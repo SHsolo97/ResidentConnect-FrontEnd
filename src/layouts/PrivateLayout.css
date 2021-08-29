@@ -1,0 +1,117 @@
+.container {
+    display: grid;
+    grid-template-columns: 3fr 17fr;
+    grid-template-rows: repeat(10, auto);
+    grid-row-gap: 0.5em;
+   
+}
+
+.App-header {
+    grid-column: 1 / 10;
+    grid-row: 1;
+    min-height: 50px;
+    margin: 0;
+    color: white;
+    text-align: left;
+    background-color: #05144f;
+
+}
+
+.App-body {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    display: flex;
+    flex-direction: column;
+
+    align-items: space-between;
+    justify-content: left;
+}
+
+.content {
+    background-color: #FFF;
+    padding: 10px;
+}
+
+ul.menu-header li {
+    display: inline;
+}
+
+    ul.menu-header li a {
+        color: #FFF;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 20px;
+        display: inline-block;
+    }
+
+.menu-header {
+    display: flex;
+    flex-direction: row;
+    align-items: space-between;
+    justify-content: left;
+    background-color: #111;
+    padding: 10px;
+    margin: 10px;
+}
+
+.App-footer {
+    grid-column: 1 /3;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    color: rgb(14, 13, 13);
+    background-color: #05144f;
+    ;
+}
+
+
+
+.site-nav {
+
+    grid-row: 2 / span 5;
+    margin: 0;
+    padding: .5em;
+    
+    border-radius: .2em;
+    width:200px;
+}
+.bg-image
+{
+    background:url('../images/buildings/b8.jpg') no-repeat center center/cover;
+    filter: blur(0px);
+    -webkit-filter: blur(0px);
+}
+.mainnav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+    align-self: auto;
+}
+
+.mainnav > li {
+    list-style-type: none;
+    margin-left: 0pt;
+}
+
+        .mainnav > li > a, .mainnav > li >span {
+            color: orange;
+            text-decoration: none;
+            text-align: left;
+            display: block;
+            padding: 0.75em;
+            line-height: 70px;
+            filter: blur(0px);
+            -webkit-filter: blur(0px);
+            font-size:24px;
+            align-self: start;
+       
+            align-items:center;
+        }
+
+
+
+.tile {
+    padding: 1.5em;
+    background-color: #fff;
+}
