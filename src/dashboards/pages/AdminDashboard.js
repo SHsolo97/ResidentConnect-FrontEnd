@@ -3,21 +3,21 @@ import { useProfile } from '../../context/profile.context'
 import { PageHeader } from '../../shared/components/PageHeader';
 
 const AdminDashboard = () => {
-    const {profile}=useProfile();
-    console.log(profile);
+    const {user}=useProfile();
+    console.log(user);
     return (
         <>
          <PageHeader>Admin Dashboard</PageHeader>
-         <div>id={profile.id}</div>
+         <div>id={user.id}</div>
         
         <br/>
-        <div>Email={profile.email}</div>
+        <div>Email={user.email}</div>
         
         <br/>
-        <div>Type={profile.type}</div>
+        <div>Type={user.type}</div>
         
         <br/>
-        <div>uid={profile.uid}</div>
+        <div>uid={user.uid}</div>
         
         <br/>
         </>

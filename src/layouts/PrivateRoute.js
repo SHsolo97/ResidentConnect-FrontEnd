@@ -7,12 +7,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     
-    const {profile,isLoading}=useProfile();
-    if(isLoading && !profile)
+    const {user,isLoading}=useProfile();
+    if(isLoading && !user)
     {
         return <CircularProgress variant="indeterminate"/>
     }
-    if(!profile && !isLoading)
+    if(!user && !isLoading)
     {
         return <Redirect to="/signin" />
     }

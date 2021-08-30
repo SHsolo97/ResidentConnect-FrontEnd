@@ -31,6 +31,7 @@ import AdminProfileSetting from './apartments/pages/AdminProfileSetting';
 import SettingsRoute from './layouts/SettingsRoute';
 import ResidentProfileSetting from './apartments/pages/ResidentProfileSetting'
 import { ProfileProvider } from './context/profile.context';
+import { ProfileSelection } from './authentication/pages/ProfileSelection';
 
 function App() {
  return(
@@ -45,7 +46,7 @@ function App() {
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={AdminProfileSetting} />
    <SettingsRoute path="/settingsR" component={ResidentProfileSetting} />
-
+   <SettingsRoute path="/selectprofile" component={ProfileSelection}/>
    <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
    <PrivateRoute path="/dashboardA" component={AdminDashboard} />
    <PrivateRoute path="/buyandsell" component={BuyAndSell} />

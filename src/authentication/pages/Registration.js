@@ -164,6 +164,8 @@ const Registration = () => {
                   
                   console.log('user is created');
                   console.log(response.data);
+                  signOut();
+                  history.push('/signin');
                  
                  }
            
@@ -188,6 +190,13 @@ const Registration = () => {
 
       event.preventDefault() 
      }
+     const signOut=()=>{
+        auth.signOut().then(() => {
+          history.push('/signin');
+      }).catch((error) => {
+        console.log(error);
+      });
+        }
      const onFacebookSignUp = () => {
         onSignUpWithProvider(new firebase.auth.FacebookAuthProvider());
 

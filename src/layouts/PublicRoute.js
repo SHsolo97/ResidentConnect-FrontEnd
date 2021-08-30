@@ -4,29 +4,30 @@ import { useProfile } from '../context/profile.context';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const PublicRoute = ({children,...routeProps}) => {
-    const {profile,isLoading}=useProfile();
+    const {user,isLoading}=useProfile();
    
-    if(isLoading && !profile)
+    if(isLoading && !user)
     {
         return <CircularProgress variant="indeterminate"/>
     }
   
-    if(profile &&  !isLoading  )
+    if(user &&  !isLoading  )
     {
-        const userType=profile.type
+        const userType=user.type
+
         if(userType === 'resident')
         {
-            if(profile.profilecompletion)
+            if(user.profilecompletion)
                 return <Redirect to="/dashboardR" />
             else
-                 return <Redirect to="/settingsR" />
+                 return <Redirect to="/selectprofile" />
         }
         else
         {
-            if(profile.profilecompletion)
+            if(user.profilecompletion)
                 return <Redirect to="/dashboardA" />
             else
-                return <Redirect to="/settingsA" />
+                return <Redirect to="/selectprofile" />
         }   
     }
    
