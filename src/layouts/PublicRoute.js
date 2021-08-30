@@ -1,21 +1,35 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router';
+import { useProfile } from '../context/profile.context';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const PublicRoute = ({children,...routeProps}) => {
-    const profile=true;
-    const usertype="admin"
-    
-    if(profile && usertype === 'resident' )
+    const {profile,isLoading}=useProfile();
+   
+    if(isLoading && !profile)
     {
-       
-            return <Redirect to="/dashboardR" />
-         
-
+        return <CircularProgress variant="indeterminate"/>
     }
-    else if(profile && usertype === 'admin' )
+  
+    if(profile &&  !isLoading  )
     {
-        return <Redirect to="/dashboardA" />
+        const userType=profile.type
+        if(userType === 'resident')
+        {
+            if(profile.profilecompletion)
+                return <Redirect to="/dashboardR" />
+            else
+                 return <Redirect to="/settingsR" />
+        }
+        else
+        {
+            if(profile.profilecompletion)
+                return <Redirect to="/dashboardA" />
+            else
+                return <Redirect to="/settingsA" />
+        }   
     }
+   
     return (
         <Route {...routeProps}> {children} </Route>
     )

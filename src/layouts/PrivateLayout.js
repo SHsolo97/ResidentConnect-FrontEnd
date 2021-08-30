@@ -36,6 +36,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Badge from '@material-ui/core/Badge';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { auth } from '../misc/firebase';
 
 
 const drawerWidth = 240;
@@ -106,8 +107,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
-const PrivateLayout = ({ children, ...props }) => {
-    
+const PrivateLayout = ({ children }) => {
+   
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -119,7 +120,18 @@ const PrivateLayout = ({ children, ...props }) => {
     const handleDrawerClose = () => {
       setOpen(false);
     };
-  
+
+    const showApartmentDetails=()=>{
+      console.log('Show Apartment deetails');
+    }
+    const signOut=()=>{
+      auth.signOut().then(() => {
+        history.push('/signin');
+    }).catch((error) => {
+      console.log(error);
+    });
+      }
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -147,7 +159,7 @@ const PrivateLayout = ({ children, ...props }) => {
             <div className={classes.sectionDesktop}>
  
             <IconButton color="inherit">
-              <ApartmentIcon />
+              <ApartmentIcon  onClick={showApartmentDetails}/>
             </IconButton >
             <IconButton color="inherit">
               <AccountCircle />
@@ -157,7 +169,7 @@ const PrivateLayout = ({ children, ...props }) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit" edge="end">
+            <IconButton color="inherit" edge="end" onClick={signOut}>
               <ExitToAppIcon />
             </IconButton>
             </div>

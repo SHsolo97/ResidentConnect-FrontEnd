@@ -29,9 +29,13 @@ import AdminVisitors from './visitormgmt/pages/AdminVisitors';
 import ResidentVisitors from './visitormgmt/pages/ResidentVisitors';
 import AdminProfileSetting from './apartments/pages/AdminProfileSetting';
 import SettingsRoute from './layouts/SettingsRoute';
+import ResidentProfileSetting from './apartments/pages/ResidentProfileSetting'
+import { ProfileProvider } from './context/profile.context';
 
 function App() {
- return <Switch>
+ return(
+ <ProfileProvider>
+   <Switch>
    <PublicRoute path="/signin">
      <SignIn />
     
@@ -40,6 +44,8 @@ function App() {
    <Registration />
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={AdminProfileSetting} />
+   <SettingsRoute path="/settingsR" component={ResidentProfileSetting} />
+
    <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
    <PrivateRoute path="/dashboardA" component={AdminDashboard} />
    <PrivateRoute path="/buyandsell" component={BuyAndSell} />
@@ -61,11 +67,10 @@ function App() {
    <PrivateRoute path="/pollings" component={Pollings} /> 
    <PrivateRoute path="/maintenance" component={MaintenanceOverview}/>
    <PrivateRoute path="/createContact" component={CreateContact}/>
-  
- 
-   
-   
+    
  </Switch>
+ </ProfileProvider>
+ );
 }
 
 export default App;

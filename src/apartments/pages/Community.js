@@ -3,9 +3,12 @@ import {TextField,Button} from '@material-ui/core';
 import { useState } from 'react';
 import axios from "axios";
 import { PageHeader } from '../../shared/components/PageHeader'
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const COMMUNITY_DEFAULT={
      
+   
     "name": "XYZ XYZ XYZ",
     "builder": "LightHouse ",
     "address" : {
@@ -16,8 +19,23 @@ const COMMUNITY_DEFAULT={
             "pincode" : "600011"
     }
 }
-export const Community = ({children}) => {
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: '25ch',
+    },
+  }));
+
   
+export const Community = ({children}) => {
+    const classes = useStyles();
+    const communityid="610a6f23d8a2ea5ae8de47e4";
+    
     const [communityDetails,setCommunityDetails]=useState({
         name:'',
         builder:'',
@@ -27,6 +45,7 @@ export const Community = ({children}) => {
         state:'',
         pincode:''
     });
+   
     const setCommunityName = (event) => {
         setCommunityDetails((prevState)=>{
             return{...prevState,name:event.target.value}});
@@ -45,7 +64,7 @@ export const Community = ({children}) => {
       };
       const setCity = (event) => {
         setCommunityDetails((prevState)=>{
-            return{...prevState,state:event.target.value}});
+            return{...prevState,city:event.target.value}});
       };
       const setState = (event) => {
         setCommunityDetails((prevState)=>{
@@ -62,7 +81,6 @@ export const Community = ({children}) => {
      
         console.log(COMMUNITY_DEFAULT);   
        
-        var registionsuccess = false;
         axios.post(apiBaseUrl + 'create', COMMUNITY_DEFAULT)
             .then(function (response) {
                 console.log(response);
@@ -99,26 +117,23 @@ export const Community = ({children}) => {
     <form  >
      
       
-        <div>
-            <TextField id="communityname" label="Community Name" value={communityDetails.name} onChange={setCommunityName} variant="outlined"/>
-        </div>
-        <div>
-        <TextField id="communitybuilder" label="Builder Name" value={communityDetails.builder} onChange={setBuilderName} variant="outlined"/>
-        </div>
-        <div>
-            <TextField id="addressline" label="Address" value={communityDetails.addressline} onChange={setAddressLine} variant="outlined"/>
-            </div>
-        <div>
-            <TextField id="area" label="Area" value={communityDetails.area} onChange={setArea} variant="outlined"/>
-            </div>
-        <div>
-            <TextField id="city" label="City" value={communityDetails.city} onChange={setCity} variant="outlined"/>
-            </div>
-        <div>
-             <TextField id="state" label="State" value={communityDetails.state} onChange={setState} variant="outlined"/>
-             </div>
-        <div>
-            <TextField id="pincode" label="Pincode" value={communityDetails.pincode} onChange={setPincode} variant="outlined"/>
+      
+            <TextField id="communityname" style={{ margin: 8, width: '100ch'}}    margin="normal" label="Community Name" value={communityDetails.name} onChange={setCommunityName} variant="outlined"/>
+           
+        
+          <TextField id="communitybuilder"  style={{ margin: 8 , width: '100ch'}}   margin="normal"  label="Builder Name" value={communityDetails.builder} onChange={setBuilderName} variant="outlined"/>
+       
+      
+            <TextField id="addressline" style={{ margin: 8,  width: '100ch' }}   margin="normal" label="Address" value={communityDetails.addressline} onChange={setAddressLine} variant="outlined"/>
+            <TextField id="area"  style={{ margin: 8 ,  width: '100ch' }}   margin="normal" label="Area" value={communityDetails.area} onChange={setArea} variant="outlined"/>
+         <div className={classes.root}>
+            
+            <TextField id="city" className={classes.textField} label="City" value={communityDetails.city} onChange={setCity} variant="outlined"/>
+            
+             <TextField id="state" className={classes.textField} label="State" value={communityDetails.state} onChange={setState} variant="outlined"/>
+             
+       
+            <TextField id="pincode" className={classes.textField} label="Pincode" value={communityDetails.pincode} onChange={setPincode} variant="outlined"/>
             </div>
            
 

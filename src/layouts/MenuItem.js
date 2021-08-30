@@ -33,12 +33,15 @@ import { useHistory } from 'react-router-dom';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import StoreIcon from '@material-ui/icons/Store';
+import { useProfile } from '../context/profile.context';
 export const MenuItem = ({children,...props}) => {
+    const {profile}=useProfile();
+    const userType=profile.type;
     const menuName=children;
     const history =useHistory();
     const handleMenu=()=>{
         console.log(menuName);
-        if(props.role==='Resident')
+        if(userType==='Resident')
         {
         switch(menuName) {
             case 'Dashboard':

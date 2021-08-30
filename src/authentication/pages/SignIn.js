@@ -51,6 +51,22 @@ const SignIn = () => {
              //Alert.info(err.message, 10000);
          }
      }
+     const onSignIn=()=>{
+       var userType='admin';
+       console.log(email);
+       console.log(password.password);
+       auth.signInWithEmailAndPassword(email,password.password)
+       .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(userCredential);
+        // ...
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+
+     }
      const onFacebookSignIn = () => {
          onSignInWithProvider(new firebase.auth.FacebookAuthProvider());
  
@@ -87,7 +103,7 @@ const SignIn = () => {
         />
       </FormControl>
     
-    <Button variant="contained" color="primary">Sign In </Button>
+    <Button variant="contained" color="primary" onClick={onSignIn}>Sign In </Button>
     <Button variant="contained" color="primary" onClick={onFacebookSignIn}> Login with Facebook </Button>
     <Button variant="contained" color="secondary" onClick={onGoogleSignIn}> Login with Google </Button>
     <Link  component="button" variant="body2" onClick ={onSignUp}>  New User? Sign Up </Link>
