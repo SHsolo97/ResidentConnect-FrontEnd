@@ -164,9 +164,10 @@ const Registration = () => {
                   
                   console.log('user is created');
                   console.log(response.data);
+                  
                   signOut();
                   history.push('/signin');
-                 
+                  
                  }
            
              })

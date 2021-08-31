@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './PrivateLayout.css'
+import Grid from '@material-ui/core/Grid';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -141,8 +142,9 @@ const PrivateLayout = ({ children }) => {
             [classes.appBarShift]: open,
           })}
         >
-          <Toolbar>
-            <IconButton
+        <Toolbar>
+        <Grid container  direction="row" justifyContent="flex-start" alignItems="center">
+           <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
@@ -153,11 +155,14 @@ const PrivateLayout = ({ children }) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            
+                  <Typography variant="h6" noWrap>
               Residents Connect
             </Typography>
+            </Grid>
+            <Grid container  direction="row" justifyContent="flex-end" alignItems="center">
+
             <div className={classes.sectionDesktop}>
- 
             <IconButton color="inherit">
               <ApartmentIcon  onClick={showApartmentDetails}/>
             </IconButton >
@@ -172,8 +177,11 @@ const PrivateLayout = ({ children }) => {
             <IconButton color="inherit" edge="end" onClick={signOut}>
               <ExitToAppIcon />
             </IconButton>
+            
             </div>
+            </Grid>
             </Toolbar>
+            
         </AppBar>
         <Drawer
           variant="permanent"
