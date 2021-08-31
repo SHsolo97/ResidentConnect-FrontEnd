@@ -1,12 +1,73 @@
 import React,{ useEffect,createContext,useContext,useState } from "react";
 import { auth } from "../misc/firebase";
 import axios from "axios";
+import { KeyboardReturnOutlined } from "@material-ui/icons";
 
 const ProfileContext=createContext();
 export const ProfileProvider=({children})=>{
-    const[profile,setProfile]=useState(null);
+    const[user,setUser]=useState(null);
+    const[community,setCommunity]=useState(null);
+    const[communityList,setCommunityList]=useState(null);
+    const[apartment,setApartment]=useState(null);
+    const[apartmentList,setApartmentList]=useState(null);
     const [isLoading,setIsLoading]=useState(true);
-    
+
+   const getCommunityDetails=async (communityId)=>{
+    var apiBaseUrl = `http://localhost:4000/api/community/${communityId}`;
+    let communityinfo=null;
+
+  
+    let data=null
+ 
+  
+    await axios.get(apiBaseUrl )
+         .then(function (response) {
+             if (response.status === 200)
+            {           
+              
+             communityinfo=response.data;
+                if(communityinfo!=null)
+                {
+             
+
+                 data={
+                    id:communityinfo._id,
+                    name:communityinfo.name,
+                    builder:communityinfo.builder,
+                  
+                }
+                }     
+                return data;  
+                
+             
+             
+             }
+       
+         })
+         .catch(function (error) {
+             console.log(error);
+             return(null);
+
+         });
+        }
+    const setCommunitydetail= (communityIds)=>{
+       console.log(communityIds);
+       if(communityIds==null)
+        return;
+         communityIds.map( async(communityId)=>{
+        console.log(communityId);
+        const communitydata=await getCommunityDetails(communityId);
+        setCommunityList(communityList => [...communityList, communitydata]);
+
+        });
+        console.log(communityList);
+        if(communityList!=null)
+               setCommunity(communityList[0]);
+    }
+    const setApartmentdetail=async (apartmentIds)=>{
+        console.log(apartmentIds);
+        setApartmentList(apartmentIds);
+     }
     const setUserDetails=async (uid)=>
     {
         var apiBaseUrl = `http://localhost:4002/api/users/search`;
@@ -16,6 +77,7 @@ export const ProfileProvider=({children})=>{
         searchquery={uid:uid}
       
         let data=null
+     
         console.log(searchquery);
         await axios.post(apiBaseUrl,searchquery )
              .then(function (response) {
@@ -26,24 +88,31 @@ export const ProfileProvider=({children})=>{
                     if(userinfo!=null)
                     {
                     console.log(userinfo);
+                    console.log(userinfo.communities);
+                    console.log(userinfo.apartments);
+                   // setCommunitydetail(userinfo.communities);
+                  //  setApartmentdetail(userinfo.apartments);
+
                      data={
                         id:userinfo._id,
                         uid:userinfo.uid,
                         email:userinfo.email,
                         type:userinfo.type,
-                        profilecompletion:userinfo.profilecompletion
+                        profilecompletion:userinfo.profilecompletion,
+                        communities:userinfo.communities,
+                        apartments:userinfo.apartments
 
                     }
                     }       
-                    setProfile(data);
+                    setUser(data);
                  
                  }
            
              })
              .catch(function (error) {
                  console.log(error);
-                 setProfile(null);
-                 
+                 setUser(null);
+
              });
              
     }
@@ -53,12 +122,15 @@ export const ProfileProvider=({children})=>{
             if(authObj)
             {
                 setUserDetails(authObj.uid)              
-                setIsLoading(false);
+                setIsLoading(false); 
+                setCommunitydetail();
+                setApartmentdetail();
             }
             else
             {
-                setProfile(null);
+                setUser(null);               
                 setIsLoading(false);
+
             }
 
         });
@@ -68,7 +140,7 @@ export const ProfileProvider=({children})=>{
     },[])
 
     return (
-    <ProfileContext.Provider value={{isLoading,profile}}> {children} </ProfileContext.Provider>);
+    <ProfileContext.Provider value={{isLoading,user,community,communityList,apartment,apartmentList}}> {children} </ProfileContext.Provider>);
 
 }
 

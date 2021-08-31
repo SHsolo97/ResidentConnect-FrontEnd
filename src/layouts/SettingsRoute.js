@@ -3,9 +3,9 @@ import { Redirect, Route } from 'react-router';
 import { useProfile } from '../context/profile.context';
 
 const SettingsRoute = ({ component: Component, ...rest }) => {
-    const profile=useProfile();
+    const {user}=useProfile();
 
-    if(!profile)
+    if(!user)
     {
         return <Redirect to="/signin" />
     }

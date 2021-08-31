@@ -35,8 +35,8 @@ import PanToolIcon from '@material-ui/icons/PanTool';
 import StoreIcon from '@material-ui/icons/Store';
 import { useProfile } from '../context/profile.context';
 export const MenuItem = ({children,...props}) => {
-    const {profile}=useProfile();
-    const userType=profile.type;
+    const {user}=useProfile();
+    const userType=user.type;
     const menuName=children;
     const history =useHistory();
     const handleMenu=()=>{

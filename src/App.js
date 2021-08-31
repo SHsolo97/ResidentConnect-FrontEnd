@@ -31,6 +31,11 @@ import AdminProfileSetting from './apartments/pages/AdminProfileSetting';
 import SettingsRoute from './layouts/SettingsRoute';
 import ResidentProfileSetting from './apartments/pages/ResidentProfileSetting'
 import { ProfileProvider } from './context/profile.context';
+import { ProfileSelection } from './authentication/pages/ProfileSelection';
+import { AddClassified } from './classifieds/pages/AddClassified';
+import { ViewClassified } from './classifieds/pages/ViewClassified';
+import { PostAd } from './buyandsell/pages/PostAd';
+import { AddFacility } from './facilitybooking/pages/AddFacility';
 
 function App() {
  return(
@@ -45,7 +50,7 @@ function App() {
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={AdminProfileSetting} />
    <SettingsRoute path="/settingsR" component={ResidentProfileSetting} />
-
+   <SettingsRoute path="/selectprofile" component={ProfileSelection}/>
    <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
    <PrivateRoute path="/dashboardA" component={AdminDashboard} />
    <PrivateRoute path="/buyandsell" component={BuyAndSell} />
@@ -67,6 +72,11 @@ function App() {
    <PrivateRoute path="/pollings" component={Pollings} /> 
    <PrivateRoute path="/maintenance" component={MaintenanceOverview}/>
    <PrivateRoute path="/createContact" component={CreateContact}/>
+   <PrivateRoute path="/addClassified" component={AddClassified} />
+   <PrivateRoute path="/viewClassified" component={ViewClassified} />
+   <PrivateRoute path="/postAd" component={PostAd} />
+   <PrivateRoute path="/addFacility" component={AddFacility}/>
+
     
  </Switch>
  </ProfileProvider>
