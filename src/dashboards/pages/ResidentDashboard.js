@@ -4,7 +4,7 @@ import { useProfile } from '../../context/profile.context'
 
 const ResidentDashboard = () => {
     const {user}=useProfile();
-    console.log(user);
+   
     return (
         <>
          <PageHeader>Resident Dashboard</PageHeader>

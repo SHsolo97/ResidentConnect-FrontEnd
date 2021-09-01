@@ -34,7 +34,7 @@ import ViewListIcon from '@material-ui/icons/ViewList';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import StoreIcon from '@material-ui/icons/Store';
 import { useProfile } from '../context/profile.context';
-export const MenuItem = ({children,...props}) => {
+export const CustumMenuItem = ({children,...props}) => {
     const {user}=useProfile();
     const userType=user.type;
     const menuName=children;

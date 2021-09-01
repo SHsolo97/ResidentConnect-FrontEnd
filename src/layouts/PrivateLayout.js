@@ -31,14 +31,20 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import AddAlertIcon from '@material-ui/icons/AddAlert';
 import ContactsIcon from '@material-ui/icons/Contacts';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
-import { MenuItem } from './MenuItem';
+import { CustumMenuItem } from './MenuItem';
 import { useHistory } from 'react-router-dom';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Badge from '@material-ui/core/Badge';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { auth } from '../misc/firebase';
-
+import { useCommunity } from '../context/community.context';
+import { useApartment } from '../context/apartment.context';
+import { useProfile } from '../context/profile.context';
+import Menu from '@material-ui/core/Menu';
+import { useEffect } from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Button, Input, InputBase, TextField } from '@material-ui/core';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -109,22 +115,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PrivateLayout = ({ children }) => {
-   
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    const history = useHistory();
+  const {community,communityList} = useCommunity();
+  const {apartment,apartmentList} = useApartment();
+  const {user} = useProfile();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openApartmentMenu = Boolean(anchorEl);
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const history = useHistory();
+  const communitynames= new Map();
+  
+  const handleApartmentMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleSwitchProfile=(event)=>{
+    console.log(event.target.id);
+    event.preventDefault();
+    event.stopPropagation();
+
+
+  }
+  const handleApartmentClose = () => {
+    setAnchorEl(null);
+  };
+
     const handleDrawerOpen = () => {
       setOpen(true);
     };
-  
+    useEffect(() => {
+      communityList.map((community) => {
+        communitynames.set(community.id,community.name);
+      }
+      )
+
+    }, []);
+
     const handleDrawerClose = () => {
       setOpen(false);
     };
 
-    const showApartmentDetails=()=>{
-      console.log('Show Apartment deetails');
-    }
+  
     const signOut=()=>{
       auth.signOut().then(() => {
         history.push('/signin');
@@ -132,7 +163,11 @@ const PrivateLayout = ({ children }) => {
       console.log(error);
     });
       }
-
+   
+   const getApartmentid = (block,floor,aptnum)=>
+   {
+    return `Block ${block}  Floor  ${floor} Flat ${aptnum}`
+   }
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -164,8 +199,53 @@ const PrivateLayout = ({ children }) => {
 
             <div className={classes.sectionDesktop}>
             <IconButton color="inherit">
-              <ApartmentIcon  onClick={showApartmentDetails}/>
+              <ApartmentIcon  onClick={handleApartmentMenu}/>
             </IconButton >
+            <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={openApartmentMenu}
+                onClose={handleApartmentClose}
+              >
+                {user.type==='resident'?
+                 
+                 <div>
+                 {apartmentList.map((apartment) => {    
+                      
+                        return (<div>   
+                          <InputBase  
+                          inputProps={{ 'aria-label': 'naked' }}   
+                             id = {apartment.communityid}  defaultValue={apartment.communityid} />
+                        <MenuItem key={apartment.id}    onClick={handleSwitchProfile}  value={apartment.id}>
+                        <InputBase  
+                   inputProps={{ 'aria-label': 'naked' }}   onClick={handleSwitchProfile}   id = {apartment.id} defaultValue = {getApartmentid(apartment.block , apartment.floor, apartment.aptnum)}/>
+                        
+                  </MenuItem>
+                        </div>)
+                 }
+                   )
+                }
+                   </div>
+              
+              
+                : 
+                <>
+                <div>Community</div>
+                <MenuItem onClick={handleApartmentClose}>Community id</MenuItem>
+                <div>Apartment</div>
+                <MenuItem onClick={handleApartmentClose}>Aparment id </MenuItem>
+                </>
+                }
+              </Menu>
             <IconButton color="inherit">
               <AccountCircle />
             </IconButton >
@@ -203,21 +283,21 @@ const PrivateLayout = ({ children }) => {
           </div>
           <Divider />
           <List>
-          <MenuItem role='admin'>Dashboard</MenuItem>
+          <CustumMenuItem role='admin'>Dashboard</CustumMenuItem>
          
            
-           <MenuItem role='admin'>Facilties</MenuItem>
-           <MenuItem role='admin'>Events</MenuItem>
-           <MenuItem role='admin'>Chat Rooms</MenuItem>
-           <MenuItem role='admin'>Buy &amp; Sell</MenuItem>
-           <MenuItem role='admin'>Classifieds</MenuItem>
-           <MenuItem role='admin'>Polling</MenuItem>
-           <MenuItem role='admin'>Payments</MenuItem>
-           <MenuItem role='admin'>Car Pooling</MenuItem>
+           <CustumMenuItem role='admin'>Facilties</CustumMenuItem>
+           <CustumMenuItem role='admin'>Events</CustumMenuItem>
+           <CustumMenuItem role='admin'>Chat Rooms</CustumMenuItem>
+           <CustumMenuItem role='admin'>Buy &amp; Sell</CustumMenuItem>
+           <CustumMenuItem role='admin'>Classifieds</CustumMenuItem>
+           <CustumMenuItem role='admin'>Polling</CustumMenuItem>
+           <CustumMenuItem role='admin'>Payments</CustumMenuItem>
+           <CustumMenuItem role='admin'>Car Pooling</CustumMenuItem>
          
-           <MenuItem role='admin'>Visitors</MenuItem>
-           <MenuItem role='admin'>Maintenance</MenuItem>
-           <MenuItem role='admin'>Contacts</MenuItem>
+           <CustumMenuItem role='admin'>Visitors</CustumMenuItem>
+           <CustumMenuItem role='admin'>Maintenance</CustumMenuItem>
+           <CustumMenuItem role='admin'>Contacts</CustumMenuItem>
            
           </List>
           
