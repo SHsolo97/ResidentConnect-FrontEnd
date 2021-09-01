@@ -21,6 +21,8 @@ import Box from '@material-ui/core/Box';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
    imageList: {
@@ -41,24 +43,26 @@ const useStyles = makeStyles((theme) => ({
   }));
 export const PostAd = () => {
     const classes = useStyles();
+    const history=useHistory();
     const {user}=useProfile();
-    const  communityid ="612bf9c96b1331634c3a701c";
+    const communityid = user.communities[0];
 
+    const [files, setFiles] = useState([]);
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
+   
     const [advert,setAdvert]=useState({
         
-            communityid : user.communities[0],
+            communityid :communityid,
             creator:user.id,
             title: '',
             description:'',
             category: '',
             subcategory:'',
-            type:'',
+            type:'Private',
             images:[],
             price:{
                 value:'',
-                currency:'INR',
                 negotiable:true
             }
         
@@ -71,6 +75,11 @@ export const PostAd = () => {
         
         getSubCategories();
     }, [advert.category])
+
+    useEffect(() => {
+        
+        
+    }, [files])
 
     const getSubCategories=async()=>{
 
@@ -133,6 +142,21 @@ export const PostAd = () => {
         setAdvert((prevState)=>{
             return{...prevState,price:tempPrice}});   
       }
+      const addFile=(file)=>{
+        console.log('inside addFile')
+        console.log(file);
+       
+          setFiles(file);
+        
+        
+      }
+      const handleCancel=(event)=>
+      {
+        history.push('/buyandsell');
+      }
+      const createAdvert=(event)=>{
+          console.log('create Advert');
+      }
     return (
         <>
            <PageHeader>Post your Ad</PageHeader> 
@@ -171,14 +195,14 @@ export const PostAd = () => {
         {[...Array(12)].map((item, i) => (
          
          <ImageListItem >
-            <AdImageUpload/>
+            <AdImageUpload addFile={addFile}/>
             </ImageListItem>
    
         ))}
         </ImageList>
            <Grid container direction="row" justifyContent="space-evenly" alignItems="center" >
-            <Button variant="contained" style ={{backgroundColor: orange[500] }}> Submit</Button>
-            <Button variant="contained" style ={{backgroundColor: orange[500] }}> Cancel</Button>
+            <PrimaryButton onClick={createAdvert} > Submit</PrimaryButton>
+            <PrimaryButton onClick={handleCancel}> Cancel</PrimaryButton>
             </Grid>
             
         

@@ -20,6 +20,9 @@ const AdminDashboard = () => {
         <div>uid={user.uid}</div>
         
         <br/>
+        {user.communities.map((community)=>            
+          <div>{community}</div>
+        )}
         </>
     )
 }

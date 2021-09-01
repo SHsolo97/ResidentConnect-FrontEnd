@@ -1,4 +1,4 @@
-import { Announcement, Apartment } from '@material-ui/icons';
+import { Announcement, Apartment, Commute } from '@material-ui/icons';
 import React from 'react';
 import {  Switch } from 'react-router-dom';
 import Announcements from './announcements/pages/Announcements';
@@ -36,10 +36,15 @@ import { AddClassified } from './classifieds/pages/AddClassified';
 import { ViewClassified } from './classifieds/pages/ViewClassified';
 import { PostAd } from './buyandsell/pages/PostAd';
 import { AddFacility } from './facilitybooking/pages/AddFacility';
+import SamplePage from './sample/SamplePage';
+import { CommunityProvider } from './context/community.context';
+import { ApartmentProvider } from './context/apartment.context';
 
 function App() {
  return(
  <ProfileProvider>
+   <CommunityProvider>
+     <ApartmentProvider>
    <Switch>
    <PublicRoute path="/signin">
      <SignIn />
@@ -76,9 +81,14 @@ function App() {
    <PrivateRoute path="/viewClassified" component={ViewClassified} />
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
+   <PrivateRoute path="/samplePage" component={SamplePage}/>
+
+   
 
     
  </Switch>
+ </ApartmentProvider>
+ </CommunityProvider>
  </ProfileProvider>
  );
 }

@@ -41,7 +41,7 @@ export const MenuItem = ({children,...props}) => {
     const history =useHistory();
     const handleMenu=()=>{
         console.log(menuName);
-        if(userType==='Resident')
+        if(userType==='resident')
         {
         switch(menuName) {
             case 'Dashboard':

@@ -10,6 +10,7 @@ const Classifieds = () => {
     const goToClassified=()=>
     {
         history.push('/addclassified');
+        //history.push('/samplePage');
     }
     return (
         <>
