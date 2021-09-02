@@ -19,6 +19,8 @@ import ImageUpload from '../components/ImageUpload';
 import { storage } from '../../misc/firebase';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router';
+import {uploadImagesToFireStorage} from '../../misc/firestore';
+import { getRequest } from '../../misc/http-hooks';
 
 const MAX_FILE_SIZE = 1000 * 1024 * 5;
 
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   
 
 export const AddClassified = () => {
-  const [file, setFile] = useState();
+  let file=null;
   const history=useHistory();
   const [isLoading, setIsLoading] = useState(false);
     const classes = useStyles();
@@ -45,7 +47,7 @@ export const AddClassified = () => {
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
    
-    const uploadImageToFireStorage = async () => {
+   /* const uploadImageToFireStorage = async () => {
       const fileList=[file];
       try {
           setIsLoading(true);
@@ -85,7 +87,7 @@ export const AddClassified = () => {
           setIsLoading(false);
           console.log(err);
       }
-  }
+  }*/
   
     const [classified,setClassified]=useState({
         communityid:communityid,
@@ -176,16 +178,28 @@ export const AddClassified = () => {
     
              });
     }
-    const addFile=(file)=>{
+
+    const getCategories1 =async()=>
+    {
+      var apiBaseUrl = `http://localhost:4005/api/classifieds/categories`        
+
+      const responseData=await getRequest(apiBaseUrl);
+      setCategories(responseData.categories);
+    }
+    const addFile=(imagefile)=>{
       console.log('inside addFile')
-      console.log(file);
+      console.log(imagefile);
      
-        setFile(file);
+      file=imagefile;
       
       
     }
     const addClassified=async()=>{
-      const imagefiles=await uploadImageToFireStorage();
+      const fileList=[file];
+     
+      const path=`${communityid}/classifieds`;
+      //const imagefiles=await uploadImageToFireStorage();
+      const imagefiles=await uploadImagesToFireStorage(path,fileList);
       setClassified((prevState)=>{
         return{...prevState,thumbnail:imagefiles[0].url}});
         await addClassifieds();

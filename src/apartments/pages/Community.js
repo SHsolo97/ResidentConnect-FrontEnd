@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TextField,Button} from '@material-ui/core';
 import { useState } from 'react';
 import axios from "axios";
 import { PageHeader } from '../../shared/components/PageHeader'
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useCommunity } from '../../context/community.context';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import { useProfile } from '../../context/profile.context';
 
 const COMMUNITY_DEFAULT={
      
@@ -32,20 +34,69 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   
-export const Community = ({children}) => {
+export const Community = ({children,...props}) => {
     const classes = useStyles();
-    const communityid="610a6f23d8a2ea5ae8de47e4";
-    
+    const {communityList}=useCommunity();
+    const communityid=communityList[0].id
+    const {isLoading}=useProfile();
     const [communityDetails,setCommunityDetails]=useState({
-        name:'',
-        builder:'',
+      name:'',
+      builder:'',
+      address:{
         addressline:'',
         area:'',
         city:'',
         state:'',
         pincode:''
+      }
     });
-   
+    const updateCommunityDetails=async()=>{
+
+      var apiBaseUrl = `http://localhost:4000/api/community/${communityid}`   
+      console.log(communityDetails);
+      await axios.put(apiBaseUrl,communityDetails )
+           .then(function (response) {
+               if (response.status === 200)
+              {  
+                console.log( response.data);
+               
+                 
+                
+              }
+           })
+           .catch(function (error) {
+               console.log(error);
+                
+           });
+  }
+    const getCommunityDetails=async()=>{
+
+      var apiBaseUrl = `http://localhost:4000/api/community/${communityid}`   
+      await axios.get(apiBaseUrl )
+           .then(function (response) {
+               if (response.status === 200)
+              {  
+                console.log(response.data);
+                const communitydata= response.data;
+                setCommunityDetails((prevState)=>{
+                  return{...prevState,name:communitydata.name}});
+                setCommunityDetails((prevState)=>{
+                  return{...prevState,builder:communitydata.builder}});
+                  setCommunityDetails((prevState)=>{
+                    return{...prevState,address:communitydata.address}});
+                 
+                
+              }
+           })
+           .catch(function (error) {
+               console.log(error);
+                
+           });
+  }
+    useEffect(() => {
+      getCommunityDetails();
+    
+    }, [])
     const setCommunityName = (event) => {
         setCommunityDetails((prevState)=>{
             return{...prevState,name:event.target.value}});
@@ -55,88 +106,56 @@ export const Community = ({children}) => {
             return{...prevState,builder:event.target.value}});
       };
       const setAddressLine = (event) => {
+        const tempAddress=communityDetails.address;
+        tempAddress.addressline=event.target.value;
         setCommunityDetails((prevState)=>{
-            return{...prevState,addressline:event.target.value}});
+            return{...prevState,address:tempAddress}});
       };
       const setArea = (event) => {
+        const tempAddress=communityDetails.address;
+        tempAddress.area=event.target.value;
         setCommunityDetails((prevState)=>{
-            return{...prevState,area:event.target.value}});
+            return{...prevState,address:tempAddress}});
       };
       const setCity = (event) => {
-        setCommunityDetails((prevState)=>{
-            return{...prevState,city:event.target.value}});
+        const tempAddress=communityDetails.address;
+        tempAddress.city=event.target.value;
+         setCommunityDetails((prevState)=>{
+         
+            return{...prevState,address:tempAddress}});
       };
       const setState = (event) => {
+        const tempAddress=communityDetails.address;
+        tempAddress.state=event.target.value;
         setCommunityDetails((prevState)=>{
-            return{...prevState,state:event.target.value}});
+            return{...prevState,address:tempAddress}});
       };
       const setPincode = (event) => {
+        const tempAddress=communityDetails.address;
+        tempAddress.pincode=event.target.value;
         setCommunityDetails((prevState)=>{
-            return{...prevState,pincode:event.target.value}});
+            return{...prevState,address:tempAddress}});
       };
-      const handleSubmit=(e)=>{
-        var apiBaseUrl = "http://residentsconnect.dev/api/community/";
-        var self = this;
-        
-     
-        console.log(COMMUNITY_DEFAULT);   
-       
-        axios.post(apiBaseUrl + 'create', COMMUNITY_DEFAULT)
-            .then(function (response) {
-                console.log(response);
-                if (response.status === 201) {
-                
-                    console.log("community created....");
-                  
 
 
-                }
-                else if (response.data.code === 204) {
-                    console.log("invalid data");
-                    alert("invalid data")
-                }
-                else {
-                    console.log("community  exists");
-                    alert("community  exist");
-                }
-
-            })
-           
-            .catch(function (error) {
-             
-                console.log(error);
-            });
-        
-        e.preventDefault();
-        e.stopPropagation();
-
+      const handleSubmit=(event)=>{
+        updateCommunityDetails();
+        props.handleNext()
       }
   return (
       <>
       <PageHeader>{children}</PageHeader>
     <form  >
-     
-      
-      
-            <TextField id="communityname" style={{ margin: 8, width: '100ch'}}    margin="normal" label="Community Name" value={communityDetails.name} onChange={setCommunityName} variant="outlined"/>
-           
-        
-          <TextField id="communitybuilder"  style={{ margin: 8 , width: '100ch'}}   margin="normal"  label="Builder Name" value={communityDetails.builder} onChange={setBuilderName} variant="outlined"/>
-       
-      
-            <TextField id="addressline" style={{ margin: 8,  width: '100ch' }}   margin="normal" label="Address" value={communityDetails.addressline} onChange={setAddressLine} variant="outlined"/>
-            <TextField id="area"  style={{ margin: 8 ,  width: '100ch' }}   margin="normal" label="Area" value={communityDetails.area} onChange={setArea} variant="outlined"/>
-         <div className={classes.root}>
-            
-            <TextField id="city" className={classes.textField} label="City" value={communityDetails.city} onChange={setCity} variant="outlined"/>
-            
-             <TextField id="state" className={classes.textField} label="State" value={communityDetails.state} onChange={setState} variant="outlined"/>
-             
-       
-            <TextField id="pincode" className={classes.textField} label="Pincode" value={communityDetails.pincode} onChange={setPincode} variant="outlined"/>
-            </div>
-           
-
+      <TextField id="communityname" style={{ margin: 8, width: '100ch'}}    margin="normal" label="Community Name" value={communityDetails.name} onChange={setCommunityName} variant="outlined"/>
+      <TextField id="communitybuilder"  style={{ margin: 8 , width: '100ch'}}   margin="normal"  label="Builder Name" value={communityDetails.builder} onChange={setBuilderName} variant="outlined"/>
+      <TextField id="addressline" style={{ margin: 8,  width: '100ch' }}   margin="normal" label="Address" value={communityDetails.address!=null?communityDetails.address.addressline:''} onChange={setAddressLine} variant="outlined"/>
+      <TextField id="area"  style={{ margin: 8 ,  width: '100ch' }}   margin="normal" label="Area" value={communityDetails.address!=null?communityDetails.address.area:''} onChange={setArea} variant="outlined"/>
+      <div className={classes.root}>
+        <TextField id="city" className={classes.textField} label="City" value={communityDetails.address!=null?communityDetails.address.city:''} onChange={setCity} variant="outlined"/>
+        <TextField id="state" className={classes.textField} label="State" value={communityDetails.address!=null?communityDetails.address.state:''} onChange={setState} variant="outlined"/>
+        <TextField id="pincode" className={classes.textField} label="Pincode" value={communityDetails.address!=null?communityDetails.address.pincode:''} onChange={setPincode} variant="outlined"/>
+      </div>
+      <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
     </form>
     </>
     )

@@ -34,7 +34,7 @@ const AdImageUpload = props => {
       fileIsValid = false;
     }
  //   props.onInput(props.id, pickedFile, fileIsValid);
-      props.addFile(pickedFile);
+      props.addFile(pickedFile,props.placeholder);
   };
 
   const pickImageHandler = () => {
@@ -42,8 +42,9 @@ const AdImageUpload = props => {
   };
 
   return (
-    <div className="form-control">
+    <div className="form-control" >
       <input
+        
         id={props.id}
         ref={filePickerRef}
         style={{ display: 'none' }}
@@ -52,7 +53,7 @@ const AdImageUpload = props => {
         onChange={pickedHandler}
       />
       <div className={`image-upload`}>
-        <div className="image-upload__preview" onClick={pickImageHandler}>
+        <div className="image-upload__preview"   onClick={pickImageHandler}>
           {previewUrl && <img src={previewUrl} alt="Preview"  />}
           {!previewUrl && <p><AddAPhotoIcon fontSize="large"/> </p>}
         </div>

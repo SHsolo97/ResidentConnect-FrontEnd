@@ -39,6 +39,7 @@ import { AddFacility } from './facilitybooking/pages/AddFacility';
 import SamplePage from './sample/SamplePage';
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';
+import { ResidentApartmentDetails } from './apartments/pages/ResidentApartmentDetails';
 
 function App() {
  return(
@@ -55,6 +56,8 @@ function App() {
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={AdminProfileSetting} />
    <SettingsRoute path="/settingsR" component={ResidentProfileSetting} />
+   <SettingsRoute path="/apartmentDetailsR" component={ResidentApartmentDetails}/>
+   
    <SettingsRoute path="/selectprofile" component={ProfileSelection}/>
    <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
    <PrivateRoute path="/dashboardA" component={AdminDashboard} />
@@ -81,6 +84,7 @@ function App() {
    <PrivateRoute path="/viewClassified" component={ViewClassified} />
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
+
    <PrivateRoute path="/samplePage" component={SamplePage}/>
 
    

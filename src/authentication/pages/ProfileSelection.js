@@ -5,6 +5,7 @@ import { PageHeader } from '../../shared/components/PageHeader';
 import { useHistory } from 'react-router';
 import { useCommunity } from '../../context/community.context';
 import { useApartment } from '../../context/apartment.context';
+import PrimaryButton from '../../shared/components/PrimaryButton';
 export const ProfileSelection = () => {
     const {user,isLoading}=useProfile();
     const {community,communityList} = useCommunity();
@@ -16,9 +17,16 @@ export const ProfileSelection = () => {
     const history=useHistory();
     const handleSubmit=()=>{
         if(user.type==='admin')
-          history.push('/dashboardA');
+      
+            if(user.profilecompletion)
+                history.push('/dashboardA');
+            else
+            history.push('settingsA');
         else
-         history.push('/dashboardR');
+        if(user.profilecompletion)
+            history.push('/dashboardR');
+         else
+            history.push('settingsR');
 
     }
     
@@ -51,7 +59,7 @@ export const ProfileSelection = () => {
 
         
        
-        <Button variant="contained" color="primary"  onClick={handleSubmit}> Add</Button>
+        <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
        
         </div>);
 }

@@ -11,6 +11,8 @@ import { ApartmentModels } from './ApartmentModels';
 import { ApartmentBlocks } from './ApartmentBlocks';
 import { PageHeader } from '../../shared/components/PageHeader'
 import { ApartmentServices } from './ApartmentServices';
+import { useHistory } from 'react-router';
+import PrimaryButton from '../../shared/components/PrimaryButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,11 +46,13 @@ export default function  AdminProfileSetting()
     return ( <CommunityStepper stepperInfo={STEPPER_DEFAULT} />);
 }
 
+
  function CommunityStepper({children,...props}) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const stepperInfo=props.stepperInfo;
-  
+    const history=useHistory();  
+    
     const steps = getSteps();
     const stepsContent=getStepContentDetails();
     function getSteps() {
@@ -90,6 +94,7 @@ export default function  AdminProfileSetting()
       }
     }
     const handleNext = () => {
+      
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       
 
@@ -99,22 +104,20 @@ export default function  AdminProfileSetting()
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
   
-    const handleReset = () => {
-      setActiveStep(0);
-    };
+  
    const getPage=(activeStep)=>
    {
     switch (activeStep) {
         case 0:
-            return <Community>{stepsContent[0]}</Community>
+            return <Community  handleNext={handleNext}>{stepsContent[0]}</Community>
         case 1:
-            return <ApartmentModels>{stepsContent[1]}</ApartmentModels>
+            return <ApartmentModels handleBack={handleBack}  handleNext={handleNext} >{stepsContent[1]}</ApartmentModels>
         case 2:
-            return <ApartmentBlocks>{stepsContent[2]}</ApartmentBlocks>
+            return <ApartmentBlocks  handleBack={handleBack}  handleNext={handleNext}>{stepsContent[2]}</ApartmentBlocks>
         case 3:
-            return <Apartments>{stepsContent[3]}</Apartments>
+            return <Apartments handleBack={handleBack}  handleNext={handleNext}>{stepsContent[3]}</Apartments>
         case 4:
-            return <ApartmentServices>{stepsContent[4]}</ApartmentServices>
+            return <ApartmentServices  handleBack={handleBack}  handleNext={handleNext}>{stepsContent[4]}</ApartmentServices>
         default:
             return <h1>Unknown</h1>
      }
@@ -128,32 +131,13 @@ export default function  AdminProfileSetting()
             </Step>
           ))}
         </Stepper>
-        <div>
-          {activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>All steps completed</Typography>
-              <Button onClick={handleReset}>Reset</Button>
-            </div>
-          ) : (
-            <div>
+        
              { 
              getPage(activeStep)
             }
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.backButton}
-                >
-                  Back
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
-            </div>
-          )}
+             
+          
         </div>
-      </div>
+     
     );
   }
