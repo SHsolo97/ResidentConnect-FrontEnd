@@ -9,6 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import { useProfile } from '../../context/profile.context';
+import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   }));
+
 export default function AddEditApartmentModel({...props}) {
     const classes = useStyles();
     const {user}=useProfile();
@@ -28,11 +31,54 @@ export default function AddEditApartmentModel({...props}) {
     const addBlock=()=>
     {
         console.log(modelDetails);
-        props.addApartmentModel(modelDetails);
+        addApartmentModel(modelDetails);
         props.handleClose();
     }
+    const editBlock=()=>
+    {
+      console.log(modelDetails);
+      editApartmentModel(modelDetails);
+      props.handleClose();
+    }
 
-    
+    const editApartmentModel=async(modelToBeEdit)=>{
+      var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/${modelToBeEdit._id}`  
+      await axios.edit(apiBaseUrl,modelToBeEdit )
+           .then(function (response) {
+               if (response.status === 200)
+
+              {
+                  console.log(response.data);
+              
+               
+                
+              }
+           })
+           .catch(function (error) {
+               console.log(error);
+                
+           });
+  } 
+
+    const addApartmentModel=async(model)=>{
+      var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/create`  
+      console.log(model);
+      await axios.post(apiBaseUrl,model )
+           .then(function (response) {
+               if (response.status === 201)
+
+              {
+                  console.log(response.data);
+               
+                 
+                
+              }
+           })
+           .catch(function (error) {
+               console.log(error);
+                
+           });
+  } 
     
 
    
@@ -141,10 +187,14 @@ export default function AddEditApartmentModel({...props}) {
     </form>
         </DialogContent>
         <DialogActions>
-        
+         {props.actionType=='add'?
           <Button onClick={addBlock} color="primary">
-            Submit
-          </Button>
+            Add
+          </Button>:
+          <Button onClick={editBlock} color="primary">
+          Edit
+        </Button>
+        }
           <Button onClick={props.handleClose} color="primary">
             Cancel
           </Button>

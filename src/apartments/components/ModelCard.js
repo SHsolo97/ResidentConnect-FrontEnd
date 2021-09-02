@@ -32,12 +32,26 @@ const useStyles = makeStyles({
 
 export default function ModelCard({children,...props}) {
   const classes = useStyles();
- const model=props.model;
+ const[model,setModel]=React.useState(props.model);
  
- const deleteModel=(event)=>{
+ const deleteModel=async (event)=>{
   console.log(`delete ${model._id}`);
-  props.deleteModel(model);
-
+  
+    var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/${model._id}`  
+      await axios.delete(apiBaseUrl )
+          .then(function (response) {
+            if (response.status === 200)            
+           {
+               console.log(response.data);
+           }
+        })
+        .catch(function (error) {
+            console.log(error);
+             
+        });
+  
+     
+   
   event.preventDefault();
   event.stopPropagation()
  }
