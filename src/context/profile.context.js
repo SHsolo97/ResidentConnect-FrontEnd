@@ -6,13 +6,13 @@ import { KeyboardReturnOutlined } from "@material-ui/icons";
 const ProfileContext=createContext();
 export const ProfileProvider=({children})=>{
     const[user,setUser]=useState(null);
-    const[community,setCommunity]=useState(null);
-    const[communityList,setCommunityList]=useState(null);
-    const[apartment,setApartment]=useState(null);
-    const[apartmentList,setApartmentList]=useState(null);
+   // const[community,setCommunity]=useState(null);
+    //const[communityList,setCommunityList]=useState(null);
+    //const[apartment,setApartment]=useState(null);
+   // const[apartmentList,setApartmentList]=useState(null);
     const [isLoading,setIsLoading]=useState(true);
 
-   const getCommunityDetails=async (communityId)=>{
+   /*const getCommunityDetails=async (communityId)=>{
     var apiBaseUrl = `http://localhost:4000/api/community/${communityId}`;
     let communityinfo=null;
 
@@ -68,6 +68,7 @@ export const ProfileProvider=({children})=>{
         console.log(apartmentIds);
         setApartmentList(apartmentIds);
      }
+     */
     const setUserDetails=async (uid)=>
     {
         var apiBaseUrl = `http://localhost:4002/api/users/search`;
@@ -123,8 +124,8 @@ export const ProfileProvider=({children})=>{
             {
                 setUserDetails(authObj.uid)              
                 setIsLoading(false); 
-                setCommunitydetail();
-                setApartmentdetail();
+               // setCommunitydetail();
+               // setApartmentdetail();
             }
             else
             {
@@ -140,7 +141,7 @@ export const ProfileProvider=({children})=>{
     },[])
 
     return (
-    <ProfileContext.Provider value={{isLoading,user,community,communityList,apartment,apartmentList}}> {children} </ProfileContext.Provider>);
+    <ProfileContext.Provider value={{isLoading,user}}> {children} </ProfileContext.Provider>);
 
 }
 

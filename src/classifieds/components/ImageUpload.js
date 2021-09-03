@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { withStyles } from "@material-ui/core/styles";
 
 import { Button } from '@material-ui/core';
 import './ImageUpload.css';
@@ -35,6 +34,7 @@ const ImageUpload = props => {
       fileIsValid = false;
     }
  //   props.onInput(props.id, pickedFile, fileIsValid);
+      props.addFile(pickedFile);
   };
 
   const pickImageHandler = () => {
@@ -53,7 +53,7 @@ const ImageUpload = props => {
       />
       <div className={`image-upload`}>
         <div className="image-upload__preview" onClick={pickImageHandler}>
-          {previewUrl && <img  height="100%" width="100%"  src={previewUrl} alt="Preview"  />}
+          {previewUrl && <img src={previewUrl} alt="Preview"  />}
           {!previewUrl && <p><AddAPhotoIcon fontSize="large"/> </p>}
         </div>
        

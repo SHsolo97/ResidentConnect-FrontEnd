@@ -1,12 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { withStyles } from "@material-ui/core/styles";
 
 import { Button } from '@material-ui/core';
 import './AdImageUpload.css';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import { makeStyles } from '@material-ui/core/styles';
-
-
 const AdImageUpload = props => {
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
@@ -38,6 +34,7 @@ const AdImageUpload = props => {
       fileIsValid = false;
     }
  //   props.onInput(props.id, pickedFile, fileIsValid);
+      props.addFile(pickedFile,props.placeholder);
   };
 
   const pickImageHandler = () => {
@@ -45,8 +42,9 @@ const AdImageUpload = props => {
   };
 
   return (
-    <div className="form-control">
+    <div className="form-control" >
       <input
+        
         id={props.id}
         ref={filePickerRef}
         style={{ display: 'none' }}
@@ -55,8 +53,8 @@ const AdImageUpload = props => {
         onChange={pickedHandler}
       />
       <div className={`image-upload`}>
-        <div className="image-upload__preview" onClick={pickImageHandler}>
-          {previewUrl && <img  height="100%" width="100%"  src={previewUrl} alt="Preview"  />}
+        <div className="image-upload__preview"   onClick={pickImageHandler}>
+          {previewUrl && <img src={previewUrl} alt="Preview"  />}
           {!previewUrl && <p><AddAPhotoIcon fontSize="large"/> </p>}
         </div>
        

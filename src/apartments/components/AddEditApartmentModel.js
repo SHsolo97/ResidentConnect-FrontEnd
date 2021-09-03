@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
+import { useProfile } from '../../context/profile.context';
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -19,32 +20,25 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   }));
-export default function AddApartmentModal({...props}) {
+export default function AddEditApartmentModel({...props}) {
     const classes = useStyles();
-
-    const [modelDetails,setModelDetails]=useState({
-        name: '',
-        area:{
-          carpetarea:0,
-          builduparea:0,
-          superbuilduparea:0
-        },
-        rooms : {
-          bedrooms : 0,
-          bathrooms :0,
-          balconies: 0,
-          kitchens :0,
-          halls :0,
-          otherrooms:0
-      }
-    });
+    const {user}=useProfile();
+    const communityid=user.communities[0];
+    const [modelDetails,setModelDetails]=useState(props.model);
     const addBlock=()=>
     {
         console.log(modelDetails);
+        props.addApartmentModel(modelDetails);
         props.handleClose();
     }
 
-    
+    const editBlock=()=>
+    {
+      console.log(modelDetails);
+      props.editApartmentModel(modelDetails);
+      props.handleClose();
+      
+    }
     
 
    
@@ -153,11 +147,16 @@ export default function AddApartmentModal({...props}) {
     </form>
         </DialogContent>
         <DialogActions>
+         {props.actionType==='add'?
+          <Button onClick={addBlock} color="primary">
+            Add
+          </Button>:
+          <Button onClick={editBlock} color="primary">
+          Edit
+        </Button>
+          }
           <Button onClick={props.handleClose} color="primary">
             Cancel
-          </Button>
-          <Button onClick={addBlock} color="primary">
-            Submit
           </Button>
         </DialogActions>
       </Dialog>

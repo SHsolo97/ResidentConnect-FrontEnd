@@ -4,9 +4,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import AddEditApartmentModel from './AddEditApartmentModel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import axios from 'axios';
+import { useModelState } from '../../misc/custom-hooks';
 const useStyles = makeStyles({
   card: {
     marginLeft:200,
@@ -28,18 +32,36 @@ const useStyles = makeStyles({
 });
 
 export default function ModelCard({children,...props}) {
+  const { isOpen, open, close } = useModelState();
+  
   const classes = useStyles();
  const model=props.model;
+ 
+ const deleteModel=(event)=>{
+  console.log(`delete ${model._id}`);
+  props.deleteModel(model);
+
+  event.preventDefault();
+  event.stopPropagation()
+ }
+ const editApartmentModel=(modelTobeEdit)=>{
+   props.editApartmentModel(modelTobeEdit);
+ }
   return (
-    <Card className={classes.card}>
+    
+      <Card  value={props.key} className={classes.card}>
       <CardContent>
       <Grid
   container
   direction="row"
   justifyContent="flex-end"
   alignItems="baseline"
-> <EditIcon/>
-      <DeleteIcon />
+>
+
+<Button onClick={open}> <EditIcon/></Button>
+{isOpen && <AddEditApartmentModel  actionType="edit" model={model} editApartmentModel={editApartmentModel} handleClose={close} open={open} />}
+                     
+<Button onClick={deleteModel}> <DeleteIcon /> </Button>
       </Grid>
 
         <Typography variant="h5" component="h2">
@@ -71,5 +93,6 @@ export default function ModelCard({children,...props}) {
       </CardContent>
      
     </Card>
+   
   );
 }

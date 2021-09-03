@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { orange } from '@material-ui/core/colors';
 import {Button} from '@material-ui/core';
 import { PageHeader } from '../../shared/components/PageHeader'
+import PrimaryButton from '../../shared/components/PrimaryButton';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 150 },
@@ -42,7 +43,12 @@ const columns = [
     setRows([...rows,{ id:id, block: '', floors: 0, flats: 0}]));
     console.log(id);
 }, [rows])
- 
+const handleSubmit=(e)=>{
+  props.handleNext();
+}
+const handleBack=(e)=>{
+  props.handleBack();
+}
   return (
       <>
       <PageHeader>{children}</PageHeader>  
@@ -58,6 +64,9 @@ const columns = [
         disableSelectionOnClick
       />
     </div>
+    <PrimaryButton  onClick={handleBack}> Back </PrimaryButton>
+    <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
+
     </>
   );
 }

@@ -1,9 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import {TextField,Button} from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
+
 import { orange } from '@material-ui/core/colors'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +16,13 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import LanguageTwoToneIcon from '@material-ui/icons/LanguageTwoTone';
 import { PhoneList } from '../components/PhoneList';
 import ImageUpload from '../components/ImageUpload';
+import { storage } from '../../misc/firebase';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router';
+import {uploadImagesToFireStorage} from '../../misc/firestore';
+import { getRequest } from '../../misc/http-hooks';
+
+const MAX_FILE_SIZE = 1000 * 1024 * 5;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,15 +35,63 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   }));
+  
+
 export const AddClassified = () => {
+  let file=null;
+  const history=useHistory();
+  const [isLoading, setIsLoading] = useState(false);
     const classes = useStyles();
     const {user}=useProfile();
-    const  communityid ="612bf9c96b1331634c3a701c";
+    const  communityid =user.communities[0];
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
+   
+   /* const uploadImageToFireStorage = async () => {
+      const fileList=[file];
+      try {
+          setIsLoading(true);
+          const uploadPromises = fileList.map(f => {
+            console.log(f.name);
+              return storage
+                  .ref(`${communityid}/classifieds`)
+                  .child(Date.now() + f.name)
+                  .put(f,
+                      {
+                        contentType: `image/jpeg`,
+                        cacheControl: `public, max-age=${3600 * 12 * 3}`
+                      });
 
-    const [classified,setClassified]=useState({
+          });
+          const uploadSnapshots = await Promise.all(uploadPromises);
+          const shapePromises = uploadSnapshots.map(async snap => {
+              return {
+                  contentType: snap.metadata.contentType,
+                  name: snap.metadata.name,
+                  url: await snap.ref.getDownloadURL()
+              }
+          })
+          console.log(shapePromises);
+          const files = await Promise.all(shapePromises);
+          console.log(files);
+          setClassified((prevState)=>{
+            return{...prevState,thumbnail:files[0].url}});
+         // await afterUpload(files);
+          setIsLoading(false);
+         return files;
         
+        
+      }
+
+      catch (err) {
+          setIsLoading(false);
+          console.log(err);
+      }
+  }*/
+  
+    const [classified,setClassified]=useState({
+        communityid:communityid,
+        thumbnail:'', 
         category:'',
         subcategory:'',
         name:'',
@@ -55,6 +110,10 @@ export const AddClassified = () => {
     });
     useEffect(() => {
         
+     console.log(classified);
+  }, [file,classified])
+    useEffect(() => {
+        
         getCategories();
     }, [])
     useEffect(() => {
@@ -62,6 +121,25 @@ export const AddClassified = () => {
         getSubCategories();
     }, [classified.category])
 
+    const addClassifieds=async()=>{
+      var apiBaseUrl = `http://localhost:4005/api/classifieds/create`   
+           
+      await axios.post(apiBaseUrl,classified )
+           .then(function (response) {
+               if (response.status === 200)
+              {           
+                
+                  console.log(response.data);
+               
+              }
+         
+           })
+           .catch(function (error) {
+               console.log(error);
+               return(null);
+  
+           });
+    }
     const getSubCategories=async()=>{
 
         var apiBaseUrl = `http://localhost:4005/api/classifieds/subcategories`   
@@ -100,7 +178,31 @@ export const AddClassified = () => {
     
              });
     }
-    const addClassified=()=>{
+
+    const getCategories1 =async()=>
+    {
+      var apiBaseUrl = `http://localhost:4005/api/classifieds/categories`        
+
+      const responseData=await getRequest(apiBaseUrl);
+      setCategories(responseData.categories);
+    }
+    const addFile=(imagefile)=>{
+      console.log('inside addFile')
+      console.log(imagefile);
+     
+      file=imagefile;
+      
+      
+    }
+    const addClassified=async()=>{
+      const fileList=[file];
+     
+      const path=`${communityid}/classifieds`;
+      //const imagefiles=await uploadImageToFireStorage();
+      const imagefiles=await uploadImagesToFireStorage(path,fileList);
+      setClassified((prevState)=>{
+        return{...prevState,thumbnail:imagefiles[0].url}});
+        await addClassifieds();
         console.log(classified);    
     }
     const setClassifiedName=(event)=>{
@@ -156,6 +258,10 @@ export const AddClassified = () => {
         setClassified((prevState)=>{
             return{...prevState,website:event.target.value}});
       }
+      const handleCancel=(event)=>{
+        history.push('/classifieds');
+
+      }
     
     
         return (
@@ -198,9 +304,10 @@ export const AddClassified = () => {
        
        <PhoneList/>
 
-       <ImageUpload  id="classifieldIamge" errorText="Upload Image" />
-       <Button variant="contained" style ={{backgroundColor: orange[500] }} onClick={addClassified}>Add</Button>
-      
+       <ImageUpload  addFile={addFile} id="classifieldIamge" errorText="Upload Image" />
+       <PrimaryButton onClick={addClassified}>Submit</PrimaryButton>
+       <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+
           </form>
           </>
           )

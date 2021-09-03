@@ -154,7 +154,9 @@ const Registration = () => {
                 uid:uid,
                 email:userInfo.email,
                 communities:[apartment.communityid],
-                apartments:[apartment._id],
+                apartments:[{
+                  communityid:apartment.communityid,
+                  apartmentid:apartment._id}],
             }
         }
         console.log(userData);

@@ -1,4 +1,4 @@
-import { Announcement, Apartment } from '@material-ui/icons';
+import { Announcement, Apartment, Commute } from '@material-ui/icons';
 import React from 'react';
 import {  Switch } from 'react-router-dom';
 import Announcements from './announcements/pages/Announcements';
@@ -36,10 +36,16 @@ import { AddClassified } from './classifieds/pages/AddClassified';
 import { ViewClassified } from './classifieds/pages/ViewClassified';
 import { PostAd } from './buyandsell/pages/PostAd';
 import { AddFacility } from './facilitybooking/pages/AddFacility';
+import SamplePage from './sample/SamplePage';
+import { CommunityProvider } from './context/community.context';
+import { ApartmentProvider } from './context/apartment.context';
+import { ResidentApartmentDetails } from './apartments/pages/ResidentApartmentDetails';
 
 function App() {
  return(
  <ProfileProvider>
+   <CommunityProvider>
+     <ApartmentProvider>
    <Switch>
    <PublicRoute path="/signin">
      <SignIn />
@@ -50,6 +56,8 @@ function App() {
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={AdminProfileSetting} />
    <SettingsRoute path="/settingsR" component={ResidentProfileSetting} />
+   <SettingsRoute path="/apartmentDetailsR" component={ResidentApartmentDetails}/>
+   
    <SettingsRoute path="/selectprofile" component={ProfileSelection}/>
    <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
    <PrivateRoute path="/dashboardA" component={AdminDashboard} />
@@ -77,8 +85,14 @@ function App() {
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
 
+   <PrivateRoute path="/samplePage" component={SamplePage}/>
+
+   
+
     
  </Switch>
+ </ApartmentProvider>
+ </CommunityProvider>
  </ProfileProvider>
  );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React,{useState, useEffect} from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -8,12 +9,31 @@ import Select from '@material-ui/core/Select';
 import axios from 'axios';
 import {TextField,Button} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-
+import { useHistory } from 'react-router';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import Link from '@material-ui/core/Link';
+import { useModelState } from '../../misc/custom-hooks';
+import TimeSlotModal from '../components/TimeSlotModal';
+import TimeSlotArray from '../components/TimeSlotArray';
 
 export const AddFacility = () => {
-    
+    const history=useHistory();
+    const { isOpen, open, close } = useModelState();
     const [faciltyTypes,setFacilityTypes]=useState([]);
     const[day,setDay]=useState('Monday');
+    const [timeSlotChipPerDay, setTimeSlotChipPerDay] = React.useState(
+        [{day:'Monday',chips:[]},
+         {day:'Tuesday',chips:[]},
+         {day:'Wednesday',chips:[]},
+         {day:'Thursday',chips:[]},
+         {day:'Friday',chips:[]},
+         {day:'Saturday',chips:[]},
+         {day:'Sunday',chips:[]}
+          ]
+            );
+
+    const [timeSlotChip, setTimeSlotChip] = React.useState([]);
+   const[slotKey,setSlotKey]=React.useState(0);
     const[bookingDetails,setBookingDetails]=useState(
         {
            
@@ -28,8 +48,58 @@ export const AddFacility = () => {
             ]
             
         });
-       
-    const [facility,setFacility]=useState({
+    
+        useEffect(() => {
+            
+            console.log(`inside use effect ${day} `);
+            let timings= null;
+            switch(day)
+            {
+            case "Monday":
+                setBookingDetails(facility.timings[0]);
+                 setTimeSlotChip(timeSlotChipPerDay[0].chips);
+
+                 break;
+            case "Tuesday":
+               
+                setBookingDetails(facility.timings[1]);
+                setTimeSlotChip(timeSlotChipPerDay[1].chips);
+
+                break;
+            case "Wednesday":
+               
+                setBookingDetails(facility.timings[2]);
+                setTimeSlotChip(timeSlotChipPerDay[2].chips);
+
+                break;
+            case "Thursday":
+                
+                
+                setBookingDetails(facility.timings[3]);
+                setTimeSlotChip(timeSlotChipPerDay[3].chips);
+
+                break;
+            case "Friday":
+               
+                setBookingDetails(facility.timings[4]);
+                setTimeSlotChip(timeSlotChipPerDay[4].chips);
+
+                break;
+            case "Saturday":
+                setBookingDetails(facility.timings[5]); 
+                setTimeSlotChip(timeSlotChipPerDay[5].chips);
+                break;
+            case "Sunday":
+               
+                setBookingDetails(facility.timings[6]) 
+                setTimeSlotChip(timeSlotChipPerDay[6].chips);
+                break;
+        }
+       console.log(timeSlotChip);
+     
+          
+        }, [day])
+        const [facility,setFacility]=useState({
         type:'',
         name:'',
         details:'',
@@ -150,50 +220,56 @@ export const AddFacility = () => {
  
     const setBookingDay=(event)=>{
 
-        let timings= null;
-        console.log(event.target.value);
-        setDay(event.target.value);
-        // eslint-disable-next-line default-case
-        switch(event.target.value)
+        console.log(`previous day: ${day}`);
+        switch(day)
         {
-            case "Monday":
-                console.log(event.target.value);
-                 timings=facility.timings[0];
-                 break;
-            case "Tuesday":
-               
-                console.log(event.target.value);
-                timings=facility.timings[1]; 
+            case 'Monday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [0]: timeSlotChip
+                 }))
                 break;
-            case "Wednesday":
-                console.log(event.target.value);
-               
-                timings=facility.timings[2]; 
+            case 'Tuesday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [1]: timeSlotChip
+                 }))
                 break;
-            case "Thursday":
-                console.log(event.target.value);
-                
-                timings=facility.timings[3]; 
+            case 'Wednesday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [2]: timeSlotChip
+                 }))
                 break;
-            case "Friday":
-                console.log(event.target.value);
-               
-                timings=facility.timings[4]; 
+            case 'Thursday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [3]: timeSlotChip
+                 }))
                 break;
-            case "Saturday":
-                console.log(event.target.value);
-                timings=facility.timings[5]; 
+            case 'Friday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [4]: timeSlotChip
+                 }))
                 break;
-            case "Sunday":
-                console.log(event.target.value);
-               
-                timings=facility.timings[6]; 
+            case 'saturday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [5]: timeSlotChip
+                 }))
+                break;
+            case 'Sunday':
+                setTimeSlotChipPerDay(timeSlotChipPerDay=>({
+                    ...timeSlotChipPerDay,
+                    [6]: timeSlotChip
+                 }))
                 break;
         }
-        setBookingDetails(timings);
+        setDay(event.target.value);
        
-        console.log(timings);
-        console.log(bookingDetails);
+    
+       
 
     }
     const setFacilityName=(event)=>{
@@ -204,6 +280,36 @@ export const AddFacility = () => {
         setFacility((prevState)=>{
             return{...prevState,details:event.target.value}});
       }
+      const handleCancel=(event)=>{
+          history.push('/facilityA');
+      }
+      const addFacility=(event)=>{
+          console.log('Add Facility');
+      }
+
+      const handleAddTimeSlot=(slotToAdd)=>()=>{
+        //setChipData((chips) => chips.push(chipToAdd));
+        console.log("handleAdd");
+        console.log(slotToAdd);
+        addTimeSlot(slotToAdd);
+      }
+    
+      const handleTimeSlotAdd=(value)=>{
+        close();
+        const chipToAdd={key:slotKey, label:value};
+        console.log(chipToAdd);
+        addTimeSlot(chipToAdd);
+      }
+      
+      const addTimeSlot=(slotToAdd)=>{
+        setTimeSlotChip(SlotChip => [...SlotChip, slotToAdd]);
+        console.log(slotToAdd);
+        setSlotKey(slotKey+1);
+      }
+     
+      const handleTimeSlotDelete = (slotToDelete) => () => {
+        setTimeSlotChip((slots) => slots.filter((slot) => slot.key !== slotToDelete.key));
+      };
     return (
         <>
            <PageHeader>Add Facility</PageHeader> 
@@ -226,8 +332,7 @@ export const AddFacility = () => {
       <TextField id="facilitydetails"  multiline rows={10} style={{  width: '160ch'}}   margin="normal"  label="Facility Details" value={facility.details} onChange={setFacilityDetails} variant="outlined"/>
        <FormControl  style={{  }}>
         <InputLabel id="inpit-bokkingday">Day</InputLabel>
-        <Select labelId="lbl-bookingday" id="lbl-bookingday"  value={day}  variant="outlined"  onChange={setBookingDay} >
-     
+        <Select labelId="lbl-bookingday" id="lbl-bookingday"  value={day}  variant="outlined"  onChange={setBookingDay} >     
           <MenuItem value='Monday'>Monday</MenuItem>
           <MenuItem value='Tuesday'>Tuesday</MenuItem>
           <MenuItem value='Wednesday'> Wednesday</MenuItem>
@@ -235,9 +340,15 @@ export const AddFacility = () => {
           <MenuItem value='Friday'>Friday</MenuItem>
           <MenuItem value='Saturday'> Saturday</MenuItem>
           <MenuItem value='Sunday'> Sunday </MenuItem>
-
         </Select>
-  
+        <Link  component="button" variant="body2" onClick={open}> Add Slot </Link>
+        {isOpen && <TimeSlotModal handleClose={close} open={open} addTimeSlot={handleTimeSlotAdd} />}
+        <TimeSlotArray timeSlotChip={timeSlotChip} key={slotKey} handleDelete={handleTimeSlotDelete} handleAdd={handleAddTimeSlot} />
+
+        <Grid  container direction="row" justifyContent="center" alignItems="center">
+        <PrimaryButton onClick={addFacility}>Submit</PrimaryButton>
+       <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+       </Grid>
       </FormControl>
       </Grid>
        </>

@@ -21,6 +21,9 @@ import Box from '@material-ui/core/Box';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router';
+import { uploadImagesToFireStorage } from '../../misc/firestore';
 
 const useStyles = makeStyles((theme) => ({
    imageList: {
@@ -41,24 +44,25 @@ const useStyles = makeStyles((theme) => ({
   }));
 export const PostAd = () => {
     const classes = useStyles();
+    const history=useHistory();
     const {user}=useProfile();
-    const  communityid ="612bf9c96b1331634c3a701c";
-
+    const communityid = user.communities[0];
+    const files =[null,null,null,null,null,null,null,null,null,null,null,null];
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
+   
     const [advert,setAdvert]=useState({
         
-            communityid : user.communities[0],
+            communityid :communityid,
             creator:user.id,
             title: '',
             description:'',
             category: '',
             subcategory:'',
-            type:'',
+            type:'private',
             images:[],
             price:{
                 value:'',
-                currency:'INR',
                 negotiable:true
             }
         
@@ -72,6 +76,11 @@ export const PostAd = () => {
         getSubCategories();
     }, [advert.category])
 
+    useEffect(() => {
+        
+        
+    }, [files])
+
     const getSubCategories=async()=>{
 
         var apiBaseUrl = `http://localhost:4004/api/adverts/subcategories`   
@@ -79,28 +88,40 @@ export const PostAd = () => {
         await axios.post(apiBaseUrl,data )
              .then(function (response) {
                  if (response.status === 200)
-                {           
-                  
-                    console.log(response.data.subcategories);
-                    setSubCategories(response.data.subcategories);
+                {  
+                     setSubCategories(response.data.subcategories);
                 }
-           
              })
              .catch(function (error) {
                  console.log(error);
-                 return(null);
-    
+                 return(null);    
              });
     }
-    const getCategories=async()=>{
-        
+    const getCategories=async()=>{        
         var apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
         await axios.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
+                { 
+                     setCategories(response.data.categories);
+                }           
+             })
+             .catch(function (error) {
+                 console.log(error);
+                 return(null);    
+             });
+    }
+    const addAdvert=async()=>{
+        var apiBaseUrl = `http://localhost:4004/api/adverts/create`   
+             
+        await axios.post(apiBaseUrl,advert )
+             .then(function (response) {
+                 if (response.status === 200)
                 {           
                   
-                    setCategories(response.data.categories);
+                    console.log(response.data);
+                    return response.data;
+                 
                 }
            
              })
@@ -109,8 +130,7 @@ export const PostAd = () => {
                  return(null);
     
              });
-    }
-
+      }
     const setCategory=(event)=>{
         setAdvert((prevState)=>{
             return{...prevState,category:event.target.value}});
@@ -132,6 +152,36 @@ export const PostAd = () => {
         tempPrice.value = event.target.value;
         setAdvert((prevState)=>{
             return{...prevState,price:tempPrice}});   
+      }
+      const addFile=(file,placeholder)=>{
+        console.log('inside addFile')
+        console.log(file);
+        files[placeholder]=file;
+
+         
+            console.log(files);
+        
+      }
+      const handleCancel=(event)=>
+      {
+        history.push('/buyandsell');
+      }
+      const createAdvert=async (event)=>{
+          const filePath=``;
+          const validFiles=files.filter(file => file!=null);
+
+          const fileData=await uploadImagesToFireStorage(filePath,validFiles)
+          const fileDataUrls=[];
+          fileData.map(data=>fileDataUrls.push(data.url));
+
+          setAdvert((prevState)=>{
+            return{...prevState,images:fileDataUrls}});  
+        
+          console.log('create Advert');
+          console.log(advert);
+          const advertResponse=await addAdvert();
+          console.log(advertResponse);
+
       }
     return (
         <>
@@ -171,14 +221,14 @@ export const PostAd = () => {
         {[...Array(12)].map((item, i) => (
          
          <ImageListItem >
-            <AdImageUpload/>
+            <AdImageUpload placeholder={i}   addFile={addFile}/>
             </ImageListItem>
    
         ))}
         </ImageList>
            <Grid container direction="row" justifyContent="space-evenly" alignItems="center" >
-            <Button variant="contained" style ={{backgroundColor: orange[500] }}> Submit</Button>
-            <Button variant="contained" style ={{backgroundColor: orange[500] }}> Cancel</Button>
+            <PrimaryButton onClick={createAdvert} > Submit</PrimaryButton>
+            <PrimaryButton onClick={handleCancel}> Cancel</PrimaryButton>
             </Grid>
             
         
