@@ -32,7 +32,13 @@ export default function AddEditApartmentModel({...props}) {
         props.handleClose();
     }
 
-    
+    const editBlock=()=>
+    {
+      console.log(modelDetails);
+      props.editApartmentModel(modelDetails);
+      props.handleClose();
+      
+    }
     
 
    
@@ -141,10 +147,14 @@ export default function AddEditApartmentModel({...props}) {
     </form>
         </DialogContent>
         <DialogActions>
-        
+         {props.actionType==='add'?
           <Button onClick={addBlock} color="primary">
-            Submit
-          </Button>
+            Add
+          </Button>:
+          <Button onClick={editBlock} color="primary">
+          Edit
+        </Button>
+          }
           <Button onClick={props.handleClose} color="primary">
             Cancel
           </Button>

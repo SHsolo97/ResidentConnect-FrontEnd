@@ -75,7 +75,7 @@ export const ApartmentModels = ({children,...props}) => {
     }
     const editApartmentModel=async(modelToBeEdit)=>{
         var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/${modelToBeEdit._id}`  
-        await axios.edit(apiBaseUrl,modelToBeEdit )
+        await axios.put(apiBaseUrl,modelToBeEdit )
              .then(function (response) {
                  if (response.status === 200)
 
@@ -143,10 +143,10 @@ export const ApartmentModels = ({children,...props}) => {
           <PageHeader>{children}</PageHeader>  
           <Button   variant="contained" style ={{backgroundColor: orange[500] }} 
                startIcon={<AddCircleOutlineIcon />} onClick={open}>Add Model</Button>
-                     {isOpen && <AddEditApartmentModel  model={INTIAIL_VALUE} addApartmentModel={addApartmentModel} handleClose={close} open={open} />}
+                     {isOpen && <AddEditApartmentModel  actionType="add" model={INTIAIL_VALUE} addApartmentModel={addApartmentModel} handleClose={close} open={open} />}
                      {models.map((model)=> 
                      
-                     <ModelCard  deleteModel={deleteModel} model={model}/>
+                     <ModelCard editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model}/>
                      )}
                      <PrimaryButton    onClick={handleBack}> Back </PrimaryButton>
                       <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
