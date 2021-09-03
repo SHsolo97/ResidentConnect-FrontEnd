@@ -60,7 +60,7 @@ export default function PrimaryButton({children,...props}) {
   return (
   
       <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" onClick={props.onClick} className={classes.margin}>
+        <Button  type={props.type} variant="contained" color="primary" onClick={props.onClick} className={classes.margin}>
           {children}
         </Button>
       </ThemeProvider>
