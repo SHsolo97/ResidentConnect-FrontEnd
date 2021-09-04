@@ -40,6 +40,7 @@ import SamplePage from './sample/SamplePage';
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';
 import { ResidentApartmentDetails } from './apartments/pages/ResidentApartmentDetails';
+import ProfileSetting from './profiles/pages/ProfileSetting';
 
 function App() {
  return(
@@ -84,7 +85,7 @@ function App() {
    <PrivateRoute path="/viewClassified" component={ViewClassified} />
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
-
+   <PrivateRoute path="/profile" component={ProfileSetting}/>
    <PrivateRoute path="/samplePage" component={SamplePage}/>
 
    

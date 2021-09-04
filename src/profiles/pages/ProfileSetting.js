@@ -18,7 +18,6 @@ import axios from 'axios';
 import { Avatar } from '@material-ui/core';
 import img from '../../images/avatars/mypict.jpg'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import ProfileImageUpload from '../components/ProfileImageUpload';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { FormControlLabel } from '@material-ui/core';
 
@@ -60,43 +59,15 @@ avatar: {
 
 }));
 
-const ResidentProfileSetting = () => {
+const ProfileSetting = () => {
   
 const [avatarImage,setAvatarImage]=React.useState();
 const {user}=useProfile();
 
 const classes = useStyles();
 const history=useHistory();
-const [formInput,setFormInput]=React.useState(
-{
-profilecompletion:true,
-firstname: "",
-lastname: "",
-avatar:"",
-bloodgroup:"A Positive",
-phone:[{
-type:"",
-number:""},
-{
-type:"",
-number:""}],
-emergencycontacts:
-[
-{
-name: "",
-relationship: "",
-phone: ""
-},
-{
-name: "",
-relationship: "",
-phone: ""
-}
-]
-
-
-}
-);
+const [formInput,setFormInput]=React.useState(user);
+console.log(formInput);
 const handleInput = evt => {
 const name = evt.target.name;
 const newValue = evt.target.value;
@@ -240,8 +211,10 @@ return (
   <form onSubmit={handleSubmit}>
     <PageHeader>Profile</PageHeader>
     <div className={classes.avatar}>
-       <ProfileImageUpload addFile={addFile} id="classifieldIamge" errorText=""/>
-       {avatarImage===null? <div>upload image</div>:null}
+    <Avatar  style={{ height: '150px', width: '150px' , objectFit:'cover' }} >
+          {user.avatar && <img src={user.avatar} alt="Preview"  />}
+          {!user.avatar && <AddAPhotoIcon fontSize="large"/> }
+        </Avatar>
        </div>
     <Box className={classes.root}>
 
@@ -310,4 +283,4 @@ return (
 </>
 )
 }
-export default ResidentProfileSetting;
+export default ProfileSetting;

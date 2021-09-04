@@ -94,7 +94,7 @@ export const ProfileProvider=({children})=>{
                    // setCommunitydetail(userinfo.communities);
                   //  setApartmentdetail(userinfo.apartments);
 
-                     data={
+                     /*data={
                         id:userinfo._id,
                         uid:userinfo.uid,
                         email:userinfo.email,
@@ -103,8 +103,9 @@ export const ProfileProvider=({children})=>{
                         communities:userinfo.communities,
                         apartments:userinfo.apartments
 
-                    }
-                    }       
+                    }*/
+                    data=userinfo;
+                    }  
                     setUser(data);
                  
                  }

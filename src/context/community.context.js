@@ -33,6 +33,7 @@ export const CommunityProvider=({children})=>{
                     id:communityinfo._id,
                     name:communityinfo.name,
                     builder:communityinfo.builder,
+                    address:communityinfo.address
                   
                 }
                 return communitydata;  

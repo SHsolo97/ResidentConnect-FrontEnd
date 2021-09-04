@@ -17,16 +17,12 @@ const PublicRoute = ({children,...routeProps}) => {
 
         if(userType === 'resident')
         {
-            if(user.profilecompletion)
-                return <Redirect to="/dashboardR" />
-            else
+          
                  return <Redirect to="/selectprofile" />
         }
         else
         {
-            if(user.profilecompletion)
-                return <Redirect to="/dashboardA" />
-            else
+           
                 return <Redirect to="/selectprofile" />
         }   
     }

@@ -8,19 +8,7 @@ import { useCommunity } from '../../context/community.context';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useProfile } from '../../context/profile.context';
 
-const COMMUNITY_DEFAULT={
-     
-   
-    "name": "XYZ XYZ XYZ",
-    "builder": "LightHouse ",
-    "address" : {
-            "addressline" : "streetname",
-            "area" : "Pallavaram",
-            "city": "Chennai",
-            "state" : "Tamil Nadu",
-            "pincode" : "600011"
-    }
-}
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -82,6 +70,7 @@ export const Community = ({children,...props}) => {
                   return{...prevState,name:communitydata.name}});
                 setCommunityDetails((prevState)=>{
                   return{...prevState,builder:communitydata.builder}});
+                  if(communitydata.address!=null)
                   setCommunityDetails((prevState)=>{
                     return{...prevState,address:communitydata.address}});
                  
@@ -106,6 +95,15 @@ export const Community = ({children,...props}) => {
             return{...prevState,builder:event.target.value}});
       };
       const setAddressLine = (event) => {
+        if(communityDetails.address==null)
+        setCommunityDetails((prevState)=>{
+          return{...prevState,address:{
+            addressline:'',
+            area:'',
+            city:'',
+            state:'',
+            pincode:''
+          }}});
         const tempAddress=communityDetails.address;
         tempAddress.addressline=event.target.value;
         setCommunityDetails((prevState)=>{

@@ -16,15 +16,23 @@ import { auth,database } from '../../misc/firebase';
 import Link from '@material-ui/core/Link';
 import {Redirect} from 'react-router-dom';
 import { PageHeader } from '../../shared/components/PageHeader';
-import { ControlCameraOutlined } from '@material-ui/icons';
+import { CenterFocusStrong, ControlCameraOutlined } from '@material-ui/icons';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+import { Box } from '@material-ui/core';
+import PrimaryButton from '../../shared/components/PrimaryButton';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexWrap: 'wrap',
+
+width:"100ch",
+height: "75ch",
+padding: '1ch',
+borderRadius:'5ch',
+border: '2px solid orange'
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -217,55 +225,55 @@ const Registration = () => {
         setUserInfo((prevState)=>{
             return{...prevState,email:event.target.value}});
      }
+     const goToSignIn=(event)=>{
+      history.push('/signin');
+     }
      return (
-        <Grid   container direction="column" justifyContent="center" alignItems="center">
+      <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"200px"}} alignItems="center">
+
+      <Box className={classes.root}>
+
+    
+        <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">
         <PageHeader>Sign Up</PageHeader>
         <RadioGroup row aria-label="position" name="position" defaultValue="top" onChange={onChangeUserType}>        
         <FormControlLabel id="radio_admin"   value="admin"  control={<Radio color="primary" />} label="Admin" />        
         <FormControlLabel id="radio_resident"    value="resident"  control={<Radio color="primary" />} label="Resident" />        
-      </RadioGroup>
+         </RadioGroup>
 
-      <FormControlLabel id="lblToken"  label="Token" labelPlacement="start"
-        control={        
-        <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Token</InputLabel>
-        <OutlinedInput id="token" type= "text" onChange={(e)=>setToken(e.target.value)} value={token} />
-        </FormControl>
-        }
-        /> 
+         
+     
+        <TextField id="token" style={{ margin: 8, width: '30ch'}}    margin="normal" label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
+
+       
+        <TextField id="email" style={{ margin: 8, width: '30ch'}}    margin="normal" label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
         
-        <FormControlLabel id="lblEmail"  label="Email" labelPlacement="start"
-        control={        
+        
+
         <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
-        <OutlinedInput id="email" type= "text" onChange={onChangeEmail} value={userInfo.email} />
-        </FormControl>
-        }
-        /> 
-                     
-       <FormControlLabel id="lblpassword"  label="Password" labelPlacement="start"
-        control={
-        <FormControl variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="password">Password</InputLabel>
   
-          <OutlinedInput   id="outlined-adornment-password" type={password.showPassword ? "text" : "password"} onChange={handlePasswordChange("password")}
+          <OutlinedInput   id="password" type={password.showPassword ? "text" : "password"} onChange={handlePasswordChange("password")}
               value={password.password}         
               endAdornment={
             <InputAdornment position="end">
-              <IconButton  onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
+              <IconButton   aria-label="toggle password visibility" onClick={handleClickShowPassword}
+               onMouseDown={handleMouseDownPassword} edge="end">
                 {password.showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
               }
           />
         </FormControl>
-         }
-         /> 
+       
       
-      <Button variant="contained" color="primary" onClick={onSignup}>Sign Up </Button>
-      <Button variant="contained" color="primary" onClick={onFacebookSignUp}> Signup with Facebook </Button>
+      <PrimaryButton onClick={onSignup}>Sign Up </PrimaryButton>
+      <Button variant="contained" color="secondary" onClick={onFacebookSignUp}> Signup with Facebook </Button>
       <Button variant="contained" color="secondary" onClick={onGoogleSignUp}> Signup with Google </Button>
-    
+      <Link component="button" variant="body2" onClick={goToSignIn}> Existing User? Sign In </Link>
+
+      </Grid>
+      </Box>
       </Grid>
     )
 }
