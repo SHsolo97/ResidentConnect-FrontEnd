@@ -1,9 +1,11 @@
 import React from 'react'
+import Home from './home'
 
 const AdminChatroom = () => {
     return (
         <div>
-            Admin ChatRoom Overview
+             ChatRooms
+            <Home/>
         </div>
     )
 }

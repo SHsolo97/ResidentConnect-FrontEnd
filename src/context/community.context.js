@@ -92,7 +92,7 @@ export const CommunityProvider=({children})=>{
     },[user])
 
     return (
-    <CommunityContext.Provider value={{community,communityList}}> {children} </CommunityContext.Provider>);
+    <CommunityContext.Provider value={{community,setCommunity,communityList}}> {children} </CommunityContext.Provider>);
 
 }
 

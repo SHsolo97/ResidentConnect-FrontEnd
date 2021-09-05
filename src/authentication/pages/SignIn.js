@@ -77,7 +77,6 @@ auth.signInWithEmailAndPassword(email,password.password)
 // Signed in
 const user = userCredential.user;
 console.log(userCredential);
-<Alert severity="success">Login Successful</Alert>
 console.log('goto profile select');
 history.push('/selectprofile');
 // ...
