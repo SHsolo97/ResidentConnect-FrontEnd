@@ -100,7 +100,7 @@ export const ApartmentProvider=({children})=>{
     },[user])
 
     return (
-    <ApartmentContext.Provider value={{apartment,apartmentList}}> {children} </ApartmentContext.Provider>);
+    <ApartmentContext.Provider value={{apartment,setApartment,apartmentList}}> {children} </ApartmentContext.Provider>);
 
 }
 

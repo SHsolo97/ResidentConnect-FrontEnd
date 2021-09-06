@@ -164,6 +164,9 @@ const PrivateLayout = ({ children }) => {
     });
       }
    
+      const openProfileSettings=()=>{
+        history.push('/profile');
+      }
    const getApartmentid = (block,floor,aptnum)=>
    {
     return `Block ${block}  Floor  ${floor} Flat ${aptnum}`
@@ -246,7 +249,7 @@ const PrivateLayout = ({ children }) => {
                 </>
                 }
               </Menu>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={openProfileSettings}>
               <AccountCircle />
             </IconButton >
             <IconButton aria-label="show 17 new notifications" color="inherit">

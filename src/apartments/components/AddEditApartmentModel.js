@@ -1,14 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
-import { useProfile } from '../../context/profile.context';
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -22,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 export default function AddEditApartmentModel({...props}) {
     const classes = useStyles();
-    const {user}=useProfile();
-    const communityid=user.communities[0];
     const [modelDetails,setModelDetails]=useState(props.model);
     const addBlock=()=>
     {
@@ -47,34 +43,34 @@ export default function AddEditApartmentModel({...props}) {
             return{...prevState, name : event.target.value}});
       };
       const setCarpetArea = (event) => {
-        let temparea=modelDetails.area
-        temparea.carpetarea = parseInt(event.target.value);
+        const temparea=modelDetails.area
+        temparea.carpetarea = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,area : temparea}});
       };
       const setBuildUpArea = (event) => {
-        let temparea=modelDetails.area
-        temparea.builduparea = parseInt(event.target.value);
+        const temparea=modelDetails.area
+        temparea.builduparea = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,area:temparea}});
       };
       const setSuperBuildUpArea = (event) => {
-        let temparea=modelDetails.area
-        temparea.superbuilduparea = parseInt(event.target.value);
+        const temparea=modelDetails.area
+        temparea.superbuilduparea = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,area:temparea}});
       };
      
     
       const setBedRooms = (event) => {
-        let temprooms=modelDetails.rooms
-        temprooms.bedrooms = parseInt(event.target.value);
+        const temprooms=modelDetails.rooms
+        temprooms.bedrooms = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,rooms:temprooms}});
       };
       const setBathrooms = (event) => {
-        let temprooms=modelDetails.rooms
-        temprooms.bathrooms = parseInt(event.target.value);
+        const temprooms=modelDetails.rooms
+        temprooms.bathrooms = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,rooms:temprooms}});
       };
@@ -83,29 +79,30 @@ export default function AddEditApartmentModel({...props}) {
      
   
       const setBalconies = (event) => {
-        let temprooms=modelDetails.rooms
-        temprooms.balconies = parseInt(event.target.value);
+        const temprooms=modelDetails.rooms
+       
+        temprooms.balconies = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,rooms:temprooms}});
       };
 
       const setKitchens = (event) => {
-        let temprooms=modelDetails.rooms
-        temprooms.kitchens = parseInt(event.target.value);
+        const temprooms=modelDetails.rooms
+        temprooms.kitchens = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,rooms:temprooms}});
       };
 
       const setHalls = (event) => {
-        let temprooms=modelDetails.rooms
-        temprooms.halls = parseInt(event.target.value);
+        const temprooms=modelDetails.rooms
+        temprooms.halls = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,rooms:temprooms}});
       };
 
       const setOtherrooms = (event) => {
-        let temprooms=modelDetails.rooms
-        temprooms.otherrooms = parseInt(event.target.value);
+        const temprooms=modelDetails.rooms
+        temprooms.otherrooms = parseInt(event.target.value, 10);
         setModelDetails((prevState)=>{
             return{...prevState,rooms:temprooms}});
       };

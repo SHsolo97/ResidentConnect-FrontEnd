@@ -14,6 +14,8 @@ import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import Divider from '@material-ui/core/Divider';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import { AdDetails } from '../pages/AdDetails';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
   root: {
@@ -43,11 +45,20 @@ const useStyles = makeStyles({
 });
 
 export default function MyAdCard({...props}) {
+  const history=useHistory();
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const advert=props.advert;
 const openAd=(event)=>{
     console.log('open ad');
+    console.log(advert);
+    event.stopPropagation();
+    event.preventDefault();
+    history.push({
+      pathname: '/adDetails',
+      state: { advert: advert }    
+
+    })
 }
 
   return (
@@ -78,7 +89,7 @@ const openAd=(event)=>{
     <CardMedia
          className={classes.media} component="img"
 
-          image= {advert.thumbnail}
+          image= {advert.images[0]}
           title="image"
         />
         <Typography color="textSecondary" > {advert.title} </Typography>
@@ -89,7 +100,7 @@ const openAd=(event)=>{
    
     </Grid>
     <Grid item xs={5}>
-    <Typography  color="textSecondary" > {advert.description}</Typography>
+    <Typography  color="textSecondary" > {advert.description.slice(0,97)} ...</Typography>
     </Grid>
     </Grid>
     </CardActionArea>

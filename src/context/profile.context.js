@@ -1,11 +1,23 @@
 import React,{ useEffect,createContext,useContext,useState } from "react";
-import { auth } from "../misc/firebase";
 import axios from "axios";
 import { KeyboardReturnOutlined } from "@material-ui/icons";
+import { auth, database, messaging } from '../misc/firebase';
+import firebase from 'firebase/app';
 
+export const isOfflineForDatabase = {
+    state: 'offline',
+    last_changed: firebase.database.ServerValue.TIMESTAMP,
+};
+
+const isOnlineForDatabase = {
+    state: 'online',
+    last_changed: firebase.database.ServerValue.TIMESTAMP,
+};
 const ProfileContext=createContext();
 export const ProfileProvider=({children})=>{
     const[user,setUser]=useState(null);
+    let userRef;
+    let userStatusRef;
    // const[community,setCommunity]=useState(null);
     //const[communityList,setCommunityList]=useState(null);
     //const[apartment,setApartment]=useState(null);
@@ -94,7 +106,7 @@ export const ProfileProvider=({children})=>{
                    // setCommunitydetail(userinfo.communities);
                   //  setApartmentdetail(userinfo.apartments);
 
-                     data={
+                     /*data={
                         id:userinfo._id,
                         uid:userinfo.uid,
                         email:userinfo.email,
@@ -103,8 +115,9 @@ export const ProfileProvider=({children})=>{
                         communities:userinfo.communities,
                         apartments:userinfo.apartments
 
-                    }
-                    }       
+                    }*/
+                    data=userinfo;
+                    }  
                     setUser(data);
                  
                  }
@@ -126,6 +139,18 @@ export const ProfileProvider=({children})=>{
                 setIsLoading(false); 
                // setCommunitydetail();
                // setApartmentdetail();
+               userStatusRef = database.ref(`/status/${authObj.uid}`);
+
+               database.ref('.info/connected').on('value', function (snapshot) {                  
+                   if (!!snapshot.val() === false) {
+                       return;
+                   }
+
+                   
+                   userStatusRef.onDisconnect().set(isOfflineForDatabase).then(function () {                
+                       userStatusRef.set(isOnlineForDatabase);
+                   });
+               });
             }
             else
             {

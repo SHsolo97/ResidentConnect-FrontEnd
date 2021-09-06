@@ -1,7 +1,7 @@
 import React from 'react';
 import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { orange, purple } from '@material-ui/core/colors';
+import { blue, grey, orange, purple } from '@material-ui/core/colors';
 
 const BootstrapButton = withStyles({
   root: {
@@ -51,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 const theme = createTheme({
   palette: {
     primary: orange,
+    secondary:blue,
+    disabled:grey
   },
 });
 
@@ -60,7 +62,7 @@ export default function PrimaryButton({children,...props}) {
   return (
   
       <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" onClick={props.onClick} className={classes.margin}>
+        <Button  type={props.type} variant="contained" color="primary" onClick={props.onClick} className={classes.margin}>
           {children}
         </Button>
       </ThemeProvider>

@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import { SectionHeader } from '../../shared/components/SectionHeader';
 import {TextField,Button} from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import { orange } from '@material-ui/core/colors'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -24,6 +24,27 @@ import AdImageUpload from '../../buyandsell/components/AdImageUpload';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
+const CustomTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'orange',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'orange',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'orange',
+      },
+      '&:hover fieldset': {
+        borderColor: 'blue',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'orange',
+      },
+    },
+  },
+})(TextField);
 
 const useStyles = makeStyles((theme) => ({
    imageList: {
@@ -40,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
       width: '25ch',
+      color:'secondary'
     },
   }));
 export const PostAd = () => {
@@ -50,11 +72,10 @@ export const PostAd = () => {
     const files =[null,null,null,null,null,null,null,null,null,null,null,null];
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
-   
     const [advert,setAdvert]=useState({
         
             communityid :communityid,
-            creator:user.id,
+            creator:user._id,
             title: '',
             description:'',
             category: '',
@@ -167,7 +188,7 @@ export const PostAd = () => {
         history.push('/buyandsell');
       }
       const createAdvert=async (event)=>{
-          const filePath=``;
+          const filePath=`adverts/${communityid}/${user._id}`;
           const validFiles=files.filter(file => file!=null);
 
           const fileData=await uploadImagesToFireStorage(filePath,validFiles)
@@ -208,9 +229,9 @@ export const PostAd = () => {
      
            <Divider />
            <SectionHeader>Include Details</SectionHeader>
-           <TextField id="adverttitle" style={{ margin: 8, width: '100ch'}}    margin="normal" label="Title" value={advert.title} onChange={setAdvertTitle} variant="outlined"/>
-             <TextField id="advertdescription"  multiline rows={10} style={{ margin: 8 , width: '100ch'}}   margin="normal"  label="Classified Description" value={advert.description} onChange={setAdvertDescription} variant="outlined"/>
-             <TextField id="advertprice" style={{ margin: 8,  width: '100ch' }}   margin="normal" label="Price" value={advert.price.value} onChange={setPrice} variant="outlined"/>
+           <CustomTextField id="adverttitle" style={{ margin: 8, width: '120ch'}}    margin="normal" label="Title" value={advert.title} onChange={setAdvertTitle} variant="outlined"/>
+             <TextField id="advertdescription"  multiline rows={10} style={{ margin: 8 , width: '120ch'}}   margin="normal"  label="Classified Description" value={advert.description} onChange={setAdvertDescription} variant="outlined"/>
+             <TextField id="advertprice" style={{ margin: 8,  width: '120ch' }}   margin="normal" label="Price" value={advert.price.value} onChange={setPrice} variant="outlined"/>
       
            <Divider />
            <SectionHeader>Upload Photos</SectionHeader>

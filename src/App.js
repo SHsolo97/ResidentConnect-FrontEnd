@@ -1,14 +1,12 @@
-import { Announcement, Apartment, Commute } from '@material-ui/icons';
 import React from 'react';
 import {  Switch } from 'react-router-dom';
 import Announcements from './announcements/pages/Announcements';
-import Community from './apartments/pages/Community';
+import {Community} from './apartments/pages/Community';
 import Registration from './authentication/pages/Registration';
 import SignIn from './authentication/pages/SignIn';
 import BuyAndSell from './buyandsell/pages/BuyAndSell';
 import CarPooling from './carpooling/pages/CarPooling';
 import AdminChatroom from './chatrooms/pages/AdminChatroom';
-import Chatroom from './chatrooms/pages/AdminChatroom';
 import ResidentChatroom from './chatrooms/pages/ResidentChatroom';
 import Classifieds from './classifieds/pages/Classifieds';
 import AdminContacts from './contacts/pages/AdminContacts';
@@ -27,7 +25,7 @@ import ResidentPayments from './payments/pages/ResidentPayments';
 import Pollings from './polling/pages/Pollings';
 import AdminVisitors from './visitormgmt/pages/AdminVisitors';
 import ResidentVisitors from './visitormgmt/pages/ResidentVisitors';
-import AdminProfileSetting from './apartments/pages/AdminProfileSetting';
+import CommunityProfileSetting from './apartments/pages/CommunityProfileSetting';
 import SettingsRoute from './layouts/SettingsRoute';
 import ResidentProfileSetting from './apartments/pages/ResidentProfileSetting'
 import { ProfileProvider } from './context/profile.context';
@@ -40,6 +38,10 @@ import SamplePage from './sample/SamplePage';
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';
 import { ResidentApartmentDetails } from './apartments/pages/ResidentApartmentDetails';
+import ProfileSetting from './profiles/pages/ProfileSetting';
+import { MyAds } from './buyandsell/pages/MyAds';
+import { AdvertsProvider } from './context/adverts.context';
+import { AdDetails } from './buyandsell/pages/AdDetails';
 
 function App() {
  return(
@@ -54,7 +56,7 @@ function App() {
    <PublicRoute path="/registration">
    <Registration />
    </PublicRoute>
-   <SettingsRoute path="/settingsA" component={AdminProfileSetting} />
+   <SettingsRoute path="/settingsA" component={CommunityProfileSetting} />
    <SettingsRoute path="/settingsR" component={ResidentProfileSetting} />
    <SettingsRoute path="/apartmentDetailsR" component={ResidentApartmentDetails}/>
    
@@ -84,10 +86,12 @@ function App() {
    <PrivateRoute path="/viewClassified" component={ViewClassified} />
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
-
+   <PrivateRoute path="/profile" component={ProfileSetting}/>
    <PrivateRoute path="/samplePage" component={SamplePage}/>
+  
+     <PrivateRoute path="/myads" component={MyAds}/>
+     <PrivateRoute path="/adDetails" component={AdDetails}/>
 
-   
 
     
  </Switch>

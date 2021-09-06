@@ -41,7 +41,7 @@ const STEPPER_DEFAULT=[
     ]
 
 
-export default function  AdminProfileSetting()
+export default function  CommunityProfileSetting()
 {
     return ( <CommunityStepper stepperInfo={STEPPER_DEFAULT} />);
 }

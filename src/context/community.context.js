@@ -33,6 +33,7 @@ export const CommunityProvider=({children})=>{
                     id:communityinfo._id,
                     name:communityinfo.name,
                     builder:communityinfo.builder,
+                    address:communityinfo.address
                   
                 }
                 return communitydata;  
@@ -91,7 +92,7 @@ export const CommunityProvider=({children})=>{
     },[user])
 
     return (
-    <CommunityContext.Provider value={{community,communityList}}> {children} </CommunityContext.Provider>);
+    <CommunityContext.Provider value={{community,setCommunity,communityList}}> {children} </CommunityContext.Provider>);
 
 }
 
