@@ -72,11 +72,10 @@ export const PostAd = () => {
     const files =[null,null,null,null,null,null,null,null,null,null,null,null];
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
-   
     const [advert,setAdvert]=useState({
         
             communityid :communityid,
-            creator:user.id,
+            creator:user._id,
             title: '',
             description:'',
             category: '',
@@ -189,7 +188,7 @@ export const PostAd = () => {
         history.push('/buyandsell');
       }
       const createAdvert=async (event)=>{
-          const filePath=``;
+          const filePath=`adverts/${communityid}/${user._id}`;
           const validFiles=files.filter(file => file!=null);
 
           const fileData=await uploadImagesToFireStorage(filePath,validFiles)

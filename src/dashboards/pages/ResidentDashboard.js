@@ -8,7 +8,7 @@ const ResidentDashboard = () => {
     return (
         <>
          <PageHeader>Resident Dashboard</PageHeader>
-         <div>user id={user.id}</div>
+         <div>user id={user._id}</div>
         
         <br/>
         <div>Email={user.email}</div>

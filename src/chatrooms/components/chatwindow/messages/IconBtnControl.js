@@ -8,7 +8,7 @@ const ConditionalBadge = ({ condition, children }) => {
 }
 const IconBtnControl = ({ isVisible,iconName, tooltip, onClick,badgeContent,...props}) => {
     return (
-        <div className="ml-2" style={{ visibility: isVisible ? 'visible' : 'hidden' }}>
+        <div  style={{ visibility: isVisible ? 'visible' : 'hidden' }}>
             <ConditionalBadge condition={badgeContent}>
                 <Whisper
                     placement="top"

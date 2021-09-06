@@ -12,7 +12,7 @@ export const RoomsProvider = ({ children }) => {
     const {user}=useProfile();
     const communityid=user.communities[0];
     useEffect(() => {
-        const roomListRef = database.ref(`rooms`);
+        const roomListRef = database.ref(`rooms/${communityid}`);
         roomListRef.on('value', (snap) => {
             const data = transformArrWithId(snap.val());
             setRooms(data)

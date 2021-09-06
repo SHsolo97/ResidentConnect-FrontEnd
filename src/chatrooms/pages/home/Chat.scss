@@ -1,0 +1,44 @@
+@import 'override';
+@import 'utility';
+@import 'utility_colors';
+
+.chat-top,
+.chat-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+$chat-t: 75px;
+$chat-b: 65px;
+
+.chat-top {
+  height: $chat-t;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    background-color: #fcfcfc;
+  }
+  .custom-scroll {
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: #ddd;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: darken(#ddd, 20%);
+    }
+  }
+.chat-bottom {
+  height: $chat-b;
+}

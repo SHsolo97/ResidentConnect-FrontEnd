@@ -194,16 +194,18 @@ break;
 }
 
 const editUser=async()=>{
-  
-  var apiBaseUrl = `http://localhost:4002/api/users/${user.id}`  
+  console.log(user);
+  var apiBaseUrl = `http://localhost:4002/api/users/${user._id}`  
   await axios.put(apiBaseUrl,formInput )
        .then(function (response) {
            if (response.status === 200)
 
           {
               console.log(response.data);
-             
-              history.push('/apartmentDetailsR');
+              if (user.type==='resident')              
+                history.push('/apartmentDetailsR');
+              else
+              history.push('/dashboardA');
              
             
           }
@@ -220,7 +222,7 @@ console.log(formInput);
 console.log(avatarImage);
 //history.push('/apartmentDetailsR');
 const fileList=[avatarImage];
-const path=`${user.id}/avatars`;
+const path=`${user._id}/avatars`;
 const imagefiles=await uploadImagesToFireStorage(path,fileList);
 setFormInput(produce(formInput, draft => {
   draft.avatar = imagefiles[0].url
@@ -304,8 +306,12 @@ return (
         </Grid>
       </Grid>
     </Box>
-    <PrimaryButton type="submit"> Next </PrimaryButton>
-  </form>
+    {
+    (user.type==='resident') ?
+    <PrimaryButton type="submit"> Next </PrimaryButton>:
+    <PrimaryButton type="submit"> Submit </PrimaryButton>
+    }
+    </form>
 
 </>
 )

@@ -1,13 +1,13 @@
 import React from 'react';
-import { Avatar } from 'rsuite';
 import { getNameInitials } from '../../misc/helpers';
+import { Avatar } from '@material-ui/core';
 
-const ProfileAvatar = ({ name, ...avatarProps }) => {
+  
+const ProfileAvatar = ({ ...avatarProps }) => {
+    
     return (
-        <Avatar circle {...avatarProps}>
-            { getNameInitials(name)}
-
-        </Avatar>
+        <Avatar {...avatarProps}  />
+        
     );
 }
 

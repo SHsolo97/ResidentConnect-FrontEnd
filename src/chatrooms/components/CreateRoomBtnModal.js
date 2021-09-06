@@ -48,6 +48,7 @@ const CreateRoomBtnModal = () => {
         const newRoomdata = {
             ...formValue,
             communityid:communityid,
+            
             createdAt: firebase.database.ServerValue.TIMESTAMP,
             admins: {
                 [auth.currentUser.uid]: true
@@ -55,7 +56,7 @@ const CreateRoomBtnModal = () => {
         }
         ;
         try {
-            await database.ref('rooms').push(newRoomdata);
+            await database.ref(`rooms/${communityid}`).push(newRoomdata);
 
             setIsLoading(false);
             setFormValue(INITIAL_FORM);

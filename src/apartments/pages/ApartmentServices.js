@@ -7,7 +7,7 @@ export const ApartmentServices = ({children,...props}) => {
     const history=useHistory();
   
       const handleSubmit=(e)=>{
-        history.push('dashboardA');
+        history.push('/settingsR');
     }
     const handleBack=(e)=>{
         props.handleBack();

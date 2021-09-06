@@ -10,6 +10,7 @@ import { auth } from '../../../misc/firebase';
 import { transformToArr } from '../../../misc/helpers';
 import { Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Divider from '@material-ui/core/Divider';
 
 const Chat = ({children}) => {
 //const { chatId } = useParams();
@@ -37,9 +38,17 @@ admins
 
 return (
 <CurrentRoomProvider data={currentRoomData}>
-  <Grid container direction="column" justifyContent="space-around" alignItems="center">
+  <Grid container direction="column" justifyContent="space-between" alignItems="stretch">
+
   <ChatTop />
+  <Divider/>
+  <Messages />
+  <Divider/>
+
+  <Grid container direction="column" >
+
     <ChatBottom />
+    </Grid>
   </Grid>
 </CurrentRoomProvider>
 );

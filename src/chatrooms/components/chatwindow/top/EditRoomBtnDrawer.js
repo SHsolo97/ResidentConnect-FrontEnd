@@ -16,6 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Dialog } from '@material-ui/core';
+import { useProfile } from '../../../../context/profile.context';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,16 +42,18 @@ const EditRoomBtnDrawer = () => {
     console.log(description);
     const formRef = useRef();
     const chatId = useCurrentRoom(v => v.id);
+    const {user}=useProfile();
+    const communityid=user.communities[0];
     console.log(chatId);
     //const { chatId } = useParams();
     //const isMobile = useMediaQuery(`(max-width:992px)`);
     const onSubmit = (event) => {
-        database.ref(`rooms/${chatId}`).child('name').set(formValue.name).then(() => {
+        database.ref(`rooms/${communityid}/${chatId}`).child('name').set(formValue.name).then(() => {
             console.log('Successfully Updated');
         }).catch(err => {
             console.log(err.message);
         })
-        database.ref(`rooms/${chatId}`).child('description').set(formValue.description).then(() => {
+        database.ref(`rooms/${communityid}/${chatId}`).child('description').set(formValue.description).then(() => {
             console.log('Successfully Updated');
         }).catch(err => {
             console.log(err.message);

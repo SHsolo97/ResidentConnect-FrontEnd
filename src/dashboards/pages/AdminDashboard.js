@@ -10,7 +10,7 @@ const AdminDashboard = () => {
     return (
         <>
          <PageHeader>Admin Dashboard</PageHeader>
-         <div>id={user.id}</div>
+         <div>id={user._id}</div>
         
         <br/>
         <div>Email={user.email}</div>

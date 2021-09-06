@@ -1,12 +1,13 @@
 /* eslint-disable consistent-return */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams } from 'react-router';
 import { Alert, Button } from 'rsuite';
+import { useCurrentRoom } from '../../../../context/currentroom.context';
 import { auth, database, storage } from '../../../../misc/firebase';
 import { transformArrWithId, groupBy} from '../../../../misc/helpers';
 import MessageItem from './MessageItem';
-
-const PAGE_SIZE = 5;
+import { Paper } from '@material-ui/core';
+import { useProfile } from '../../../../context/profile.context';
+const PAGE_SIZE = 50;
 const messageRef = database.ref('/messages');
 
 function shouldScrollToBottom(node, threshold = 30) {
@@ -15,12 +16,13 @@ function shouldScrollToBottom(node, threshold = 30) {
 }
 const Messages = () => {
     const selfRef = useRef();
-    const { chatId } = useParams();
+    const  chatId  = useCurrentRoom(v => v.id);
     const [limit, setLimit] = useState(PAGE_SIZE);
     const [messages, setMessages] = useState(null);
     const isChatEmpty = messages && messages.length === 0;
     const canShowMessages = messages && messages.length > 0;
-   
+   const {user}=useProfile();
+   const communityid=user.communities[0];
 
     const loadMessages = useCallback((limitToLast) => {
         messageRef.off();
@@ -68,7 +70,7 @@ const Messages = () => {
     }, [loadMessages])
     const handleAdmin = useCallback(async (uid) => {
 
-        const adminRef = database.ref(`/rooms/${chatId}/admins`);
+        const adminRef = database.ref(`/rooms/${communityid}/${chatId}/admins`);
         let alertMsg;
         await adminRef.transaction(admins => {
             if (admins) {
@@ -123,13 +125,13 @@ const Messages = () => {
         
         updates[`/messages/${msgId}`] = null;
         if (isLast && messages.length>2) {
-            updates[`/rooms/${chatId}/lastMessage`] = {
+            updates[`/rooms/${communityid}/${chatId}/lastMessage`] = {
                 ...messages[messages.length - 2],
                 msgId: messages[messages.length-2].id
             }
         }
         if (isLast && messages.length ===1) {
-            updates[`/rooms/${chatId}/lastMessage`] = null;
+            updates[`/rooms/${communityid}/${chatId}/lastMessage`] = null;
 
         }
         try {
@@ -174,18 +176,21 @@ const Messages = () => {
         return items;
     };
     return (
-        <ul ref={selfRef} className="msg-list custom-scroll">
+        <Paper style={{height: 500, overflow: 'auto'}}>
+
+        <div ref={selfRef} >
             {messages && messages.length >= PAGE_SIZE && 
-                <li className="text-center mt-2 mb-2">
+               
                 <Button disabled={messages.length <PAGE_SIZE } onClick={onLoadMore} color="green" > Load More </Button>
-                </li>
+               
             }
-            {isChatEmpty && <li> No messages yet </li>}
+            {isChatEmpty && <h6> No messages yet </h6>}
             {canShowMessages &&
                 renderMessages()
                 }
 
-        </ul>
+        </div>
+        </Paper>
 
     );
 }

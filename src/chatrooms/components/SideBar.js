@@ -19,13 +19,13 @@ const SideBar = ({...props}) => {
     }, [topSidebarRef]);
     return (
         <div >
-            <div >
-                <CreateRoomBtnModal />
+            
+               
                 <Divider> Join Conversation</Divider>
                 <div>
                     <ChatRoomList  setCurrentRoomId={setCurrentRoom} aboveElHeight={height}/>
                 </div>
-            </div>
+            
         </div>
 
 

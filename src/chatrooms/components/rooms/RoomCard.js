@@ -14,7 +14,7 @@ import { useHistory, useLocation } from 'react-router';
 
 const useStyles = makeStyles((theme)=>({
 root: {
-maxWidth: 400,
+maxWidth: 500,
 },
 avatar: {
 width: theme.spacing(7),
@@ -36,13 +36,13 @@ return (
   <CardActionArea>
     <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
       <CardContent>
-        <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start">
+        <Grid container direction="row" justifyContent="flex-start" alignItems="center">
 
-        <Grid item xs={8}> <Typography variant="h4" component="h1">
+        <Grid item  justifyContent="flex-end" alignItems="center"  > <Typography variant="h6" component="h6">
             {name}
           </Typography>
           </Grid> 
-          <Grid item xs={4}  direction="row" justifyContent="flex-end" alignItems="flex-end">
+          <Grid item    style={{marginLeft:250}} direction="column"  justifyContent="flex-end" alignItems="center"  >
           <Typography color="textSecondary" variant="body2" component="span">
           <TimeAgo 
                     datetime={lastMessage? new Date(lastMessage.createdAt):new Date(createdAt)}/>

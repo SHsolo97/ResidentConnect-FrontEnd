@@ -1,16 +1,16 @@
 import React from 'react';
-import { Loader, Nav ,Sidenav} from 'rsuite';
+import { Loader, Nav } from 'rsuite';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useRooms } from '../../../context/rooms.context';
-import RoomItem from './RoomItem';
 import { useProfile } from '../../../context/profile.context';
 import {RoomCard} from './RoomCard';
+import { Paper } from '@material-ui/core';
 
 const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
     const rooms = useRooms();
+    console.log(rooms);
     const {user}=useProfile();
-    const communityid=user.communities[0];
     //const c_rooms=rooms.find(room => room.communityid === communityid);
     const location = useLocation();
     const setCurrentRoom=(roomid)=>{
@@ -18,11 +18,11 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
         setCurrentRoomId(roomid);
     } 
     return (
-       <Nav
+        <Paper style={{height: 600, overflow: 'auto'}}>
+        <Nav
         appearance="subtle"
         vertical
         reversed
-        className="overflow-y-scroll custom-scroll h-100"
         style={{ height: `calc(100% -${aboveElHeight}px)` }}
         activeKey={location.pathname} 
     >
@@ -30,7 +30,7 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
             {rooms &&
                 rooms.length > 0 &&
                 rooms.map(room => (
-                    <Nav.Item  componentClass={Link}  to={`/chat/${room.id}`}
+                    <Nav.Item  style={{marginTop:20}} componentClass={Link}  to={`/chat/${room.id}`}
                     key={room.id} panel="true"
                     eventKey={`/chat/${room.id}` }> 
                     <RoomCard setCurrentRoomId={setCurrentRoom} room={room} />
@@ -40,6 +40,7 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
             
 
         </Nav>
+        </Paper>
        
     );
         }
