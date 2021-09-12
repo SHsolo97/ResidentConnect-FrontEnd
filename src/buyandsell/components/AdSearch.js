@@ -14,7 +14,8 @@ export const AdSearch = ({...props}) => {
         getCategories();
     }, [])
     useEffect(() => {
-        
+        if(props.category==='')
+            return;
         getSubCategories();
     }, [props.category])
 
@@ -41,7 +42,7 @@ export const AdSearch = ({...props}) => {
     const getCategories=async()=>{
         
         var apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
-        await axios.get(apiBaseUrl )
+        await axios.get(apiBaseUrl)
              .then(function (response) {
                  if (response.status === 200)
                 {           

@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   root: {
       marginLeft:100,
     width: 1300,
+    marginTop:50
   },
   advertdate:{
     backgroundColor: '#0063cc',
@@ -64,10 +65,10 @@ const openAd=(event)=>{
   return (
     <Card className={classes.root} onClick={openAd}>
    <CardActionArea>
-       <Grid alignItems="center" container  >
+       <Grid alignItems="center" container  zeroMinWidth >
   <Grid item xs={2}    container
   direction="row" justifyContent="space-around"
-  alignItems="center"  >
+  alignItems="center"  zeroMinWidth >
         <div>
         <Typography color="textSecondary" gutterBottom>
           FROM: {advert.activatedat}
@@ -78,12 +79,12 @@ const openAd=(event)=>{
         </div>
       </Grid>
       
-    <Grid item xs={5}>
+    <Grid item xs={7} zeroMinWidth>
 <Grid
   container
   direction="row"
   justifyContent="space-around"
-  alignItems="center"  
+  alignItems="center"   zeroMinWidth
 >
 
     <CardMedia
@@ -92,14 +93,14 @@ const openAd=(event)=>{
           image= {advert.images[0]}
           title="image"
         />
-        <Typography color="textSecondary" > {advert.title} </Typography>
+        <Typography color="textSecondary" > {advert.title.slice(0,20)} </Typography>
         <Typography color="textSecondary" > {advert.price.value} </Typography> 
         <Chip label="active" color="primary" />
        
     </Grid>
    
     </Grid>
-    <Grid item xs={5}>
+    <Grid item xs={3} zeroMinWidth>
     <Typography  color="textSecondary" > {advert.description.slice(0,97)} ...</Typography>
     </Grid>
     </Grid>

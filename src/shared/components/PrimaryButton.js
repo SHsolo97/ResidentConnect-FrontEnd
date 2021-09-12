@@ -3,7 +3,7 @@ import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui
 import Button from '@material-ui/core/Button';
 import { blue, grey, orange, purple } from '@material-ui/core/colors';
 
-const BootstrapButton = withStyles({
+export const BootstrapButton = withStyles({
   root: {
     boxShadow: 'none',
     textTransform: 'none',

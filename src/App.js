@@ -42,6 +42,7 @@ import ProfileSetting from './profiles/pages/ProfileSetting';
 import { MyAds } from './buyandsell/pages/MyAds';
 import { AdvertsProvider } from './context/adverts.context';
 import { AdDetails } from './buyandsell/pages/AdDetails';
+import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
 
 function App() {
  return(
@@ -91,7 +92,7 @@ function App() {
   
      <PrivateRoute path="/myads" component={MyAds}/>
      <PrivateRoute path="/adDetails" component={AdDetails}/>
-
+     <PrivateRoute path="/updateAdDetails"  component={UpdateAdDetails}/>
 
     
  </Switch>

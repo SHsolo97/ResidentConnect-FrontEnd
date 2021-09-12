@@ -6,45 +6,22 @@ import {TextField,Button} from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
-import { orange } from '@material-ui/core/colors'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useEffect } from 'react';
 import axios from 'axios';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import LanguageTwoToneIcon from '@material-ui/icons/LanguageTwoTone';
+
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
-const CustomTextField = withStyles({
-  root: {
-    '& label.Mui-focused': {
-      color: 'orange',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'orange',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'orange',
-      },
-      '&:hover fieldset': {
-        borderColor: 'blue',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'orange',
-      },
-    },
-  },
-})(TextField);
+import { CustomTextField } from '../../shared/components/CustomTextField';
+
 
 const useStyles = makeStyles((theme) => ({
    imageList: {
@@ -187,6 +164,14 @@ export const PostAd = () => {
       {
         history.push('/buyandsell');
       }
+      useEffect( () => { async function  createad(){
+        console.log('create Advert');
+          console.log(advert);
+          const advertResponse=await addAdvert();
+          console.log(advertResponse);
+      }
+      createad();
+      }, [advert.images])
       const createAdvert=async (event)=>{
           const filePath=`adverts/${communityid}/${user._id}`;
           const validFiles=files.filter(file => file!=null);
@@ -197,11 +182,8 @@ export const PostAd = () => {
 
           setAdvert((prevState)=>{
             return{...prevState,images:fileDataUrls}});  
-        
-          console.log('create Advert');
-          console.log(advert);
-          const advertResponse=await addAdvert();
-          console.log(advertResponse);
+         history.push('/myads');
+          
 
       }
     return (
@@ -236,13 +218,14 @@ export const PostAd = () => {
            <Divider />
            <SectionHeader>Upload Photos</SectionHeader>
                       
-           
+           <div> ({advert.images.length}) images uploaded successfully </div> 
+
            <ImageList    rowHeight={180}  cols={4} className={classes.imageList}>
 
         {[...Array(12)].map((item, i) => (
          
          <ImageListItem >
-            <AdImageUpload placeholder={i}   addFile={addFile}/>
+            <AdImageUpload placeholder={i}   file={files[i]} addFile={addFile}/>
             </ImageListItem>
    
         ))}

@@ -201,6 +201,12 @@ console.log(formInput);
 editUser();
 
 }
+const goToDashboard=(event)=>{
+  if(user.type==='admin')
+    history.push('/dashboardA')
+  else
+    history.push('/dashboardR')
+}
 const addFile=(filetoUpload)=>{
  setAvatarImage(filetoUpload);
 
@@ -277,7 +283,9 @@ return (
         </Grid>
       </Grid>
     </Box>
-    <PrimaryButton type="submit"> Next </PrimaryButton>
+    <PrimaryButton type="submit"> Update </PrimaryButton>
+    <PrimaryButton onClick={goToDashboard}> Cancel </PrimaryButton>
+
   </form>
 
 </>

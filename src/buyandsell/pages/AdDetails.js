@@ -126,8 +126,13 @@ getSellerDetails();
 
 const updateAd=async (event)=>
 {
-
+    history.push({
+        pathname: '/updateAdDetails',
+        state: { currentAdvert: advert }    
+  
+      })
 }
+
 const deleteAd=async()=>{
     console.log(`delete ${advert._id}`);
     var apiBaseUrl = `http://localhost:4004/api/adverts/${advert._id}`  
@@ -196,7 +201,7 @@ return (
                 <p>{advert.title}</p>
                 <Divider />
                 <SectionHeader>Description</SectionHeader>
-                <p>{advert.description}</p>
+                <p style={{whiteSpace:'pre-line'}}> {advert.description}</p>
               </Grid>
             </Box>
           </Grid>

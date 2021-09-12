@@ -45,7 +45,8 @@ export const MyAds = () => {
 
             <div>
             <PageHeader>My Ads</PageHeader> 
-            <MyAdFilter/>   
+            <MyAdFilter/>  
+             
             {adverts.map((ad)=>{
                 return <MyAdCard advert={ad}/>
             })}

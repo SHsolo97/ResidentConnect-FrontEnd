@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rc-frontend
-          image: agni1984/rc-frontend:v0.0.22
+          image: agni1984/rc-client
           ports: 
             - containerPort: 3000 
 ---

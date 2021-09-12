@@ -10,6 +10,7 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from '../../../../shared/components/SectionHeader';
 import { Grid } from '@material-ui/core';
+import RequestInfoBtnModal from './RequestInfoBtnModal';
 
 const useStyles = makeStyles((theme) => ({
 root: {
@@ -39,14 +40,20 @@ return (
   <Grid container direction="row" justifyContent="space-between" alignItems="center">
 
     <SectionHeader>{name}</SectionHeader>
+    <Grid items direction="row" justifyContent="flex-start" alignItems="center">
+
     {isAdmin &&
     <EditRoomBtnDrawer />
     }
+      <RequestInfoBtnModal/>
+      </Grid>
   </Grid>
 
 
     <div>
+      
   <RoomInfoBtnModal />
+
   </div>
 </div>
 );

@@ -11,6 +11,7 @@ import { transformToArr } from '../../../misc/helpers';
 import { Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
+import { AudiotrackSharp } from '@material-ui/icons';
 
 const Chat = ({children}) => {
 //const { chatId } = useParams();
@@ -28,16 +29,21 @@ const id = currentRoom.id;
 
 const admins = transformToArr(currentRoom.admins);
 const isAdmin = admins.includes(auth.currentUser.uid);
+const members=transformToArr(currentRoom.members);
+const isMember=members.includes(auth.currentUser.uid);
 const currentRoomData = {
 id,
 name,
 description,
 isAdmin,
-admins
+admins,
+isMember,
+members
 }
 
 return (
 <CurrentRoomProvider data={currentRoomData}>
+  
   <Grid container direction="column" justifyContent="space-between" alignItems="stretch">
 
   <ChatTop />
