@@ -29,7 +29,7 @@ export const Apartments = ({children,...props}) => {
                  if (response.status === 200)
 
                 {
-                    console.log(response.data.models);
+                   // console.log(response.data.models);
                      setModels(response.data.models);
                    
                   
@@ -46,7 +46,7 @@ export const Apartments = ({children,...props}) => {
              .then(function (response) {
                  if (response.status === 200)
                  {
-                    console.log(response.data);
+                    //console.log(response.data);
                     setCommunity(response.data);
                     let blockdetails=response.data.blockdetails;
                     let data=[];
@@ -61,7 +61,7 @@ export const Apartments = ({children,...props}) => {
                     })
                     setCurrentBlock(data[0])
                    
-                    console.log(data);
+                    //console.log(data);
                     setBlocks(data);
                 }
              })
@@ -78,7 +78,7 @@ export const Apartments = ({children,...props}) => {
              .then(function (response) {
                  if (response.status === 201)
                  {
-                    console.log(response.data.apartment);
+                    //console.log(response.data.apartment);
                     return response.data.apartment;
                 }
              })
@@ -96,15 +96,15 @@ export const Apartments = ({children,...props}) => {
         searchquery['communityid']=communityid;
         searchquery['block']=currentBlock.block   ;
         searchquery['floor']=currentFloor ;  
-        console.log(searchquery);
+        //console.log(searchquery);
         await axios.post(apiBaseUrl,searchquery )
              .then(function (response) {
                  if (response.status === 200)
                  {
-                    console.log(response.data);
+                   // console.log(response.data);
                     setCommunity(response.data);
                     let apartments=response.data.apartments;
-                    console.log(apartments);
+                    //console.log(apartments);
                     let data=[];
                     [...Array(currentBlock.flats)].map((item, i) =>
                     {
@@ -129,7 +129,7 @@ export const Apartments = ({children,...props}) => {
 
                     })
                    
-                    console.log(data);
+                    //console.log(data);
                     setFlats(data);
                 }
              })
@@ -145,7 +145,7 @@ export const Apartments = ({children,...props}) => {
 
     const sendMail=(email,token,aptnum)=>{
 
-        console.log(token);
+        //console.log(token);
         const recipient=email;
         const subject='Enroll to Residents Connect'
         const body=`Enroll to resident app (http://127.0.0.1:3000/sigin) using token id ${token} for ${aptnum}`;
@@ -168,7 +168,7 @@ export const Apartments = ({children,...props}) => {
 
     }
     const enrollFlats= (e)=>{
-        console.log(flats);
+       // console.log(flats);
         flats.map((flat=>{
             let data={};
             data['issold']= flat.status==='not-sold'?false:true;
@@ -179,14 +179,15 @@ export const Apartments = ({children,...props}) => {
                data['block']=flat.block;
                data['floor']=flat.floor;
                 data['model']=flat.model;
-                console.log(data);
+               // console.log(data);
             createApartment(data)
             .then(response=>
             {
-                console.log(response);
+               // console.log(response);
                 const tokenid=response.token;
-                console.log(tokenid);
-                sendMail(flat.email,tokenid,flat.aptnum);
+               // console.log(tokenid);
+                if(flat.email!==null && flat.email!=='')
+                    sendMail(flat.email,tokenid,flat.aptnum);
 
             })
         }))
@@ -216,8 +217,8 @@ export const Apartments = ({children,...props}) => {
     }
     const GetFlats=(e)=>
     {
-        console.log(currentBlock);
-        console.log(currentFloor);
+       // console.log(currentBlock);
+       // console.log(currentFloor);
         getApartments();
     }
     const saveRow=(flatsToAdd)=>{

@@ -28,26 +28,26 @@ export const BlockRow = ({...props}) => {
         }
     }, [props.block])
     const onSave=()=>{
-        console.log('save clicked');
-        console.log(block);
+        //console.log('save clicked');
+       // console.log(block);
         setDisabled(disabled=>!disabled);
         props.saveRow(block);
     }
     const onEdit=()=>{
-        console.log('edit clicked');
-        console.log(block);
+       // console.log('edit clicked');
+      //  console.log(block);
         setOldValue(block);
         setDisabled(disabled=>!disabled);
     }
     const onCancel=()=>{
-        console.log('cancel clicked');
-        console.log(block);
+        //console.log('cancel clicked');
+       // console.log(block);
         setBlock(oldValue);
         setDisabled(disabled=>!disabled);
     }
     const onDelete=()=>{
-        console.log('delete clicked');
-        console.log(block);
+       // console.log('delete clicked');
+        //console.log(block);
         props.deleteRow(block.key);
     }
     const setBlockValue=(e)=>{

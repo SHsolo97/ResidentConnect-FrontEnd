@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 export const FlatRow = ({...props}) => {
-    console.log(props.flat);
+    //console.log(props.flat);
     const [oldValue,setOldValue]=React.useState(props.flat)
 
     const [flat,setFlat]=React.useState(props.flat)
@@ -35,20 +35,20 @@ export const FlatRow = ({...props}) => {
         }
     }, [props.flat,props.flat.model.name])
     const onSave=()=>{
-        console.log('save clicked');
-        console.log(flat);
+        //console.log('save clicked');
+        //console.log(flat);
         setDisabled(disabled=>!disabled);
         props.saveRow(flat);
     }
     const onEdit=()=>{
-        console.log('edit clicked');
-        console.log(flat);
+        //console.log('edit clicked');
+        //console.log(flat);
         setOldValue(flat);
         setDisabled(disabled=>!disabled);
     }
     const onCancel=()=>{
-        console.log('cancel clicked');
-        console.log(flat);
+        //console.log('cancel clicked');
+        //console.log(flat);
         setFlat(oldValue);
         setDisabled(disabled=>!disabled);
     }
@@ -60,8 +60,8 @@ export const FlatRow = ({...props}) => {
         setFlat({...flat,'aptnum':value});
     }
     const getModel=(modelid)=>{
-        console.log( props.models);
-        console.log(modelid);
+        //console.log( props.models);
+        //console.log(modelid);
         const model= props.models.filter((model)=>model._id===modelid);
         return model[0];
            
@@ -70,9 +70,9 @@ export const FlatRow = ({...props}) => {
     const setFlatModelValue=(e)=>{
         e.preventDefault();
         const modelid=e.target.value;
-        console.log(modelid);
+       // console.log(modelid);
         const modelInfo=getModel(modelid);
-        console.log(modelInfo)
+       // console.log(modelInfo)
         let value={};
         value['name']=modelInfo.name;
         value['area']=modelInfo.area;
