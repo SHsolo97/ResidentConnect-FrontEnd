@@ -45,6 +45,7 @@ import Menu from '@material-ui/core/Menu';
 import { useEffect } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Button, Input, InputBase, TextField } from '@material-ui/core';
+import logo from '../images/home/logo.png';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -193,7 +194,7 @@ const PrivateLayout = ({ children }) => {
             >
               <MenuIcon />
             </IconButton>
-            
+              <img src={logo}/>
                   <Typography variant="h6" noWrap>
               Residents Connect
             </Typography>

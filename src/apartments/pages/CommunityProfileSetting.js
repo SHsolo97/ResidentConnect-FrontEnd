@@ -13,7 +13,6 @@ import { PageHeader } from '../../shared/components/PageHeader'
 import { ApartmentServices } from './ApartmentServices';
 import { useHistory } from 'react-router';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',

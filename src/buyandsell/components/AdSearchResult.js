@@ -9,7 +9,7 @@ const communityid=user.communities[0];
 const [adverts, setAdverts] = useState([]);
 
 const getAds=async()=>{
-const apiBaseUrl = `http://localhost:4004/api/adverts`
+const apiBaseUrl = `http://localhost:4004/api/adverts/search`
 const searchQuery={communityid:communityid}
 
 if(props.category!=='')

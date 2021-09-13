@@ -20,6 +20,7 @@ import Dialog from '@material-ui/core/Dialog';
 import { useModelState } from '../../misc/custom-hooks'
 import { DeleteAdvertModal } from '../components/DeleteAdvertModal'
 import { useHistory } from 'react-router'
+import { ImageCarousel } from '../components/ImageCarousel'
 
 const useStyles = makeStyles((theme) => ({
 root:{
@@ -153,53 +154,25 @@ const deleteAd=async()=>{
 return (
 <div>
   <PageHeader> {advert.title} </PageHeader>
+
   <Grid container direction="column" justifyContent="center" alignItems="center">
     <Grid container direction="row" justifyContent="space-around" alignItems="flex-start">
       <Grid xs={9}>
         <Grid container spacing={5} direction="column" justifyContent="space-around" alignItems="flex-start">
           <Grid items>
 
-            <Box className={classes.adImages}>
-              <Grid container style={{width:300}} direction="column" justifyContent="space-evenly" alignItems="flex-start">
-                <ImageList rowHeight={300} cols={1} style={{alignSelf:"center"}}>
+          
+                <ImageCarousel images={advert.images}/>
+              
 
-                  <ImageListItem>
-                    <div className={classes.ThumbImageView}>
-                      <img src={advert.images[0]} alt="Preview" />
-                    </div>
-
-                  </ImageListItem>
-
-                </ImageList>
-                <br />
-                <br />
-                <ImageList rowHeight={100} cols={advert.images.length}>
-                  {[...Array(advert.images.length)].map((item, i) => (
-
-                  <ImageListItem>
-                    <div className={classes.imageView}>
-                      <img style={{  width:'10ch', height: '10ch'}} src={advert.images[i]} alt="Preview" />
-
-                    </div>
-
-                  </ImageListItem>
-
-
-                  ))}
-                </ImageList>
-
-              </Grid>
-            </Box>
+          
           </Grid>
           <br />
           <br />
           <Grid items>
             <Box className={classes.addetails}>
               <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
-                <SectionHeader>Details</SectionHeader>
-
-                <p>{advert.title}</p>
-                <Divider />
+               
                 <SectionHeader>Description</SectionHeader>
                 <p style={{whiteSpace:'pre-line'}}> {advert.description}</p>
               </Grid>

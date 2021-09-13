@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+
 export const AdSearch = ({...props}) => {
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
@@ -12,7 +13,7 @@ export const AdSearch = ({...props}) => {
     useEffect(() => {
         
         getCategories();
-    }, [])
+    },[])
     useEffect(() => {
         if(props.category==='')
             return;
@@ -21,7 +22,7 @@ export const AdSearch = ({...props}) => {
 
     const getSubCategories=async()=>{
 
-        var apiBaseUrl = `http://localhost:4004/api/adverts/subcategories`   
+        const apiBaseUrl = `http://localhost:4004/api/adverts/subcategories`   
         const data={category:props.category};     
         await axios.post(apiBaseUrl,data )
              .then(function (response) {
@@ -40,9 +41,8 @@ export const AdSearch = ({...props}) => {
              });
     }
     const getCategories=async()=>{
-        
-        var apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
-        await axios.get(apiBaseUrl)
+        const apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
+        await axios.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                 {           
@@ -56,6 +56,7 @@ export const AdSearch = ({...props}) => {
                  return(null);
     
              });
+        
     }
 
     return (

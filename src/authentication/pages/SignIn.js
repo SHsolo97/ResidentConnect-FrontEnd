@@ -1,4 +1,4 @@
-import { Button, OutlinedInput, Grid, TextField } from '@material-ui/core'
+import { Button, OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
 import React from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -17,16 +17,19 @@ import {Redirect} from 'react-router-dom';
 import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader';
 import { Box } from '@material-ui/core';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import img2 from '../../images/home/img9.jfif'
+import logo from '../../images/home/houselogo.png';
+
 const useStyles=makeStyles((theme)=>({
-root: {
-display: 'flex',
-flexWrap: 'wrap',
-width:"100ch",
-height: "75ch",
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+
+width:"80ch",
+height: "60ch",
 padding: '1ch',
-borderRadius:'5ch',
-border: '2px solid orange'
-}
+  }
 }));
 
 const SignIn = () => {
@@ -102,10 +105,10 @@ history.push(path);
 return (
 
 <>
-  <Grid container direction="column" justifyContent="center" style={{marginLeft:"5px", marginTop:"200px"}} alignItems="center">
-    <PageHeader> Welcome to Residents Connect</PageHeader>
+  <Grid container direction="column" justifyContent="center" style={{marginLeft:"5px"}} alignItems="center">
+  <img src={logo}/>
 
-    <Box className={classes.root}>
+    <Paper elevation={10} className={classes.root}>
 
       <Grid container direction="column"  justifyContent="space-evenly" alignItems="center">
         <PageHeader>Sign In</PageHeader>
@@ -128,12 +131,11 @@ return (
             />
         </FormControl>
 
-        <Button variant="contained" color="primary" onClick={onSignIn}>Sign In </Button>
-        <Button variant="contained" color="primary" onClick={onFacebookSignIn}> Login with Facebook </Button>
-        <Button variant="contained" color="secondary" onClick={onGoogleSignIn}> Login with Google </Button>
+        <PrimaryButton variant="contained" color="primary" onClick={onSignIn}>Sign In </PrimaryButton>
+      
         <Link component="button" variant="body2" onClick={onSignUp}> New User? Sign Up </Link>
       </Grid>
-    </Box>
+    </Paper>
   </Grid>
 
 </>

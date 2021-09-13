@@ -5,6 +5,7 @@ import { Grid, GridListTileBar, TextField } from '@material-ui/core';
 import { BlockRow } from '../components/BlockRow';
 import { makeStyles } from '@material-ui/core/styles';
 import { useProfile } from '../../context/profile.context';
+import { PageHeader } from '../../shared/components/PageHeader';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export const ApartmentBlocks = ({...props}) => {
+export const ApartmentBlocks = ({children,...props}) => {
    
     const {user}=useProfile();
     
@@ -135,7 +136,7 @@ export const ApartmentBlocks = ({...props}) => {
   direction="column"
   justifyContent="center"
   alignItems="center"
->
+>  <PageHeader>{children}</PageHeader>
          <PrimaryButton onClick={addRow}>Add Block</PrimaryButton>
          <Grid
         container

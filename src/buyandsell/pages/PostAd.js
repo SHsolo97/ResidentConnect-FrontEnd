@@ -55,7 +55,7 @@ export const PostAd = () => {
             creator:user._id,
             title: '',
             description:'',
-            category: '',
+            category: 'Autos',
             subcategory:'',
             type:'private',
             images:[],
@@ -130,8 +130,10 @@ export const PostAd = () => {
              });
       }
     const setCategory=(event)=>{
+ 
         setAdvert((prevState)=>{
             return{...prevState,category:event.target.value}});
+        
       } 
       const setSubCategory=(event)=>{
         setAdvert((prevState)=>{
@@ -164,14 +166,7 @@ export const PostAd = () => {
       {
         history.push('/buyandsell');
       }
-      useEffect( () => { async function  createad(){
-        console.log('create Advert');
-          console.log(advert);
-          const advertResponse=await addAdvert();
-          console.log(advertResponse);
-      }
-      createad();
-      }, [advert.images])
+   
       const createAdvert=async (event)=>{
           const filePath=`adverts/${communityid}/${user._id}`;
           const validFiles=files.filter(file => file!=null);
@@ -182,6 +177,9 @@ export const PostAd = () => {
 
           setAdvert((prevState)=>{
             return{...prevState,images:fileDataUrls}});  
+            console.log(advert);
+            const advertResponse=await addAdvert();
+            console.log(advertResponse);
          history.push('/myads');
           
 
