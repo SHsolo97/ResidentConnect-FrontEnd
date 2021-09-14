@@ -24,7 +24,7 @@ import { getRequest } from '../../misc/http-hooks';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {Alert} from '../../shared/components/Alert';
-import {useAlertState}  from '../../misc/custom-hooks';
+import {useAlertState} from '../../misc/custom-hooks';
 import {Progress} from '../../shared/components/Progress';
 
 const MAX_FILE_SIZE = 1000 * 1024 * 5;
@@ -125,8 +125,8 @@ getCategories();
 }, [])
 useEffect(() => {
 
-  if(classified.category==='')
-    return;
+if(classified.category==='')
+return;
 getSubCategories();
 }, [classified.category])
 
@@ -208,7 +208,7 @@ const addFile=(imagefile)=>{
 file=imagefile;
 }
 const addClassified=async()=>{
-  setIsLoading(true);
+setIsLoading(true);
 const fileList=[file];
 
 const path=`${communityid}/classifieds`;
@@ -282,6 +282,7 @@ return (
 
 <>
   <PageHeader>Add Classified</PageHeader>
+  <form>
     <Grid container direction="column" justifyContent="space-around" alignItems="flex-start">
       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
         <FormControl style={{ margin: 8, width: '50ch'}} variant="outlined" className={classes.formControl}>
@@ -329,7 +330,7 @@ return (
     </Grid>
   </form>
   {isLoading?
-  <Progress/>:
+  <Progress />:
   null
   }
   { isAlertOpen?
@@ -338,7 +339,6 @@ return (
 
   :
   null}
-
 </>
 )
 
