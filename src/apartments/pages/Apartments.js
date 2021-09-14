@@ -9,6 +9,8 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FlatRow } from '../components/FlatRow';
+import Grid from '@material-ui/core/Grid';
+
 export const Apartments = ({children,...props}) => {
     const {user}=useProfile();
     const communityid=user.communities[0];

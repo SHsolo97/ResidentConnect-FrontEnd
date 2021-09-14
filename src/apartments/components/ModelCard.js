@@ -50,7 +50,7 @@ export default function ModelCard({children,...props}) {
  }
   return (
     
-      <Card  value={props.key} className={classes.card}>
+      <Card  elevation={10} value={props.key} className={classes.card}>
       <CardContent>
       <Grid
   container

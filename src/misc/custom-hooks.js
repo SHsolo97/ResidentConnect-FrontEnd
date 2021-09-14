@@ -2,10 +2,15 @@ import { useCallback, useEffect,useState,useRef } from "react";
 import { database } from "./firebase";
 
 export function useAlertState(defaultValue = false) {
-    const [isOpen, setIsOpen] = useState(defaultValue);
-    const open = useCallback(() =>  setIsOpen(true) , []);
-    const close = useCallback(() =>   setIsOpen(false) , []);
-    return { isOpen, open, close }; 
+    const [isAlertOpen, setIsAlertOpen] = useState(defaultValue);
+   
+
+    const openAlert = useCallback(() =>  {
+        setIsAlertOpen(true) ;
+     
+    } , []);
+    const closeAlert = useCallback(() =>   setIsAlertOpen(false) , []);
+    return { isAlertOpen, openAlert, closeAlert}; 
 }
 export function useModelState(defaultValue = false) {
     const [isOpen, setIsOpen] = useState(defaultValue);

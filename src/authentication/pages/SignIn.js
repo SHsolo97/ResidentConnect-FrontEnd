@@ -2,7 +2,6 @@ import { Button, OutlinedInput, Grid, TextField, Paper } from '@material-ui/core
 import React from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -20,6 +19,8 @@ import { Box } from '@material-ui/core';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import img2 from '../../images/home/img9.jfif'
 import logo from '../../images/home/houselogo.png';
+import {Alert} from '../../shared/components/Alert';
+import {useAlertState}  from '../../misc/custom-hooks';
 
 const useStyles=makeStyles((theme)=>({
   root: {
@@ -33,10 +34,15 @@ padding: '1ch',
 }));
 
 const SignIn = () => {
+  const { isAlertOpen, openAlert, closeAlert } = useAlertState();
+  const [alertMessage, setAlertMessage]=useState(null);
+  const [alertType,setAlertType]=useState(null);
+
 const classes=useStyles();
 const {user}=useProfile();
 const history = useHistory();
 const[email,setEmail]=useState(null);
+const [error,setError]=useState(null);
 const [password, setPassword] = useState({
 password: "",
 showPassword: false,
@@ -72,9 +78,11 @@ catch (err) {
 }
 }
 const onSignIn=()=>{
+
 var userType='admin';
-console.log(email);
-console.log(password.password);
+//console.log(email);
+//console.log(password.password);
+
 auth.signInWithEmailAndPassword(email,password.password)
 .then((userCredential) => {
 // Signed in
@@ -86,6 +94,11 @@ history.push('/selectprofile');
 })
 .catch((error) => {
 console.log(error)
+setError(error.message);
+setAlertMessage(error.message);
+setAlertType('error');
+openAlert();
+
 });
 
 }
@@ -137,6 +150,10 @@ return (
       </Grid>
     </Paper>
   </Grid>
+  { isAlertOpen?
+  <Alert open={isAlertOpen} handleClose={closeAlert} type={alertType}>{alertMessage}</Alert>
+  :
+  null}
 
 </>
 
