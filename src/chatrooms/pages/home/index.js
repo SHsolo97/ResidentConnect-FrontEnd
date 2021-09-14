@@ -6,6 +6,7 @@ import { useMediaQuery } from '../../../misc/custom-hooks';
 import Chat from './Chat';
 import { Grid } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
+import { RoomsRequestsProvider } from '../../../context/roomsrequest.context';
 
 const Home = () => {
 const isDesktop = useMediaQuery(`(min-width: 992px)`);
@@ -19,6 +20,7 @@ setCurrentRoomId(roomid);
 }
 return (
 <RoomsProvider>
+  <RoomsRequestsProvider>
   <Grid container direction="row" justifyContent="space-between" alignItems="stretch" spacing={3}>
     <Grid item xs={4}>
       {canRenderSideBar &&
@@ -34,6 +36,7 @@ return (
       }
     </Grid>
   </Grid>
+  </RoomsRequestsProvider>
 </RoomsProvider>
 )
 

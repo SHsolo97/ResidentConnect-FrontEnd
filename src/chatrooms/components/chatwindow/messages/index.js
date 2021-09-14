@@ -160,7 +160,7 @@ const Messages = () => {
         Object.keys(groups).forEach((date) => {
             items.push(
 
-                <li key={date} className="text-center mb-1 padded"> {date} </li>
+                <li key={date} style={{marginBottom:'10px',color:'blue', fontSize:'16px',listStyleType:'none', textAlign:'center'}}> {date} </li>
             );
             const msgs = groups[date].map(msg => (
                 <MessageItem

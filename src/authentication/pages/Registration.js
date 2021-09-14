@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, OutlinedInput, Grid, TextField } from '@material-ui/core'
+import { Button, OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
@@ -22,17 +22,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import { Box } from '@material-ui/core';
 import PrimaryButton from '../../shared/components/PrimaryButton';
+import logo from '../../images/home/houselogo.png';
+
+import lock from '../../images/authentication/lock.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexWrap: 'wrap',
 
-width:"100ch",
-height: "75ch",
+width:"80ch",
+height: "60ch",
 padding: '1ch',
-borderRadius:'5ch',
-border: '2px solid orange'
+
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -229,13 +231,15 @@ const Registration = () => {
       history.push('/signin');
      }
      return (
-      <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"200px"}} alignItems="center">
 
-      <Box className={classes.root}>
+      <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"50px"}} alignItems="center">
+      <img src={logo}/>
+      <Paper elevation={10} className={classes.root}>
 
     
         <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">
         <PageHeader>Sign Up</PageHeader>
+        <img src={lock}/>
         <RadioGroup row aria-label="position" name="position" defaultValue="top" onChange={onChangeUserType}>        
         <FormControlLabel id="radio_admin"   value="admin"  control={<Radio color="primary" />} label="Admin" />        
         <FormControlLabel id="radio_resident"    value="resident"  control={<Radio color="primary" />} label="Resident" />        
@@ -268,12 +272,11 @@ const Registration = () => {
        
       
       <PrimaryButton onClick={onSignup}>Sign Up </PrimaryButton>
-      <Button variant="contained" color="secondary" onClick={onFacebookSignUp}> Signup with Facebook </Button>
-      <Button variant="contained" color="secondary" onClick={onGoogleSignUp}> Signup with Google </Button>
+
       <Link component="button" variant="body2" onClick={goToSignIn}> Existing User? Sign In </Link>
 
       </Grid>
-      </Box>
+      </Paper>
       </Grid>
     )
 }

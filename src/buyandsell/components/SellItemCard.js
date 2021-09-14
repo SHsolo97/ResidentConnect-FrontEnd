@@ -56,14 +56,8 @@ export default function SellItemCard({children,...props}) {
 }
 
   return (
-    <Card className={classes.root} onClick={openAd}>
-     <CardActions>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        
-      
-      </CardActions>
+    <Card key={props.key} className={classes.root} onClick={openAd}>
+    
       <CardActionArea>
       <CardMedia
         className={classes.media}

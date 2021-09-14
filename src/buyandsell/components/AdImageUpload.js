@@ -5,11 +5,9 @@ import './AdImageUpload.css';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 const AdImageUpload = props => {
   const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState();
+  const [previewUrl, setPreviewUrl] = useState(props.file);
   const [isValid, setIsValid] = useState(false);
-
   const filePickerRef = useRef();
-
   useEffect(() => {
     if (!file) {
       return;

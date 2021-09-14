@@ -1,5 +1,7 @@
+import { Divider } from '@material-ui/core';
 import React, { useRef, useState, useEffect }  from 'react';
-import { Divider } from 'rsuite';
+import { SectionHeader } from '../../shared/components/SectionHeader';
+
 import CreateRoomBtnModal from './CreateRoomBtnModal';
 import DashboardToggle from './dashboard/DashboardToggle';
 import ChatRoomList from './rooms/ChatRoomList';
@@ -19,9 +21,9 @@ const SideBar = ({...props}) => {
     }, [topSidebarRef]);
     return (
         <div >
-            
+            <SectionHeader>Join Conversation</SectionHeader>
                
-                <Divider> Join Conversation</Divider>
+            <Divider/>
                 <div>
                     <ChatRoomList  setCurrentRoomId={setCurrentRoom} aboveElHeight={height}/>
                 </div>

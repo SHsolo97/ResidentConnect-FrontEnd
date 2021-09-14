@@ -52,6 +52,9 @@ const CreateRoomBtnModal = () => {
             createdAt: firebase.database.ServerValue.TIMESTAMP,
             admins: {
                 [auth.currentUser.uid]: true
+            },
+            members: {
+                [auth.currentUser.uid]: true
             }
         }
         ;
@@ -71,7 +74,7 @@ const CreateRoomBtnModal = () => {
     }
 
     return (
-        <div className="mt-2">
+        <div style={{marginTop:'10px'}}>
             <PrimaryButton block color="green" onClick={open}>
              <EmojiObjectsIcon /> Create new Chat Room
             </PrimaryButton>

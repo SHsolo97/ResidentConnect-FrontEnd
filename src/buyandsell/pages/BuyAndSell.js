@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {TextField,Button} from '@material-ui/core';
+import { Grid } from '@material-ui/core'
 
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useHistory } from 'react-router'
@@ -26,10 +27,14 @@ const BuyAndSell = () => {
 
     return (
         <>
-               <PageHeader> Buy &amp; Sell</PageHeader>
+               <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                <PageHeader> Buy &amp; Sell</PageHeader>
+                <Grid items direction="row" justifyContent="flex-start" alignItems="center">
+
                 <PrimaryButton onClick={goToPostAd}>Sell</PrimaryButton>
                 <PrimaryButton onClick={goToMyAds}>My Ads</PrimaryButton>
-
+                </Grid>
+                </Grid>
                 <AdSearch category={category} setCategory={setCategory} subcategory={subcategory} setSubCategory={setSubCategory} />
                 <AdSearchResult category={category} subcategory={subcategory} />
       

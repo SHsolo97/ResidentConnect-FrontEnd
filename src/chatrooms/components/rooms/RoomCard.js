@@ -11,6 +11,8 @@ import { Avatar } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import TimeAgo from 'timeago-react';
 import { useHistory, useLocation } from 'react-router';
+import ProfileAvatar from '../ProfileAvatar';
+import PrimaryButton from '../../../shared/components/PrimaryButton';
 
 const useStyles = makeStyles((theme)=>({
 root: {
@@ -27,6 +29,7 @@ const classes = useStyles();
 const { createdAt, name, lastMessage } = room;
 const location=useLocation();
 const history=useHistory();
+
 const setCurrentRoom=()=>{
     console.log(room.id);
     setCurrentRoomId(room.id);
@@ -38,10 +41,12 @@ return (
       <CardContent>
         <Grid container direction="row" justifyContent="flex-start" alignItems="center">
 
-        <Grid item  justifyContent="flex-end" alignItems="center"  > <Typography variant="h6" component="h6">
+        <Grid item  justifyContent="flex-end" alignItems="center"  >
+           <Typography variant="h6" component="h6">
             {name}
           </Typography>
           </Grid> 
+
           <Grid item    style={{marginLeft:250}} direction="column"  justifyContent="flex-end" alignItems="center"  >
           <Typography color="textSecondary" variant="body2" component="span">
           <TimeAgo 
@@ -53,8 +58,8 @@ return (
       {lastMessage ?
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
 
-       <Grid item xs={3}>
-            <Avatar alt="u" src={lastMessage.author.avatar} className={classes.avatar} />
+       <Grid item xs={2}>
+            <ProfileAvatar style={{width:'50px' , height:'50px'}}  alt="u" src={lastMessage.author.avatar} className={classes.avatar} />
         </Grid>
             <Grid items xs={9} container direction="column" justifyContent="flex-start" alignItems="flex-start">
             
