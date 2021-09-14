@@ -64,7 +64,7 @@ const ResidentProfileSetting = () => {
   
 const [avatarImage,setAvatarImage]=React.useState();
 const {user}=useProfile();
-
+const communityid=user.communities[0];
 const classes = useStyles();
 const history=useHistory();
 const [formInput,setFormInput]=React.useState(
@@ -193,10 +193,10 @@ break;
 }
 }
 
-const editUser=async()=>{
+const editUser=async(profileData)=>{
   console.log(user);
   var apiBaseUrl = `http://localhost:4002/api/users/${user._id}`  
-  await axios.put(apiBaseUrl,formInput )
+  await axios.put(apiBaseUrl,profileData )
        .then(function (response) {
            if (response.status === 200)
 
@@ -222,14 +222,13 @@ console.log(formInput);
 console.log(avatarImage);
 //history.push('/apartmentDetailsR');
 const fileList=[avatarImage];
-const path=`${user._id}/avatars`;
+const path=`${communityid}/avatars/${user._id}`;
 const imagefiles=await uploadImagesToFireStorage(path,fileList);
-setFormInput(produce(formInput, draft => {
-  draft.avatar = imagefiles[0].url
-}));
-console.log(formInput);
+const profileData=formInput;
+ profileData.avatar = imagefiles[0].url;
 
-editUser();
+
+editUser(profileData);
 
 }
 const addFile=(filetoUpload)=>{

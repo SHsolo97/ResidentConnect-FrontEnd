@@ -17,7 +17,7 @@ import Grid from '@material-ui/core/Grid';
 
 
 export const ProfileSelection = () => {
-const {user,isLoading}=useProfile();
+const {user}=useProfile();
 const {community,communityList} = useCommunity();
 const {apartment,apartmentList} = useApartment();
 console.log(community);

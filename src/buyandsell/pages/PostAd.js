@@ -109,10 +109,10 @@ export const PostAd = () => {
                  return(null);    
              });
     }
-    const addAdvert=async()=>{
+    const addAdvert=async(advertData)=>{
         var apiBaseUrl = `http://localhost:4004/api/adverts/create`   
              
-        await axios.post(apiBaseUrl,advert )
+        await axios.post(apiBaseUrl,advertData )
              .then(function (response) {
                  if (response.status === 200)
                 {           
@@ -174,12 +174,10 @@ export const PostAd = () => {
           const fileData=await uploadImagesToFireStorage(filePath,validFiles)
           const fileDataUrls=[];
           fileData.map(data=>fileDataUrls.push(data.url));
-
-          setAdvert((prevState)=>{
-            return{...prevState,images:fileDataUrls}});  
-            console.log(advert);
-            const advertResponse=await addAdvert();
-            console.log(advertResponse);
+          const advertData=advert;
+          advertData.images=fileDataUrls;
+       
+           addAdvert(advertData);
          history.push('/myads');
           
 
