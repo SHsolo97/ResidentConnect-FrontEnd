@@ -26,6 +26,7 @@ import Paper from '@material-ui/core/Paper';
 import {Alert} from '../../shared/components/Alert';
 import {useAlertState} from '../../misc/custom-hooks';
 import {Progress} from '../../shared/components/Progress';
+import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
 
 const MAX_FILE_SIZE = 1000 * 1024 * 5;
 
@@ -50,54 +51,11 @@ const [isLoading, setIsLoading] = useState(false);
 const { isAlertOpen, openAlert, closeAlert } = useAlertState();
 const [alertMessage, setAlertMessage]=useState(null);
 const [alertType,setAlertType]=useState(null);
-const [isSucess,setSuccess]=useState(true);
 const classes = useStyles();
 const {user}=useProfile();
 const communityid =user.communities[0];
 const [ categories,setCategories]=useState([]);
 const [ subCategories,setSubCategories]=useState([]);
-
-/* const uploadImageToFireStorage = async () => {
-const fileList=[file];
-try {
-setIsLoading(true);
-const uploadPromises = fileList.map(f => {
-console.log(f.name);
-return storage
-.ref(`${communityid}/classifieds`)
-.child(Date.now() + f.name)
-.put(f,
-{
-contentType: `image/jpeg`,
-cacheControl: `public, max-age=${3600 * 12 * 3}`
-});
-
-});
-const uploadSnapshots = await Promise.all(uploadPromises);
-const shapePromises = uploadSnapshots.map(async snap => {
-return {
-contentType: snap.metadata.contentType,
-name: snap.metadata.name,
-url: await snap.ref.getDownloadURL()
-}
-})
-console.log(shapePromises);
-const files = await Promise.all(shapePromises);
-console.log(files);
-setClassified((prevState)=>{
-return{...prevState,thumbnail:files[0].url}});
-// await afterUpload(files);
-setIsLoading(false);
-return files;
-
-
-}
-
-catch (err) {
-setIsLoading(false);
-console.log(err);
-}
-}*/
 
 const [classified,setClassified]=useState({
 communityid:communityid,
@@ -131,9 +89,9 @@ getSubCategories();
 }, [classified.category])
 
 const addClassifieds=async(classifiedData)=>{
-var apiBaseUrl = `http://localhost:4005/api/classifieds/create`
+var apiBaseUrl = `/classifieds/create`
 
-await axios.post(apiBaseUrl,classifiedData )
+await classifiedAPI.post(apiBaseUrl,classifiedData )
 .then(function (response) {
 if (response.status === 201)
 {
@@ -158,9 +116,9 @@ openAlert();
 }
 const getSubCategories=async()=>{
 
-var apiBaseUrl = `http://localhost:4005/api/classifieds/subcategories`
+var apiBaseUrl = `/classifieds/subcategories`
 const data={category:classified.category};
-await axios.post(apiBaseUrl,data )
+await classifiedAPI.post(apiBaseUrl,data )
 .then(function (response) {
 if (response.status === 200)
 {
@@ -179,8 +137,8 @@ openAlert();
 }
 const getCategories=async()=>{
 
-var apiBaseUrl = `http://localhost:4005/api/classifieds/categories`
-await axios.get(apiBaseUrl )
+var apiBaseUrl = `/classifieds/categories`
+await classifiedAPI.get(apiBaseUrl )
 .then(function (response) {
 if (response.status === 200)
 {
@@ -197,13 +155,7 @@ openAlert();
 });
 }
 
-const getCategories1 =async()=>
-{
-var apiBaseUrl = `http://localhost:4005/api/classifieds/categories`
 
-const responseData=await getRequest(apiBaseUrl);
-setCategories(responseData.categories);
-}
 const addFile=(imagefile)=>{
 file=imagefile;
 }

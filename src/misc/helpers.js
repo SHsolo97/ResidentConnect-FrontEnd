@@ -7,6 +7,12 @@ export function getNameInitials(name) {
     return splitName[0][0];
 
 }
+
+export function calculateAverageStars(_1star,_2star,_3star,_4star,_5star,_totrating)
+{
+    let averageRating=((1*_1star)+ (2*_2star)+(3*_3star)+(4*_4star)+(5*_5star))/_totrating;
+    return Math.round(averageRating,1).toFixed(1);
+}
 export function transformToArr(snapVal) {
     return snapVal ? Object.keys(snapVal) : [];
 }
