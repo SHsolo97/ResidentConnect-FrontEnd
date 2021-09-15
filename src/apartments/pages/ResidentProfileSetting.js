@@ -21,6 +21,7 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import ProfileImageUpload from '../components/ProfileImageUpload';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { FormControlLabel } from '@material-ui/core';
+import userAPI from '../../misc/axios-calls/userAPI';
 
 const useStyles = makeStyles((theme) => ({
 root: {
@@ -195,8 +196,8 @@ break;
 
 const editUser=async(profileData)=>{
   console.log(user);
-  var apiBaseUrl = `http://localhost:4002/api/users/${user._id}`  
-  await axios.put(apiBaseUrl,profileData )
+  var apiBaseUrl = `/users/${user._id}`  
+  await userAPI.put(apiBaseUrl,profileData )
        .then(function (response) {
            if (response.status === 200)
 

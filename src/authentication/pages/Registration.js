@@ -23,6 +23,8 @@ import Radio from '@material-ui/core/Radio';
 import { Box } from '@material-ui/core';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import logo from '../../images/home/houselogo.png';
+import userAPI from '../../misc/axios-calls/userAPI';
+import communityAPI from '../../misc/axios-calls/communityAPI';
 
 import lock from '../../images/authentication/lock.png';
 
@@ -75,10 +77,10 @@ const Registration = () => {
       const validateToken=async ()=>{
         var apiBaseUrl = null;
         if(userInfo.type==='admin')
-             apiBaseUrl=`http://localhost:4000/api/community/validatetoken/${token}`;
+             apiBaseUrl=`/community/validatetoken/${token}`;
         else
-            apiBaseUrl=`http://localhost:4000/api/community/apartments/validatetoken/${token}`;
-       await axios.get(apiBaseUrl )
+            apiBaseUrl=`/community/apartments/validatetoken/${token}`;
+       await communityAPI.get(apiBaseUrl )
             .then(function (response) {
                 if (response.status === 200) {           
                     if(userInfo.type==='admin')                    
@@ -146,7 +148,7 @@ const Registration = () => {
      const createUser=async ()=>{
         console.log('create userInfo Record...');
         console.log(community);
-        var apiBaseUrl = `http://localhost:4002/api/users/create`;
+        var apiBaseUrl = `/users/create`;
         let userData=null;
         if(userInfo.type==='admin')
         {
@@ -170,7 +172,7 @@ const Registration = () => {
             }
         }
         console.log(userData);
-        await axios.post(apiBaseUrl,userData )
+        await userAPI.post(apiBaseUrl,userData )
              .then(function (response) {
                  if (response.status === 201) {           
                   

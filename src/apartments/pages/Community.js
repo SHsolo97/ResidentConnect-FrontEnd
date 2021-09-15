@@ -9,6 +9,7 @@ import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useProfile } from '../../context/profile.context';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import communityAPI from '../../misc/axios-calls/communityAPI';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,9 +43,9 @@ pincode:''
 });
 const updateCommunityDetails=async()=>{
 
-var apiBaseUrl = `http://localhost:4000/api/community/${communityid}`
+var apiBaseUrl = `/community/${communityid}`
 console.log(communityDetails);
-await axios.put(apiBaseUrl,communityDetails )
+await communityAPI.put(apiBaseUrl,communityDetails )
 .then(function (response) {
 if (response.status === 200)
 {
@@ -61,8 +62,8 @@ console.log(error);
 }
 const getCommunityDetails=async()=>{
 
-var apiBaseUrl = `http://localhost:4000/api/community/${communityid}`
-await axios.get(apiBaseUrl )
+var apiBaseUrl = `/community/${communityid}`
+await communityAPI.get(apiBaseUrl )
 .then(function (response) {
 if (response.status === 200)
 {

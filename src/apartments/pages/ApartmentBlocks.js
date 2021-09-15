@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader';
 import Paper from '@material-ui/core/Paper';
+import communityAPI from '../../misc/axios-calls/communityAPI';
 
 const useStyles = makeStyles((theme) => ({
 formControl: {
@@ -37,8 +38,8 @@ floordetails: []
 }
 const editBlocks=async (blocksToAdd)=>{
 
-var apiBaseUrl = `http://localhost:4000/api/community/${communityid}/blocks/edit`
-await axios.put(apiBaseUrl,blocksToAdd )
+var apiBaseUrl = `/community/${communityid}/blocks/edit`
+await communityAPI.put(apiBaseUrl,blocksToAdd )
 .then(function (response) {
 if (response.status === 200)
 
@@ -58,8 +59,8 @@ console.log(error);
 const [isNew,setIsNew]=React.useState([])
 const [blocks,setBlocks]=React.useState([])
 const getApartmentBlocks=async()=>{
-var apiBaseUrl = `http://localhost:4000/api/community/${communityid}/blocks`
-await axios.get(apiBaseUrl )
+var apiBaseUrl = `/community/${communityid}/blocks`
+await communityAPI.get(apiBaseUrl )
 .then(function (response) {
 if (response.status === 200)
 

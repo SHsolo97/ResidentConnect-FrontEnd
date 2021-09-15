@@ -3,13 +3,15 @@ import { useProfile } from '../../context/profile.context';
 import axios from 'axios';
 import SellItemCard from './SellItemCard';
 import { Box, Grid } from '@material-ui/core';
+import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+
+
 export const AdSearchResult = ({...props}) => {
 const {user}=useProfile();
 const communityid=user.communities[0];
 const [adverts, setAdverts] = useState([]);
-
 const getAds=async()=>{
-const apiBaseUrl = `http://localhost:4004/api/adverts/search`
+const apiBaseUrl = `/adverts/search`
 const searchQuery={communityid:communityid}
 
 if(props.category!=='')
@@ -18,7 +20,7 @@ if(props.subcategory!=='')
 searchQuery['subcategory']=props.subcategory;
 
 console.log(searchQuery);
-await axios.post(apiBaseUrl,searchQuery )
+await buyAndSellAPI.post(apiBaseUrl,searchQuery )
 .then(function (response) {
 if (response.status === 200)
 

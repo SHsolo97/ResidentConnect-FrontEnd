@@ -21,6 +21,8 @@ import { useModelState } from '../../misc/custom-hooks'
 import { DeleteAdvertModal } from '../components/DeleteAdvertModal'
 import { useHistory } from 'react-router'
 import { ImageCarousel } from '../components/ImageCarousel'
+import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+import userAPI from '../../misc/axios-calls/userAPI';
 
 const useStyles = makeStyles((theme) => ({
 root:{
@@ -104,9 +106,9 @@ const {user}=useProfile();
 const [sellerDetails,setSellerDetails]=React.useState({firstname:'', lastname:'',phone:[{number:''}]});
 const { isOpen, open, close } = useModelState();
 const getSellerDetails=async()=>{
-const apiBaseUrl = `http://localhost:4002/api/users/${advert.creator}`
+const apiBaseUrl = `/users/${advert.creator}`
 console.log(apiBaseUrl);
-await axios.get(apiBaseUrl)
+await userAPI.get(apiBaseUrl)
 .then(function (response) {
 if (response.status === 200)
 {
@@ -136,8 +138,8 @@ const updateAd=async (event)=>
 
 const deleteAd=async()=>{
     console.log(`delete ${advert._id}`);
-    var apiBaseUrl = `http://localhost:4004/api/adverts/${advert._id}`  
-      await axios.delete(apiBaseUrl )
+    var apiBaseUrl = `/adverts/${advert._id}`  
+      await buyAndSellAPI.delete(apiBaseUrl )
           .then(function (response) {
             if (response.status === 200)            
            {

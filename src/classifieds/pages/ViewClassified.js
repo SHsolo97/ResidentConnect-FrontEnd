@@ -12,14 +12,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ClassifiedDetails } from '../components/ClassifiedDetails';
 import { ClassifiedReviews } from '../components/ClassifiedReviews';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import reducers from '../reducers';
 import ClassifiedsList from './ClassifiedsList';
 import { useProfile } from '../../context/profile.context';
+import { createStore, applyMiddleware, compose } from 'redux';
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

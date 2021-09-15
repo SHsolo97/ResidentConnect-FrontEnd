@@ -10,6 +10,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FlatRow } from '../components/FlatRow';
 import Grid from '@material-ui/core/Grid';
+import communityAPI from '../../misc/axios-calls/communityAPI';
+import notificationAPI from '../../misc/axios-calls/notificationAPI';
 
 export const Apartments = ({children,...props}) => {
     const {user}=useProfile();
@@ -25,8 +27,8 @@ export const Apartments = ({children,...props}) => {
     const [isLoading, setLoading] = React.useState(true);
 
     const getApartmentModels=async()=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/${communityid}/apartments/models`   
-        await axios.get(apiBaseUrl )
+        var apiBaseUrl = `/community/${communityid}/apartments/models`   
+        await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
 
@@ -43,8 +45,8 @@ export const Apartments = ({children,...props}) => {
              });
     }
     const getCommunityDetails=async ()=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/${communityid}`   
-        await axios.get(apiBaseUrl )
+        var apiBaseUrl = `/community/${communityid}`   
+        await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                  {
@@ -74,9 +76,9 @@ export const Apartments = ({children,...props}) => {
     }
 
     const createApartment=async (data)=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/apartment/create`   
+        var apiBaseUrl = `/community/apartment/create`   
   
-        return await axios.post(apiBaseUrl,data )
+        return await communityAPI.post(apiBaseUrl,data )
              .then(function (response) {
                  if (response.status === 201)
                  {
@@ -93,13 +95,13 @@ export const Apartments = ({children,...props}) => {
     }
 
     const getApartments=async ()=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/apartments`   
+        var apiBaseUrl = `/community/apartments`   
         let searchquery={};
         searchquery['communityid']=communityid;
         searchquery['block']=currentBlock.block   ;
         searchquery['floor']=currentFloor ;  
         //console.log(searchquery);
-        await axios.post(apiBaseUrl,searchquery )
+        await communityAPI.post(apiBaseUrl,searchquery )
              .then(function (response) {
                  if (response.status === 200)
                  {
@@ -156,7 +158,7 @@ export const Apartments = ({children,...props}) => {
              "body":body,
              "recipient":recipient
         }
-         axios.post('https://rvdgmd0qb5.execute-api.ap-south-1.amazonaws.com/dev/sendMail', data)
+        notificationAPI.post('/sendMail', data)
         
     
         .then(res => {

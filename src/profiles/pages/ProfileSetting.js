@@ -20,6 +20,7 @@ import img from '../../images/avatars/mypict.jpg'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { FormControlLabel } from '@material-ui/core';
+import userAPI from '../../misc/axios-calls/userAPI';
 
 const useStyles = makeStyles((theme) => ({
 root: {
@@ -166,8 +167,8 @@ break;
 
 const editUser=async()=>{
   
-  var apiBaseUrl = `http://localhost:4002/api/users/${user.id}`  
-  await axios.put(apiBaseUrl,formInput )
+  var apiBaseUrl = `/users/${user.id}`  
+  await userAPI.put(apiBaseUrl,formInput )
        .then(function (response) {
            if (response.status === 200)
 
@@ -187,8 +188,7 @@ const editUser=async()=>{
 
 const handleSubmit=async (event)=>{
 event.preventDefault();
-console.log(formInput);
-console.log(avatarImage);
+
 //history.push('/apartmentDetailsR');
 const fileList=[avatarImage];
 const path=`${user.id}/avatars`;
@@ -217,10 +217,8 @@ return (
   <form onSubmit={handleSubmit}>
     <PageHeader>Profile</PageHeader>
     <div className={classes.avatar}>
-    <Avatar  style={{ height: '150px', width: '150px' , objectFit:'cover' }} >
-          {user.avatar && <img src={user.avatar} alt="Preview"  />}
+          {user.avatar && <Avatar src={user.avatar} alt="Preview" style={{ height: '150px', width: '150px' }}   />}
           {!user.avatar && <AddAPhotoIcon fontSize="large"/> }
-        </Avatar>
        </div>
     <Box className={classes.root}>
 

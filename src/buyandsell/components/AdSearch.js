@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 
 export const AdSearch = ({...props}) => {
     const [ categories,setCategories]=useState([]);
@@ -22,9 +23,9 @@ export const AdSearch = ({...props}) => {
 
     const getSubCategories=async()=>{
 
-        const apiBaseUrl = `http://localhost:4004/api/adverts/subcategories`   
+        const apiBaseUrl = `/adverts/subcategories`   
         const data={category:props.category};     
-        await axios.post(apiBaseUrl,data )
+        await buyAndSellAPI.post(apiBaseUrl,data )
              .then(function (response) {
                  if (response.status === 200)
                 {           
@@ -41,8 +42,8 @@ export const AdSearch = ({...props}) => {
              });
     }
     const getCategories=async()=>{
-        const apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
-        await axios.get(apiBaseUrl )
+        const apiBaseUrl = `/adverts/categories`        
+        await buyAndSellAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                 {           

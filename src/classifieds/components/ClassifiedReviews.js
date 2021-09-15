@@ -4,8 +4,16 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
 import ReviewList from './ReviewList';
+import {useModelState} from '../../misc/custom-hooks';
+import AddReviewModel from './AddReviewModel';
+import { createStore, applyMiddleware, compose } from 'redux';
 
 export const ClassifiedReviews = ({classified}) => {
+  const { isOpen, open, close } = useModelState();
+
+  const createReview=()=>{
+    open();
+  }
 const renderAverageRatingCard=()=>
 {
 return(
@@ -37,7 +45,9 @@ return (
     </Grid>
   </Grid>
 
-  <PrimaryButton> Write An Review</PrimaryButton>
+  <PrimaryButton onClick={createReview}> Write An Review</PrimaryButton>
+  {isOpen &&
+       <AddReviewModel handleClose={close} open={open} />}
   <ReviewList classifiedid={classified._id}/>
 </div>
 )
