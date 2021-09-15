@@ -15,10 +15,12 @@ import Link from '@material-ui/core/Link';
 import { useModelState } from '../../misc/custom-hooks';
 import TimeSlotModal from '../components/TimeSlotModal';
 import TimeSlotArray from '../components/TimeSlotArray';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 export const AddFacility = () => {
     const history=useHistory();
-    const { isOpen, open, close } = useModelState();
     const [faciltyTypes,setFacilityTypes]=useState([]);
     const[day,setDay]=useState('Monday');
     const [timeSlotChipPerDay, setTimeSlotChipPerDay] = React.useState(
@@ -33,7 +35,6 @@ export const AddFacility = () => {
             );
 
     const [timeSlotChip, setTimeSlotChip] = React.useState([]);
-   const[slotKey,setSlotKey]=React.useState(0);
     const[bookingDetails,setBookingDetails]=useState(
         {
            
@@ -99,6 +100,7 @@ export const AddFacility = () => {
      
           
         }, [day])
+       
         const [facility,setFacility]=useState({
         type:'',
         name:'',
@@ -266,6 +268,7 @@ export const AddFacility = () => {
                  }))
                 break;
         }
+        console.log(timeSlotChip);
         setDay(event.target.value);
        
     
@@ -287,29 +290,7 @@ export const AddFacility = () => {
           console.log('Add Facility');
       }
 
-      const handleAddTimeSlot=(slotToAdd)=>()=>{
-        //setChipData((chips) => chips.push(chipToAdd));
-        console.log("handleAdd");
-        console.log(slotToAdd);
-        addTimeSlot(slotToAdd);
-      }
-    
-      const handleTimeSlotAdd=(value)=>{
-        close();
-        const chipToAdd={key:slotKey, label:value};
-        console.log(chipToAdd);
-        addTimeSlot(chipToAdd);
-      }
-      
-      const addTimeSlot=(slotToAdd)=>{
-        setTimeSlotChip(SlotChip => [...SlotChip, slotToAdd]);
-        console.log(slotToAdd);
-        setSlotKey(slotKey+1);
-      }
      
-      const handleTimeSlotDelete = (slotToDelete) => () => {
-        setTimeSlotChip((slots) => slots.filter((slot) => slot.key !== slotToDelete.key));
-      };
     return (
         <>
            <PageHeader>Add Facility</PageHeader> 
@@ -341,15 +322,14 @@ export const AddFacility = () => {
           <MenuItem value='Saturday'> Saturday</MenuItem>
           <MenuItem value='Sunday'> Sunday </MenuItem>
         </Select>
-        <Link  component="button" variant="body2" onClick={open}> Add Slot </Link>
-        {isOpen && <TimeSlotModal handleClose={close} open={open} addTimeSlot={handleTimeSlotAdd} />}
-        <TimeSlotArray timeSlotChip={timeSlotChip} key={slotKey} handleDelete={handleTimeSlotDelete} handleAdd={handleAddTimeSlot} />
-
+        </FormControl>
+      
+     
         <Grid  container direction="row" justifyContent="center" alignItems="center">
         <PrimaryButton onClick={addFacility}>Submit</PrimaryButton>
        <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
        </Grid>
-      </FormControl>
+     
       </Grid>
        </>
     )

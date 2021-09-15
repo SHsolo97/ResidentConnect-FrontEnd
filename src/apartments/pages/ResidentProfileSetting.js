@@ -70,27 +70,27 @@ const history=useHistory();
 const [formInput,setFormInput]=React.useState(
 {
 profilecompletion:true,
-firstname: "",
-lastname: "",
-avatar:"",
+firstname: '',
+lastname: '',
+avatar:'',
 bloodgroup:"A Positive",
 phone:[{
-type:"",
-number:""},
+type:'',
+number:''},
 {
-type:"",
-number:""}],
+type:'',
+number:''}],
 emergencycontacts:
 [
 {
-name: "",
-relationship: "",
-phone: ""
+name: '',
+relationship: '',
+phone: ''
 },
 {
-name: "",
-relationship: "",
-phone: ""
+name: '',
+relationship: '',
+phone: ''
 }
 ]
 
@@ -224,8 +224,16 @@ console.log(avatarImage);
 const fileList=[avatarImage];
 const path=`${communityid}/avatars/${user._id}`;
 const imagefiles=await uploadImagesToFireStorage(path,fileList);
-const profileData=formInput;
- profileData.avatar = imagefiles[0].url;
+let profileData={};
+profileData['profilecompletion']=true;
+profileData['firstname']= formInput.firstname;
+profileData['lastname']=formInput.lastname;
+profileData['avatar']=imagefiles[0].url
+profileData['bloodgroup']=formInput.bloodgroup;
+profileData['phone']=formInput.phone;
+profileData['emergencycontacts']=formInput.emergencycontacts;
+
+
 
 
 editUser(profileData);

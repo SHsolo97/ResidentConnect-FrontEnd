@@ -40,7 +40,6 @@ export const CustumMenuItem = ({children,...props}) => {
     const menuName=children;
     const history =useHistory();
     const handleMenu=()=>{
-        console.log(menuName);
         if(userType==='resident')
         {
         switch(menuName) {

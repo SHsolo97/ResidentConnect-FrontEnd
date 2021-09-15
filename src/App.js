@@ -8,7 +8,7 @@ import BuyAndSell from './buyandsell/pages/BuyAndSell';
 import CarPooling from './carpooling/pages/CarPooling';
 import AdminChatroom from './chatrooms/pages/AdminChatroom';
 import ResidentChatroom from './chatrooms/pages/ResidentChatroom';
-import Classifieds from './classifieds/pages/Classifieds';
+import {Classifieds} from './classifieds/pages/Classifieds';
 import AdminContacts from './contacts/pages/AdminContacts';
 import CreateContact from './contacts/pages/CreateContact';
 import ResidentContacts from './contacts/pages/ResidentContacts';

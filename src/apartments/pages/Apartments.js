@@ -156,7 +156,7 @@ export const Apartments = ({children,...props}) => {
              "body":body,
              "recipient":recipient
         }
-         axios.post('https://enjx2h7og1.execute-api.ap-south-1.amazonaws.com/dev/sendMail', data)
+         axios.post('https://rvdgmd0qb5.execute-api.ap-south-1.amazonaws.com/dev/sendMail', data)
         
     
         .then(res => {
