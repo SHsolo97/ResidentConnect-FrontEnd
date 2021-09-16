@@ -8,7 +8,7 @@ import BuyAndSell from './buyandsell/pages/BuyAndSell';
 import CarPooling from './carpooling/pages/CarPooling';
 import AdminChatroom from './chatrooms/pages/AdminChatroom';
 import ResidentChatroom from './chatrooms/pages/ResidentChatroom';
-import Classifieds from './classifieds/pages/Classifieds';
+import {Classifieds} from './classifieds/pages/Classifieds';
 import AdminContacts from './contacts/pages/AdminContacts';
 import CreateContact from './contacts/pages/CreateContact';
 import ResidentContacts from './contacts/pages/ResidentContacts';
@@ -43,6 +43,10 @@ import { MyAds } from './buyandsell/pages/MyAds';
 import { AdvertsProvider } from './context/adverts.context';
 import { AdDetails } from './buyandsell/pages/AdDetails';
 import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
+import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSettings';
+import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
+import {InitiatePayment}  from './payments/pages/InitiatePayment';
+
 
 function App() {
  return(
@@ -89,12 +93,15 @@ function App() {
    <PrivateRoute path="/addFacility" component={AddFacility}/>
    <PrivateRoute path="/profile" component={ProfileSetting}/>
    <PrivateRoute path="/samplePage" component={SamplePage}/>
-  
+   <PrivateRoute path="/apartmentprofile" component={ResidentApartmentSettings}/>
+
      <PrivateRoute path="/myads" component={MyAds}/>
      <PrivateRoute path="/adDetails" component={AdDetails}/>
      <PrivateRoute path="/updateAdDetails"  component={UpdateAdDetails}/>
+     <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
+     <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
 
-    
+     
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>

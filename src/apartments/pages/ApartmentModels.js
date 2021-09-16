@@ -12,6 +12,7 @@ import axios from 'axios';
 import ModelCard from '../components/ModelCard';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import communityAPI from '../../misc/axios-calls/communityAPI';
 
 export const ApartmentModels = ({children,...props}) => {
 const { isOpen, open, close } = useModelState();
@@ -36,9 +37,9 @@ otherrooms:0
 }
 }
 const addApartmentModel=async(model)=>{
-var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/create`
+var apiBaseUrl = `/community/apartments/models/create`
 console.log(model);
-await axios.post(apiBaseUrl,model )
+await communityAPI.post(apiBaseUrl,model )
 .then(function (response) {
 if (response.status === 201)
 
@@ -57,8 +58,8 @@ console.log(error);
 });
 }
 const getApartmentModels=async()=>{
-var apiBaseUrl = `http://localhost:4000/api/community/${communityid}/apartments/models`
-await axios.get(apiBaseUrl )
+var apiBaseUrl = `/community/${communityid}/apartments/models`
+await communityAPI.get(apiBaseUrl )
 .then(function (response) {
 if (response.status === 200)
 
@@ -75,8 +76,8 @@ console.log(error);
 });
 }
 const editApartmentModel=async(modelToBeEdit)=>{
-var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/${modelToBeEdit._id}`
-await axios.put(apiBaseUrl,modelToBeEdit )
+var apiBaseUrl = `/community/apartments/models/${modelToBeEdit._id}`
+await communityAPI.put(apiBaseUrl,modelToBeEdit )
 .then(function (response) {
 if (response.status === 200)
 
@@ -110,8 +111,8 @@ console.log(error);
 const deleteModel= async (modelToBeDelete)=>
 {
 console.log(`delete ${modelToBeDelete._id}`);
-var apiBaseUrl = `http://localhost:4000/api/community/apartments/models/${modelToBeDelete._id}`
-await axios.delete(apiBaseUrl )
+var apiBaseUrl = `/community/apartments/models/${modelToBeDelete._id}`
+await communityAPI.delete(apiBaseUrl )
 .then(function (response) {
 if (response.status === 200)
 {

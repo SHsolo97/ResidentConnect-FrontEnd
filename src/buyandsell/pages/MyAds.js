@@ -2,11 +2,10 @@ import {useEffect,useState}  from 'react'
 import  React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useProfile } from '../../context/profile.context'
-import axios from 'axios';
 import MyAdCard from '../components/MyAdCard';
-import { AdvertsProvider, useAdverts } from '../../context/adverts.context';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { MyAdFilter } from './MyAdFilter';
+import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 
 export const MyAds = () => {
     const {user}=useProfile();
@@ -17,10 +16,10 @@ export const MyAds = () => {
     const creator=user._id;
  
     const getAds=async()=>{
-        const apiBaseUrl = `http://localhost:4004/api/adverts`  
+        const apiBaseUrl = `/adverts`  
         const searchQuery={creator:creator}
         console.log(searchQuery);
-        await axios.post(apiBaseUrl,searchQuery )
+        await buyAndSellAPI.post(apiBaseUrl,searchQuery )
              .then(function (response) {
                  if (response.status === 200)
     

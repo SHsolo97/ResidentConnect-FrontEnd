@@ -11,8 +11,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useEffect } from 'react';
-import axios from 'axios';
-
 import Grid from '@material-ui/core/Grid';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
@@ -21,6 +19,7 @@ import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { CustomTextField } from '../../shared/components/CustomTextField';
+import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -81,9 +80,9 @@ export const PostAd = () => {
 
     const getSubCategories=async()=>{
 
-        var apiBaseUrl = `http://localhost:4004/api/adverts/subcategories`   
+        var apiBaseUrl = `/adverts/subcategories`   
         const data={category:advert.category};     
-        await axios.post(apiBaseUrl,data )
+        await buyAndSellAPI.post(apiBaseUrl,data )
              .then(function (response) {
                  if (response.status === 200)
                 {  
@@ -96,8 +95,8 @@ export const PostAd = () => {
              });
     }
     const getCategories=async()=>{        
-        var apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
-        await axios.get(apiBaseUrl )
+        var apiBaseUrl = `/adverts/categories`        
+        await buyAndSellAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                 { 
@@ -110,9 +109,9 @@ export const PostAd = () => {
              });
     }
     const addAdvert=async(advertData)=>{
-        var apiBaseUrl = `http://localhost:4004/api/adverts/create`   
+        var apiBaseUrl = `/adverts/create`   
              
-        await axios.post(apiBaseUrl,advertData )
+        await buyAndSellAPI.post(apiBaseUrl,advertData )
              .then(function (response) {
                  if (response.status === 200)
                 {           

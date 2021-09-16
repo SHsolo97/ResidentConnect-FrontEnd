@@ -2,28 +2,24 @@ import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import Divider from '@material-ui/core/Divider';
 import { SectionHeader } from '../../shared/components/SectionHeader';
-import {TextField,Button} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
-import { orange } from '@material-ui/core/colors'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useEffect } from 'react';
-import axios from 'axios';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import LanguageTwoToneIcon from '@material-ui/icons/LanguageTwoTone';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
+import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+
 const CustomTextField = withStyles({
     root: {
       '& label.Mui-focused': {
@@ -104,9 +100,9 @@ export const UpdateAdDetails = ({...props}) => {
       }
        const getSubCategories=async()=>{
 
-        var apiBaseUrl = `http://localhost:4004/api/adverts/subcategories`   
+        var apiBaseUrl = `/adverts/subcategories`   
         const data={category:advert.category};     
-        await axios.post(apiBaseUrl,data )
+        await buyAndSellAPI.post(apiBaseUrl,data )
              .then(function (response) {
                  if (response.status === 200)
                 {  
@@ -119,8 +115,8 @@ export const UpdateAdDetails = ({...props}) => {
              });
     }
     const getCategories=async()=>{        
-        var apiBaseUrl = `http://localhost:4004/api/adverts/categories`        
-        await axios.get(apiBaseUrl )
+        var apiBaseUrl = `/adverts/categories`        
+        await buyAndSellAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                 { 

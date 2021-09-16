@@ -14,6 +14,7 @@ import { RadioGroup } from '@material-ui/core';
 import { Radio } from '@material-ui/core';
 import { SectionHeader } from '../../shared/components/SectionHeader';
 import axios from 'axios';
+import communityAPI from '../../misc/axios-calls/communityAPI';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,8 +56,8 @@ export const ResidentApartmentDetails = () => {
 const editApartment=async()=>{
     console.log(status);
     const data={status : status};
-    var apiBaseUrl = `http://localhost:4000/api/community/apartment/${apartment.id}`  
-    await axios.put(apiBaseUrl,data )
+    var apiBaseUrl = `/community/apartment/${apartment.id}`  
+    await communityAPI.put(apiBaseUrl,data )
          .then(function (response) {
              if (response.status === 200)
   

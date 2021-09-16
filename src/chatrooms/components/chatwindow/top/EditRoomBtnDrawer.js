@@ -58,6 +58,7 @@ const EditRoomBtnDrawer = () => {
         }).catch(err => {
             console.log(err.message);
         })
+        close();
     }
     const [formValue, setFormValue] = useState({
         'name':name,

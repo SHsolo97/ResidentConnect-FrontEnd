@@ -10,6 +10,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FlatRow } from '../components/FlatRow';
 import Grid from '@material-ui/core/Grid';
+import communityAPI from '../../misc/axios-calls/communityAPI';
+import notificationAPI from '../../misc/axios-calls/notificationAPI';
+import { Progress } from '../../shared/components/Progress';
 
 export const Apartments = ({children,...props}) => {
     const {user}=useProfile();
@@ -22,18 +25,18 @@ export const Apartments = ({children,...props}) => {
     const [currentFloor,setCurrentFloor]=React.useState(0);
     const [flats,setFlats]=React.useState([]);
     const [models,setModels]=React.useState([]);
-    const [isLoading, setLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     const getApartmentModels=async()=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/${communityid}/apartments/models`   
-        await axios.get(apiBaseUrl )
+        var apiBaseUrl = `/community/${communityid}/apartments/models`   
+        await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
 
                 {
                    // console.log(response.data.models);
                      setModels(response.data.models);
-                   
+                     setIsLoading(false);
                   
                 }
              })
@@ -43,8 +46,8 @@ export const Apartments = ({children,...props}) => {
              });
     }
     const getCommunityDetails=async ()=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/${communityid}`   
-        await axios.get(apiBaseUrl )
+        var apiBaseUrl = `/community/${communityid}`   
+        await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                  {
@@ -74,9 +77,9 @@ export const Apartments = ({children,...props}) => {
     }
 
     const createApartment=async (data)=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/apartment/create`   
+        var apiBaseUrl = `/community/apartment/create`   
   
-        return await axios.post(apiBaseUrl,data )
+        return await communityAPI.post(apiBaseUrl,data )
              .then(function (response) {
                  if (response.status === 201)
                  {
@@ -93,13 +96,13 @@ export const Apartments = ({children,...props}) => {
     }
 
     const getApartments=async ()=>{
-        var apiBaseUrl = `http://localhost:4000/api/community/apartments`   
+        var apiBaseUrl = `/community/apartments`   
         let searchquery={};
         searchquery['communityid']=communityid;
         searchquery['block']=currentBlock.block   ;
         searchquery['floor']=currentFloor ;  
         //console.log(searchquery);
-        await axios.post(apiBaseUrl,searchquery )
+        await communityAPI.post(apiBaseUrl,searchquery )
              .then(function (response) {
                  if (response.status === 200)
                  {
@@ -156,7 +159,7 @@ export const Apartments = ({children,...props}) => {
              "body":body,
              "recipient":recipient
         }
-         axios.post('https://enjx2h7og1.execute-api.ap-south-1.amazonaws.com/dev/sendMail', data)
+        notificationAPI.post('/sendMail', data)
         
     
         .then(res => {
@@ -199,9 +202,13 @@ export const Apartments = ({children,...props}) => {
         props.handleBack();
     }
     React.useEffect(() => {
-        getCommunityDetails();
-        getApartmentModels();
-    }, [communityid])
+        getCommunityDetails().then(
+            response=>{
+                getApartmentModels();
+
+            }
+        );
+    }, [])
 
     const setCurrentBlockInfo=(e)=>{
 
@@ -231,14 +238,17 @@ export const Apartments = ({children,...props}) => {
             return flat;
         }));
     }
-    const deleteRow=()=>{
-
-    }
-     return (
-        <>
-
-        <PageHeader>{children}</PageHeader>
-        <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
+   
+    const renderApartmentInfo=()=>{
+        console.log(currentBlock);
+        console.log(blocks);
+        if(currentBlock==null)
+            if(blocks!=null)
+                setCurrentBlock(blocks[0]);
+            else
+                return null;
+        return(<div>
+            <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
         <Select id="blocks" value={currentBlock.block} onChange={setCurrentBlockInfo}  >
         {blocks.map((block)=>            
           <MenuItem key={block.id} name={block.id} value={block.block}>{block.block}</MenuItem>
@@ -260,6 +270,20 @@ export const Apartments = ({children,...props}) => {
         <PrimaryButton  onClick={enrollFlats}> Enroll </PrimaryButton>
         <PrimaryButton  onClick={handleBack}> Back </PrimaryButton>
         <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
+        </div>)
+    }
+     return (
+        <>
+
+        <PageHeader>{children}</PageHeader>
+
+        {blocks.length===0 && isLoading?
+            <Progress/>
+            :
+            renderApartmentInfo()
+
+        }
+        
         </>
     )
 }

@@ -10,12 +10,46 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core'
+import { useProfile } from '../../context/profile.context'
+import communityAPI from '../../misc/axios-calls/communityAPI';
 
 export const ApartmentServices = ({children,...props}) => {
+const {user}=useProfile();
+const communityid=user.communities[0];
 const history=useHistory();
+const [enrolledServices,SetEnrolledService]=React.useState({
+  maintenance:false,
+  visitor:false,
+  polling:false,
+  carpooling:false,
+  facility:false
+});
+const updateServiceDetails=async(data)=>{
 
+  var apiBaseUrl = `/community/${communityid}`
+  console.log(data);
+  await communityAPI.put(apiBaseUrl,data )
+  .then(function (response) {
+  if (response.status === 200)
+  {
+  console.log( response.data);
+  
+  history.push('/settingsR');
+  
+  }
+  })
+  .catch(function (error) {
+  console.log(error);
+  
+  });
+  }
 const handleSubmit=(e)=>{
-history.push('/settingsR');
+  console.log(enrolledServices);
+  const data={}
+  data['paidservices']=enrolledServices;
+  console.log(data);
+  updateServiceDetails(data);
+  
 }
 const handleBack=(e)=>{
 props.handleBack();
@@ -35,14 +69,16 @@ return (
   alignItems="flex-start"
 >
 <div>
-  <FormControlLabel value="maintenance" control={<Checkbox color="primary" />}
+  <FormControlLabel value={enrolledServices.maintenance} onChange={(e)=>{SetEnrolledService((prevState)=>{
+            return{...prevState, maintenance : !enrolledServices.maintenance}})}} control={<Checkbox color="primary" />}
   label="Maintenance Request"
   labelPlacement="end"
   />
   <span style={{color:'gray'}}> (₹ 0.10 per request)</span>
   </div>
   <div>
-  <FormControlLabel value="visitor" control={<Checkbox color="primary" />}
+  <FormControlLabel value={enrolledServices.visitor}   onChange={(e)=>{SetEnrolledService((prevState)=>{
+            return{...prevState, visitor :!enrolledServices.visitor}})}} control={<Checkbox color="primary" />}
   label="Visitor Management"
   labelPlacement="end"
   />
@@ -50,7 +86,8 @@ return (
   </div>
   <div>
   
-  <FormControlLabel value="polling" control={<Checkbox color="primary" />}
+  <FormControlLabel value={enrolledServices.polling}   onChange={(e)=>{SetEnrolledService((prevState)=>{
+            return{...prevState, polling :!enrolledServices.polling}})}} control={<Checkbox color="primary" />}
   label="Polling"
   labelPlacement="end"
   />
@@ -58,7 +95,17 @@ return (
   </div>
   <div>
   
-   <FormControlLabel value="facility" control={<Checkbox color="primary" />}
+  <FormControlLabel value={enrolledServices.carpooling}  onChange={(e)=>{SetEnrolledService((prevState)=>{
+            return{...prevState, carpooling :!enrolledServices.carpooling}})}} control={<Checkbox color="primary" />}
+  label="Car Pooling"
+  labelPlacement="end"
+  />
+  <span style={{color:'gray'}}> (₹ 0.10 per request)</span>
+  </div>
+  <div>
+  
+   <FormControlLabel    value={enrolledServices.facility}   onChange={(e)=>{SetEnrolledService((prevState)=>{
+            return{...prevState, facility :!enrolledServices.facility}})}} control={<Checkbox color="primary" />}
   label="Facility Booking"
   labelPlacement="end"
   />

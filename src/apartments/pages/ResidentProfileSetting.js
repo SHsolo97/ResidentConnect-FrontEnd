@@ -21,6 +21,7 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import ProfileImageUpload from '../components/ProfileImageUpload';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { FormControlLabel } from '@material-ui/core';
+import userAPI from '../../misc/axios-calls/userAPI';
 
 const useStyles = makeStyles((theme) => ({
 root: {
@@ -70,27 +71,27 @@ const history=useHistory();
 const [formInput,setFormInput]=React.useState(
 {
 profilecompletion:true,
-firstname: "",
-lastname: "",
-avatar:"",
+firstname: '',
+lastname: '',
+avatar:'',
 bloodgroup:"A Positive",
 phone:[{
-type:"",
-number:""},
+type:'',
+number:''},
 {
-type:"",
-number:""}],
+type:'',
+number:''}],
 emergencycontacts:
 [
 {
-name: "",
-relationship: "",
-phone: ""
+name: '',
+relationship: '',
+phone: ''
 },
 {
-name: "",
-relationship: "",
-phone: ""
+name: '',
+relationship: '',
+phone: ''
 }
 ]
 
@@ -195,8 +196,8 @@ break;
 
 const editUser=async(profileData)=>{
   console.log(user);
-  var apiBaseUrl = `http://localhost:4002/api/users/${user._id}`  
-  await axios.put(apiBaseUrl,profileData )
+  var apiBaseUrl = `/users/${user._id}`  
+  await userAPI.put(apiBaseUrl,profileData )
        .then(function (response) {
            if (response.status === 200)
 
@@ -224,8 +225,16 @@ console.log(avatarImage);
 const fileList=[avatarImage];
 const path=`${communityid}/avatars/${user._id}`;
 const imagefiles=await uploadImagesToFireStorage(path,fileList);
-const profileData=formInput;
- profileData.avatar = imagefiles[0].url;
+let profileData={};
+profileData['profilecompletion']=true;
+profileData['firstname']= formInput.firstname;
+profileData['lastname']=formInput.lastname;
+profileData['avatar']=imagefiles[0].url
+profileData['bloodgroup']=formInput.bloodgroup;
+profileData['phone']=formInput.phone;
+profileData['emergencycontacts']=formInput.emergencycontacts;
+
+
 
 
 editUser(profileData);
@@ -241,7 +250,7 @@ return (
   <form onSubmit={handleSubmit}>
     <PageHeader>Profile</PageHeader>
     <div className={classes.avatar}>
-       <ProfileImageUpload addFile={addFile} id="classifieldIamge" errorText=""/>
+       <ProfileImageUpload previewUrl={null} addFile={addFile} id="classifieldIamge" errorText=""/>
        {avatarImage===null? <div>upload image</div>:null}
        </div>
     <Box className={classes.root}>
