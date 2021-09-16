@@ -3,11 +3,9 @@ import userAPI from '../../misc/axios-calls/userAPI';
 import _ from 'lodash';
 
 
-export const fetchClassifieds = (communityid) => async dispatch => {
+export const fetchClassifieds = (searchQuery) => async dispatch => {
 
-    let searchQuery={
-        "communityid":communityid
-    }
+  
     console.log(searchQuery);
   const response = await classifiedAPI.post('/classifieds/search',searchQuery);
 

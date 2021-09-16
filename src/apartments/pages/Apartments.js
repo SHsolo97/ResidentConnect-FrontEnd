@@ -12,6 +12,7 @@ import { FlatRow } from '../components/FlatRow';
 import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import notificationAPI from '../../misc/axios-calls/notificationAPI';
+import { Progress } from '../../shared/components/Progress';
 
 export const Apartments = ({children,...props}) => {
     const {user}=useProfile();
@@ -24,7 +25,7 @@ export const Apartments = ({children,...props}) => {
     const [currentFloor,setCurrentFloor]=React.useState(0);
     const [flats,setFlats]=React.useState([]);
     const [models,setModels]=React.useState([]);
-    const [isLoading, setLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     const getApartmentModels=async()=>{
         var apiBaseUrl = `/community/${communityid}/apartments/models`   
@@ -35,7 +36,7 @@ export const Apartments = ({children,...props}) => {
                 {
                    // console.log(response.data.models);
                      setModels(response.data.models);
-                   
+                     setIsLoading(false);
                   
                 }
              })
@@ -201,9 +202,13 @@ export const Apartments = ({children,...props}) => {
         props.handleBack();
     }
     React.useEffect(() => {
-        getCommunityDetails();
-        getApartmentModels();
-    }, [communityid])
+        getCommunityDetails().then(
+            response=>{
+                getApartmentModels();
+
+            }
+        );
+    }, [])
 
     const setCurrentBlockInfo=(e)=>{
 
@@ -233,14 +238,17 @@ export const Apartments = ({children,...props}) => {
             return flat;
         }));
     }
-    const deleteRow=()=>{
-
-    }
-     return (
-        <>
-
-        <PageHeader>{children}</PageHeader>
-        <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
+   
+    const renderApartmentInfo=()=>{
+        console.log(currentBlock);
+        console.log(blocks);
+        if(currentBlock==null)
+            if(blocks!=null)
+                setCurrentBlock(blocks[0]);
+            else
+                return null;
+        return(<div>
+            <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
         <Select id="blocks" value={currentBlock.block} onChange={setCurrentBlockInfo}  >
         {blocks.map((block)=>            
           <MenuItem key={block.id} name={block.id} value={block.block}>{block.block}</MenuItem>
@@ -262,6 +270,20 @@ export const Apartments = ({children,...props}) => {
         <PrimaryButton  onClick={enrollFlats}> Enroll </PrimaryButton>
         <PrimaryButton  onClick={handleBack}> Back </PrimaryButton>
         <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
+        </div>)
+    }
+     return (
+        <>
+
+        <PageHeader>{children}</PageHeader>
+
+        {blocks.length===0 && isLoading?
+            <Progress/>
+            :
+            renderApartmentInfo()
+
+        }
+        
         </>
     )
 }

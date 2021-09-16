@@ -97,7 +97,7 @@ export const ApartmentProvider=({children})=>{
         return ()=>{
             authUnsub();
         }
-    },[user])
+    },[])
 
     return (
     <ApartmentContext.Provider value={{apartment,setApartment,apartmentList}}> {children} </ApartmentContext.Provider>);

@@ -43,6 +43,9 @@ import { MyAds } from './buyandsell/pages/MyAds';
 import { AdvertsProvider } from './context/adverts.context';
 import { AdDetails } from './buyandsell/pages/AdDetails';
 import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
+import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSettings';
+import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
+
 
 function App() {
  return(
@@ -89,11 +92,12 @@ function App() {
    <PrivateRoute path="/addFacility" component={AddFacility}/>
    <PrivateRoute path="/profile" component={ProfileSetting}/>
    <PrivateRoute path="/samplePage" component={SamplePage}/>
-  
+   <PrivateRoute path="/apartmentprofile" component={ResidentApartmentSettings}/>
+
      <PrivateRoute path="/myads" component={MyAds}/>
      <PrivateRoute path="/adDetails" component={AdDetails}/>
      <PrivateRoute path="/updateAdDetails"  component={UpdateAdDetails}/>
-
+     <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
     
  </Switch>
  </ApartmentProvider>

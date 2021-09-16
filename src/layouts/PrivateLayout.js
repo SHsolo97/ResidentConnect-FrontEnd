@@ -107,27 +107,12 @@ const PrivateLayout = ({ children }) => {
   const {community,communityList} = useCommunity();
   const {apartment,apartmentList} = useApartment();
   const {user} = useProfile();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const openApartmentMenu = Boolean(anchorEl);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const communitynames= new Map();
   
-  const handleApartmentMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleSwitchProfile=(event)=>{
-    console.log(event.target.id);
-    event.preventDefault();
-    event.stopPropagation();
-
-
-  }
-  const handleApartmentClose = () => {
-    setAnchorEl(null);
-  };
 
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -144,7 +129,13 @@ const PrivateLayout = ({ children }) => {
       setOpen(false);
     };
     const goToAparmentSettings=()=>{
+
       console.log('Goto Aparment Settings');
+      if(user.type=='resident')
+        history.push('/apartmentprofile');
+      if(user.type=='admin')
+        history.push('/updateCommunityProfile');
+
     }
   
     const signOut=()=>{
@@ -193,56 +184,9 @@ const PrivateLayout = ({ children }) => {
 
             <div className={classes.sectionDesktop}>
             <IconButton color="inherit">
-              <ApartmentIcon  onClick={handleApartmentMenu}/>
+              <ApartmentIcon  onClick={goToAparmentSettings}/>
             </IconButton >
-            <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={openApartmentMenu}
-                onClose={handleApartmentClose}
-              >
-                  {user.type==='resident'?
-                 
-                 <div>
-                 {apartmentList.map((apartment) => {    
-                      
-                        return (<div>   
-                          <InputBase  
-                          inputProps={{ 'aria-label': 'naked' }}   
-                             id = {apartment.communityid}  defaultValue={apartment.communityid} />
-                        <MenuItem key={apartment.id}    onClick={handleSwitchProfile}  value={apartment.id}>
-                        <InputBase  
-                   inputProps={{ 'aria-label': 'naked' }}   onClick={handleSwitchProfile}   id = {apartment.id} defaultValue = {getApartmentid(apartment.block , apartment.floor, apartment.aptnum)}/>
-                        
-                  </MenuItem>
-                        </div>)
-                 }
-                   )
-                }
-                   </div>
-              
-              
-                : 
-              
-                 <div>
-                 {communityList.map((community) => { 
-                                  return <MenuItem onClick={goToAparmentSettings}>{community.name}</MenuItem>
-   
-                 })}
-                </div>  
-
-             
-                }
-              </Menu>
+            
             <IconButton color="inherit" onClick={openProfileSettings}>
               <AccountCircle />
             </IconButton >
@@ -280,8 +224,7 @@ const PrivateLayout = ({ children }) => {
           </div>
           <Divider />
           <List>
-          <CustumMenuItem role='admin'>Dashboard</CustumMenuItem>
-         
+          <CustumMenuItem role='admin'>Dashboard</CustumMenuItem>  
            
            <CustumMenuItem role='admin'>Facilties</CustumMenuItem>
            <CustumMenuItem role='admin'>Events</CustumMenuItem>
@@ -290,8 +233,7 @@ const PrivateLayout = ({ children }) => {
            <CustumMenuItem role='admin'>Classifieds</CustumMenuItem>
            <CustumMenuItem role='admin'>Polling</CustumMenuItem>
            <CustumMenuItem role='admin'>Payments</CustumMenuItem>
-           <CustumMenuItem role='admin'>Car Pooling</CustumMenuItem>
-         
+           <CustumMenuItem role='admin'>Car Pooling</CustumMenuItem>         
            <CustumMenuItem role='admin'>Visitors</CustumMenuItem>
            <CustumMenuItem role='admin'>Maintenance</CustumMenuItem>
            <CustumMenuItem role='admin'>Contacts</CustumMenuItem>

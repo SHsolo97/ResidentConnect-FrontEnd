@@ -11,12 +11,7 @@ import { ImageList } from '@material-ui/core'
 import { ImageListItem } from '@material-ui/core'
 import PrimaryButton from '../../shared/components/PrimaryButton'
 import { useProfile } from '../../context/profile.context'
-import axios from 'axios';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
+
 import { useModelState } from '../../misc/custom-hooks'
 import { DeleteAdvertModal } from '../components/DeleteAdvertModal'
 import { useHistory } from 'react-router'
