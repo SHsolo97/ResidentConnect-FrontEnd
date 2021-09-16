@@ -16,21 +16,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
 import ApartmentIcon from '@material-ui/icons/Apartment';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import PersonIcon from '@material-ui/icons/Person';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import PollIcon from '@material-ui/icons/Poll';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import PaymentIcon from '@material-ui/icons/Payment';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
-import ContactsIcon from '@material-ui/icons/Contacts';
-import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
+
 import { CustumMenuItem } from './MenuItem';
 import { useHistory } from 'react-router-dom';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -44,7 +32,7 @@ import { useProfile } from '../context/profile.context';
 import Menu from '@material-ui/core/Menu';
 import { useEffect } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Button, Input, InputBase, TextField } from '@material-ui/core';
+import {  InputBase} from '@material-ui/core';
 import logo from '../images/home/logo.png';
 
 const drawerWidth = 240;
@@ -155,7 +143,9 @@ const PrivateLayout = ({ children }) => {
     const handleDrawerClose = () => {
       setOpen(false);
     };
-
+    const goToAparmentSettings=()=>{
+      console.log('Goto Aparment Settings');
+    }
   
     const signOut=()=>{
       auth.signOut().then(() => {
@@ -220,7 +210,7 @@ const PrivateLayout = ({ children }) => {
                 open={openApartmentMenu}
                 onClose={handleApartmentClose}
               >
-                {user.type==='resident'?
+                  {user.type==='resident'?
                  
                  <div>
                  {apartmentList.map((apartment) => {    
@@ -242,12 +232,15 @@ const PrivateLayout = ({ children }) => {
               
               
                 : 
-                <>
-                <div>Community</div>
-                <MenuItem onClick={handleApartmentClose}>Community id</MenuItem>
-                <div>Apartment</div>
-                <MenuItem onClick={handleApartmentClose}>Aparment id </MenuItem>
-                </>
+              
+                 <div>
+                 {communityList.map((community) => { 
+                                  return <MenuItem onClick={goToAparmentSettings}>{community.name}</MenuItem>
+   
+                 })}
+                </div>  
+
+             
                 }
               </Menu>
             <IconButton color="inherit" onClick={openProfileSettings}>

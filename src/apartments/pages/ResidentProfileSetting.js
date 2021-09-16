@@ -250,7 +250,7 @@ return (
   <form onSubmit={handleSubmit}>
     <PageHeader>Profile</PageHeader>
     <div className={classes.avatar}>
-       <ProfileImageUpload addFile={addFile} id="classifieldIamge" errorText=""/>
+       <ProfileImageUpload previewUrl={null} addFile={addFile} id="classifieldIamge" errorText=""/>
        {avatarImage===null? <div>upload image</div>:null}
        </div>
     <Box className={classes.root}>

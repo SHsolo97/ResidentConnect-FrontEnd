@@ -5,17 +5,10 @@ import './ProfileImageUpload.css';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { makeStyles } from '@material-ui/core/styles';
 import { Fullscreen } from '@material-ui/icons';
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    width: theme.spacing(25),
-    height: theme.spacing(25),
-  },
-}));
 
 const ProfileImageUpload = props => {
-  const classes = useStyles();
  const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState();
+  const [previewUrl, setPreviewUrl] = useState(props.previewUrl);
   const [isValid, setIsValid] = useState(false);
 
   const filePickerRef = useRef();
@@ -52,7 +45,7 @@ const ProfileImageUpload = props => {
   };
 
   return (
-    <div className="form-control" >
+    <div  >
       <input
         
         id={props.id}

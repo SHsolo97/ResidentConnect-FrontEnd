@@ -8,7 +8,7 @@ import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router';
 import { Paper } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { produce } from 'immer';
+import { produce, setUseProxies } from 'immer';
 import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
@@ -21,6 +21,8 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { FormControlLabel } from '@material-ui/core';
 import userAPI from '../../misc/axios-calls/userAPI';
+import { Progress } from '../../shared/components/Progress';
+import ProfileImageUpload from '../../apartments/components/ProfileImageUpload';
 
 const useStyles = makeStyles((theme) => ({
 root: {
@@ -54,7 +56,7 @@ marginRight: theme.spacing(1),
 width: '15ch',
 },
 avatar: {
-  marginLeft: theme.spacing(70),
+  marginLeft: theme.spacing(35),
   marginRight: theme.spacing(1),
 },
 
@@ -67,8 +69,9 @@ const {user}=useProfile();
 
 const classes = useStyles();
 const history=useHistory();
-const [formInput,setFormInput]=React.useState(user);
-console.log(formInput);
+const [formInput,setFormInput]=React.useState(null);
+const [isLoading,setIsLoading]=React.useState(true)
+
 const handleInput = evt => {
 const name = evt.target.name;
 const newValue = evt.target.value;
@@ -164,18 +167,46 @@ break;
 
 }
 }
+const getUser=async()=>{
+  console.log(user);
+  var apiBaseUrl = `/users/${user._id}`  
+  await userAPI.get(apiBaseUrl,formInput )
+       .then(function (response) {
+           if (response.status === 200)
 
-const editUser=async()=>{
+          {
+            console.log(response.data);
+            setFormInput(response.data);
+            setIsLoading(false);
+             
+            
+          }
+       })
+       .catch(function (error) {
+           console.log(error);
+           setIsLoading(false);
+
+            
+       });
+}
+React.useEffect(() => {
+  getUser();
   
-  var apiBaseUrl = `/users/${user.id}`  
-  await userAPI.put(apiBaseUrl,formInput )
+}, [])
+const editUser=async(profileData)=>{
+  
+  var apiBaseUrl = `/users/${user._id}`  
+  await userAPI.put(apiBaseUrl,profileData )
        .then(function (response) {
            if (response.status === 200)
 
           {
               console.log(response.data);
              
-              history.push('/apartmentDetailsR');
+              if(user.type==='admin')
+              history.push('/dashboardA')
+            else
+              history.push('/dashboardR')
              
             
           }
@@ -190,15 +221,24 @@ const handleSubmit=async (event)=>{
 event.preventDefault();
 
 //history.push('/apartmentDetailsR');
+console.log()
+const profileData={}
+if(avatarImage!=null)
+{
 const fileList=[avatarImage];
 const path=`${user.id}/avatars`;
 const imagefiles=await uploadImagesToFireStorage(path,fileList);
-setFormInput(produce(formInput, draft => {
-  draft.avatar = imagefiles[0].url
-}));
-console.log(formInput);
+profileData['avatar']=imagefiles[0].url
 
-editUser();
+
+}
+
+profileData['firstname']= formInput.firstname;
+profileData['lastname']=formInput.lastname;
+profileData['bloodgroup']=formInput.bloodgroup;
+profileData['phone']=formInput.phone;
+profileData['emergencycontacts']=formInput.emergencycontacts;
+editUser(profileData);
 
 }
 const goToDashboard=(event)=>{
@@ -211,14 +251,18 @@ const addFile=(filetoUpload)=>{
  setAvatarImage(filetoUpload);
 
 }
-return (
+const renderUserData=()=>{
+  console.log('inside render user data');
+  return(
+    <form onSubmit={handleSubmit}>
 
-<>
-  <form onSubmit={handleSubmit}>
-    <PageHeader>Profile</PageHeader>
     <div className={classes.avatar}>
-          {user.avatar && <Avatar src={user.avatar} alt="Preview" style={{ height: '150px', width: '150px' }}   />}
-          {!user.avatar && <AddAPhotoIcon fontSize="large"/> }
+     
+          <div className={classes.avatar}>
+          <ProfileImageUpload previewUrl={formInput.avatar } addFile={addFile} id="classifieldIamge" errorText=""/>
+          {avatarImage===null? <div>upload image</div>:null}
+          </div>
+           
        </div>
     <Box className={classes.root}>
 
@@ -285,6 +329,20 @@ return (
     <PrimaryButton onClick={goToDashboard}> Cancel </PrimaryButton>
 
   </form>
+  )
+}
+return (
+
+<>
+    <PageHeader>Profile</PageHeader>
+    {formInput===null ?
+     <Progress/>:
+     renderUserData()
+    
+    }
+
+
+   
 
 </>
 )

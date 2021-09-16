@@ -20,7 +20,7 @@ return <FormHelperText>{touched && error}</FormHelperText>
 export const renderTextField = (
 { input, label, meta: { touched, error,invalid }, ...custom },
 ) => (
-<TextField helperText={touched && error} error={touched && invalid} {...input} {...custom} />
+<TextField label ={label} helperText={touched && error} error={touched && invalid} {...input} {...custom} />
 );
 
 export const renderRatingField=({input,...rest})=>(

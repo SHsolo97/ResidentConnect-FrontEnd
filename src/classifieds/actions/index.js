@@ -1,9 +1,7 @@
-import { useProfile } from '../../context/profile.context';
 import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
 import userAPI from '../../misc/axios-calls/userAPI';
 import _ from 'lodash';
 
-import axios from 'axios';
 
 export const fetchClassifieds = (communityid) => async dispatch => {
 
