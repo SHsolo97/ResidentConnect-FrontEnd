@@ -1,84 +1,38 @@
 import React from 'react'
-import {TextField,Button} from '@material-ui/core';
-import { useState } from 'react';
-import axios from "axios";
-import { Label } from '@material-ui/icons';
+import { useHistory } from 'react-router';
+
+import { PageHeader } from '../../shared/components/PageHeader';
+import PrimaryButton from '../../shared/components/PrimaryButton';
+import AdminPendingPayments  from '../components/AdminPendingPayments';
+import { AdminPaymentsOverview } from '../components/AdminPaymentsOverview';
+import CreatePayment from './CreatePayment'
+import reducers from '../reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const paymentstore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 const AdminPayments = () => {
-    const [emails,setEmails]=useState(null);
-    const [subject,setSubject]=useState(null);
-    const [amount,setAmount]=useState(0);
-    const handleSubmit=(e)=>{
-     
-   
-      // eslint-disable-next-line no-use-before-define
-     
-    
-      console.log(`amount : ${amount}`);
-      console.log(`emails : ${emails}`); 
-      console.log(`subject : ${subject}`); 
-      var apiBaseUrl = "http://716504ba-default-ingressrc-d980-1401639027.ap-south-1.elb.amazonaws.com/api/payments/";
-       
-        
-        var emaildata = {
-            "amt": amount,
-            "recipient": emails,
-            "subject":subject
-           
-        }
-    
-        axios.post(apiBaseUrl + 'create', emaildata)
-            .then(function (response) {
-                console.log(response);
-                if (response.status === 200) {
-                    //alert("Registration successfull.Login Again");
-                    console.log("mails sent successfull....");
-                  
+  
+    const history=useHistory();
 
-                }
-               
-                else {
-                    console.log("Error on email sent");
-                
-                }
-
-            })
-           
-            .catch(function (error) {
-             
-                console.log(error);
-            });
-        
-      
-
-               
-      e.preventDefault();
-      e.stopPropagation();
+    const gotoPaymentPage=()=>{
+        history.push('/initiatePayment');
     }
 
   return (
       <div>
-          <h2>Admin Payments Overview</h2> 
-          <form>   
-    
-            <div>
-              
-              <TextField label="emails" id="emails" value={emails}  onChange={(e)=>{setEmails(e.target.value)}} variant="outlined"/>
-              </div>
-              <div>
-              
-              <TextField label="amount" id="amount" value={amount}  onChange={(e)=>{setAmount(e.target.value)}} variant="outlined"/>
-              </div>
-              <div>
-              
-              <TextField label="subject" id="subject" value={subject}  onChange={(e)=>{setSubject(e.target.value)}} variant="outlined"/>
-              </div>
-             
-              <Button variant="contained" color="primary"  onClick={handleSubmit}>create Payment</Button>
-
-              </form>
-      </div>
-  )
+            <PageHeader>Payments Overview</PageHeader>
+            <PrimaryButton onClick={gotoPaymentPage}> Initiate Payment</PrimaryButton>
+            <Provider store={paymentstore}>
+            <AdminPaymentsOverview/>
+            <AdminPendingPayments/>
+            </Provider>
+        </div>
+  ) 
 
 }
 

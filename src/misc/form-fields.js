@@ -3,13 +3,29 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Rating from '@material-ui/lab/Rating';
-
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@material-ui/core/Select';
+import DatePicker from '@mui/lab/DatePicker';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText'
 
+export const renderDateField=({ input, value,label, variant,meta: { touched, error,invalid }, ...custom },
+    ) => (
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker {...custom} 
+        label={label}
+        value={input.value}
+        onChange={(value)=>input.onChange(value)}
+        
+              renderInput={(value) => <TextField {...value} 
+              helperText={touched && error} error={touched && invalid}  variant={variant} />}
+            />
+            </LocalizationProvider>
+             
+    );
 export const renderFromHelper = ({ touched, error }) => {
 if (!(touched && error)) {
 return

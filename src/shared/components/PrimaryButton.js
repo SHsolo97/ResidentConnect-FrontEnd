@@ -11,7 +11,7 @@ export const BootstrapButton = withStyles({
     padding: '6px 12px',
     border: '1px solid',
     lineHeight: 1.5,
-    backgroundColor: '#0063cc',
+    backgroundColor: '#FF9800',
     borderColor: '#0063cc',
     fontFamily: [
       '-apple-system',
@@ -26,7 +26,7 @@ export const BootstrapButton = withStyles({
       '"Segoe UI Symbol"',
     ].join(','),
     '&:hover': {
-      backgroundColor: '#0069d9',
+      backgroundColor: '#FF9800',
       borderColor: '#0062cc',
       boxShadow: 'none',
     },

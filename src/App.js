@@ -45,6 +45,7 @@ import { AdDetails } from './buyandsell/pages/AdDetails';
 import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
 import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSettings';
 import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
+import {InitiatePayment}  from './payments/pages/InitiatePayment';
 
 
 function App() {
@@ -98,7 +99,9 @@ function App() {
      <PrivateRoute path="/adDetails" component={AdDetails}/>
      <PrivateRoute path="/updateAdDetails"  component={UpdateAdDetails}/>
      <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
-    
+     <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
+
+     
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>
