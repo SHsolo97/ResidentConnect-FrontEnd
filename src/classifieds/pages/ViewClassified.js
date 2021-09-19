@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { ClassifiedDetails } from '../components/ClassifiedDetails';
-import { ClassifiedReviews } from '../components/ClassifiedReviews';
+import  {ClassifiedReviews}  from '../components/ClassifiedReviews';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';

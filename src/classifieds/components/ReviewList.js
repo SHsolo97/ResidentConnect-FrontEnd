@@ -9,7 +9,16 @@ class ReviewList extends React.Component {
      
       this.props.fetchCommentsAndUsers(this.props.classifiedid);
     }
-
+    componentDidUpdate(prevProps, prevState) {
+      console.log(this.props.newReview);
+      if (prevProps.newReview !== this.props.newReview) {
+        if(this.props.newReview===true)
+        {
+        this.props.fetchCommentsAndUsers(this.props.newReview);
+        console.log(this.props.comments);
+        }
+      }
+    }
   renderList() {
     return this.props.comments.map((comment) => {
       return ( <div style={{paddingBottom:'20px'}}>

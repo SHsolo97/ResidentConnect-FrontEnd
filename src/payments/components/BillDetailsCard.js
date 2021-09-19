@@ -29,7 +29,7 @@ export const BillDetailsCard = ({...props}) => {
            </Grid>
            <Grid  style={{ paddingTop:"50px"}} item xs={6}>
            <Typography   variant="body2" component="span">
-           <span style={{fontWeight:'bold'}}> Apartment: </span> {props.bill.aptname}         
+           <span style={{fontWeight:'bold'}}> Apartment: </span> {props.bill.aptnum}         
         </Typography>
         <br/>    <br/>    <br/>
         <Typography variant="body2" component="span">

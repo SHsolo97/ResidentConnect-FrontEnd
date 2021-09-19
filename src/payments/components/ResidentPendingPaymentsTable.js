@@ -17,7 +17,7 @@ import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 import { Button } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {

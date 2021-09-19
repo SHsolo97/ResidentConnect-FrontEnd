@@ -83,12 +83,14 @@ export const ApartmentProvider=({children})=>{
         const authUnsub=auth.onAuthStateChanged(authObj=>{
             if(authObj)
             {
+                console.log(user);
                 if(user!=null && user.type=='resident'  && user.apartments!=null)
                 setApartmentDetail(user.apartments)              
                
             }
             else
             {
+                console.log(user);
                 setApartmentDetail([]);               
 
             }
@@ -97,7 +99,7 @@ export const ApartmentProvider=({children})=>{
         return ()=>{
             authUnsub();
         }
-    },[])
+    },[user])
 
     return (
     <ApartmentContext.Provider value={{apartment,setApartment,apartmentList}}> {children} </ApartmentContext.Provider>);

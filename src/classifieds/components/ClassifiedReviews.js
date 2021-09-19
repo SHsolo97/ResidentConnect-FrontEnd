@@ -1,17 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import PrimaryButton from '../../shared/components/PrimaryButton'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
 import ReviewList from './ReviewList';
 import {useModelState} from '../../misc/custom-hooks';
-import AddReviewModel from './AddReviewModel';
+import {AddReview} from './AddReview';
 
-export const ClassifiedReviews = ({classified}) => {
-  const { isOpen, open, close } = useModelState();
-  const createReview=()=>{
-    open();
-  }
+
+ export const ClassifiedReviews = ({classified}) => {
+  console.log(classified);
+  const [isRender,setIsRender]=React.useState(false);
 const renderAverageRatingCard=()=>
 {
 return(
@@ -31,6 +30,11 @@ return(
     </Grid>
 )
 }
+
+const newReview=(data)=>
+{
+  setIsRender(true);
+}
 return (
 <div>
   <Grid container spacing={3}>
@@ -43,10 +47,9 @@ return (
     </Grid>
   </Grid>
 
-  <PrimaryButton onClick={createReview}> Write An Review</PrimaryButton>
-  {isOpen &&
-       <AddReviewModel classified={classified} handleClose={close} open={open} />}
-  <ReviewList classifiedid={classified._id}/>
+
+  <AddReview newReview={newReview} classified={classified} />
+  <ReviewList newReview ={isRender} classifiedid={classified._id}/>
 </div>
 )
-}
+  }

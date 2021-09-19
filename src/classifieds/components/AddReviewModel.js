@@ -94,6 +94,7 @@ const AddReviewModel = (props) => {
           setAlertMessage("comment is added");
           setAlertType("success");
           openAlert();
+          props.setNewReview(true);
         }
       })
       .catch(function (error) {
