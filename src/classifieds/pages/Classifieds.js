@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import {TextField,Button} from '@material-ui/core';
 
 import { PageHeader } from '../../shared/components/PageHeader'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {useModelState} from '../../misc/custom-hooks';
 

@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import axios from 'axios';
 import {TextField,Button} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import Link from '@material-ui/core/Link';
 import { useModelState } from '../../misc/custom-hooks';

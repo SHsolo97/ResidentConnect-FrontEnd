@@ -16,7 +16,7 @@ import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 

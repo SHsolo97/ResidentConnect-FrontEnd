@@ -166,7 +166,7 @@ export const ProfileProvider=({children})=>{
     },[])
 
     return (
-    <ProfileContext.Provider value={{isLoading,user}}> {children} </ProfileContext.Provider>);
+    <ProfileContext.Provider value={{isLoading,user,setUser}}> {children} </ProfileContext.Provider>);
 
 }
 

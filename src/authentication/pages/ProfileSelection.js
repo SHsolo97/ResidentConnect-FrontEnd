@@ -2,7 +2,9 @@ import React from 'react'
 import { useProfile } from '../../context/profile.context'
 import {Button} from '@material-ui/core';
 import { PageHeader } from '../../shared/components/PageHeader';
-import { useHistory } from 'react-router';
+import { Progress } from '../../shared/components/Progress';
+
+import { useHistory } from 'react-router-dom';
 import { useCommunity } from '../../context/community.context';
 import { useApartment } from '../../context/apartment.context';
 import PrimaryButton from '../../shared/components/PrimaryButton';
@@ -18,6 +20,8 @@ import Grid from '@material-ui/core/Grid';
 
 export const ProfileSelection = () => {
 const {user}=useProfile();
+const [isLoading,setIsLoading]=React.useState(true);
+console.log(user);
 const {community,communityList} = useCommunity();
 const {apartment,apartmentList} = useApartment();
 console.log(community);
@@ -26,22 +30,28 @@ console.log(apartment);
 console.log(apartmentList);
 const history=useHistory();
 const handleSubmit=()=>{
+ 
 if(user.type==='admin')
 
 if(user.profilecompletion)
 history.push('/dashboardA');
 else
-history.push('settingsA');
+history.push('/settingsA');
 else
 if(user.profilecompletion)
 history.push('/dashboardR');
 else
-history.push('settingsR');
+history.push('/settingsR');
 
 }
 
 return (
 <div>
+  {user===null?
+  <Progress/>
+  :
+  null
+  }
   <PageHeader> Select Profile </PageHeader>
   <RadioGroup row name="community">
 

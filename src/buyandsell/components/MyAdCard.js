@@ -15,7 +15,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import Divider from '@material-ui/core/Divider';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { AdDetails } from '../pages/AdDetails';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {

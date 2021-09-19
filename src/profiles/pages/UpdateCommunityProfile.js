@@ -11,7 +11,7 @@ import { ApartmentModels } from '../../apartments/pages/ApartmentModels';
 import { ApartmentBlocks } from '../../apartments/pages/ApartmentBlocks';
 import { PageHeader } from '../../shared/components/PageHeader'
 import { ApartmentServices } from '../../apartments/pages/ApartmentServices';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import { UpdateApartmentServices } from '../../apartments/pages/UpdateApartmentServices';

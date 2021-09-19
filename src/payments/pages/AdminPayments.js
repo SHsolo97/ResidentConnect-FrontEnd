@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { PageHeader } from '../../shared/components/PageHeader';
 import PrimaryButton from '../../shared/components/PrimaryButton';

@@ -7,7 +7,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from '@material-ui/core';
 import PhoneIcon from '@material-ui/icons/Phone';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
 root: {
 flexGrow: 1,

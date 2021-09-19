@@ -5,7 +5,7 @@ import { SectionHeader } from '../../shared/components/SectionHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { produce } from 'immer';
@@ -64,7 +64,7 @@ avatar: {
 const ResidentProfileSetting = () => {
   
 const [avatarImage,setAvatarImage]=React.useState();
-const {user}=useProfile();
+const {user,setUser}=useProfile();
 const communityid=user.communities[0];
 const classes = useStyles();
 const history=useHistory();
@@ -203,6 +203,7 @@ const editUser=async(profileData)=>{
 
           {
               console.log(response.data);
+              setUser(response.data);
               if (user.type==='resident')              
                 history.push('/apartmentDetailsR');
               else

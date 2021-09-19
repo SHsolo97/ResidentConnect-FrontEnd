@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Announcements from './announcements/pages/Announcements';
 import {Community} from './apartments/pages/Community';
 import Registration from './authentication/pages/Registration';
@@ -46,6 +46,7 @@ import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
 import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSettings';
 import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
 import {InitiatePayment}  from './payments/pages/InitiatePayment';
+import { PayBill } from './payments/pages/PayBill';
 
 
 function App() {
@@ -100,8 +101,8 @@ function App() {
      <PrivateRoute path="/updateAdDetails"  component={UpdateAdDetails}/>
      <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
      <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
-
-     
+     <PrivateRoute path="/payBill" component={PayBill} />
+    
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>

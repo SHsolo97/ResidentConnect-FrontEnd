@@ -62,6 +62,6 @@ return (
 return <div>{renderForm()}</div>;
 };
 export default reduxForm({
-form: "createPaymentForm", // a unique identifier for this form
+form: "cardForm", // a unique identifier for this form
 })(CreatePaymentForm);
 

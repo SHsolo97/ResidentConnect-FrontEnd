@@ -14,7 +14,7 @@ import { useProfile } from '../../context/profile.context'
 
 import { useModelState } from '../../misc/custom-hooks'
 import { DeleteAdvertModal } from '../components/DeleteAdvertModal'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { ImageCarousel } from '../components/ImageCarousel'
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 import userAPI from '../../misc/axios-calls/userAPI';

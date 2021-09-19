@@ -5,7 +5,7 @@ import { SectionHeader } from '../../shared/components/SectionHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { produce, setUseProxies } from 'immer';
@@ -65,11 +65,11 @@ avatar: {
 const ProfileSetting = () => {
   
 const [avatarImage,setAvatarImage]=React.useState();
-const {user}=useProfile();
+const {user,setUser}=useProfile();
 
 const classes = useStyles();
 const history=useHistory();
-const [formInput,setFormInput]=React.useState(null);
+const [formInput,setFormInput]=React.useState(user);
 const [isLoading,setIsLoading]=React.useState(true)
 
 const handleInput = evt => {
@@ -167,32 +167,32 @@ break;
 
 }
 }
-const getUser=async()=>{
-  console.log(user);
-  var apiBaseUrl = `/users/${user._id}`  
-  await userAPI.get(apiBaseUrl,formInput )
-       .then(function (response) {
-           if (response.status === 200)
+// const getUser=async()=>{
+//   console.log(user);
+//   var apiBaseUrl = `/users/${user._id}`  
+//   await userAPI.get(apiBaseUrl,formInput )
+//        .then(function (response) {
+//            if (response.status === 200)
 
-          {
-            console.log(response.data);
-            setFormInput(response.data);
-            setIsLoading(false);
+//           {
+//             console.log(response.data);
+//             setFormInput(response.data);
+//             setIsLoading(false);
              
             
-          }
-       })
-       .catch(function (error) {
-           console.log(error);
-           setIsLoading(false);
+//           }
+//        })
+//        .catch(function (error) {
+//            console.log(error);
+//            setIsLoading(false);
 
             
-       });
-}
-React.useEffect(() => {
-  getUser();
+//        });
+// }
+// React.useEffect(() => {
+//   getUser();
   
-}, [])
+// }, [])
 const editUser=async(profileData)=>{
   
   var apiBaseUrl = `/users/${user._id}`  
@@ -201,8 +201,9 @@ const editUser=async(profileData)=>{
            if (response.status === 200)
 
           {
-              console.log(response.data);
-             
+              const updatedUserDetails=response.data
+              console.log(updatedUserDetails);
+              setUser(updatedUserDetails)
               if(user.type==='admin')
               history.push('/dashboardA')
             else

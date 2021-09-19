@@ -1,6 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router'
-import { Loader } from 'rsuite';
+
 import ChatBottom from '../../components/chatwindow/bottom';
 import Messages from '../../components/chatwindow/messages';
 import ChatTop from '../../components/chatwindow/top';
@@ -11,7 +10,6 @@ import { transformToArr } from '../../../misc/helpers';
 import { Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
-import { AudiotrackSharp } from '@material-ui/icons';
 
 const Chat = ({children}) => {
 //const { chatId } = useParams();

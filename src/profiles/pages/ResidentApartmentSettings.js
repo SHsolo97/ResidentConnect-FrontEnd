@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../shared/components/PageHeader'
 import PrimaryButton from '../../shared/components/PrimaryButton'
 import { makeStyles } from  '@material-ui/core/styles';
@@ -49,7 +49,7 @@ radioGroup:{
 export const ResidentApartmentSettings = () => {
     const classes=useStyles();
     const history=useHistory();
-    const {user}=useProfile();
+    const {user,setUser}=useProfile();
     const communityid=user.communities[0];
     const apartmentid=user.apartments[0].apartmentid;
     const [status,setStatus]= React.useState(null);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Route } from 'react-router';
+import { Redirect,Route} from 'react-router-dom';
 import { useProfile } from '../context/profile.context';
 
 const SettingsRoute = ({ component: Component, ...rest }) => {

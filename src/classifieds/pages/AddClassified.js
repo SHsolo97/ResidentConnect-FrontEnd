@@ -15,7 +15,7 @@ import { PhoneList } from '../components/PhoneList';
 import ImageUpload from '../components/ImageUpload';
 import { storage } from '../../misc/firebase';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { getRequest } from '../../misc/http-hooks';
 import Grid from '@material-ui/core/Grid';

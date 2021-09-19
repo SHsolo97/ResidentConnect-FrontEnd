@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import './PrivateLayout.css'
 import Grid from '@material-ui/core/Grid';
 

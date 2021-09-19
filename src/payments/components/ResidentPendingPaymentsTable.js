@@ -17,6 +17,7 @@ import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -150,6 +151,7 @@ if (b[orderBy]
   }));
 
   export default function PendingPayments({...props}) {
+    const history=useHistory();
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('ID');
@@ -201,7 +203,11 @@ if (b[orderBy]
               <TableCell align="left">{row.dueat}</TableCell>
               <TableCell align="left">{row.status}</TableCell>
               <TableCell align="left">
-                 <Button href="#text-buttons" onClick={()=>console.log(row._id)} color="primary">Pay</Button> 
+                 <Button  onClick={()=>{
+                       history.push({
+                        pathname: '/payBill',
+                          state: { bill: row } });
+                 }} color="primary">Pay</Button> 
               </TableCell> 
 
               

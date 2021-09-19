@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { Avatar } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import TimeAgo from 'timeago-react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import ProfileAvatar from '../ProfileAvatar';
 import PrimaryButton from '../../../shared/components/PrimaryButton';
 
