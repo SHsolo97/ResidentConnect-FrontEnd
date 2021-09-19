@@ -3,6 +3,7 @@ import axios from "axios";
 import { KeyboardReturnOutlined } from "@material-ui/icons";
 import { auth, database, messaging } from '../misc/firebase';
 import firebase from 'firebase/app';
+import userAPI from '../misc/axios-calls/userAPI';
 
 export const isOfflineForDatabase = {
     state: 'offline',
@@ -83,7 +84,7 @@ export const ProfileProvider=({children})=>{
      */
     const setUserDetails=async (uid)=>
     {
-        var apiBaseUrl = `http://localhost:4002/api/users/search`;
+        var apiBaseUrl = `/users/search`;
         let userinfo=null;
         let searchquery=null;
        
@@ -92,7 +93,7 @@ export const ProfileProvider=({children})=>{
         let data=null
      
         console.log(searchquery);
-        await axios.post(apiBaseUrl,searchquery )
+        await userAPI.post(apiBaseUrl,searchquery )
              .then(function (response) {
                  if (response.status === 200)
                 {           

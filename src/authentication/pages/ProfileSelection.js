@@ -16,18 +16,20 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import communityAPI from '../../misc/axios-calls/communityAPI';
+import { useModelState } from "../../misc/custom-hooks";
+import { RegisterApartmentModel } from '../components/RegisterApartmentModel';
 
 
 export const ProfileSelection = () => {
 const {user}=useProfile();
+const { isOpen, open, close } = useModelState();
+
 const [isLoading,setIsLoading]=React.useState(true);
 console.log(user);
-const {community,communityList} = useCommunity();
-const {apartment,apartmentList} = useApartment();
-console.log(community);
-console.log(communityList);
-console.log(apartment);
-console.log(apartmentList);
+const {community,setCommunity,communityList} = useCommunity();
+const {apartment,setApartment,apartmentList} = useApartment();
+
 const history=useHistory();
 const handleSubmit=()=>{
  
@@ -44,21 +46,86 @@ else
 history.push('/settingsR');
 
 }
-
-return (
-<div>
-  {user===null?
-  <Progress/>
-  :
-  null
-  }
-  <PageHeader> Select Profile </PageHeader>
-  <RadioGroup row name="community">
+const getCommunityDetails=async (communityId)=>{
+  console.log(communityId);
+var apiBaseUrl = `/community/${communityId}`;
+let communityinfo=null;
 
 
-    <Grid container direction="column" justifyContent="space-around" alignItems="center">
-      { (user.type==='admin')
-      ? communityList.map((community)=>
+
+
+const data=await communityAPI.get(apiBaseUrl )
+    .then(function (response) {
+        if (response.status === 200)
+       {           
+         
+        communityinfo=response.data;
+           if(communityinfo!=null)
+           {
+        
+
+            const communitydata=communityinfo;
+            console.log(communitydata);
+            setCommunity(communitydata); 
+           }     
+          
+           
+          
+        
+        }
+  
+    })
+    .catch(function (error) {
+        console.log(error);
+      
+
+    });
+    return data;
+   }
+const getApartmentDetails=async (apartmentid)=>{
+  console.log(apartmentid);
+var apiBaseUrl = `/community/apartments`;
+let apartmentInfo=null;
+
+const searchQuery={
+  "_id":apartmentid
+}
+
+console.log(searchQuery);
+const data=await communityAPI.post(apiBaseUrl,searchQuery )
+    .then(function (response) {
+        if (response.status === 200)
+       {           
+         
+           apartmentInfo=response.data.apartments;
+           if(apartmentInfo.length>0)
+           {
+        
+            const apartmentdata=apartmentInfo[0];
+            
+            setApartment(apartmentdata);   
+               getCommunityDetails(apartmentdata.communityid)
+ 
+           }     
+          
+           
+         
+        
+        }
+  
+    })
+    .catch(function (error) {
+        console.log(error);
+       
+    });
+    return data;
+   }
+
+
+
+
+const renderCommunityList =()=>{
+  return communityList.map((community)=>
 
       <>
         <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
@@ -74,24 +141,91 @@ return (
           </Grid>
         </Paper>
       </>)
-      :
-      apartmentList.map((apartment)=>
 
-      <>
-        <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
-          <Grid container direction="row" justifyContent="flex-start" alignItems="center">
-          <Radio value={apartment.id} color="primary" />
+}
 
-        
-            <div>{apartment.aptnum}</div>
-            <br />
-          </Grid>
-        </Paper>
-      </>)
+const selectApartment=(event)=>{
+  const val=event.target.value;
+  console.log(val);
+  if(val==='add')
+  {
+    open();
+   
+  }
+  else
+  {
+    getApartmentDetails(val);
+    
+    
+  }
+
+}
+const renderApartmentList =()=>{
+
+ console.log(apartmentList);
+ return apartmentList.map((apartment) =>
+  <>
+    <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
+      <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+      <Radio value={apartment.id} color="primary" />
+
+    
+        <div>{apartment.aptnum}</div>
+        <br />
+      </Grid>
+    </Paper>
+  </>)
+
+}
+
+const renderAddApartment=()=>{
+  return (
+  <div>
+  <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
+  <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+  <Radio value="add"color="primary" />
+    <div>Add Apartment</div>
+    <br />
+  </Grid>
+  </Paper>
+  </div>);
+  }
+
+return (
+<div>
+  {user===null?
+  <Progress/>
+  :
+  null
+  }
+  <PageHeader> Select Profile </PageHeader>
+
+
+
+      { (user.type==='admin')
+      ? 
+      <RadioGroup row name="selectProfile" >
+            <Grid container direction="column" justifyContent="space-around" alignItems="center">
+           {renderCommunityList()}
+      </Grid>
+      </RadioGroup>
+      :    
+      <> 
+       <RadioGroup row name="selectProfile" onChange={selectApartment} >
+       <Grid container direction="column" justifyContent="space-around" alignItems="center">
+          {renderApartmentList()}
+        {renderAddApartment()}
+      </Grid>
+
+      </RadioGroup>
+
+      </>
       }
-    </Grid>
-  </RadioGroup>
-
+  
+ 
+  {isOpen &&
+    <RegisterApartmentModel open={open} handleClose={close} />
+  }
 
   <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
 

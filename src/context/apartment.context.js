@@ -3,6 +3,7 @@ import { auth } from "../misc/firebase";
 import axios from "axios";
 import { useProfile } from "./profile.context";
 import { useCommunity } from "./community.context";
+import communityAPI from '../misc/axios-calls/communityAPI';
 
 const ApartmentContext=createContext();
 export const ApartmentProvider=({children})=>{
@@ -16,13 +17,13 @@ export const ApartmentProvider=({children})=>{
 
    const getApartmentDetails=async (communityId,apartmentid)=>{
        console.log(apartmentid);
-    var apiBaseUrl = `http://localhost:4000/api/community/${communityId}/apartment/${apartmentid}`;
+    var apiBaseUrl = `/community/${communityId}/apartment/${apartmentid}`;
     let apartmentInfo=null;
 
   
  
   
-    const data=await axios.get(apiBaseUrl )
+    const data=await communityAPI.get(apiBaseUrl )
          .then(function (response) {
              if (response.status === 200)
             {           
@@ -98,8 +99,10 @@ export const ApartmentProvider=({children})=>{
         });
         return ()=>{
             authUnsub();
+            setApartmentList([]); 
         }
     },[user])
+
 
     return (
     <ApartmentContext.Provider value={{apartment,setApartment,apartmentList}}> {children} </ApartmentContext.Provider>);

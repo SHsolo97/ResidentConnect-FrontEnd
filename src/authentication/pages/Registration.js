@@ -242,7 +242,7 @@ const Registration = () => {
         <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">
         <PageHeader>Sign Up</PageHeader>
         <img src={lock}/>
-        <RadioGroup row aria-label="position" name="position" defaultValue="top" onChange={onChangeUserType}>        
+        <RadioGroup row aria-label="position" name="usertype" defaultValue="resident" onChange={onChangeUserType}>        
         <FormControlLabel id="radio_admin"   value="admin"  control={<Radio color="primary" />} label="Admin" />        
         <FormControlLabel id="radio_resident"    value="resident"  control={<Radio color="primary" />} label="Resident" />        
          </RadioGroup>

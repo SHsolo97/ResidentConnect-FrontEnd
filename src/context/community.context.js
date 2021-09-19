@@ -2,6 +2,7 @@ import React,{ useEffect,createContext,useContext,useState } from "react";
 import { auth } from "../misc/firebase";
 import axios from "axios";
 import { useProfile } from "./profile.context";
+import communityAPI from '../misc/axios-calls/communityAPI';
 
 const CommunityContext=createContext();
 export const CommunityProvider=({children})=>{
@@ -13,13 +14,13 @@ export const CommunityProvider=({children})=>{
 
    const getCommunityDetails=async (communityId)=>{
        console.log(communityId);
-    var apiBaseUrl = `http://localhost:4000/api/community/${communityId}`;
+    var apiBaseUrl = `/community/${communityId}`;
     let communityinfo=null;
 
   
  
   
-    const data=await axios.get(apiBaseUrl )
+    const data=await communityAPI.get(apiBaseUrl )
          .then(function (response) {
              if (response.status === 200)
             {           
@@ -29,13 +30,7 @@ export const CommunityProvider=({children})=>{
                 {
              
 
-                 const communitydata={
-                    id:communityinfo._id,
-                    name:communityinfo.name,
-                    builder:communityinfo.builder,
-                    address:communityinfo.address
-                  
-                }
+                 const communitydata=communityinfo;
                 return communitydata;  
                 }     
                
@@ -65,8 +60,7 @@ export const CommunityProvider=({children})=>{
 
         });
         console.log(communityList);
-        if(communityList!=null)
-               setCommunity(communityList[0]);
+     
     }
   
     useEffect(()=>{
@@ -89,7 +83,7 @@ export const CommunityProvider=({children})=>{
         return ()=>{
             authUnsub();
         }
-    },[user])
+    },[])
 
     return (
     <CommunityContext.Provider value={{community,setCommunity,communityList}}> {children} </CommunityContext.Provider>);

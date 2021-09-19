@@ -7,7 +7,6 @@ import { Box } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
 import {useApartment} from '../../context/apartment.context';
-import { useCommunity } from '../../context/community.context';
 import { TextField } from '@material-ui/core';
 import { FormControlLabel } from '@material-ui/core';
 import { RadioGroup } from '@material-ui/core';
@@ -21,6 +20,8 @@ import Icon from '@material-ui/core/Icon';
 import SendIcon from '@material-ui/icons/Send';
 import { useModelState } from '../../misc/custom-hooks';
 import { SendTokenModal } from '../components/SendTokenModal';
+import { useCommunity } from '../../context/community.context';
+
 const useStyles = makeStyles((theme) => ({
     root: {
     display: 'flex',
@@ -50,12 +51,13 @@ export const ResidentApartmentSettings = () => {
     const classes=useStyles();
     const history=useHistory();
     const {user,setUser}=useProfile();
-    const communityid=user.communities[0];
-    const apartmentid=user.apartments[0].apartmentid;
-    const [status,setStatus]= React.useState(null);
+    const {apartment,setApartment} = useApartment();
+    const {community,setCommunity} = useCommunity();
+
+    const apartmentid=apartment._id;
+    const communityid=apartment.communityid;
+    const [status,setStatus]= React.useState(apartment.status);
     const [isLoading,setIsLoading]=React.useState(true);
-    const [apartment,setApartment]=React.useState(null);
-    const [community,setCommunity]=React.useState(null);
     const { isOpen, open, close } = useModelState();
 
 const editApartment=async()=>{
@@ -68,7 +70,7 @@ const editApartment=async()=>{
   
             {
                 console.log(response.data);
-               
+                setApartment(response.data);
                 history.push('/dashboardR');
                
               
@@ -79,30 +81,7 @@ const editApartment=async()=>{
               
          });
   } 
-  const getApartment=async()=>{
-    console.log(status);
-    const data={status : status};
-    var apiBaseUrl = `/community/${communityid}/apartment/${apartmentid}`  
-    await communityAPI.get(apiBaseUrl,data )
-         .then(function (response) {
-             if (response.status === 200)
   
-            {
-                console.log(response.data);
-               
-                setApartment(response.data);
-               
-                setStatus(response.data.status);
-                setIsLoading(false);
-
-            }
-         })
-         .catch(function (error) {
-             console.log(error);
-             setIsLoading(false);
-
-         });
-  } 
   const getCommunity=async()=>{
     console.log(status);
     const data={status : status};
@@ -127,17 +106,7 @@ const editApartment=async()=>{
   } 
  
   React.useEffect(() => {
-    getCommunity().
-    then(response=>{
-        getApartment();
-
-    })
-
-  
-      return () => {
-          setApartment(null);
-          setCommunity(null);
-      }
+    getCommunity();
   }, [])
 
 
@@ -161,6 +130,10 @@ const editApartment=async()=>{
       </Button>
             </Grid>
             <TextField name="aptnum" label="Apartment Number" value={apartment.aptnum} className={classes.textField} placeholder="Apartment Number" fullWidth margin="normal"  aria-disabled />
+            <TextField name="communityname" label="Community Name" value={community.name} className={classes.textField} placeholder="Community Name" fullWidth margin="normal"  aria-disabled />
+
+            <TextField name="communitybuilder" label="Community Builder" value={community.builder} className={classes.textField} placeholder="Community Builder" fullWidth margin="normal"  aria-disabled />
+
             <TextField name="address" label="Address" value={community.address.addressline} className={classes.textField} placeholder="Address Line" fullWidth margin="normal"  aria-disabled />
             <TextField name="area" label="Area" value={community.address.area} className={classes.textField} placeholder="Area" fullWidth margin="normal"  aria-disabled />
             <TextField name="city" label="City" value={community.address.city} className={classes.textField} placeholder="City" fullWidth margin="normal"  aria-disabled />
