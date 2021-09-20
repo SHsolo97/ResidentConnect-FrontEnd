@@ -84,7 +84,7 @@ return (
 
 
   <AddReview newReview={newReview} />
-  <ReviewList newReview ={isRender} />
+  <ReviewList classifiedid={classifiedid} newReview ={isRender} />
 </div>
 )
   }
