@@ -18,6 +18,7 @@ import { database,auth } from '../../../misc/firebase';
 import firebase from 'firebase/app';
 import { transformArrWithId } from '../../../misc/helpers';
 import { useRoomsRequests } from '../../../context/roomsrequest.context';
+import { useCommunity } from '../../../context/community.context';
 
 const useStyles = makeStyles((theme)=>({
 root: {
@@ -31,7 +32,8 @@ height: theme.spacing(7),
 
 export const JoinRoomCard = ({room}) => {
   const {user}=useProfile();
-  const communityid=user.communities;
+  const {community}=useCommunity();
+  const communityid=community._id;
   const reqListRooms=useRoomsRequests();
   const classes = useStyles();
   const { createdAt, name, lastMessage,id } = room;

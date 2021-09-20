@@ -11,6 +11,7 @@ import { auth,database } from '../../../misc/firebase';
 import { transformToArr } from '../../../misc/helpers';
 import { JoinRoomCard } from './JoinRoomCard';
 import { useRoomsRequests } from '../../../context/roomsrequest.context';
+import { useCommunity } from '../../../context/community.context';
 
 const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
     const rooms = useRooms();
@@ -18,7 +19,9 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
     
     
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     //const c_rooms=rooms.find(room => room.communityid === communityid);
     const location = useLocation();
     const setCurrentRoom=(roomid)=>{

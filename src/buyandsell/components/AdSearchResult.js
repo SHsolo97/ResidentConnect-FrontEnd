@@ -4,11 +4,13 @@ import axios from 'axios';
 import SellItemCard from './SellItemCard';
 import { Box, Grid } from '@material-ui/core';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+import { useCommunity } from '../../context/community.context';
 
 
 export const AdSearchResult = ({ ...props }) => {
   const { user } = useProfile();
-  const communityid = user.communities[0];
+  const {community} = useCommunity();
+    const communityid=community._id;
   const [adverts, setAdverts] = useState([]);
   const getAds = async () => {
     const apiBaseUrl = `/adverts/search`

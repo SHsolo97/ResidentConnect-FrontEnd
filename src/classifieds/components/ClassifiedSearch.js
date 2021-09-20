@@ -9,10 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { SectionHeader } from '../../shared/components/SectionHeader';
 import { Paper } from '@material-ui/core';
+import { useCommunity } from '../../context/community.context';
 
 export const ClassifiedSearch = ({...props}) => {
     const {user} = useProfile();
-    const communityid=user.communities[0];
+    const {community} = useCommunity();
+    const communityid=community._id;
     const[category,setCategory]=useState('');
     const[subCategory,setSubCategory]=useState('');
 

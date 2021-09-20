@@ -167,32 +167,7 @@ break;
 
 }
 }
-// const getUser=async()=>{
-//   console.log(user);
-//   var apiBaseUrl = `/users/${user._id}`  
-//   await userAPI.get(apiBaseUrl,formInput )
-//        .then(function (response) {
-//            if (response.status === 200)
 
-//           {
-//             console.log(response.data);
-//             setFormInput(response.data);
-//             setIsLoading(false);
-             
-            
-//           }
-//        })
-//        .catch(function (error) {
-//            console.log(error);
-//            setIsLoading(false);
-
-            
-//        });
-// }
-// React.useEffect(() => {
-//   getUser();
-  
-// }, [])
 const editUser=async(profileData)=>{
   
   var apiBaseUrl = `/users/${user._id}`  

@@ -19,6 +19,7 @@ import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+import { useCommunity } from '../../context/community.context';
 
 const CustomTextField = withStyles({
     root: {
@@ -67,8 +68,8 @@ export const UpdateAdDetails = ({...props}) => {
     const classes = useStyles();
     const history=useHistory();
     const {user}=useProfile();
-    const communityid = user.communities[0];
-
+    const {community}=useCommunity();
+    const communityid = community._id;
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
     const [advert,setAdvert]=useState(currentAdvert);

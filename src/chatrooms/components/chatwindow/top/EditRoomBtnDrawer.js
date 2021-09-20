@@ -17,6 +17,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Dialog } from '@material-ui/core';
 import { useProfile } from '../../../../context/profile.context';
+import { useCommunity } from '../../../../context/community.context';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,7 +44,9 @@ const EditRoomBtnDrawer = () => {
     const formRef = useRef();
     const chatId = useCurrentRoom(v => v.id);
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     console.log(chatId);
     //const { chatId } = useParams();
     //const isMobile = useMediaQuery(`(max-width:992px)`);

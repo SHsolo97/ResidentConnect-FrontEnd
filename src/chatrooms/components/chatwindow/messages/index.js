@@ -7,6 +7,7 @@ import { transformArrWithId, groupBy} from '../../../../misc/helpers';
 import MessageItem from './MessageItem';
 import { Paper } from '@material-ui/core';
 import { useProfile } from '../../../../context/profile.context';
+import { useCommunity } from '../../../../context/community.context';
 const PAGE_SIZE = 50;
 const messageRef = database.ref('/messages');
 
@@ -22,8 +23,9 @@ const Messages = () => {
     const isChatEmpty = messages && messages.length === 0;
     const canShowMessages = messages && messages.length > 0;
    const {user}=useProfile();
-   const communityid=user.communities[0];
-
+  // const communityid=user.communities[0];
+   const {community}=useCommunity();
+   const communityid=community._id;
     const loadMessages = useCallback((limitToLast) => {
         messageRef.off();
         messageRef

@@ -5,9 +5,12 @@ import { useProfile } from "../../context/profile.context";
 import paymentsAPI from '../../misc/axios-calls/paymentsAPI';
 import { connect } from 'react-redux';
 import {fetchResidentsOfCommunity,fetchCommunityById,fetchApartmentsByCommunityid} from '../actions';
+import { useCommunity } from '../../context/community.context';
 export const CreatePayment = ({...props}) => {
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
    
     useEffect(() => {
         props.fetchResidentsOfCommunity(communityid);

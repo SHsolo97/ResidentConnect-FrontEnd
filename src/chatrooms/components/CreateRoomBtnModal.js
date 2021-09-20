@@ -12,6 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
 import Alert from '@material-ui/lab/Alert';
+import { useCommunity } from '../../context/community.context';
 
 const INITIAL_FORM = {
     name: '',
@@ -27,7 +28,9 @@ const CreateRoomBtnModal = () => {
     const [isLoading, setIsLoading] = useState(false);
     const formRef = useRef();
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     const onNameChange =(event)=>{
         
         setFormValue((prevState)=>{

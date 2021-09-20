@@ -20,6 +20,7 @@ import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { CustomTextField } from '../../shared/components/CustomTextField';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+import { useCommunity } from '../../context/community.context';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +45,8 @@ export const PostAd = () => {
     const classes = useStyles();
     const history=useHistory();
     const {user}=useProfile();
-    const communityid = user.communities[0];
+    const {community}=useCommunity();
+    const communityid = community._id;
     const files =[null,null,null,null,null,null,null,null,null,null,null,null];
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);

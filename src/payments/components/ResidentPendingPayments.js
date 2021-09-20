@@ -4,10 +4,13 @@ import { connect } from 'react-redux';
 import {fetchPaymentOfApartment} from '../actions';
 import { useProfile } from "../../context/profile.context";
 import ResidentPendingPaymentsTable from './ResidentPendingPaymentsTable';
+import { useApartment } from '../../context/apartment.context';
 
 export const ResidentPendingPayments = ({...props}) => {
    const {user} =useProfile();
-   const apartmentid=user.apartments[0].apartmentid;
+   const {apartment}=useApartment();
+   const apartmentid=apartment._id;
+   //const apartmentid=user.apartments[0].apartmentid;
     useEffect(() => {
         props.fetchPaymentOfApartment(apartmentid);
         console.log(props.payments);

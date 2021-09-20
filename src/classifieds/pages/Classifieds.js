@@ -18,6 +18,7 @@ import { useProfile } from '../../context/profile.context';
 import { ClassifiedSearch } from '../components/ClassifiedSearch';
 import { connect } from 'react-redux';
 import { fetchClassifieds } from '../actions';
+import { useCommunity } from '../../context/community.context';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
@@ -27,7 +28,9 @@ export const Classifieds = () => {
    
     const history=useHistory();
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    const {community}=useCommunity();
+    console.log(community);
+    const communityid=community._id;
     const [searchQuery,setSearchQuery]=React.useState({communityid});
     const goToClassified=()=>
     {

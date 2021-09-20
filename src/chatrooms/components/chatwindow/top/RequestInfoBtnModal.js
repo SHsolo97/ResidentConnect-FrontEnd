@@ -14,6 +14,7 @@ import { database } from '../../../../misc/firebase';
 import { transformArrWithId } from '../../../../misc/helpers';
 import RequestsTable from './RequestsTable';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { useCommunity } from '../../../../context/community.context';
 
 const RequestInfoBtnModal = () => {
     const { isOpen, open, close } = useModelState();
@@ -21,7 +22,9 @@ const RequestInfoBtnModal = () => {
     const name = useCurrentRoom(v => v.name);
     const id= useCurrentRoom(v => v.id);
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     const [requests,setRequests]=useState([]);
     useEffect(() => {
         const reqListRef = database.ref(`/requests/${communityid}/${id}`);
