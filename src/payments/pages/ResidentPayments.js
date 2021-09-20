@@ -6,6 +6,7 @@ import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import { BillCards } from '../components/BillCards';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -15,6 +16,7 @@ const ResidentPayments = () => {
     return (
         <div>
             <PageHeader>Payments Overview</PageHeader>
+            <BillCards/>
             <Provider store={paymentstore}>
             <ResidentPendingPayments/>
             </Provider>
