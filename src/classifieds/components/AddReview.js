@@ -18,7 +18,7 @@ import { calculateAverageStars } from "../../misc/helpers";
 import { useModelState } from "../../misc/custom-hooks";
 import AddReviewModel from "./AddReviewModel";
 
-export const AddReview = ({newReview,classified}) => {
+export const AddReview = ({newReview}) => {
   const { isOpen, open, close } = useModelState();
   const createReview=()=>{
     open();
@@ -30,7 +30,7 @@ export const AddReview = ({newReview,classified}) => {
     <div>
       <PrimaryButton onClick={createReview}> Write An Review</PrimaryButton>
         {isOpen &&
-       <AddReviewModel  setNewReview={setNewReview} classified={classified} handleClose={close} open={open} />}
+       <AddReviewModel  setNewReview={setNewReview}  handleClose={close} open={open} />}
       </div>
   )
 };

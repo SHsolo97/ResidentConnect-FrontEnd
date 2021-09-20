@@ -1,9 +1,11 @@
 import React from 'react'
+import { useCurrentClassified } from '../../context/currentclassified.context'
 
-export const ClassifiedDetails = ({classified}) => {
+export const ClassifiedDetails = () => {
+    const description= useCurrentClassified(v=>v.description);
     return (
         <div>
-            {classified.description}
+            {description}
             
         </div>
     )

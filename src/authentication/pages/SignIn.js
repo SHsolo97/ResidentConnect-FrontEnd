@@ -13,7 +13,6 @@ import firebase from 'firebase/app';
 import { auth,database } from '../../misc/firebase';
 import Link from '@material-ui/core/Link';
 import {Redirect} from 'react-router-dom';
-import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader';
 import { Box } from '@material-ui/core';
 import PrimaryButton from '../../shared/components/PrimaryButton';
@@ -39,7 +38,6 @@ const SignIn = () => {
   const [alertType,setAlertType]=useState(null);
 
 const classes=useStyles();
-const {user}=useProfile();
 const history = useHistory();
 const[email,setEmail]=useState(null);
 const [error,setError]=useState(null);

@@ -48,7 +48,6 @@ import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
 import {InitiatePayment}  from './payments/pages/InitiatePayment';
 import { PayBill } from './payments/pages/PayBill';
 
-
 function App() {
  return(
  <ProfileProvider>
@@ -102,7 +101,7 @@ function App() {
      <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
      <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
      <PrivateRoute path="/payBill" component={PayBill} />
-    
+  
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>

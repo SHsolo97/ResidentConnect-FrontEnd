@@ -56,7 +56,7 @@ const Registration = () => {
     let uid=null;
     const[userInfo,setUserInfo]=useState(
         {
-            type:'',
+            type:'resident',
          
             email:''
         }
@@ -90,7 +90,7 @@ const Registration = () => {
                       community=response.data; 
                         console.log(community);
                         
-                        return true;
+                        registerUserwithEmailAndPassword();
                     }
                     else if(userInfo.type==='resident') 
                     {
@@ -98,7 +98,7 @@ const Registration = () => {
                       console.log(response.data);
                       apartment=response.data; 
                         console.log(apartment);
-                        return true;
+                        registerUserwithEmailAndPassword();
                     }
                 }
                 else if (response.status === 404) {
@@ -192,19 +192,10 @@ const Registration = () => {
              
            
        }
-     const onSignup=(event)=>{     
-       const tokencheck=validateToken();
-       console.log(tokencheck);
-       if(tokencheck)
-       {
-
-             registerUserwithEmailAndPassword();
-           
-        
-        }
-
-      event.preventDefault() 
+     const onSignup=()=>{     
+       validateToken();
      }
+      
      const signOut=()=>{
         auth.signOut().then(() => {
           history.push('/signin');
@@ -212,6 +203,7 @@ const Registration = () => {
         console.log(error);
       });
         }
+      
      const onFacebookSignUp = () => {
         onSignUpWithProvider(new firebase.auth.FacebookAuthProvider());
 

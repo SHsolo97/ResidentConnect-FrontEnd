@@ -26,9 +26,8 @@ const {user}=useProfile();
 const { isOpen, open, close } = useModelState();
 
 const [isLoading,setIsLoading]=React.useState(true);
-console.log(user);
-const {community,setCommunity,communityList} = useCommunity();
-const {apartment,setApartment,apartmentList} = useApartment();
+const {setCommunity,communityList} = useCommunity();
+const {setApartment,apartmentList} = useApartment();
 
 const history=useHistory();
 const handleSubmit=()=>{
@@ -65,6 +64,7 @@ const data=await communityAPI.get(apiBaseUrl )
         
 
             const communitydata=communityinfo;
+            
             console.log(communitydata);
             setCommunity(communitydata); 
            }     
@@ -102,7 +102,7 @@ const data=await communityAPI.post(apiBaseUrl,searchQuery )
            {
         
             const apartmentdata=apartmentInfo[0];
-            
+            console.log(apartmentdata);
             setApartment(apartmentdata);   
                getCommunityDetails(apartmentdata.communityid)
  
@@ -125,6 +125,7 @@ const data=await communityAPI.post(apiBaseUrl,searchQuery )
 
 
 const renderCommunityList =()=>{
+
   return communityList.map((community)=>
 
       <>
@@ -160,10 +161,26 @@ const selectApartment=(event)=>{
   }
 
 }
+const selectCommunity=(event)=>{
+  const val=event.target.value;
+  console.log(val);
+  if(val==='add')
+  {
+    open();
+   
+  }
+  else
+  {
+    getCommunityDetails(val);
+    
+    
+  }
+}
 const renderApartmentList =()=>{
 
  console.log(apartmentList);
- return apartmentList.map((apartment) =>
+ 
+  return apartmentList.map((apartment) =>
   <>
     <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
@@ -193,18 +210,13 @@ const renderAddApartment=()=>{
 
 return (
 <div>
-  {user===null?
-  <Progress/>
-  :
-  null
-  }
-  <PageHeader> Select Profile </PageHeader>
+  
+  <PageHeader style={{marginTop:"400px"}}> Select Profile </PageHeader>
 
 
-
-      { (user.type==='admin')
+  { (user.type==='admin')
       ? 
-      <RadioGroup row name="selectProfile" >
+      <RadioGroup row name="selectProfile" onChange={selectCommunity} >
             <Grid container direction="column" justifyContent="space-around" alignItems="center">
            {renderCommunityList()}
       </Grid>
@@ -213,7 +225,7 @@ return (
       <> 
        <RadioGroup row name="selectProfile" onChange={selectApartment} >
        <Grid container direction="column" justifyContent="space-around" alignItems="center">
-          {renderApartmentList()}
+       {renderApartmentList()}
         {renderAddApartment()}
       </Grid>
 
@@ -226,6 +238,7 @@ return (
   {isOpen &&
     <RegisterApartmentModel open={open} handleClose={close} />
   }
+     
 
   <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
 

@@ -45,10 +45,8 @@ export const ResidentApartmentDetails = () => {
     const classes=useStyles();
     const history=useHistory();
     const {user}=useProfile();
-    const {apartmentList}=useApartment();
-    const apartment=apartmentList[0];
-    const {communityList}=useCommunity();
-    const community=communityList[0];
+    const {apartment}=useApartment();
+    const {community}=useCommunity();
     console.log(community);
     const [status,setStatus]= React.useState(apartment.status);
 

@@ -7,38 +7,30 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { SectionHeader } from "../../shared/components/SectionHeader";
 import PrimaryButton from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
-import { Field, reduxForm } from "redux-form";
-import { renderRatingField, renderTextField } from "../../misc/form-fields";
+
 import classifiedAPI from "../../misc/axios-calls/classifiedAPI";
 import { Alert } from "../../shared/components/Alert";
 import { useAlertState } from "../../misc/custom-hooks";
 import { Progress } from "../../shared/components/Progress";
 import { useProfile } from "../../context/profile.context";
 import { calculateAverageStars } from "../../misc/helpers";
-import { useCurrentClassified } from '../../context/currentclassified.context';
+import { TextField } from "@material-ui/core";
+import { Rating } from "@material-ui/lab";
+import { useCurrentClassified } from "../../context/currentclassified.context";
 
-const validate = (formValues) => {
-  const errors = {};
-  const requiredFields = ["rating", "comment"];
-  requiredFields.forEach((field) => {
-    if (!formValues[field]) {
-      errors[field] = "Required";
-    }
-  });
 
-  return errors;
-};
-
-const AddReviewModel = (props) => {
-  const classifiedid=useCurrentClassified(v=>v._id);
+export const EditReviewModel = (props) => {
   const ratings=useCurrentClassified(v=>v.ratings);
+  const{comment,rating,givenby,classifiedid,_id}=props.givenComment;
 
-  const { user } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
   const { isAlertOpen, openAlert, closeAlert } = useAlertState();
   const [alertMessage, setAlertMessage] = useState(null);
   const [alertType, setAlertType] = useState(null);
-  const editRatingDetails = async (rating) => {
+  const [newComment,setNewComment]=React.useState(comment);
+  const [newRating,setnewRating]=React.useState(rating);
+
+  const editRatingDetails = async (oldrating,newrating) => {
     const reviewData = {};
 
     let _5star = parseInt(ratings._5star);
@@ -48,10 +40,27 @@ const AddReviewModel = (props) => {
     let _1star = parseInt(ratings._1star);
     let _totrating = parseInt(ratings._totrating);
     let _avgstar = parseFloat(ratings._avgstar);
-    _totrating = _totrating + 1;
 
     // eslint-disable-next-line default-case
-    switch (rating) {
+    switch (oldrating) {
+      case 1:
+        _1star = _1star - 1;
+        break;
+      case 2:
+        _2star = _2star - 1;
+        break;
+      case 3:
+        _3star = _3star - 1;
+        break;
+      case 4:
+        _4star = _4star - 1;
+        break;
+      case 5:
+        _5star = _5star - 1;
+        break;
+    }
+      // eslint-disable-next-line default-case
+    switch (newrating) {
       case 1:
         _1star = _1star + 1;
         break;
@@ -62,7 +71,7 @@ const AddReviewModel = (props) => {
         _3star = _3star + 1;
         break;
       case 4:
-        _4star = _4star + 1;
+        _4star = _4star +  1;
         break;
       case 5:
         _5star = _5star + 1;
@@ -108,13 +117,13 @@ const AddReviewModel = (props) => {
         openAlert();
       });
   };
-  const addReviewComment = async (commentData) => {
-    var apiBaseUrl = `/classifieds/comment/create`;
+  const editReviewComment = async (commentData) => {
+    var apiBaseUrl = `/classifieds/comments/${_id}`;
 
     await classifiedAPI
-      .post(apiBaseUrl, commentData)
+      .put(apiBaseUrl, commentData)
       .then(function (response) {
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log(response.data);
           return response;
         }
@@ -127,36 +136,37 @@ const AddReviewModel = (props) => {
         openAlert();
       });
   };
-  const onSubmit = async (formValues) => {
-    let data = formValues;
-    data["comment"] = formValues.comment;
-    data["rating"] = parseInt(formValues.rating);
-    data["givenby"] = user._id;
-    data["classifiedid"] = classifiedid;
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    let data={};
+    data["comment"] = newComment;
+    data["rating"] = newRating
+   
     console.log(data);
     setIsLoading(true);
-    await addReviewComment(data).then((response) => {
-      editRatingDetails(data.rating);
+    await editReviewComment(data).then((response) => {
+      editRatingDetails(rating,data.rating);
     });
   };
 
   return (
-    <Dialog  maxWidth='md' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+    <Dialog  fullWidth='true'  maxWidth='md' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">
         <SectionHeader> Write your review </SectionHeader>
       </DialogTitle>
       <DialogContent>
-        <form onSubmit={props.handleSubmit(onSubmit)}>
+        <form >
           <Grid container direction="column" justifyContent="space-around" alignItems="center">
             <div>
-              <Field name="rating" component={renderRatingField} />
+              <Rating name="rating"  value={newRating} onChange={(e)=>{setnewRating(e.target.value)}} />
             </div>
 
             <div>
-              <Field style={{width:'800px'}} name="comment" id="comment" component={renderTextField} label="Comment" multiline rows={10} palceholder="enter comment" variant="outlined" />
+              <TextField  style={{width:"800px"}} name="comment" value={newComment} id="comment" label="Comment" multiline rows={10} palceholder="enter comment"
+               variant="outlined" onChange={(e)=>{setNewComment(e.target.value)}}  />
             </div>
             <Grid container direction="row" justifyContent="space-around" alignItems="center">
-              <PrimaryButton type="submit">Submit</PrimaryButton>
+              <PrimaryButton onClick={onSubmit} >Submit</PrimaryButton>
               <PrimaryButton onClick={props.handleClose}>
                 {" "}
                 Cancel{" "}
@@ -175,7 +185,3 @@ const AddReviewModel = (props) => {
   );
 };
 
-export default reduxForm({
-  form: "inputCommentForm", // a unique identifier for this form
-  validate,
-})(AddReviewModel);

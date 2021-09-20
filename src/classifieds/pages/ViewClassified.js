@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { CurrentClassifiedProvider } from '../../context/currentclassified.context';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -59,8 +60,9 @@ export const ViewClassified = ({...props}) => {
     setValue(newValue);
   };
     return (
-        <>
-          <ClassifiedOverview classified={classified}/>
+        
+        <CurrentClassifiedProvider data={classified}>
+          <ClassifiedOverview />
           <Divider />
           <div >
       <div position="static" color="default">
@@ -71,15 +73,15 @@ export const ViewClassified = ({...props}) => {
         </Tabs>
       </div>
       <TabPanel  id="description"  value={value} index={0}>
-        <ClassifiedDetails classified={classified}/>
+        <ClassifiedDetails />
       </TabPanel>
       <TabPanel id="reviews" value={value} index={1}>
       <Provider store={store}>
-       <ClassifiedReviews classified={classified}/>
+       <ClassifiedReviews />
        </Provider>
       </TabPanel>
      
     </div>
-        </>
+    </CurrentClassifiedProvider>
     )
 }

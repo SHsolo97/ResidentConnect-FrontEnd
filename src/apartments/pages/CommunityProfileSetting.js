@@ -18,6 +18,7 @@ import communityAPI from '../../misc/axios-calls/communityAPI';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop:'10ch',
     width: '100%',
   },
   backButton: {
@@ -126,7 +127,7 @@ export default function  CommunityProfileSetting()
    }
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+        <Stepper  activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>

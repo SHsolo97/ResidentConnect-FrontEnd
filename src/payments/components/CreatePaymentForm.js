@@ -6,7 +6,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { Field, FieldArray, reduxForm } from "redux-form";
 import TextField from '@mui/material/TextField';
 import DatePicker from '@mui/lab/DatePicker';
-
+import MenuItem from '@mui/material/MenuItem';
 import {
 renderRatingField,renderDateField,
 renderTextField,
@@ -35,10 +35,10 @@ return (
 
     <div>
       <Field name="category" style={{ width: "29ch" }}  component={renderSelectField} label="Category" variant="outlined">
-        <option value="" />
-        <option value="maintenance">Maintenance</option>
-        <option value="facilitybooking">Facility Booking</option>
-        <option value="water">Water Bill</option>
+        <MenuItem value="" />
+        <MenuItem value="maintenance">Maintenance</MenuItem>
+        <MenuItem value="facilitybooking">Facility Booking</MenuItem>
+        <MenuItem value="water">Water Bill</MenuItem>
       </Field>
     </div>
     <div>

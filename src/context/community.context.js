@@ -83,7 +83,7 @@ export const CommunityProvider=({children})=>{
         return ()=>{
             authUnsub();
         }
-    },[])
+    },[user])
 
     return (
     <CommunityContext.Provider value={{community,setCommunity,communityList}}> {children} </CommunityContext.Provider>);
