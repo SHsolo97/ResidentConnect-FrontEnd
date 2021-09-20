@@ -2,7 +2,9 @@ import React from 'react'
 import Box from '@material-ui/core/Box';
 import { Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { connect } from 'react-redux';
+import {fetchPaymentOfApartment} from '../actions';
+import { useApartment } from '../../context/apartment.context';
 const useStyles = makeStyles((theme) => ({
     lastpaymentInner: {
         background:'#FFEAB3',
@@ -73,9 +75,16 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-export const BillCards = () => {
+export const BillCards = ({...props}) => {
     const classes = useStyles();
-
+    const {apartment}=useApartment();
+    const apartmentid=apartment._id;
+    const totalDue=props.totalDue==null?0:props.totalDue.toLocaleString('en-IN')
+    const totalOverdue=props.totalOverdue==null?0:props.totalOverdue.toLocaleString('en-IN')
+    React.useEffect(() => {
+        props.fetchPaymentOfApartment(apartmentid);
+       
+    },[])
        return (
     <div style={{paddingTop:"50px", paddingBottom:"50px"}} >
     <Grid  container
@@ -91,7 +100,7 @@ export const BillCards = () => {
   alignItems="center"  style={{width:"50px"}}
 >
     <div className={classes.cardHeading}> Bill Due</div>
-    <div className={classes.cardAmount} >5000</div>
+    <div className={classes.cardAmount}> &#8377; {totalDue}</div>
     <a href="#" className={classes.cardLink} >Pay Now</a>
         </Grid>
       </Box>
@@ -104,7 +113,7 @@ export const BillCards = () => {
   alignItems="center"  style={{width:"50px"}}
 >
     <div className={classes.cardHeading}> Over Due</div>
-    <div className={classes.cardAmount} >5000</div>
+    <div className={classes.cardAmount} > &#8377; {totalOverdue}</div>
     <a href="#" className={classes.cardLink} >Pay Now</a>
         </Grid>
       </Box>
@@ -119,7 +128,7 @@ export const BillCards = () => {
 >
     <div className={classes.cardHeading}> Last Payment</div>
     <div className={classes.cardAmount} >5000</div>
-    <a href="#" className={classes.cardLink} >Pay Now</a>
+    <a href="#" className={classes.cardLink} >View</a>
         </Grid>
       </Box>
       </Box>
@@ -129,3 +138,21 @@ export const BillCards = () => {
   );
     
 }
+const mapStateToProps = state => {
+    return {     totalOverdue : state.payments.reduce(function (accumulator, payment) {
+        if(payment.status==='overdue')
+            return accumulator + payment.amt;
+      }, 0),
+      totalDue : state.payments.reduce(function (accumulator, payment) {
+        if(payment.status==='due')
+            return accumulator + payment.amt;
+      }, 0)
+      
+    };
+  };
+  
+export default connect(
+    mapStateToProps,
+    { fetchPaymentOfApartment }
+  )(BillCards);
+  

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { PageHeader } from '../../shared/components/PageHeader';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import AdminPendingPayments from '../components/AdminPendingPayments';
-import { AdminPaymentsOverview } from '../components/AdminPaymentsOverview';
+import  AdminPaymentsOverview  from '../components/AdminPaymentsOverview';
 import CreatePayment from './CreatePayment'
 import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';

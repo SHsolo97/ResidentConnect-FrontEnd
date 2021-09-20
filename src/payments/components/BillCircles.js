@@ -25,8 +25,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function BillCircles() {
+export default function BillCircles({...props}) {
     const classes = useStyles();
+    const totalpaid=props.totalPaid==null?0:parseInt(props.totalPaid) ;
+    const totalDue= (props.totalDue==null?0:parseInt(props.totalDue)) +
+    (props.totalOverdue==null?0:parseInt(props.totalOverdue));
+    const totalAmount=totalpaid+totalDue;
 
   return (
 
@@ -41,17 +45,17 @@ export default function BillCircles() {
       
        <div  > Total Due</div>
         <Box className={classes.commonStyles}>
-            <div className={classes.circleAmount}>34,500 </div></Box>
+            <div className={classes.circleAmount}>{totalAmount} </div></Box>
          
       
        <div  style={{   marginTop:'50px'}}> Collected</div>
       <Box className={classes.commonStyles}>
-      <div className={classes.circleAmount}>34,500 </div></Box>
+      <div className={classes.circleAmount}> {totalpaid} </div></Box>
          
       
        <div  style={{   marginTop:'50px'}}> Due</div>
       <Box className={classes.commonStyles}>
-      <div className={classes.circleAmount}>34,500 </div></Box>
+      <div className={classes.circleAmount}>{totalDue}</div></Box>
      
    </Grid>
   
