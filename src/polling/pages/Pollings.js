@@ -9,13 +9,16 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import PollingOverview from '../components/PollingOverview';
 import { useProfile } from '../../context/profile.context';
 import { Grid, Typography } from '@material-ui/core';
+import { useCommunity } from '../../context/community.context';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const pollingStore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 const Pollings = () => {
     const { isOpen, open, close } = useModelState();
+
     const {user}=useProfile();
+    const {community}=useCommunity()
     return (
         <div>
            <Grid container style={{marginBottom:'50px'}} direction="row" justifyContent="space-between" alignItems="center">

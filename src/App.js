@@ -14,6 +14,8 @@ import CreateContact from './contacts/pages/CreateContact';
 import ResidentContacts from './contacts/pages/ResidentContacts';
 import AdminDashboard from './dashboards/pages/AdminDashboard';
 import ResidentDashboard from './dashboards/pages/ResidentDashboard';
+import DummyAdminDashboard from './dashboards/pages/DummyAdminDashboard';
+import DummyResidentDashboard from './dashboards/pages/DummyResidentDashboard';
 import Events from './eventmgmt/pages/Events';
 import AdminFacility from './facilitybooking/pages/AdminFacility';
 import ResidentFacility from './facilitybooking/pages/ResidentFacility';
@@ -66,8 +68,10 @@ function App() {
    <SettingsRoute path="/apartmentDetailsR" component={ResidentApartmentDetails}/>
    
    <SettingsRoute path="/selectprofile" component={ProfileSelection}/>
-   <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
-   <PrivateRoute path="/dashboardA" component={AdminDashboard} />
+   <PrivateRoute path="/dashboardR" component={DummyResidentDashboard} />
+   <PrivateRoute path="/dashboardA" component={DummyAdminDashboard} />
+   <PrivateRoute path="/dashboardOR" component={ResidentDashboard} />
+   <PrivateRoute path="/dashboardOA" component={AdminDashboard} />
    <PrivateRoute path="/buyandsell" component={BuyAndSell} />
    <PrivateRoute path="/events" component={Events} /> 
    <PrivateRoute path="/classifieds" component={Classifieds} />
