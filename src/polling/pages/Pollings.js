@@ -8,6 +8,7 @@ import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import PollingOverview from '../components/PollingOverview';
 import { useProfile } from '../../context/profile.context';
+import { Grid, Typography } from '@material-ui/core';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,10 +18,12 @@ const Pollings = () => {
     const {user}=useProfile();
     return (
         <div>
-            <h1> Pollings </h1>
+           <Grid container style={{marginBottom:'50px'}} direction="row" justifyContent="space-between" alignItems="center">
+                 <h1> Pollings </h1>
+                 <PrimaryButton onClick={open}>Create Polling</PrimaryButton>
+            </Grid>
             <Provider store={pollingStore}>
 
-                <PrimaryButton onClick={open}>Create Polling</PrimaryButton>
             {isOpen && <CreatePolling   handleClose={close} open={open} />}
                 <PollingOverview userid={user._id}/>
                
