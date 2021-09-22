@@ -7,6 +7,11 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Card from "../../shared/components/cards/Card.js";
+import CardHeader from "../../shared/components/cards/CardHeader.js";
+import CardIcon from "../../shared/components/cards/CardIcon.js";
+import CardBody from "../../shared/components/cards/CardBody.js";
+import CardFooter from "../../shared/components/cards/CardFooter.js";
 import {fetchPaymentOfCommunity} from '../actions';
 import { makeStyles } from '@material-ui/core';
 import {
@@ -17,8 +22,7 @@ import {
 
 const useStyles = makeStyles({
   piechart: {
-    marginTop:'-65px',
-    marginLeft:'95px',
+
 
     width: '300px',
     height: '300px'
@@ -53,10 +57,14 @@ const AdminPaymentSection =({...props})=>{
     }
 
     return(
-        <Paper elevation={3} style={{width:'600px',height:'400px'}}>
-        <SectionHeader> Payments</SectionHeader>
-        {renderPaymentData()}
-        </Paper>
+        <Card>
+        <CardHeader color="rose">
+          <h2 className={classes.cardTitleWhite}>Payments</h2>
+        </CardHeader>
+        <CardBody>
+         {renderPaymentData()}
+        </CardBody>
+      </Card>
     )
 
 }

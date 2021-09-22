@@ -17,6 +17,8 @@ import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 import { Button } from '@material-ui/core';
+import Chip from '@mui/material/Chip';
+import {convertDate} from '../../misc/helpers';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -163,6 +165,9 @@ if (b[orderBy]
   setOrderBy(property);
   };
 
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
 
   const handleChangePage = (event, newPage) => {
@@ -195,11 +200,13 @@ if (b[orderBy]
             <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
 
               <TableCell align="left">{row.period}</TableCell>
-              <TableCell align="left">{row.category}</TableCell>
+              <TableCell align="left">{row.category.capitalize()}</TableCell>
               <TableCell align="left">{row.aptnum}</TableCell>              
               <TableCell align="left">{row.amt}</TableCell>
-              <TableCell align="left">{row.dueat}</TableCell>
-              <TableCell align="left">{row.status}</TableCell>
+              <TableCell align="left">{convertDate(row.dueat)}</TableCell>
+              <TableCell align="left">
+                <Chip label={row.status.capitalize()} color={row.status==='due'?'primary':'secondary'} />
+</TableCell>
               <TableCell align="left">
                  <Button href="#text-buttons" onClick={()=>console.log(row._id)} color="primary">send reminder</Button> 
               </TableCell> 

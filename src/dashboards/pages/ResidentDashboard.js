@@ -32,6 +32,7 @@ import {
     completedTasksChart,
   } from "../../data/charts.js";
 import styles from "../styles/dashboardStyle.js";
+import { UserInfo } from '../components/UserInfo';
 const useStyles = makeStyles(styles);
 
 
@@ -48,9 +49,8 @@ const ResidentDashboard = () => {
   const communityid=community._id;
    return (
     <>
-     <PageHeader>Resident Dashboard</PageHeader>     
      <Provider store={dashboardstore}>
-  
+      <UserInfo/>
 
  
   <GridContainer>

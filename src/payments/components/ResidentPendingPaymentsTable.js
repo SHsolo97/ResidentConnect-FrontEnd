@@ -18,6 +18,8 @@ import { styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import Chip from '@mui/material/Chip';
+import {convertDate} from '../../misc/helpers';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -177,7 +179,9 @@ if (b[orderBy]
   };
 
 
-
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -197,11 +201,13 @@ if (b[orderBy]
             <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
 
               <TableCell align="left">{row.period}</TableCell>
-              <TableCell align="left">{row.category}</TableCell>
+              <TableCell align="left">{row.category.capitalize()}</TableCell>
               <TableCell align="left">{row.aptnum}</TableCell>              
               <TableCell align="left">{row.amt}</TableCell>
-              <TableCell align="left">{row.dueat}</TableCell>
-              <TableCell align="left">{row.status}</TableCell>
+              <TableCell align="left">{convertDate(row.dueat)}</TableCell>
+              <TableCell align="left">
+                <Chip label={row.status.capitalize()} color={row.status==='due'?'primary':'secondary'} />
+</TableCell>
               <TableCell align="left">
                  <Button  onClick={()=>{
                        history.push({

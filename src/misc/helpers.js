@@ -7,7 +7,12 @@ export function getNameInitials(name) {
     return splitName[0][0];
 
 }
-
+export function convertDate(rawdate)
+{
+    const date=new Date(rawdate);
+    const converteddate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    return converteddate;
+}
 export function calculateAverageStars(_1star,_2star,_3star,_4star,_5star,_totrating)
 {
     let averageRating=((1*_1star)+ (2*_2star)+(3*_3star)+(4*_4star)+(5*_5star))/_totrating;

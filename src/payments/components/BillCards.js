@@ -139,11 +139,11 @@ export const BillCards = ({...props}) => {
     
 }
 const mapStateToProps = state => {
-    return {     totalOverdue : state.payments.reduce(function (accumulator, payment) {
+    return {     totalOverdue :  state.payments.filter(payment=>payment.status==='overdue').reduce(function (accumulator, payment) {
         if(payment.status==='overdue')
             return accumulator + payment.amt;
       }, 0),
-      totalDue : state.payments.reduce(function (accumulator, payment) {
+      totalDue :  state.payments.filter(payment=>payment.status==='due').reduce(function (accumulator, payment) {
         if(payment.status==='due')
             return accumulator + payment.amt;
       }, 0)

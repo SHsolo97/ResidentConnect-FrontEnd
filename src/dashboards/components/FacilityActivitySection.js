@@ -10,42 +10,65 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import ChartistGraph from "react-chartist";
-
+import {
+    Chart,
+    BarSeries,
+  } from '@devexpress/dx-react-chart-material-ui';
 import {
     dailySalesChart,
     emailsSubscriptionChart,
     completedTasksChart,
   } from "../../data/charts.js";
   import styles from "../styles/dashboardStyle.js";
-const useStyles = makeStyles(styles);
-
+  const useStyles = makeStyles({
+    barchart: {
+  
+  
+      width: '300px',
+      height: '300px'
+     
+    },
+  });const data = [
+    { month: 'Jan', booking: 25 },
+    { month: 'Feb', booking: 35 },
+    { month: 'Mar', booking: 45 },
+    { month: 'Apr', booking: 10 },
+    { month: 'May', booking: 12 },
+    { month: 'June', booking: 15 },
+    { month: 'July', booking: 40 },
+    { month: 'Aug', booking: 45 },
+    { month: 'Sep', booking: 10 },
+    { month: 'Oct', booking: 12 },
+    { month: 'Nov', booking: 15 },
+    { month: 'Dec', booking: 40 },
+  
+  ];
+  
+  
 export const FacilityActivitySection = () => {
     const classes=useStyles();
+    const[chartData,setchartData]=React.useState(data);
+
+    const renderData=()=>{
+        return <Chart className={classes.barchart}
+          data={chartData} 
+        >
+
+          <BarSeries
+            valueField="booking"
+            argumentField="month"
+          />
+        </Chart>
+    }
     return (
-        <Card chart>
-            <CardHeader color="success">
-              <ChartistGraph
-                className="ct-chart"
-                data={dailySalesChart.data}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
-              <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today sales.
-              </p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
-              </div>
-            </CardFooter>
-          </Card>
+        <Card>
+        <CardHeader color="success">
+          <h2 className={classes.cardTitleWhite}>Facility and Activity </h2>
+         
+        </CardHeader>
+        <CardBody>
+            {renderData()}
+        </CardBody>
+      </Card>
     )
 }

@@ -10,16 +10,16 @@ import { useProfile } from '../../context/profile.context';
 import { useModelState } from '../../misc/custom-hooks';
 import  EditReviewModel  from './EditReviewModel';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { convertDate } from '../../misc/helpers';
 
 
 
 export const ReviewCard = ({ classified,comment,deleteReviewComment }) => {
-  const date = new Date(comment.createdat);
   const { isOpen, open, close } = useModelState();
  
 
   const {user}=useProfile();
-  const commentdate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  const commentdate = convertDate(comment.createdat);
   const editComment = () => {
     console.log('clicked edit');
     open();
