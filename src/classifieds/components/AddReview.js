@@ -16,21 +16,36 @@ import { Progress } from "../../shared/components/Progress";
 import { useProfile } from "../../context/profile.context";
 import { calculateAverageStars } from "../../misc/helpers";
 import { useModelState } from "../../misc/custom-hooks";
-import AddReviewModel from "./AddReviewModel";
+import { connect } from 'react-redux';
 
-export const AddReview = ({newReview}) => {
+import AddReviewModel from "./AddReviewModel";
+import { fetchCommentsAndUsers,fetchClassifieds,fetchClassifiedById } from '../actions';
+import { useCommunity } from "../../context/community.context";
+
+export const AddReview = ({...props}) => {
   const { isOpen, open, close } = useModelState();
+  const {community} =useCommunity();
   const createReview=()=>{
     open();
   }
   const setNewReview=(data)=>{
-    newReview(data);
+    props.fetchClassifieds(community._id);
+    props.fetchClassifiedById(props.classified._id);
+    props.fetchCommentsAndUsers(props.classified._id);
   }
   return (
     <div>
       <PrimaryButton onClick={createReview}> Write An Review</PrimaryButton>
         {isOpen &&
-       <AddReviewModel  setNewReview={setNewReview}  handleClose={close} open={open} />}
+       <AddReviewModel classified={props.classified} setNewReview={setNewReview}  handleClose={close} open={open} />}
       </div>
   )
 };
+const mapStateToProps = state => {
+  return { comments: state.comments };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchCommentsAndUsers,fetchClassifieds,fetchClassifiedById }
+)(AddReview);

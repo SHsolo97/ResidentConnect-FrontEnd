@@ -30,8 +30,8 @@ const validate = (formValues) => {
 };
 
 const AddReviewModel = (props) => {
-  const classifiedid=useCurrentClassified(v=>v._id);
-  const ratings=useCurrentClassified(v=>v.ratings);
+  const classifiedid=props.classified._id;
+  const ratings=props.classified.ratings;
 
   const { user } = useProfile();
   const [isLoading, setIsLoading] = useState(false);

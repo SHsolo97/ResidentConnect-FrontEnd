@@ -9,88 +9,90 @@ import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-export class UnitsAndUserSection extends React.Component {
-    componentDidMount() {
-        console.log(this.props.communityid);
-        this.props.fetchUsersOverview(this.props.communityid);
-        this.props.fetchApartmentsOverview(this.props.communityid);
+import Card from "../../shared/components/cards/Card.js";
+import CardHeader from "../../shared/components/cards/CardHeader.js";
+import CardIcon from "../../shared/components/cards/CardIcon.js";
+import CardBody from "../../shared/components/cards/CardBody.js";
+import CardFooter from "../../shared/components/cards/CardFooter.js";
+import Table from "../../shared/components/Table/Table.js"
+import styles from "../styles/dashboardStyle.js";
+import { makeStyles } from "@material-ui/core/styles";
 
-        console.log(this.props.userSummary);
-        console.log(this.props.apartmentsSummary);
+const useStyles = makeStyles(styles);
 
-    }
-    renderUserData() {
-        if (this.props.userSummary.length != 0) {
-            return (
-                <div>
-                    <GroupsIcon style={{width:'50px',height:'50px'}} />
+const UnitsAndUserSection =({...props}) =>{
+const classes=useStyles();
+React.useEffect(() => {
+props.fetchUsersOverview(props.communityid);
+props.fetchApartmentsOverview(props.communityid);
+}, [])
 
-                    <div>  <span style={{fontWeight:'bold', fontSize:'20px'}}> {this.props.userSummary.total}  </span> users</div>
-                    <div> {this.props.userSummary.admin} admins</div>
-                    <div> {this.props.userSummary.resident} residents</div>
-                </div>
-            )
-        }
-            return (
-                <div>
-                    <GroupsIcon style={{width:'50px',height:'50px'}} />
-                    </div>)
-    }
-    renderApartmentData() {
-        if (this.props.apartmentsSummary!=null) {
-            return (
-                <div>
-                                   <ApartmentIcon style={{width:'50px',height:'50px'}} />
+const renderUserData=() =>{
+if (props.userSummary.length != 0) {
+return (
+<div>
+  <GroupsIcon style={{width:'50px',height:'50px'}} />
 
-                    <div> <span style={{fontWeight:'bold', fontSize:'20px'}}>  {this.props.apartmentsSummary.total} </span> units</div>
-                    
-                      
-                       { this.props.apartmentsSummary.status.map(data=>
-                            {
-                                return <div> {data.count} {data.type}</div>   
-                            })
-                        }
-                    
-      
-                </div>
-            )
-        }
-        return (
-            <div>
-                <ApartmentIcon style={{width:'50px',height:'50px'}} />
-                </div>)
-    }
+  <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.userSummary.total} </span> users</div>
+  <div> {props.userSummary.admin} admins</div>
+  <div> {props.userSummary.resident} residents</div>
+</div>
+)
+}
+return (
+<div>
+  <GroupsIcon style={{width:'50px',height:'50px'}} />
+</div>)
+}
+const renderApartmentData=()=> {
+if (props.apartmentsSummary!=null) {
+return (
+<div>
+  <ApartmentIcon style={{width:'50px',height:'50px'}} />
+  <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.apartmentsSummary.total} </span> units</div>
+  { props.apartmentsSummary.status.map(data=>
+  {
+  return <div> {data.count} {data.type}</div>
+  })
+  }
+</div>
+)
+}
+return (
+<div>
+  <ApartmentIcon style={{width:'50px',height:'50px'}} />
+</div>)
+}
 
-    render() {
-        return (
-                
-                <Paper elevation={3} style={{width:'600px',height:'400px'}}>
-                <SectionHeader>Units &amp; Users </SectionHeader>
-                <Grid
+
+return (
+<Card>
+  <CardHeader color="info">
+    <h2 className={classes.cardTitleWhite}>Units &amp; Users</h2>
+  </CardHeader>
+  <CardBody>
+  <Grid
   container
   direction="row"
   justifyContent="space-around"
   alignItems="center"
 >
-    {this.renderUserData()}
-                <Divider orientation="vertical" flexItem />
-
-                {this.renderApartmentData()}
-                </Grid>
-                </Paper>
-            
-        )
-    }
+    {renderUserData()}
+    <Divider orientation="vertical" flexItem />
+    {renderApartmentData()}
+    </Grid>
+  </CardBody>
+</Card>
+)
 }
 const mapStateToProps = state => {
-
-    return {
-        userSummary: state.userSummary,
-        apartmentsSummary: state.apartmentsSummary
-    };
+return {
+userSummary: state.userSummary,
+apartmentsSummary: state.apartmentsSummary
+};
 };
 
 export default connect(
-    mapStateToProps,
-    { fetchUsersOverview, fetchApartmentsOverview }
+mapStateToProps,
+{ fetchUsersOverview, fetchApartmentsOverview }
 )(UnitsAndUserSection);

@@ -49,6 +49,7 @@ import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSetti
 import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
 import {InitiatePayment}  from './payments/pages/InitiatePayment';
 import { PayBill } from './payments/pages/PayBill';
+import {hot} from 'react-hot-loader';
 
 function App() {
  return(
@@ -113,4 +114,4 @@ function App() {
  );
 }
 
-export default App;
+export default hot(module)(App);

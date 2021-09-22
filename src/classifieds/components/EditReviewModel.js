@@ -16,11 +16,11 @@ import { useProfile } from "../../context/profile.context";
 import { calculateAverageStars } from "../../misc/helpers";
 import { TextField } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import { useCurrentClassified } from "../../context/currentclassified.context";
-
+import { connect } from 'react-redux';
+import { fetchCommentsAndUsers,fetchClassifiedById } from '../actions';
 
 export const EditReviewModel = (props) => {
-  const ratings=useCurrentClassified(v=>v.ratings);
+  const ratings=props.classified;
   const{comment,rating,givenby,classifiedid,_id}=props.givenComment;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -104,10 +104,11 @@ export const EditReviewModel = (props) => {
         if (response.status === 200) {
           setIsLoading(false);
           props.handleClose();
-          setAlertMessage("comment is added");
+          setAlertMessage("comment is esited");
           setAlertType("success");
           openAlert();
-          props.setNewReview(true);
+          props.fetchClassifiedById(classifiedid);
+          props.fetchCommentsAndUsers(classifiedid);
         }
       })
       .catch(function (error) {
@@ -185,3 +186,14 @@ export const EditReviewModel = (props) => {
   );
 };
 
+const mapStateToProps = state => {
+  console.log(state.classified) ;
+     return { classified: state.classified,
+      comments: state.comments };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchClassifiedById,fetchCommentsAndUsers }
+
+)(EditReviewModel);

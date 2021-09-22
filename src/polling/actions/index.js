@@ -1,4 +1,3 @@
-import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
 import _ from 'lodash';
 

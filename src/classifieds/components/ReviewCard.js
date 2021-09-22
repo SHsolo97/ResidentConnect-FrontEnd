@@ -8,18 +8,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { useProfile } from '../../context/profile.context';
 import { useModelState } from '../../misc/custom-hooks';
-import { EditReviewModel } from './EditReviewModel';
-import { useCurrentClassified } from '../../context/currentclassified.context';
+import  EditReviewModel  from './EditReviewModel';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { calculateAverageStars } from "../../misc/helpers";
-import classifiedAPI from "../../misc/axios-calls/classifiedAPI";
 
 
-export const ReviewCard = ({ comment }) => {
+
+export const ReviewCard = ({ classified,comment,deleteReviewComment }) => {
   const date = new Date(comment.createdat);
   const { isOpen, open, close } = useModelState();
-  const classifiedid=useCurrentClassified(v=>v._id);
-  const ratings=useCurrentClassified(v=>v.ratings);
+ 
 
   const {user}=useProfile();
   const commentdate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
@@ -27,88 +24,9 @@ export const ReviewCard = ({ comment }) => {
     console.log('clicked edit');
     open();
   }
-  const editRatingDetails = async (rating) => {
-    const reviewData = {};
-
-    let _5star = parseInt(ratings._5star);
-    let _4star = parseInt(ratings._4star);
-    let _3star = parseInt(ratings._3star);
-    let _2star = parseInt(ratings._2star);
-    let _1star = parseInt(ratings._1star);
-    let _totrating = parseInt(ratings._totrating);
-    let _avgstar = parseFloat(ratings._avgstar);
-
-    // eslint-disable-next-line default-case
-    switch (rating) {
-      case 1:
-        _1star = _1star - 1;
-        break;
-      case 2:
-        _2star = _2star - 1;
-        break;
-      case 3:
-        _3star = _3star - 1;
-        break;
-      case 4:
-        _4star = _4star - 1;
-        break;
-      case 5:
-        _5star = _5star - 1;
-        break;
-    }
-    _totrating=_totrating-1
-    
-    _avgstar = calculateAverageStars(
-      _1star,
-      _2star,
-      _3star,
-      _4star,
-      _5star,
-      _totrating
-    );
-    console.log(_avgstar);
-    reviewData["_1star"] = _1star;
-    reviewData["_2star"] = _2star;
-    reviewData["_3star"] = _3star;
-    reviewData["_4star"] = _4star;
-    reviewData["_5star"] = _5star;
-    reviewData["_avgstar"] = _avgstar;
-    reviewData["_totrating"] = _totrating;
-    const data = {
-      ratings: reviewData,
-    };
-    var apiBaseUrl = `/classifieds/${classifiedid}`;
-
-    await classifiedAPI
-      .put(apiBaseUrl, data)
-      .then(function (response) {
-        if (response.status === 200) {
-          console.log("edited the rating details")
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      });
-  };
-  const deleteReviewComment = async (rating) => {
-    var apiBaseUrl = `/classifieds/comments/${comment._id}`;
-
-    await classifiedAPI
-      .delete(apiBaseUrl)
-      .then(function (response) {
-        if (response.status === 200) {
-          console.log(response.data);
-          editRatingDetails(rating)
-          
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-     
-      });
-  };
+  
   const deleteComment=()=>{
-    deleteReviewComment(comment.rating);
+    deleteReviewComment(comment._id,comment.rating);
   }
   return (
     <div><Grid container spacing={3}>
@@ -138,7 +56,7 @@ export const ReviewCard = ({ comment }) => {
 
     </Grid>
           {isOpen &&
-           <EditReviewModel  givenComment={comment} handleClose={close} open={open} />}
+           <EditReviewModel classified={classified} givenComment={comment} handleClose={close} open={open} />}
           
     </div>
   )
