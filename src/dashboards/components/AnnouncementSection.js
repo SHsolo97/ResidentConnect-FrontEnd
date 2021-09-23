@@ -10,12 +10,14 @@ import { connect } from 'react-redux'
 import { makeStyles } from "@material-ui/core/styles";
 import { useCommunity } from '../../context/community.context.js';
 import AnnouncementTable from "../../shared/components/Table/AnnouncementTable.js"
+import { useProfile } from '../../context/profile.context.js';
 
 
 const useStyles = makeStyles(styles);
 
 export const AnnouncementSection = ({...props}) => {
     const classes=useStyles();
+    const {user}=useProfile();
     const {community}=useCommunity();
     const [announcements,setAnnouncements]=React.useState([]);
 
@@ -40,11 +42,17 @@ export const AnnouncementSection = ({...props}) => {
          
         </CardHeader>
         <CardBody>
+            {user.type==='admin'?            
         <AnnouncementTable
             tableHeaderColor="success"
             tableHead={["Announcement", "View", "Edit", "Delete"]}
-            tableData={announcements}
-          />
+            tableData={announcements}/>
+            :
+            <AnnouncementTable
+            tableHeaderColor="success"
+            tableHead={["Announcement", "View"]}
+            tableData={announcements}/>
+            }
         </CardBody>
       </Card>
     )

@@ -193,11 +193,11 @@ const PrivateLayout = ({ children }) => {
             <IconButton color="inherit" onClick={openProfileSettings}>
               <AccountCircle />
             </IconButton >
+           { user.type==='admin' ?
             <IconButton  onClick={open} color="inherit">
-
-                <NotificationsIcon />
-              
-            </IconButton>
+                <NotificationsIcon />             
+            </IconButton>:
+            null}
             <IconButton color="inherit" edge="end" onClick={signOut}>
               <ExitToAppIcon />
             </IconButton>

@@ -20,7 +20,7 @@ export default function CustomTable(props) {
   const [poll,setPoll]=React.useState(null);
   const classes = useStyles();
   const { tableHead, tableData, tableHeaderColor } = props;
-  
+
   // eslint-disable-next-line no-extend-native
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -45,7 +45,15 @@ export default function CustomTable(props) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+        {tableData.length===0  &&
+     
+     <TableRow key='no-record' className={classes.tableBodyRow}>
+
+       <TableCell className={classes.tableCell}  style={{color:'gray'}}> No Polls</TableCell>
+       </TableRow>
+   
+   }
+          { tableData.length!==0  && tableData.map((prop, key) => {
             return (
               <TableRow key={prop._id} className={classes.tableBodyRow}>
                 

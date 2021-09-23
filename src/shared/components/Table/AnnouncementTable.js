@@ -29,7 +29,6 @@ const { tableHead, tableData, tableHeaderColor } = props;
 const deleteAnnouncement=async()=>{
   console.log('delete');
   var apiBaseUrl = `/announcements/${announcement._id}`
-  // eslint-disable-next-line no-extend-native
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
@@ -66,7 +65,15 @@ return (
     </TableHead>
     ) : null}
     <TableBody>
-      {tableData.map((prop, key) => {
+    {tableData.length===0  &&
+     
+        <TableRow key='no-record' className={classes.tableBodyRow}>
+  
+          <TableCell className={classes.tableCell}  style={{color:'gray'}}> No Announcements</TableCell>
+          </TableRow>
+      
+      }
+      {tableData.length!==0 && tableData.map((prop, key) => {
       return (
       <TableRow key={prop._id} className={classes.tableBodyRow}>
 
@@ -78,7 +85,7 @@ return (
           open();
           }} > View</Link>
         </TableCell>
-        {user._id===prop.createdby &&
+        {user.type==='admin'&&
         <TableCell style={{width:"20px"}} className={classes.tableCell}>
           <IconButton onClick={()=> {
           console.info(prop._id);
@@ -88,7 +95,7 @@ return (
             <DeleteIcon />
           </IconButton>
         </TableCell> }
-        {user._id===prop.createdby && <TableCell style={{width:"20px"}} className={classes.tableCell} >
+        {user.type==='admin' && <TableCell style={{width:"20px"}} className={classes.tableCell} >
           <IconButton>
             <EditIcon />
           </IconButton>
