@@ -26,16 +26,19 @@ React.useEffect(() => {
 props.fetchUsersOverview(props.communityid);
 props.fetchApartmentsOverview(props.communityid);
 }, [])
-
+// eslint-disable-next-line no-extend-native
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 const renderUserData=() =>{
 if (props.userSummary.length != 0) {
 return (
 <div>
   <GroupsIcon style={{width:'50px',height:'50px'}} />
 
-  <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.userSummary.total} </span> users</div>
-  <div> {props.userSummary.admin} admins</div>
-  <div> {props.userSummary.resident} residents</div>
+  <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.userSummary.total} </span> Users</div>
+  <div> {props.userSummary.admin} Admins</div>
+  <div> {props.userSummary.resident} Residents</div>
 </div>
 )
 }
@@ -49,10 +52,10 @@ if (props.apartmentsSummary!=null) {
 return (
 <div>
   <ApartmentIcon style={{width:'50px',height:'50px'}} />
-  <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.apartmentsSummary.total} </span> units</div>
+  <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.apartmentsSummary.total} </span> Units</div>
   { props.apartmentsSummary.status.map(data=>
   {
-  return <div> {data.count} {data.type}</div>
+  return <div> {data.count} {data.type.capitalize()}</div>
   })
   }
 </div>

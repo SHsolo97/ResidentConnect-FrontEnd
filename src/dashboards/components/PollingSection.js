@@ -11,15 +11,17 @@ import styles from "../styles/dashboardStyle.js";
 import { makeStyles } from "@material-ui/core/styles";
 import {fetchActivePollsByCommunity} from '../actions/index';
 import { connect } from 'react-redux';
+import { useCommunity } from '../../context/community.context';
+
 const useStyles = makeStyles(styles);
 
 export const PollingSection = ({...props}) => {
     const classes = useStyles();
     const [polls,setPolls]=React.useState([]);
-
+    const {community}=useCommunity();
     useEffect(() => {
         console.log(props.communityid);
-         props.fetchActivePollsByCommunity(props.communityid);
+         props.fetchActivePollsByCommunity(community._id);
          console.log(props.polls);
          if(props.polls!=null)
          {

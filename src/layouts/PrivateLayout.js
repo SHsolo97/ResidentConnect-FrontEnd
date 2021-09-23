@@ -15,6 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { useModelState } from '../misc/custom-hooks';
 
 import ApartmentIcon from '@material-ui/icons/Apartment';
 
@@ -33,6 +34,7 @@ import { useEffect } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import {  InputBase} from '@material-ui/core';
 import logo from '../images/home/logo.png';
+import {CreateAnnouncementModal} from '../announcements/pages/CreateAnnouncementModal';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -103,18 +105,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PrivateLayout = ({ children }) => {
+  const { isOpen, open, close } = useModelState();
+  
   const {community,communityList} = useCommunity();
   const {apartment,apartmentList} = useApartment();
   const {user} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const history = useHistory();
   const communitynames= new Map();
   
 
     const handleDrawerOpen = () => {
-      setOpen(true);
+      setOpenDrawer(true);
     };
     useEffect(() => {
       communityList.map((community) => {
@@ -125,7 +129,7 @@ const PrivateLayout = ({ children }) => {
     }, []);
 
     const handleDrawerClose = () => {
-      setOpen(false);
+      setOpenDrawer(false);
     };
     const goToAparmentSettings=()=>{
 
@@ -158,7 +162,7 @@ const PrivateLayout = ({ children }) => {
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: openDrawer,
           })}
         >
         <Toolbar>
@@ -169,7 +173,7 @@ const PrivateLayout = ({ children }) => {
               onClick={handleDrawerOpen}
               edge="start"
               className={clsx(classes.menuButton, {
-                [classes.hide]: open,
+                [classes.hide]: openDrawer,
               })}
             >
               <MenuIcon />
@@ -189,10 +193,10 @@ const PrivateLayout = ({ children }) => {
             <IconButton color="inherit" onClick={openProfileSettings}>
               <AccountCircle />
             </IconButton >
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+            <IconButton  onClick={open} color="inherit">
+
                 <NotificationsIcon />
-              </Badge>
+              
             </IconButton>
             <IconButton color="inherit" edge="end" onClick={signOut}>
               <ExitToAppIcon />
@@ -206,13 +210,13 @@ const PrivateLayout = ({ children }) => {
         <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: openDrawer,
+            [classes.drawerClose]: !openDrawer,
           })}
           classes={{
             paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
+              [classes.drawerOpen]: openDrawer,
+              [classes.drawerClose]: !openDrawer,
             }),
           }}
         >
@@ -244,6 +248,9 @@ const PrivateLayout = ({ children }) => {
           <div className={classes.toolbar} />
           <div className="main">{children}</div>
         </main>
+        {isOpen&&
+          <CreateAnnouncementModal open={open} handleClose={close}/>
+        }
       </div>
     );
 }

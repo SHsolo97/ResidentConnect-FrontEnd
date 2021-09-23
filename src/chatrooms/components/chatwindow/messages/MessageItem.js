@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { Button } from 'rsuite';
+import Button from '@mui/material/Button';
+
 import TimeAgo from 'timeago-react';
 import { useCurrentRoom } from '../../../../context/currentroom.context';
 import { auth } from '../../../../misc/firebase';
@@ -18,6 +19,7 @@ import { red } from '@material-ui/core/colors';
 import { grey } from '@material-ui/core/colors';
 import { Grid } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
+import { useProfile } from '../../../../context/profile.context';
 const StyledBadge = withStyles((theme) => ({
 badge: {
 right: -3,
@@ -58,9 +60,10 @@ const isMobile = useMediaQuery(`(max-width:992px)`);
 const isAdmin = useCurrentRoom(v => v.isAdmin);
 const admins = useCurrentRoom(v => v.admins);
 // console.log('isAdmin', isAdmin);
-
+const {user}=useProfile();
 const isMessageAuthorAdmin = admins?admins.includes(author.uid):false;
 const isAuthor = auth.currentUser.uid === author.uid;
+
 const canGrantAdmin = isAdmin && !isAuthor;
 const canShowIcons = isMobile || isHovered;
 const isLiked = likes && Object.keys(likes).includes(auth.currentUser.uid);
@@ -74,13 +77,9 @@ return (
 
         <ProfileAvatar src={author.avatar} alt={author.name} name={author.name} style={{  width: 50  ,height :50}} />
         
-      <ProfileInfoBtnModal  style={{ padding:10,}} profile={author} appearance="link" >
-        {canGrantAdmin &&
-        <Button block onClick={()=> handleAdmin(author.uid)} color="blue">
-          {isMessageAuthorAdmin ? 'Remove admin permission' : 'give admin permission'}
-        </Button>
-        }
-      </ProfileInfoBtnModal>
+      <ProfileInfoBtnModal  handleAdmin={handleAdmin} style={{ padding:10}} profile={author} / >
+     
+     
       <TimeAgo datetime={createdAt} style={{ padding:10,  color: grey[500] , fontSize: 10 }} />
     </Grid>
 

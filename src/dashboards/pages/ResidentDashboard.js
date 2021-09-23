@@ -33,6 +33,7 @@ import {
   } from "../../data/charts.js";
 import styles from "../styles/dashboardStyle.js";
 import { UserInfo } from '../components/UserInfo';
+import  AnnouncementSection  from '../components/AnnouncementSection';
 const useStyles = makeStyles(styles);
 
 
@@ -55,7 +56,10 @@ const ResidentDashboard = () => {
  
   <GridContainer>
   <GridItem xs={12} sm={12} md={6}>
-            <PollingSection  userid={user._id} communityid={communityid} />
+            <AnnouncementSection   />
+        </GridItem>
+  <GridItem xs={12} sm={12} md={6}>
+            <PollingSection  userid={user._id} />
         </GridItem>
   </GridContainer>
   </Provider>

@@ -7,6 +7,7 @@ export function getNameInitials(name) {
     return splitName[0][0];
 
 }
+
 export function convertDate(rawdate)
 {
     const date=new Date(rawdate);

@@ -1,6 +1,8 @@
 import userAPI from '../../misc/axios-calls/userAPI';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import paymentsAPI from '../../misc/axios-calls/paymentsAPI';
+import announcementAPI from '../../misc/axios-calls/announcementAPI';
+
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
 import _ from 'lodash';
 
@@ -27,6 +29,16 @@ export const fetchActivePollsByCommunity = (communityid) => async dispatch => {
 
   dispatch({ type: 'FETCH_ACTIVE_POLLS_BY_COMMUNITY', payload: response.data.polls});
 };
+export const fetchAnnouncementsByCommunity = (communityid) => async dispatch => {
+
+     const searchQuery={
+         communityid,
+       
+     }
+   const response = await announcementAPI.post('/announcements/search',searchQuery);
+ 
+   dispatch({ type: 'FETCH_ANNOUNCEMENTS_BY_COMMUNITY', payload: response.data.announcements});
+ };
 export const fetchPaymentOfApartment = (apartmentid) => async dispatch => {
     let searchQuery={
         "apartmentid":apartmentid

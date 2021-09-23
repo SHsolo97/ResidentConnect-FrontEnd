@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Announcements from './announcements/pages/Announcements';
 import {Community} from './apartments/pages/Community';
 import Registration from './authentication/pages/Registration';
 import SignIn from './authentication/pages/SignIn';
@@ -78,7 +77,6 @@ function App() {
    <PrivateRoute path="/classifieds" component={Classifieds} />
    <PrivateRoute path="/carpolling" component={CarPooling} />
    <PrivateRoute path="/apartments" component={Community} />
-   <PrivateRoute path="/announcement" component={Announcements} />
    <PrivateRoute path="/chatroomR" component={ResidentChatroom} />
    <PrivateRoute path="/chatroomA" component={AdminChatroom} />
    <PrivateRoute path="/paymentA" component={AdminPayments} />
@@ -106,7 +104,7 @@ function App() {
      <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
      <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
      <PrivateRoute path="/payBill" component={PayBill} />
-  
+
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>

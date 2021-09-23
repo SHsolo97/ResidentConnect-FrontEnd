@@ -20,6 +20,11 @@ export default function CustomTable(props) {
   const [poll,setPoll]=React.useState(null);
   const classes = useStyles();
   const { tableHead, tableData, tableHeaderColor } = props;
+  
+  // eslint-disable-next-line no-extend-native
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>

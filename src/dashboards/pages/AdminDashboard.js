@@ -33,7 +33,7 @@ emailsSubscriptionChart,
 completedTasksChart,
 } from "../../data/charts.js";
 import styles from "../styles/dashboardStyle.js";
-import { AnnouncementSection } from '../components/AnnouncementSection';
+import  AnnouncementSection from '../components/AnnouncementSection';
 const useStyles = makeStyles(styles);
 
 
@@ -70,7 +70,7 @@ return (
         <AnnouncementSection communityid={communityid} />
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>
-        <PollingSection userid={user._id} communityid={communityid} />
+        <PollingSection userid={user._id}  />
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>
         <FacilityActivitySection communityid={communityid} />

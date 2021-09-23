@@ -7,9 +7,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { SectionHeader } from "../../shared/components/SectionHeader";
-import { Alert } from "../../shared/components/Alert";
-import { useAlertState } from "../../misc/custom-hooks";
-import { Progress } from "../../shared/components/Progress";
+
 import { useProfile } from "../../context/profile.context";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';

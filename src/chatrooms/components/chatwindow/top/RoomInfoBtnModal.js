@@ -22,7 +22,7 @@ const RoomInfoBtnModal = () => {
            </Link>
           
 
-            <Dialog open={isOpen} onClose={close}>
+            <Dialog open={isOpen} fullWidth='true' maxWidth='md' onClose={close}>
                 <SectionHeader>    About {name} </SectionHeader>
                 <DialogContent>
                      <h2>Description </h2>
