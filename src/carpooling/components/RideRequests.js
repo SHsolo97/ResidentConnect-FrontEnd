@@ -13,11 +13,11 @@ export const RideRequests = ({...props}) => {
         props.fetchRideRequestsByRideOwner(user._id);
         
     },[])
-    const rejectRide=async(_id)=>{
+    const rejectRide=async(_id,rejectReason)=>{
    
         var apiBaseUrl = `/carpoolings/riderequests/${_id}`;
     
-        await carPoolingAPI.put(apiBaseUrl, {status:'rejected'})
+        await carPoolingAPI.put(apiBaseUrl, {status:'rejected',rejectionreason:rejectReason})
           .then(function (response) {
             if (response.status === 200) {
               console.log(response.data);

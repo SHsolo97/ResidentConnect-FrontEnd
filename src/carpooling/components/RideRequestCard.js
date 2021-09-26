@@ -13,10 +13,13 @@ import Avatar from '@mui/material/Avatar';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 import { useProfile } from '../../context/profile.context';
+import {useModelState} from '../../misc/custom-hooks';
+import { RejectReasonModel } from './RejectReasonModel';
 
 export const  RideRequestCard=({...props})=> {
   const {user}=useProfile();
-  
+  const { isOpen, open, close } = useModelState();
+  const [rejectReason,setRejectReaon]=React.useState(null);
   let startAddress=null;
   let destAddress= null;
   let ridedate=null;
@@ -45,8 +48,13 @@ export const  RideRequestCard=({...props})=> {
        props.approveRide(props.ridereq._id);
     }
     const RejectRequest=()=>{
-      props.rejectRide(props.ridereq._id);
+      console.log('inside reject');
+       open();
+      
 
+    }
+    const rejectRide=(rejectReason)=>{
+      props.rejectRide(props.ridereq._id,rejectReason);
     }
 return (
 <Paper elevation={5} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
@@ -103,13 +111,16 @@ return (
      
           <PrimaryButton onClick={approveRequest}>{approvebuttonName} </PrimaryButton>
           <PrimaryButton onClick={RejectRequest}>{rejectbuttonName} </PrimaryButton>
-
+          {isOpen &&
+       <RejectReasonModel  rejectRide={rejectRide}  open={isOpen} handleclose={close}/>
+  }
        
       </div>
     </Grid>
 
 
   </Grid>
+
 </Paper>
 );
 }
