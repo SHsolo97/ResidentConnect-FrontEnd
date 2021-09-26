@@ -1,5 +1,5 @@
 import React from "react";
-import PrimaryButton from "../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
 import { Field, reduxForm } from "redux-form";
 import {  renderTextField, renderDateTimeField,required,number,minValue } from "../../misc/form-fields";

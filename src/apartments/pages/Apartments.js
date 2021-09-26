@@ -3,7 +3,7 @@
 import React from 'react'
 import { useCommunity } from '../../context/community.context';
 import { PageHeader } from '../../shared/components/PageHeader'
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';

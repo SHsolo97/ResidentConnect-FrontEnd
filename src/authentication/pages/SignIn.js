@@ -14,7 +14,7 @@ import Link from '@material-ui/core/Link';
 
 import { PageHeader } from '../../shared/components/PageHeader';
 
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 
 import logo from '../../images/home/houselogo.png';
 import {Alert} from '../../shared/components/Alert';

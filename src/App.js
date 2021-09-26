@@ -1,4 +1,7 @@
 import React from 'react';
+import { createTheme,  ThemeProvider } from '@material-ui/core/styles';
+import { blue, grey, orange } from '@material-ui/core/colors';
+
 import { Switch } from 'react-router-dom';
 import {Community} from './apartments/pages/Community';
 import Registration from './authentication/pages/Registration';
@@ -52,9 +55,16 @@ import {hot} from 'react-hot-loader';
 import { CreateRide } from './carpooling/pages/CreateRide';
 import { SearchRide } from './carpooling/pages/SearchRide';
 import { RideHistory } from './carpooling/pages/RideHistory';
-
+const theme = createTheme({
+  palette: {
+    primary: orange,
+    secondary:blue,
+    disabled:grey
+  },
+});
 function App() {
  return(
+  <ThemeProvider theme={theme}>
  <ProfileProvider>
    <CommunityProvider>
      <ApartmentProvider>
@@ -117,6 +127,7 @@ function App() {
  </ApartmentProvider>
  </CommunityProvider>
  </ProfileProvider>
+ </ThemeProvider>
  );
 }
 

@@ -4,7 +4,7 @@ import { PageHeader } from '../../shared/components/PageHeader'
 import { SectionHeader } from '../../shared/components/SectionHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';

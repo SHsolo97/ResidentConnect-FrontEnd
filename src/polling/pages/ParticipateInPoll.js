@@ -1,5 +1,5 @@
 import React from "react";
-import PrimaryButton from "../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";

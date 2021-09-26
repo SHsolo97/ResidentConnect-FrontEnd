@@ -1,5 +1,5 @@
 import React from 'react'
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import DialogActions from '@material-ui/core/DialogActions';
 
 import Dialog from '@material-ui/core/Dialog';

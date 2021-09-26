@@ -5,7 +5,7 @@ import { database } from '../../../../misc/firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
-import PrimaryButton from '../../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../../shared/components/PrimaryButton';
 import { TextField } from '@material-ui/core';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';

@@ -3,7 +3,7 @@ import { Field,  reduxForm } from "redux-form";
 
 import Grid from '@mui/material/Grid';
 import FormLabel from '@mui/material/FormLabel';
-import PrimaryButton from "../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../shared/components/PrimaryButton";
 
 import cardlogos from '../../images/payments/cardlogos.png'
 import {

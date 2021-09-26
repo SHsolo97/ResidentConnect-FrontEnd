@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useHistory } from 'react-router-dom'
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';

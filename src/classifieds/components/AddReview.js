@@ -1,5 +1,5 @@
 import React from "react";
-import PrimaryButton from "../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../shared/components/PrimaryButton";
 import { useModelState } from "../../misc/custom-hooks";
 import { connect } from 'react-redux';
 import AddReviewModel from "./AddReviewModel";

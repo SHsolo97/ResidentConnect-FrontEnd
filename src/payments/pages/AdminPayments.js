@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 
 import { PageHeader } from '../../shared/components/PageHeader';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import AdminPendingPayments from '../components/AdminPendingPayments';
 import  AdminPaymentsOverview  from '../components/AdminPaymentsOverview';
 

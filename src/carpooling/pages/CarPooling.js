@@ -1,5 +1,5 @@
 import React from 'react'
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useHistory } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';

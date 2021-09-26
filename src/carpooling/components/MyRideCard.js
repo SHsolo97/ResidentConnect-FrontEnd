@@ -5,7 +5,7 @@ import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 
 export const  MyRideCard=({ride,...props})=> {

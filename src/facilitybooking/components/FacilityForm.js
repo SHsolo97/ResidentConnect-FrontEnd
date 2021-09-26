@@ -1,7 +1,7 @@
 import React from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import Grid from '@material-ui/core/Grid';
 import {Field,FieldArray, reduxForm} from 'redux-form';
 import {renderTextField,renderRadioGroup,renderCheckbox} from '../../misc/form-fields';

@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-import PrimaryButton from '../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../shared/components/PrimaryButton';
 import { useProfile } from '../../../context/profile.context';
 import { database,auth } from '../../../misc/firebase';
 import firebase from 'firebase/app';

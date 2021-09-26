@@ -1,5 +1,5 @@
 import React from 'react'
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import { Grid } from '@material-ui/core';
 import { BlockRow } from '../components/BlockRow';
 import { makeStyles } from '@material-ui/core/styles';

@@ -11,7 +11,7 @@ renderTextField,
 renderSelectField,
 
 } from "../../misc/form-fields";
-import PrimaryButton from "../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../shared/components/PrimaryButton";
 
 export const CreatePaymentForm = ({...props}) => {
 

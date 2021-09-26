@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../shared/components/PageHeader'
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import { makeStyles } from  '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Grid } from '@material-ui/core';

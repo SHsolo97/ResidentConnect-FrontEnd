@@ -5,7 +5,7 @@ import { PageHeader } from '../../shared/components/PageHeader';
 import { useHistory } from 'react-router-dom';
 import { useCommunity } from '../../context/community.context';
 import { useApartment } from '../../context/apartment.context';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 

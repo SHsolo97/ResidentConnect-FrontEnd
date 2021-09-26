@@ -5,7 +5,7 @@ import { orange } from '@material-ui/core/colors';
 import {Button} from '@material-ui/core';
 import {useModelState} from '../../misc/custom-hooks';
 import AddEditApartmentModel from '../components/AddEditApartmentModel';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { useProfile } from '../../context/profile.context';
 import { useEffect } from 'react';
 import ModelCard from '../components/ModelCard';

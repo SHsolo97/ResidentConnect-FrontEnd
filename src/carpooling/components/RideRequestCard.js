@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 import {useModelState} from '../../misc/custom-hooks';
 import { RejectReasonModel } from './RejectReasonModel';

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { PageHeader } from '../../shared/components/PageHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import { useCommunity } from '../../context/community.context';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../shared/components/PrimaryButton';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';

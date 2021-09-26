@@ -12,7 +12,7 @@ import { Dialog } from '@material-ui/core';
 import { uploadFilesToFireStorage } from '../../../../misc/firestore';
 
 import IconButton from '@material-ui/core/IconButton';
-import PrimaryButton from '../../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../../shared/components/PrimaryButton';
 import { useCurrentRoom } from '../../../../context/currentroom.context';
 
 const MAX_FILE_SIZE = 1000 * 1024 * 5;

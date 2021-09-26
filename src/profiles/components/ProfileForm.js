@@ -2,7 +2,7 @@ import React from 'react'
 import { useProfile } from '../../context/profile.context'
 
 import { SectionHeader } from '../../shared/components/SectionHeader'
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { MenuItem } from '@material-ui/core';

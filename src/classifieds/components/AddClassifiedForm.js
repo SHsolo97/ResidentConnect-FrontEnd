@@ -4,7 +4,7 @@ import { Field, FieldArray, reduxForm } from "redux-form";
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import ImageUpload from '../components/ImageUpload';
 import {PhoneItem} from '../components/PhoneItem';
 import LanguageTwoToneIcon from '@material-ui/icons/LanguageTwoTone';

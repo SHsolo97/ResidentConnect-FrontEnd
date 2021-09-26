@@ -1,7 +1,7 @@
 import {  Dialog, DialogTitle,DialogContent,DialogActions } from '@material-ui/core';
 import React from 'react';
 import { useModelState } from '../../../../misc/custom-hooks';
-import PrimaryButton from '../../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../../shared/components/PrimaryButton';
 import ProfileAvatar from '../../ProfileAvatar';
 import Button from '@mui/material/Button';
 import { useCurrentRoom } from '../../../../context/currentroom.context';

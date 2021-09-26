@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import PhoneIcon from '@material-ui/icons/Phone';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email';
 const useStyles = makeStyles((theme) => ({

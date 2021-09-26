@@ -1,6 +1,6 @@
 import React from 'react'
 import { useModelState } from '../../misc/custom-hooks';
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import  CreatePolling  from './CreatePolling'
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';

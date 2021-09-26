@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useCommunity } from '../../context/community.context';
 import { useProfile } from '../../context/profile.context'
 import { PageHeader } from '../../shared/components/PageHeader';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 
 const DummyAdminDashboard = () => {
     const history=useHistory();

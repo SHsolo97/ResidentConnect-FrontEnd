@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
 
 import Avatar from '@mui/material/Avatar';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 import { useProfile } from '../../context/profile.context';
 import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';

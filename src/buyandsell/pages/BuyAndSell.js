@@ -4,7 +4,7 @@ import { PageHeader } from '../../shared/components/PageHeader'
 import { useHistory } from 'react-router-dom'
 import { AdSearch } from '../components/AdSearch';
 import { AdSearchResult } from '../components/AdSearchResult';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 
 
 

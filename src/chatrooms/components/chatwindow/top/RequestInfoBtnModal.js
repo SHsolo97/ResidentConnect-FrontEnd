@@ -1,7 +1,7 @@
 import React, { memo,useEffect,useState } from 'react';
 import { useCurrentRoom } from '../../../../context/currentroom.context';
 import { useModelState } from '../../../../misc/custom-hooks';
-import PrimaryButton from '../../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../../shared/components/PrimaryButton';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import {  Dialog, IconButton } from '@material-ui/core';
@@ -32,7 +32,7 @@ const RequestInfoBtnModal = () => {
         });
 
         
-    },[id]);
+    },[id,communityid]);
 
    
 
