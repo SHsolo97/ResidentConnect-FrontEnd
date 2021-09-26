@@ -7,11 +7,36 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@material-ui/core/Select';
 import DatePicker from '@mui/lab/DatePicker';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText'
 import ImageUpload from '../classifieds/components/ImageUpload';
+import TimePicker from '@mui/lab/TimePicker';
+
+export const renderTimeField=({input,value,label,variant,meta: { touched, error,invalid },...custom})=>(
+  <LocalizationProvider dateAdapter={AdapterDateFns}>
+  <TimePicker label={label} {...custom}
+  value={input.value}
+  onChange={(value)=>input.onChange(value)}
+
+  renderInput={(value) => <TextField {...value} 
+  helperText={touched && error} error={touched && invalid}  variant={variant} />}/>
+              </LocalizationProvider>
+
+)
+export const renderDateTimeField=({input,value,label,variant,meta: { touched, error,invalid },...custom})=>(
+  <LocalizationProvider dateAdapter={AdapterDateFns}>
+  <DateTimePicker label={label} {...custom}
+  value={input.value}
+  onChange={(value)=>input.onChange(value)}
+
+  renderInput={(value) => <TextField {...value} 
+  helperText={touched && error} error={touched && invalid}  variant={variant} />}/>
+              </LocalizationProvider>
+
+)
 
 export const renderImageField=({input,value,label, ...custom}) => (
   

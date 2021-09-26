@@ -11,8 +11,23 @@ export function getNameInitials(name) {
 export function convertDate(rawdate)
 {
     const date=new Date(rawdate);
-    const converteddate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    const converteddate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
     return converteddate;
+}
+
+export function convertTime(rawdate)
+{
+    const date=new Date(rawdate);
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  
 }
 export function calculateAverageStars(_1star,_2star,_3star,_4star,_5star,_totrating)
 {

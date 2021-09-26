@@ -49,6 +49,9 @@ import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
 import {InitiatePayment}  from './payments/pages/InitiatePayment';
 import { PayBill } from './payments/pages/PayBill';
 import {hot} from 'react-hot-loader';
+import { CreateRide } from './carpooling/pages/CreateRide';
+import { SearchRide } from './carpooling/pages/SearchRide';
+import { RideHistory } from './carpooling/pages/RideHistory';
 
 function App() {
  return(
@@ -104,7 +107,13 @@ function App() {
      <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
      <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
      <PrivateRoute path="/payBill" component={PayBill} />
-
+     <PrivateRoute path="/createRide" component={CreateRide} />
+     <PrivateRoute path="/searchRide" component={SearchRide} />
+     <PrivateRoute path="/rideHistory" component={RideHistory} />
+     <PublicRoute path="/">
+     <SignIn />
+    
+   </PublicRoute>
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>
