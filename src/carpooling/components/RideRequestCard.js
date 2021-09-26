@@ -1,27 +1,21 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
-import {fetchRideById,fetchUser} from '../actions/index';
 import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
 import Avatar from '@mui/material/Avatar';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
-import { useProfile } from '../../context/profile.context';
 import {useModelState} from '../../misc/custom-hooks';
 import { RejectReasonModel } from './RejectReasonModel';
 
 export const  RideRequestCard=({...props})=> {
-  const {user}=useProfile();
   const { isOpen, open, close } = useModelState();
   
-    const [approvebuttonName,setApproveButtonName]=React.useState('Approve');
-    const [rejectbuttonName,setRejectbuttonName]=React.useState('Reject');
+    const [approvebuttonName]=React.useState('Approve');
+    const [rejectbuttonName]=React.useState('Reject');
 
     
     const approveRequest=()=>{

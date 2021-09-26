@@ -1,14 +1,12 @@
 import React,{ useEffect,createContext,useContext,useState } from "react";
 import { auth } from "../misc/firebase";
-import axios from "axios";
+
 import { useProfile } from "./profile.context";
-import { useCommunity } from "./community.context";
 import communityAPI from '../misc/axios-calls/communityAPI';
 
 const ApartmentContext=createContext();
 export const ApartmentProvider=({children})=>{
     const {user}=useProfile();
-    const {community,communityList}= useCommunity();
 
     const[apartment,setApartment]=useState(null);
     const[apartmentList,setApartmentList]=useState([]);
@@ -85,7 +83,7 @@ export const ApartmentProvider=({children})=>{
             if(authObj)
             {
                 console.log(user);
-                if(user!=null && user.type=='resident'  && user.apartments!=null)
+                if(user!=null && user.type==='resident'  && user.apartments!=null)
                 setApartmentDetail(user.apartments)              
                
             }
@@ -101,6 +99,7 @@ export const ApartmentProvider=({children})=>{
             authUnsub();
             setApartmentList([]); 
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user])
 
 

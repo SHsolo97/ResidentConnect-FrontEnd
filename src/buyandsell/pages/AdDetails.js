@@ -1,17 +1,12 @@
-import { Divider } from '@material-ui/core'
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { SectionHeader } from '../../shared/components/SectionHeader'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core'
-import { Paper } from '@material-ui/core'
-import SingleLineImageList from '../components/SingleLineImageList'
-import { ImageList } from '@material-ui/core'
-import { ImageListItem } from '@material-ui/core'
 import PrimaryButton from '../../shared/components/PrimaryButton'
 import { useProfile } from '../../context/profile.context'
-
 import { useModelState } from '../../misc/custom-hooks'
 import { DeleteAdvertModal } from '../components/DeleteAdvertModal'
 import { useHistory } from 'react-router-dom'

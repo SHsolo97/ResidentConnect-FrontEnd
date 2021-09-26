@@ -1,27 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import React from 'react'
 import { useCommunity } from '../../context/community.context';
-import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader'
 import PrimaryButton from '../../shared/components/PrimaryButton'
-import axios from 'axios';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FlatRow } from '../components/FlatRow';
-import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import notificationAPI from '../../misc/axios-calls/notificationAPI';
 import { Progress } from '../../shared/components/Progress';
 
 export const Apartments = ({children,...props}) => {
-    const {user}=useProfile();
-    const communityid=user.communities[0];
+   
+    const {community,setCommunity}=useCommunity();
+    const communityid=community._id;
     //const communityid='6132ab3d442964fd1c7ef7f4';
-    const [community,setCommunity]=React.useState(null)
     const [blocks,setBlocks]=React.useState([]);
     const [currentBlock,setCurrentBlock]=React.useState('');
-    const [floors,setFloors]=React.useState([]);
+  
     const [currentFloor,setCurrentFloor]=React.useState(0);
     const [flats,setFlats]=React.useState([]);
     const [models,setModels]=React.useState([]);
@@ -55,15 +53,15 @@ export const Apartments = ({children,...props}) => {
                     setCommunity(response.data);
                     let blockdetails=response.data.blockdetails;
                     let data=[];
-                    blockdetails.map((block)=>
+                    data.push(blockdetails.map((block)=>
                     {
                         let b={};
                         b['floors']=block.floors;
                         b['flats']=block.flats;
                         b['block']=block.block;
-                        data.push(b);
+                         return b;
                         
-                    })
+                    }));
                     setCurrentBlock(data[0])
                    
                     //console.log(data);

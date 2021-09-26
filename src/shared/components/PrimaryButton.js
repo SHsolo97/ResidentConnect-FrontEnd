@@ -1,7 +1,7 @@
 import React from 'react';
 import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { blue, grey, orange, purple } from '@material-ui/core/colors';
+import { blue, grey, orange } from '@material-ui/core/colors';
 
 export const BootstrapButton = withStyles({
   root: {

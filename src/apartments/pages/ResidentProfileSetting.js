@@ -1,4 +1,4 @@
-import React,{ useReducer } from 'react'
+import React from 'react'
 import { useProfile } from '../../context/profile.context'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { SectionHeader } from '../../shared/components/SectionHeader'
@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router-dom';
-import { Paper } from '@material-ui/core';
+
 import Grid from '@material-ui/core/Grid';
 import { produce } from 'immer';
 import { Select } from '@material-ui/core';
@@ -14,13 +14,8 @@ import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { Box } from '@material-ui/core';
-import axios from 'axios';
-import { Avatar } from '@material-ui/core';
-import img from '../../images/avatars/mypict.jpg'
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import ProfileImageUpload from '../components/ProfileImageUpload';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
-import { FormControlLabel } from '@material-ui/core';
 import userAPI from '../../misc/axios-calls/userAPI';
 
 const useStyles = makeStyles((theme) => ({

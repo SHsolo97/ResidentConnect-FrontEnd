@@ -1,5 +1,4 @@
 import React from 'react'
-import CreatePaymentForm from '../components/CreatePaymentForm';
 import { PageHeader } from '../../shared/components/PageHeader'
 import CreatePayment from './CreatePayment'
 import reducers from '../reducers';

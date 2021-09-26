@@ -1,5 +1,4 @@
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
-import _ from 'lodash';
 
 
 export const fetchPollsByCreator = (id) => async dispatch => {

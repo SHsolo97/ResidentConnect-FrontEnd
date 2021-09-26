@@ -1,20 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { SectionHeader } from '../../shared/components/SectionHeader'
 import { connect } from 'react-redux';
 import { fetchUsersOverview, fetchApartmentsOverview } from '../actions';
-import { Paper } from '@material-ui/core';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import GroupsIcon from '@mui/icons-material/Groups';
 import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
 import Card from "../../shared/components/cards/Card.js";
 import CardHeader from "../../shared/components/cards/CardHeader.js";
-import CardIcon from "../../shared/components/cards/CardIcon.js";
 import CardBody from "../../shared/components/cards/CardBody.js";
-import CardFooter from "../../shared/components/cards/CardFooter.js";
-import Table from "../../shared/components/Table/Table.js"
 import styles from "../styles/dashboardStyle.js";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,13 +19,13 @@ const classes=useStyles();
 React.useEffect(() => {
 props.fetchUsersOverview(props.communityid);
 props.fetchApartmentsOverview(props.communityid);
-}, [])
+}, [props.communityid])
 // eslint-disable-next-line no-extend-native
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 const renderUserData=() =>{
-if (props.userSummary.length != 0) {
+if (props.userSummary.length !== 0) {
 return (
 <div>
   <GroupsIcon style={{width:'50px',height:'50px'}} />

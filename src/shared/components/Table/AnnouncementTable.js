@@ -29,6 +29,7 @@ const { tableHead, tableData, tableHeaderColor } = props;
 const deleteAnnouncement=async()=>{
   console.log('delete');
   var apiBaseUrl = `/announcements/${announcement._id}`
+  // eslint-disable-next-line no-extend-native
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }

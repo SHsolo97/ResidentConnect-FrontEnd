@@ -1,15 +1,11 @@
 import React,{useState} from 'react'
-import {TextField,Button} from '@material-ui/core';
 import { Grid } from '@material-ui/core'
-
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useHistory } from 'react-router-dom'
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { orange } from '@material-ui/core/colors'
 import { AdSearch } from '../components/AdSearch';
 import { AdSearchResult } from '../components/AdSearchResult';
 import PrimaryButton from '../../shared/components/PrimaryButton';
-import { AdvertsProvider } from '../../context/adverts.context';
+
 
 
 const BuyAndSell = () => {

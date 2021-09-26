@@ -12,22 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import ApartmentIcon from '@material-ui/icons/Apartment';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import PersonIcon from '@material-ui/icons/Person';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import PollIcon from '@material-ui/icons/Poll';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import PaymentIcon from '@material-ui/icons/Payment';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
-import ContactsIcon from '@material-ui/icons/Contacts';
-import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
 import { MenuItem } from './MenuItem';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({

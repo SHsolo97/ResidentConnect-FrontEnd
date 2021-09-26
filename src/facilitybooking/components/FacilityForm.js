@@ -1,25 +1,11 @@
 import React from 'react'
-
-import Dialog from '@material-ui/core/Dialog';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { SectionHeader } from '../../shared/components/SectionHeader'
 import PrimaryButton from '../../shared/components/PrimaryButton'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-
 import {Field,FieldArray, reduxForm} from 'redux-form';
-import {renderRatingField,renderTextField,renderRadioGroup,renderSelectField,renderCheckbox} from '../../misc/form-fields';
-import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
-import {Alert} from '../../shared/components/Alert';
-import {useAlertState} from '../../misc/custom-hooks';
-import {Progress} from '../../shared/components/Progress';
-import { useProfile } from '../../context/profile.context';
+import {renderTextField,renderRadioGroup,renderCheckbox} from '../../misc/form-fields';
 import Checkbox from '@material-ui/core/Checkbox';
-import { FreeBreakfastOutlined } from '@material-ui/icons';
 
 
 

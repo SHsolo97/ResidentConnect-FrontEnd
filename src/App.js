@@ -35,13 +35,13 @@ import { AddClassified } from './classifieds/pages/AddClassified';
 import { ViewClassified } from './classifieds/pages/ViewClassified';
 import { PostAd } from './buyandsell/pages/PostAd';
 import { AddFacility } from './facilitybooking/pages/AddFacility';
-import SamplePage from './sample/SamplePage';
+
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';
 import { ResidentApartmentDetails } from './apartments/pages/ResidentApartmentDetails';
 import ProfileSetting from './profiles/pages/ProfileSetting';
 import { MyAds } from './buyandsell/pages/MyAds';
-import { AdvertsProvider } from './context/adverts.context';
+
 import { AdDetails } from './buyandsell/pages/AdDetails';
 import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
 import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSettings';
@@ -98,7 +98,6 @@ function App() {
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
    <PrivateRoute path="/profile" component={ProfileSetting}/>
-   <PrivateRoute path="/samplePage" component={SamplePage}/>
    <PrivateRoute path="/apartmentprofile" component={ResidentApartmentSettings}/>
 
      <PrivateRoute path="/myads" component={MyAds}/>

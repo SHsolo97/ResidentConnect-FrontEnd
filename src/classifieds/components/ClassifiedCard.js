@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { Button } from '@material-ui/core';
 import PhoneIcon from '@material-ui/icons/Phone';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useHistory } from 'react-router-dom';

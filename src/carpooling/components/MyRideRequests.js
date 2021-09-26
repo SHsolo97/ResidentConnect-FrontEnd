@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { connect } from 'react-redux';
 import { useProfile } from '../../context/profile.context';
@@ -12,13 +13,13 @@ export const MyRideRequests = ({...props}) => {
           
 
         
-    },[])
+    },[user._id])
 
     const renderRideRequestCard=()=>{
             return props.ridereqs.map(ridereq=>
                 {
               
-                        return  <MyRideRequestCard   ridereq={ridereq} />
+                        return  <MyRideRequestCard  key={ridereq._id}  ridereq={ridereq} />
                       
                 }
              ) }

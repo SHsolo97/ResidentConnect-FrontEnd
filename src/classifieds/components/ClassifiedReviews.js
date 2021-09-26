@@ -1,16 +1,10 @@
-import React,{useState,useEffect} from 'react'
-import PrimaryButton from '../../shared/components/PrimaryButton'
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Rating from '@material-ui/lab/Rating';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React,{useEffect} from 'react'
 import ReviewList from './ReviewList';
-import {useModelState} from '../../misc/custom-hooks';
-import AddReview from './AddReview';
-import ProgressBar from '../../shared/components/ProgressBar';
+import AddReview from './AddReview'
 import { useCurrentClassified } from '../../context/currentclassified.context';
 import  {ClassifiedRatings}  from './ClassifiedRatings';
 import {fetchClassifiedById,fetchCommentsAndUsers} from '../actions';
-
 import { connect } from 'react-redux';
 
 
@@ -22,7 +16,7 @@ import { connect } from 'react-redux';
      props.fetchClassifiedById(classifiedid);
      props.fetchCommentsAndUsers(classifiedid);
 
-}, [])
+}, [classifiedid])
 
 
 return (

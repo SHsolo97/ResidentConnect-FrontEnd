@@ -1,12 +1,11 @@
 import React from 'react'
-import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import logo from '../images/home/logo.png';
 import Typography from '@material-ui/core/Typography';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { auth } from '../misc/firebase';
 import { useHistory } from 'react-router-dom';
@@ -97,7 +96,7 @@ export const SettingsLayout = ({children}) => {
                 <Toolbar>
                     <Grid container direction="row" justifyContent="flex-start" alignItems="center">
 
-                        <img src={logo} />
+                        <img  alt="logo" src={logo} />
                         <Typography variant="h6" noWrap>
                             Residents Connect
                         </Typography>

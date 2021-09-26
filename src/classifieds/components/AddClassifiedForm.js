@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useEffect,useState} from 'react'
 import { Field, FieldArray, reduxForm } from "redux-form";
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +8,7 @@ import PrimaryButton from '../../shared/components/PrimaryButton';
 import ImageUpload from '../components/ImageUpload';
 import {PhoneItem} from '../components/PhoneItem';
 import LanguageTwoToneIcon from '@material-ui/icons/LanguageTwoTone';
-import { SubmissionError } from 'redux-form'
+
 import {required,email,pinNumber,minLength, renderTextField,renderSelectField} from "../../misc/form-fields";
 import { useHistory } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,9 +19,9 @@ export const AddClassifiedForm = ({...props}) => {
     const [category,setCategory]=useState(null)
     const [categories, setCategories] = useState([]);
 
-    const [subCategory, setSubCategory] = useState([]);
+    const [ setSubCategory] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
-    const { error, array: { push },submitting} = props
+    const { error, submitting} = props
           const getSubCategories = async () => {
 
         var apiBaseUrl = `/classifieds/subcategories`

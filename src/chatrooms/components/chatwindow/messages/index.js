@@ -6,7 +6,6 @@ import { auth, database, storage } from '../../../../misc/firebase';
 import { transformArrWithId, groupBy} from '../../../../misc/helpers';
 import MessageItem from './MessageItem';
 import { Paper } from '@material-ui/core';
-import { useProfile } from '../../../../context/profile.context';
 import { useCommunity } from '../../../../context/community.context';
 const PAGE_SIZE = 50;
 const messageRef = database.ref('/messages');
@@ -22,7 +21,6 @@ const Messages = () => {
     const [messages, setMessages] = useState(null);
     const isChatEmpty = messages && messages.length === 0;
     const canShowMessages = messages && messages.length > 0;
-   const {user}=useProfile();
   // const communityid=user.communities[0];
    const {community}=useCommunity();
    const communityid=community._id;
@@ -90,7 +88,7 @@ const Messages = () => {
         })
        
         Alert.info(alertMsg, 5000);
-    }, [chatId])
+    }, [chatId,communityid])
 
     const handleLike = useCallback(async (msgid) => {
         // console.log(msgid);
@@ -153,7 +151,7 @@ const Messages = () => {
                 Alert.error(err.message, 5000);
             }
         }
-    }, [chatId, messages])
+    }, [chatId, communityid,messages])
     const renderMessages = () => {
         const groups = groupBy(messages, (item) => new Date(item.createdAt).toDateString()
         );

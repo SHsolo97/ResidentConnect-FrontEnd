@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
-import { ReactMic } from 'react-mic';
+import React, { useState } from 'react';
+
 import { useParams } from 'react-router';
-import { Alert, Icon, InputGroup } from 'rsuite';
+import { Alert } from 'rsuite';
 import { storage } from '../../../../misc/firebase';
 import { IconButton } from '@material-ui/core';
 import MicIcon from '@material-ui/icons/Mic';
@@ -9,7 +9,7 @@ import { useModelState } from '../../../../misc/custom-hooks';
 import RecordAudio from './RecordAudio';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Dialog } from '@material-ui/core';
 import PrimaryButton from '../../../../shared/components/PrimaryButton';
@@ -17,7 +17,7 @@ import PrimaryButton from '../../../../shared/components/PrimaryButton';
 const AudioMsgBtn = ({ afterUpload }) => {
     const { chatId } = useParams();
     const { isOpen, close, open } = useModelState();
-    const [isRecording, setIsRecording] = useState(false);
+    //const [isRecording, setIsRecording] = useState(false);
     const [isUploading, setIsuploading] = useState(false);
     const [audios,setAudios]=useState([]);
     const onUpload =(event)=>{

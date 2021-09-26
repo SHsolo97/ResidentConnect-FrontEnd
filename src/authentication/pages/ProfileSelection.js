@@ -1,8 +1,6 @@
 import React from 'react'
 import { useProfile } from '../../context/profile.context'
-import {Button} from '@material-ui/core';
 import { PageHeader } from '../../shared/components/PageHeader';
-import { Progress } from '../../shared/components/Progress';
 
 import { useHistory } from 'react-router-dom';
 import { useCommunity } from '../../context/community.context';
@@ -10,10 +8,7 @@ import { useApartment } from '../../context/apartment.context';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel from '@material-ui/core/FormLabel';
+
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';
@@ -25,7 +20,7 @@ export const ProfileSelection = () => {
 const {user}=useProfile();
 const { isOpen, open, close } = useModelState();
 
-const [isLoading,setIsLoading]=React.useState(true);
+
 const {setCommunity,communityList} = useCommunity();
 const {setApartment,apartmentList} = useApartment();
 

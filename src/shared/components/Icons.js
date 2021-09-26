@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import { pink } from '@mui/material/colors';
+
 import SvgIcon from '@mui/material/SvgIcon';
 import Users from '../../images/icons/Users.svg';
 

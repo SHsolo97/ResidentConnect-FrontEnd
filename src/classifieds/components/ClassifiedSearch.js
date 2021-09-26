@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useState,useEffect} from 'react'
 import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
-import { useProfile } from '../../context/profile.context'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -12,7 +12,6 @@ import { Paper } from '@material-ui/core';
 import { useCommunity } from '../../context/community.context';
 
 export const ClassifiedSearch = ({...props}) => {
-    const {user} = useProfile();
     const {community} = useCommunity();
     const communityid=community._id;
     const[category,setCategory]=useState('');

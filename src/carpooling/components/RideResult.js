@@ -1,5 +1,4 @@
 import React from 'react'
-import { SectionHeader } from '../../shared/components/SectionHeader';
 import { connect } from 'react-redux';
 import {filterRideWithUser} from '../actions/index';
 import SearchRideCard from './SearchRideCard';
@@ -11,6 +10,7 @@ export const RideResult = ({...props}) => {
            console.log(props.rides);
  
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.filter])
     const renderRides=()=>{
         return props.rides.map(ride=>{

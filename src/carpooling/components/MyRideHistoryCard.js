@@ -1,20 +1,16 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+
 import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
-import {fetchMyRides} from '../actions/index';
-import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
 import Avatar from '@mui/material/Avatar';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
-import { useProfile } from '../../context/profile.context';
+
 export const  MyRideHistoryCard=({ride,...props})=> {
-  const {user}=useProfile();
+
     const {_id,source,ridedatetime,destination,seats,amt,car,thumbnail,status}=ride;
     const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
     const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
@@ -23,7 +19,7 @@ export const  MyRideHistoryCard=({ride,...props})=> {
 
    
 return (
-<Paper elevation={5} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
+<Paper key={_id} elevation={5} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
   <Grid container column justifyContent="space-between" alignItems="center">
 
     <Grid container row justifyContent="space-between" alignItems="center">

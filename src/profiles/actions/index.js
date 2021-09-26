@@ -1,4 +1,3 @@
-import { useProfile } from '../../context/profile.context';
 import userAPI from '../../misc/axios-calls/userAPI';
 
 

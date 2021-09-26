@@ -16,7 +16,7 @@ export const  ShowPollDetails =({...props})=> {
                     
                     {poll.options.map(option=>{
                         let   percentail=0;
-                        if(totalParticipants!=0)
+                        if(totalParticipants!==0)
                                 percentail= Math.round(((parseInt(option.votes)/parseInt(totalParticipants))*100),1);
                         
                         return <Grid

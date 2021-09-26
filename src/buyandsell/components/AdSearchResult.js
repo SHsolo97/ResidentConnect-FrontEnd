@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useProfile } from '../../context/profile.context';
-import axios from 'axios';
+
+
 import SellItemCard from './SellItemCard';
 import { Box, Grid } from '@material-ui/core';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
@@ -8,7 +8,7 @@ import { useCommunity } from '../../context/community.context';
 
 
 export const AdSearchResult = ({ ...props }) => {
-  const { user } = useProfile();
+ 
   const {community} = useCommunity();
     const communityid=community._id;
   const [adverts, setAdverts] = useState([]);
@@ -38,8 +38,8 @@ export const AdSearchResult = ({ ...props }) => {
   }
   React.useEffect(() => {
     getAds();
-    console.log(adverts);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.category, props.subcategory])
   return (
 

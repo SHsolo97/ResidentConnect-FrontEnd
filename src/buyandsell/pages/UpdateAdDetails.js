@@ -93,6 +93,7 @@ export const UpdateAdDetails = ({...props}) => {
     useEffect(() => {
         
         getSubCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [advert.category])
 
     const updateAdvert=async()=>{

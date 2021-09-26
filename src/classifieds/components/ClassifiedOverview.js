@@ -1,14 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { Button } from '@material-ui/core';
 import PhoneIcon from '@material-ui/icons/Phone';
-import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router-dom';
 import { useCurrentClassified } from '../../context/currentclassified.context';
+
 const useStyles = makeStyles((theme) => ({
 root: {
 flexGrow: 1,
@@ -53,17 +50,17 @@ return (
             </Typography>
             <Typography variant="body1" gutterBottom>
               {address.addressline} , {address.area} , {address.city}, {address.state} , {address.pincode} </Typography>
-             { phones.map(phone=>{
+             { phones.map(phone=>(
                 <Typography variant="body1">
                 <PhoneIcon fontSize="small" /> {phone.number}
               </Typography>
-            })
+             ))
             } 
-             { emails.map(email=>{
+             { emails.map(email=>(
             <Typography variant="body1">
               {email}
             </Typography>
-             })}
+             ))}
           </Grid>
        
         </Grid>

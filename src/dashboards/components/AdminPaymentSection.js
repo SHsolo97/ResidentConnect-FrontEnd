@@ -1,17 +1,8 @@
 import React from 'react'
-import { SectionHeader } from '../../shared/components/SectionHeader'
 import { connect } from 'react-redux';
-import { Paper } from '@material-ui/core';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import GroupsIcon from '@mui/icons-material/Groups';
-import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Card from "../../shared/components/cards/Card.js";
 import CardHeader from "../../shared/components/cards/CardHeader.js";
-import CardIcon from "../../shared/components/cards/CardIcon.js";
 import CardBody from "../../shared/components/cards/CardBody.js";
-import CardFooter from "../../shared/components/cards/CardFooter.js";
 import {fetchPaymentOfCommunity} from '../actions';
 import { makeStyles } from '@material-ui/core';
 import {
@@ -35,13 +26,14 @@ const AdminPaymentSection =({...props})=>{
     const classes=useStyles();
 
     React.useEffect(() => {
-        console.log(props.communityid);
+        //console.log(props.communityid);
         props.fetchPaymentOfCommunity(props.communityid);
 
-        console.log(props.totalPaid);
-        console.log(props.totalDue);
+        //console.log(props.totalPaid);
+        //console.log(props.totalDue);
         
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.communityid])
     
     const renderPaymentData=()=>{
         const totalPaid=props.totalPaid!=null?parseInt(props.totalPaid):1300;
@@ -76,11 +68,15 @@ const mapStateToProps = state => {
              totalPaid : state.payments.reduce(function (accumulator, payment) {
                 if(payment.status==='paid')
                     return accumulator + payment.amt;
+                  else
+                  return 0;
               }, 0),
             
               totalDue : state.payments.reduce(function (accumulator, payment) {
                 if(payment.status!=='paid')
                     return accumulator + payment.amt;
+                else
+                    return 0;
               }, 0)
       
     };

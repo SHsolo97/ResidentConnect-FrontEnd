@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { SectionHeader } from '../../shared/components/SectionHeader'
 import BillCircles from '../components/BillCircles';
 import PaymentGraph from './PaymentGraph';
 import Grid from '@mui/material/Grid';
@@ -10,15 +10,15 @@ import {useCommunity} from '../../context/community.context';
 export const AdminPaymentsOverview = ({...props}) => {
     const {community}=useCommunity();
     const communityid= community._id;
-    console.log(communityid);
+    //console.log(communityid);
     React.useEffect(() => {
         props.fetchPaymentOfCommunity(communityid);
-        console.log(props.totalPaid);
-        console.log(props.totalDue);
-        console.log(props.totalOverdue);
+        // console.log(props.totalPaid);
+        // console.log(props.totalDue);
+        // console.log(props.totalOverdue);
 
        
-    },[])
+    },[communityid])
         return (
         <div>
             <Grid container spacing={3}>
@@ -34,9 +34,7 @@ export const AdminPaymentsOverview = ({...props}) => {
     )
 }
 const mapStateToProps = state => {
-    let totalPaid=0;
-    let totalOverdue=0;
-    let totalDue=0;
+    ;
     return { 
         payments:state.payments,
         transactions_paid: state.payments.filter(payment=>payment.status==='paid'),

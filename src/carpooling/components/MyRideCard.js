@@ -1,20 +1,15 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
-import {fetchMyRides} from '../actions/index';
-import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
 import Avatar from '@mui/material/Avatar';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
-import { useProfile } from '../../context/profile.context';
+
 export const  MyRideCard=({ride,...props})=> {
-  const {user}=useProfile();
+  
     const {_id,source,ridedatetime,destination,seats,amt,car,thumbnail}=ride;
     const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
     const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
@@ -77,10 +72,10 @@ return (
         {ridedate}, {ridetime}
       </Typography>
       <div>
-        {ride.status!='cancelled' && 
+        {ride.status!=='cancelled' && 
         <PrimaryButton onClick={editRide}>Edit Ride </PrimaryButton>
         }
-         {ride.status!='cancelled'? 
+         {ride.status!=='cancelled'? 
           <PrimaryButton onClick={cancelRide}>Cancel Ride </PrimaryButton>
           :
           <PrimaryButton disabled>Cancelled </PrimaryButton>

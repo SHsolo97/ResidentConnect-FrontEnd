@@ -1,7 +1,6 @@
 import React,{ useEffect,createContext,useContext,useState } from "react";
 
-import { KeyboardReturnOutlined } from "@material-ui/icons";
-import { auth, database, messaging } from '../misc/firebase';
+import { auth, database } from '../misc/firebase';
 import firebase from 'firebase/app';
 import userAPI from '../misc/axios-calls/userAPI';
 
@@ -17,7 +16,7 @@ const isOnlineForDatabase = {
 const ProfileContext=createContext();
 export const ProfileProvider=({children})=>{
     const[user,setUser]=useState(null);
-    let userRef;
+    
     let userStatusRef;
 
     const [isLoading,setIsLoading]=useState(true);
@@ -70,6 +69,7 @@ export const ProfileProvider=({children})=>{
                 setIsLoading(false); 
                // setCommunitydetail();
                // setApartmentdetail();
+               // eslint-disable-next-line react-hooks/exhaustive-deps
                userStatusRef = database.ref(`/status/${authObj.uid}`);
 
                database.ref('.info/connected').on('value', function (snapshot) {                  

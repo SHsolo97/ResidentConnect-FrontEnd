@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useProfile } from '../../context/profile.context';
@@ -15,7 +16,6 @@ import { Provider } from 'react-redux';
 import  AddClassifiedForm  from '../components/AddClassifiedForm';
 
 
-const MAX_FILE_SIZE = 1000 * 1024 * 5;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const classifiedstore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));

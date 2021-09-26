@@ -2,17 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Avatar } from '@material-ui/core';
+
 import { Grid } from '@material-ui/core';
 import TimeAgo from 'timeago-react';
-import { useHistory, useLocation } from 'react-router-dom';
+
 import ProfileAvatar from '../ProfileAvatar';
-import PrimaryButton from '../../../shared/components/PrimaryButton';
 
 const useStyles = makeStyles((theme)=>({
 root: {
@@ -27,8 +23,7 @@ height: theme.spacing(7),
 export const RoomCard = ({setCurrentRoomId,room}) => {
 const classes = useStyles();
 const { createdAt, name, lastMessage } = room;
-const location=useLocation();
-const history=useHistory();
+
 
 const setCurrentRoom=()=>{
     console.log(room.id);

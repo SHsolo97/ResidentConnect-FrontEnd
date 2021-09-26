@@ -15,10 +15,10 @@ export const MyAds = () => {
         <CircularProgress/>
     const creator=user._id;
  
-    const getAds=async()=>{
+    const getAds=async(creator)=>{
         const apiBaseUrl = `/adverts`  
-        const searchQuery={creator:creator}
-        console.log(searchQuery);
+        const searchQuery={creator}
+        //console.log(searchQuery);
         await buyAndSellAPI.post(apiBaseUrl,searchQuery )
              .then(function (response) {
                  if (response.status === 200)
@@ -36,9 +36,9 @@ export const MyAds = () => {
              });  
        }
         useEffect(() => {
-            getAds();
+            getAds(creator);
           
-       }, [ ])
+       }, [creator])
     
     return (
 

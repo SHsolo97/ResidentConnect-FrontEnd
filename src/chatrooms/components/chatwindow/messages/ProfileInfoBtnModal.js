@@ -9,7 +9,7 @@ import { auth } from '../../../../misc/firebase';
 
 const ProfileInfoBtnModal = ({ profile, handleAdmin,children,...btnProps }) => {
     const { isOpen, close, open } = useModelState();
-    const { name, avatar,createdAt } = profile;
+    const { name, avatar } = profile;
     const shortName = name.split(' ')[0];
     const isAdmin = useCurrentRoom(v => v.isAdmin);
     const admins = useCurrentRoom(v => v.admins);

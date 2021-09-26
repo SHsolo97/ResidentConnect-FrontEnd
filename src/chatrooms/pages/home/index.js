@@ -5,14 +5,14 @@ import { RoomsProvider } from '../../../context/rooms.context';
 import { useMediaQuery } from '../../../misc/custom-hooks';
 import Chat from './Chat';
 import { Grid } from '@material-ui/core';
-import { Link, useLocation } from 'react-router-dom';
+
 import { RoomsRequestsProvider } from '../../../context/roomsrequest.context';
 
 const Home = () => {
 const isDesktop = useMediaQuery(`(min-width: 992px)`);
 const { isExact } = useRouteMatch();
 const canRenderSideBar = isDesktop || isExact;
-const location = useLocation();
+//const location = useLocation();
 const [currentRoomId,setCurrentRoomId]=React.useState(null);;
 const setCurrentRoom=(roomid)=>{
 console.log(roomid);

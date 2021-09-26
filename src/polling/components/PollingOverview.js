@@ -1,7 +1,6 @@
 import React from 'react'
 import {fetchPollsByCreator} from '../actions/index';
 import { connect } from 'react-redux';
-import { SectionHeader } from '../../shared/components/SectionHeader';
 import {PollingsList} from './PollingsList';
 import PollCircles from './PollCircles';
  class  PollingOverview  extends React.Component{

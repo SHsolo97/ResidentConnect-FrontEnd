@@ -15,7 +15,6 @@ import { useAlertState } from "../../misc/custom-hooks";
 import { Progress } from "../../shared/components/Progress";
 import { useProfile } from "../../context/profile.context";
 import { calculateAverageStars } from "../../misc/helpers";
-import { useCurrentClassified } from '../../context/currentclassified.context';
 
 const validate = (formValues) => {
   const errors = {};

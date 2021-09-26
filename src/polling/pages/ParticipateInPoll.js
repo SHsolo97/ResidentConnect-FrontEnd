@@ -1,31 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import PrimaryButton from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
-
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { SectionHeader } from "../../shared/components/SectionHeader";
-import { Alert } from "../../shared/components/Alert";
-import { useAlertState } from "../../misc/custom-hooks";
-import { Progress } from "../../shared/components/Progress";
 import { useProfile } from "../../context/profile.context";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import IconButton from '@mui/material/IconButton';
-import { Stack } from "@mui/material";
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
-import { useCommunity } from "../../context/community.context";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { ControlCameraOutlined } from "@material-ui/icons";
+
 
 export const ParticipateInPoll = ({...props}) => {
   const {options,_id,question,totalvotes}=props.poll;
-    const {community}=useCommunity();
     const {user}=useProfile();
     const [option,setOption]=React.useState(null);
 

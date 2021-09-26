@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import {  makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,12 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
 import { Button } from '@material-ui/core';
 import Chip from '@mui/material/Chip';
 import {convertDate} from '../../misc/helpers';
@@ -69,7 +65,7 @@ if (b[orderBy]
   ];
 
   function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const { classes,  order, orderBy,   onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
   onRequestSort(event, property);
   };
@@ -105,27 +101,7 @@ if (b[orderBy]
   rowCount: PropTypes.number.isRequired,
   };
 
-  const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(1),
-  },
-  highlight:
-  theme.palette.type === 'light'
-  ? {
-  color: theme.palette.secondary.main,
-  backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-  }
-  : {
-  color: theme.palette.text.primary,
-  backgroundColor: theme.palette.secondary.dark,
-  },
-  title: {
-  flex: '1 1 100%',
-  },
-  }));
-
-
+  
 
   const useStyles = makeStyles((theme) => ({
   root: {
@@ -165,6 +141,7 @@ if (b[orderBy]
   setOrderBy(property);
   };
 
+  // eslint-disable-next-line no-extend-native
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
@@ -194,7 +171,6 @@ if (b[orderBy]
             {stableSort(rows, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
-            const labelId = `enhanced-table-checkbox-${index}`;
 
             return (
             <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>

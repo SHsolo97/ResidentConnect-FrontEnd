@@ -6,21 +6,11 @@ import {MyRideHistoryCard} from './MyRideHistoryCard';
 
 export const MyRideHistory = ({...props}) => {
     const {user}=useProfile();
-    const [rides,setRides]=React.useState([]);
     useEffect(() => {
         props.fetchMyRides(user._id);
-        console.log(props.rides);
-        const temprides=[];
-        if(props.rides!=null)
-        {
-            props.rides.map(ride=>{
-                temprides.push(ride);
-            })
-            console.log(temprides);
-            setRides(temprides);
-
-        };
-    },[])
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[user._id])
     return (
         <div>
         { props.rides !=null && 
@@ -31,7 +21,7 @@ export const MyRideHistory = ({...props}) => {
     )
 }
 const mapStateToProps = state => {
-    return { rides: state.rides.filter(ride=>ride.status!='active')};
+    return { rides: state.rides.filter(ride=>ride.status!=='active')};
 
   };
   

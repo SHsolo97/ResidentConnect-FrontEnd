@@ -1,27 +1,18 @@
 import React from 'react';
-import { Loader, Nav } from 'rsuite';
+import {  Nav } from 'rsuite';
 import { Link, useLocation } from 'react-router-dom';
-import { transformArrWithId } from '../../../misc/helpers';
 import { useRooms } from '../../../context/rooms.context';
-import { useProfile } from '../../../context/profile.context';
 import {RoomCard} from './RoomCard';
 import { CircularProgress, Grid, Paper, TextField } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
-import { auth,database } from '../../../misc/firebase';
+import { auth } from '../../../misc/firebase';
 import { transformToArr } from '../../../misc/helpers';
 import { JoinRoomCard } from './JoinRoomCard';
-import { useRoomsRequests } from '../../../context/roomsrequest.context';
-import { useCommunity } from '../../../context/community.context';
 
 const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
     const rooms = useRooms();
-    const roomsrequests=useRoomsRequests();
-    
-    
-    const {user}=useProfile();
-    //const communityid=user.communities[0];
-    const {community}=useCommunity();
-    const communityid=community._id;
+
+  
     //const c_rooms=rooms.find(room => room.communityid === communityid);
     const location = useLocation();
     const setCurrentRoom=(roomid)=>{

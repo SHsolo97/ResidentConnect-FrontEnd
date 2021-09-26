@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import Box from '@material-ui/core/Box';
-import { Grid, Link } from '@material-ui/core';
+import { Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {fetchPaymentOfApartment} from '../actions';
@@ -84,7 +86,7 @@ export const BillCards = ({...props}) => {
     React.useEffect(() => {
         props.fetchPaymentOfApartment(apartmentid);
        
-    },[])
+    },[apartmentid])
        return (
     <div style={{paddingTop:"50px", paddingBottom:"50px"}} >
     <Grid  container
@@ -142,10 +144,14 @@ const mapStateToProps = state => {
     return {     totalOverdue :  state.payments.filter(payment=>payment.status==='overdue').reduce(function (accumulator, payment) {
         if(payment.status==='overdue')
             return accumulator + payment.amt;
+        else
+            return 0;
       }, 0),
       totalDue :  state.payments.filter(payment=>payment.status==='due').reduce(function (accumulator, payment) {
         if(payment.status==='due')
             return accumulator + payment.amt;
+        else
+            return 0;
       }, 0)
       
     };

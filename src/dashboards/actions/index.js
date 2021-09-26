@@ -4,7 +4,6 @@ import paymentsAPI from '../../misc/axios-calls/paymentsAPI';
 import announcementAPI from '../../misc/axios-calls/announcementAPI';
 
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
-import _ from 'lodash';
 
 
 export const fetchPollsByCreator = (id) => async dispatch => {
@@ -75,10 +74,11 @@ export const fetchUsersOverview = (communityid) => async dispatch => {
       admin:0,
       resident:0
   };
-  if(response.data.length!=0)
+  if(response.data.length!==0)
    {  
+       // eslint-disable-next-line array-callback-return
        response.data.map(user=>{
-           console.log(user);
+         ;
         if(user._id.type==='admin')
         {
             result.admin=user.total;
@@ -107,8 +107,9 @@ export const fetchApartmentsOverview = (communityid) => async dispatch => {
       total:0,
       status:[]
   };
-  if(response.data.length!=0)
+  if(response.data.length!==0)
    {  
+       // eslint-disable-next-line array-callback-return
        response.data.map(apttype=>{
            console.log(apttype);
            const type= apttype._id.status;

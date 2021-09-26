@@ -1,13 +1,9 @@
-import React,{useEffect} from 'react'
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import React from 'react'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
-import ReviewList from './ReviewList';
-import {useModelState} from '../../misc/custom-hooks';
-import AddReview from './AddReview';
 import ProgressBar from '../../shared/components/ProgressBar';
-import { useCurrentClassified } from '../../context/currentclassified.context';
+
 
 export const ClassifiedRatings = ({...props}) => {
   

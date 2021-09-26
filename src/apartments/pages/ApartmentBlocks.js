@@ -1,7 +1,6 @@
 import React from 'react'
 import PrimaryButton from '../../shared/components/PrimaryButton'
-import axios from 'axios';
-import { Grid, GridListTileBar, TextField } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { BlockRow } from '../components/BlockRow';
 import { makeStyles } from '@material-ui/core/styles';
 import { useProfile } from '../../context/profile.context';
@@ -68,6 +67,7 @@ if (response.status === 200)
 console.log(response.data.blocks);
 const blockList=response.data.blocks;
 
+// eslint-disable-next-line array-callback-return
 blockList.map((block,index)=>{
 blockList[index] = {...block, key: index};
 setKey(index+1);
@@ -87,6 +87,7 @@ React.useEffect(() => {
 getApartmentBlocks();
 
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 const addRow=(e)=>{
 let block=IINTIAL_VALUE;
@@ -99,6 +100,7 @@ console.log(blocks);
 const handleSubmit=(e)=>{
 console.log(blocks);
 let blockdetails=[];
+// eslint-disable-next-line array-callback-return
 blocks.map((block)=>{
 let b={};
 b['floors'] =parseInt(block['floors'])
@@ -138,7 +140,7 @@ return (
   <PrimaryButton onClick={addRow}>Add Block</PrimaryButton>
   </Grid>
     <Paper elevation={10}>
-  {blocks.length!=0?
+  {blocks.length!==0?
     <Grid container direction="row" justifyContent="center" alignItems="center">
 
     <div className={classes.formControl}> Block </div>

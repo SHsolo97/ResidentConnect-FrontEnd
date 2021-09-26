@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PrimaryButton from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
-import { Field, FieldArray,reduxForm } from "redux-form";
-import {  renderTextField, renderDateTimeField,renderTimeField,renderDateField,required,number,minValue,pinNumber } from "../../misc/form-fields";
-import ImageUpload from '../components/ImageUpload';
+import { Field, reduxForm } from "redux-form";
+import {  renderTextField, renderDateTimeField,required,number,minValue } from "../../misc/form-fields";
 
-import { SectionHeader } from "../../shared/components/SectionHeader";
-import Stack from '@mui/material/Stack';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import IconButton from '@mui/material/IconButton';
 
 const SearchRideForm = ({...props}) => {
   const submitForm=(formValues)=>{

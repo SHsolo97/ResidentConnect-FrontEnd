@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+
 import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
-import {fetchMyRides} from '../actions/index';
+
 import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
+
 import Avatar from '@mui/material/Avatar';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
@@ -17,7 +16,7 @@ import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
 
 export const  SearchRideCard=({ride,...props})=> {
   const {user}=useProfile();
-    const {_id,creator,source,ridedatetime,destination,seats,amt,car,thumbnail}=ride;
+    const {_id,creator,source,ridedatetime,destination,seats,amt}=ride;
     const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
     const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
     const ridedate=convertDate(ridedatetime);

@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
+import {  OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from "axios";
 
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,16 +10,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
-import firebase from 'firebase/app';
-import { auth,database } from '../../misc/firebase';
+import { auth } from '../../misc/firebase';
 import Link from '@material-ui/core/Link';
-import {Redirect} from 'react-router-dom';
+
 import { PageHeader } from '../../shared/components/PageHeader';
-import { CenterFocusStrong, ControlCameraOutlined } from '@material-ui/icons';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-import { Box } from '@material-ui/core';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import logo from '../../images/home/houselogo.png';
 import userAPI from '../../misc/axios-calls/userAPI';
@@ -116,16 +112,16 @@ const Registration = () => {
       const handlePasswordChange = (prop) => (event) => {
         setPassword({ ...password, [prop]: event.target.value });
       };
-      const onSignUpWithProvider =  async provider => {
+    //   const onSignUpWithProvider =  async provider => {
         
-         try {
-             const result= await auth.signInWithPopup(provider);
-             console.log(result);           
-         }
-         catch (err) {
-            console.log(err);
-        }
-     }
+    //      try {
+    //          const result= await auth.signInWithPopup(provider);
+    //          console.log(result);           
+    //      }
+    //      catch (err) {
+    //         console.log(err);
+    //     }
+    //  }
      const registerUserwithEmailAndPassword=()=>{
          console.log('Register email in Firebase....');
         auth.createUserWithEmailAndPassword(userInfo.email,password.password)
@@ -204,15 +200,15 @@ const Registration = () => {
       });
         }
       
-     const onFacebookSignUp = () => {
-        onSignUpWithProvider(new firebase.auth.FacebookAuthProvider());
+    //  const onFacebookSignUp = () => {
+    //     onSignUpWithProvider(new firebase.auth.FacebookAuthProvider());
 
-     }
-     const onGoogleSignUp = (event) => {
-        onSignUpWithProvider(new firebase.auth.GoogleAuthProvider());
-        event.preventDefault() ;
+    //  }
+    //  const onGoogleSignUp = (event) => {
+    //     onSignUpWithProvider(new firebase.auth.GoogleAuthProvider());
+    //     event.preventDefault() ;
  
-     }
+    //  }
      const onChangeUserType=(event)=>{
         setUserInfo((prevState)=>{
             return{...prevState,type:event.target.value}});
@@ -227,13 +223,13 @@ const Registration = () => {
      return (
 
       <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"50px"}} alignItems="center">
-      <img src={logo}/>
+      <img alt="logo" src={logo}/>
       <Paper elevation={10} className={classes.root}>
 
     
         <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">
         <PageHeader>Sign Up</PageHeader>
-        <img src={lock}/>
+        <img alt="lock" src={lock}/>
         <RadioGroup row aria-label="position" name="usertype" defaultValue="resident" onChange={onChangeUserType}>        
         <FormControlLabel id="radio_admin"   value="admin"  control={<Radio color="primary" />} label="Admin" />        
         <FormControlLabel id="radio_resident"    value="resident"  control={<Radio color="primary" />} label="Resident" />        

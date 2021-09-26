@@ -1,17 +1,16 @@
 import React from 'react'
-import { Field, FieldArray, reduxForm } from "redux-form";
-import Stack from '@mui/material/Stack';
+import { Field,  reduxForm } from "redux-form";
+
 import Grid from '@mui/material/Grid';
 import FormLabel from '@mui/material/FormLabel';
 import PrimaryButton from "../../shared/components/PrimaryButton";
 
 import cardlogos from '../../images/payments/cardlogos.png'
 import {
-  renderRatingField, renderDateField,
-  renderTextField, renderFormLabel,exactLength,number,required,maxLength,minLength,normalizeCardNumber,
-  renderRadioGroup,
+ 
+  renderTextField,exactLength,number,required,minLength,normalizeCardNumber, 
   renderSelectField,
-  renderCheckbox,
+
 } from "../../misc/form-fields";
 import { MenuItem } from '@mui/material';
 export const CardPaymentForm = ({ ...props }) => {
@@ -65,7 +64,7 @@ export const CardPaymentForm = ({ ...props }) => {
 
   return (
     <div style={{ marginTop: "80px" }}>
-      <img src={cardlogos} />
+      <img alt="card logo" src={cardlogos} />
       <div style={{ marginTop: "10px" }}>
         {renderForm()}
       </div>

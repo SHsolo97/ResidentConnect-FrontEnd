@@ -18,11 +18,7 @@ const ProgressBar = ({bgcolor,progress,height}) => {
         textAlign: 'right'
       }
       
-      const progresstext = {
-        padding: 10,
-        color: 'black',
-        fontWeight: 900
-      }
+    
         
     return (
     <div style={Parentdiv}>

@@ -15,12 +15,7 @@ const PollResultBar = ({progress,height}) => {
         backgroundColor: "#FFE5A1",
         textAlign: 'right'
       }
-      
-      const progresstext = {
-        padding: 10,
-        color: 'black',
-        fontWeight: 900
-      }
+     
         
     return (
     <div style={Parentdiv}>

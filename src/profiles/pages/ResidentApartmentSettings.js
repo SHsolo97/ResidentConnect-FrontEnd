@@ -5,19 +5,15 @@ import PrimaryButton from '../../shared/components/PrimaryButton'
 import { makeStyles } from  '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import { useProfile } from '../../context/profile.context';
 import {useApartment} from '../../context/apartment.context';
 import { TextField } from '@material-ui/core';
 import { FormControlLabel } from '@material-ui/core';
 import { RadioGroup } from '@material-ui/core';
 import { Radio } from '@material-ui/core';
 import { SectionHeader } from '../../shared/components/SectionHeader';
-import axios from 'axios';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import { Progress } from '../../shared/components/Progress';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import SendIcon from '@material-ui/icons/Send';
 import { useModelState } from '../../misc/custom-hooks';
 import { SendTokenModal } from '../components/SendTokenModal';
 import { useCommunity } from '../../context/community.context';
@@ -50,14 +46,12 @@ radioGroup:{
 export const ResidentApartmentSettings = () => {
     const classes=useStyles();
     const history=useHistory();
-    const {user,setUser}=useProfile();
+
     const {apartment,setApartment} = useApartment();
-    const {community,setCommunity} = useCommunity();
+    const {community} = useCommunity();
 
     const apartmentid=apartment._id;
-    const communityid=apartment.communityid;
     const [status,setStatus]= React.useState(apartment.status);
-    const [isLoading,setIsLoading]=React.useState(true);
     const { isOpen, open, close } = useModelState();
 
 const editApartment=async()=>{
@@ -82,32 +76,6 @@ const editApartment=async()=>{
          });
   } 
   
-  const getCommunity=async()=>{
-    console.log(status);
-    const data={status : status};
-    var apiBaseUrl = `/community/${communityid}`  
-    await communityAPI.get(apiBaseUrl,data )
-         .then(function (response) {
-             if (response.status === 200)
-  
-            {
-                console.log(response.data);
-               
-                setCommunity(response.data);
-               
-              
-            }
-         })
-         .catch(function (error) {
-             console.log(error);
-             setIsLoading(false);
-
-         });
-  } 
- 
-  React.useEffect(() => {
-    getCommunity();
-  }, [])
 
 
   const renderApartmentDetails=()=>

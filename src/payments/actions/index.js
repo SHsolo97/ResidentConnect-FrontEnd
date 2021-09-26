@@ -2,7 +2,6 @@ import paymentsAPI from '../../misc/axios-calls/paymentsAPI';
 import userAPI from '../../misc/axios-calls/userAPI';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 
-import _ from 'lodash';
 
 //to show payment details to resident
 export const fetchPaymentOfApartment = (apartmentid) => async dispatch => {

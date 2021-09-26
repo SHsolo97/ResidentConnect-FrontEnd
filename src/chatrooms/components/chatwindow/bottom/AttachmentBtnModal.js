@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router';
-import { Alert, Button, Icon, InputGroup, Modal, Uploader } from 'rsuite';
+
+import { Uploader } from 'rsuite';
 import { useModelState } from '../../../../misc/custom-hooks';
-import { storage } from '../../../../misc/firebase';
+
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Dialog } from '@material-ui/core';
 import { uploadFilesToFireStorage } from '../../../../misc/firestore';
-import Fab from '@material-ui/core/Fab';
+
 import IconButton from '@material-ui/core/IconButton';
 import PrimaryButton from '../../../../shared/components/PrimaryButton';
 import { useCurrentRoom } from '../../../../context/currentroom.context';

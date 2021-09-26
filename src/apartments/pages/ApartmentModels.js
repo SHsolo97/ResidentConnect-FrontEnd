@@ -8,10 +8,8 @@ import AddEditApartmentModel from '../components/AddEditApartmentModel';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import { useProfile } from '../../context/profile.context';
 import { useEffect } from 'react';
-import axios from 'axios';
 import ModelCard from '../components/ModelCard';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 
 export const ApartmentModels = ({children,...props}) => {
@@ -131,6 +129,7 @@ console.log(error);
 }
 useEffect(() => {
 getApartmentModels();
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
 
@@ -154,7 +153,7 @@ return (
     <AddEditApartmentModel actionType="add" model={INTIAIL_VALUE} addApartmentModel={addApartmentModel} handleClose={close} open={open} />}
     
     {
-    models.length==0?
+    models.length===0?
     <h2 style={{color:'gray'}}> Please add module </h2>
     :models.map((model)=>
 

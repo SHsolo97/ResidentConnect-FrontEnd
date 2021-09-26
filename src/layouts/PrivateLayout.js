@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from 'react';
 import './PrivateLayout.css'
 import Grid from '@material-ui/core/Grid';
 
@@ -23,16 +24,11 @@ import { CustumMenuItem } from './MenuItem';
 import { useHistory } from 'react-router-dom';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Badge from '@material-ui/core/Badge';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { auth } from '../misc/firebase';
 import { useCommunity } from '../context/community.context';
-import { useApartment } from '../context/apartment.context';
 import { useProfile } from '../context/profile.context';
-import Menu from '@material-ui/core/Menu';
 import { useEffect } from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
-import {  InputBase} from '@material-ui/core';
 import logo from '../images/home/logo.png';
 import {CreateAnnouncementModal} from '../announcements/pages/CreateAnnouncementModal';
 
@@ -107,8 +103,7 @@ const useStyles = makeStyles((theme) => ({
 const PrivateLayout = ({ children }) => {
   const { isOpen, open, close } = useModelState();
   
-  const {community,communityList} = useCommunity();
-  const {apartment,apartmentList} = useApartment();
+  const {communityList} = useCommunity();
   const {user} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
@@ -121,12 +116,12 @@ const PrivateLayout = ({ children }) => {
       setOpenDrawer(true);
     };
     useEffect(() => {
-      communityList.map((community) => {
-        communitynames.set(community.id,community.name);
-      }
+      communityList.map(community => (
+        communitynames.set(community.id,community.name)
       )
+      );
 
-    }, []);
+    }, [communityList]);
 
     const handleDrawerClose = () => {
       setOpenDrawer(false);
@@ -134,9 +129,9 @@ const PrivateLayout = ({ children }) => {
     const goToAparmentSettings=()=>{
 
       console.log('Goto Aparment Settings');
-      if(user.type=='resident')
+      if(user.type==='resident')
         history.push('/apartmentprofile');
-      if(user.type=='admin')
+      if(user.type==='admin')
         history.push('/updateCommunityProfile');
 
     }
@@ -152,10 +147,7 @@ const PrivateLayout = ({ children }) => {
       const openProfileSettings=()=>{
         history.push('/profile');
       }
-   const getApartmentid = (block,floor,aptnum)=>
-   {
-    return `Block ${block}  Floor  ${floor} Flat ${aptnum}`
-   }
+ 
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -178,7 +170,7 @@ const PrivateLayout = ({ children }) => {
             >
               <MenuIcon />
             </IconButton>
-              <img src={logo}/>
+              <img  alt="logo" src={logo}/>
                   <Typography variant="h6" noWrap>
               Residents Connect
             </Typography>

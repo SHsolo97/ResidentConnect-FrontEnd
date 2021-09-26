@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import PrimaryButton from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
 import { Field, FieldArray,reduxForm } from "redux-form";
-import { renderRatingField, renderTextField, renderDateField,required } from "../../misc/form-fields";
+import {  renderTextField, renderDateField,required } from "../../misc/form-fields";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -45,6 +45,7 @@ export const CreatePolling = ({...props}) => {
         data['question']=formValues.question;
         data['expiredat']=formValues.expiredat;
         const options=[];
+        // eslint-disable-next-line array-callback-return
         formValues.options.map(option=>{
             let op={}
             op['description']=option;

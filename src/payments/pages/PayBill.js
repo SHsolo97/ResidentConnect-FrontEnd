@@ -5,7 +5,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import { PayBillByCard } from '../components/PayBillByCard';
 import { PayBillByNetBanking } from '../components/PayBillByNetBanking';
 
@@ -35,12 +34,6 @@ function TabPanel(props) {
     value: PropTypes.any.isRequired,
   };
   
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.paper,
-    },
-  }));
   
 
   

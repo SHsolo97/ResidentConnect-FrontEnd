@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React,{useEffect} from 'react'
 import {fetchMyRides,fetchRideRequestsByRideId} from '../actions/index';
 import { connect } from 'react-redux';
@@ -7,20 +8,11 @@ import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
 
 export const MyRides = ({...props}) => {
     const {user}=useProfile();
-    const [rides,setRides]=React.useState([]);
+    const {fetchMyRides}=props;
     useEffect(() => {
-        props.fetchMyRides(user._id);
-        console.log(props.rides);
-        const temprides=[];
-        if(props.rides!=null)
-        {
-            props.rides.map(ride=>{
-                temprides.push(ride);
-            })
-            console.log(temprides);
-            setRides(temprides);
-
-        };
+        fetchMyRides(user._id);
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const rejectRide=async(_id)=>{
    
@@ -53,7 +45,7 @@ export const MyRides = ({...props}) => {
                 props.ridereqs.map(ridereq=>
                     {
                         rejectRide(ridereq._id);
-                    })
+                    });
                 
               }
               //cancel all pending/approved requests
@@ -70,7 +62,7 @@ export const MyRides = ({...props}) => {
         <div>
          { props.rides !=null && 
          props.rides.map(ride=>{
-                     return  <MyRideCard ride={ride} cancelRide={cancelRide}/>
+                     return  <MyRideCard key={ride._id} ride={ride} cancelRide={cancelRide}/>
                 })}
         </div>
     )
@@ -78,7 +70,7 @@ export const MyRides = ({...props}) => {
 const mapStateToProps = state => {
        return {
         ridereqs: state.ridereqs,
-        rides: state.rides.filter(ride=>ride.status=='active')};
+        rides: state.rides.filter(ride=>ride.status==='active')};
   };
   
   export default connect(

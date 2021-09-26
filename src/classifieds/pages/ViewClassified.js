@@ -5,7 +5,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import { ClassifiedDetails } from '../components/ClassifiedDetails';
 import  ClassifiedReviews  from '../components/ClassifiedReviews';
 import { Provider } from 'react-redux';
@@ -43,16 +42,10 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+
 
 
 export const ViewClassified = ({...props}) => {
-  const classes = useStyles();
   const {classified}=props.location.state
   const [value, setValue] = React.useState(0);
 

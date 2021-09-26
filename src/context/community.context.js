@@ -1,12 +1,11 @@
 import React,{ useEffect,createContext,useContext,useState } from "react";
 import { auth } from "../misc/firebase";
-import axios from "axios";
 import { useProfile } from "./profile.context";
 import communityAPI from '../misc/axios-calls/communityAPI';
 
 const CommunityContext=createContext();
 export const CommunityProvider=({children})=>{
-    const {user,setIsLoading}=useProfile();
+    const {user}=useProfile();
     const[community,setCommunity]=useState(null);
     const[communityList,setCommunityList]=useState([]);
  
@@ -83,6 +82,7 @@ export const CommunityProvider=({children})=>{
         return ()=>{
             authUnsub();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user])
 
     return (

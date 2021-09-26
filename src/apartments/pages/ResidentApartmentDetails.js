@@ -5,7 +5,6 @@ import PrimaryButton from '../../shared/components/PrimaryButton'
 import { makeStyles } from  '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import { useProfile } from '../../context/profile.context';
 import {useApartment} from '../../context/apartment.context';
 import { useCommunity } from '../../context/community.context';
 import { TextField } from '@material-ui/core';
@@ -13,7 +12,7 @@ import { FormControlLabel } from '@material-ui/core';
 import { RadioGroup } from '@material-ui/core';
 import { Radio } from '@material-ui/core';
 import { SectionHeader } from '../../shared/components/SectionHeader';
-import axios from 'axios';
+
 import communityAPI from '../../misc/axios-calls/communityAPI';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +43,6 @@ radioGroup:{
 export const ResidentApartmentDetails = () => {
     const classes=useStyles();
     const history=useHistory();
-    const {user}=useProfile();
     const {apartment}=useApartment();
     const {community}=useCommunity();
     console.log(community);

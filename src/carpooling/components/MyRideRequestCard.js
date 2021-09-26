@@ -1,26 +1,20 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+
 import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
 import { connect } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
+
 import Avatar from '@mui/material/Avatar';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
-import { useProfile } from '../../context/profile.context';
-import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
+
 
 export const  MyRideRequestCard=({...props})=> {
-  const {user}=useProfile();
-  
- 
-  
-    
-  
+   
     const renderData=()=>{
       if( typeof props.ridereq === "undefined")
     
@@ -28,7 +22,7 @@ export const  MyRideRequestCard=({...props})=> {
         if(  props.ridereq === null)
           return null;
       return(
-        <Paper elevation={5} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
+        <Paper key ={props.ridereq._id} elevation={5} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
   <Grid container column justifyContent="space-between" alignItems="center">
 
     <Grid container row justifyContent="space-between" alignItems="center"> 

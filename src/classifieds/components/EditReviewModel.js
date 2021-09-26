@@ -12,7 +12,6 @@ import classifiedAPI from "../../misc/axios-calls/classifiedAPI";
 import { Alert } from "../../shared/components/Alert";
 import { useAlertState } from "../../misc/custom-hooks";
 import { Progress } from "../../shared/components/Progress";
-import { useProfile } from "../../context/profile.context";
 import { calculateAverageStars } from "../../misc/helpers";
 import { TextField } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
@@ -21,7 +20,7 @@ import { fetchCommentsAndUsers,fetchClassifiedById } from '../actions';
 
 export const EditReviewModel = (props) => {
   const ratings=props.classified;
-  const{comment,rating,givenby,classifiedid,_id}=props.givenComment;
+  const{comment,rating,classifiedid,_id}=props.givenComment;
 
   const [isLoading, setIsLoading] = useState(false);
   const { isAlertOpen, openAlert, closeAlert } = useAlertState();

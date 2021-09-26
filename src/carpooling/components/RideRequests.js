@@ -1,8 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { SectionHeader } from '../../shared/components/SectionHeader';
 import { connect } from 'react-redux';
 import {fetchReceivedRideRequestsDetails} from '../actions/index';
-import SearchRideCard from './SearchRideCard';
 import { useProfile } from '../../context/profile.context';
 import RideRequestCard from './RideRequestCard';
 import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
@@ -12,7 +11,7 @@ export const RideRequests = ({...props}) => {
     React.useEffect(() => {
         props.fetchReceivedRideRequestsDetails(user._id);
         
-    },[])
+    },[user._id])
     const rejectRide=async(_id,rejectReason)=>{
    
         var apiBaseUrl = `/carpoolings/riderequests/${_id}`;

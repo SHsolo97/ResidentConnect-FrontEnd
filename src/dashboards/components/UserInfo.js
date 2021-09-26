@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 
 export const UserInfo = () => {
     const {user}=useProfile();
+    // eslint-disable-next-line no-extend-native
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }

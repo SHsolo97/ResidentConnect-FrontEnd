@@ -5,7 +5,7 @@ import { PageHeader } from '../../shared/components/PageHeader';
 import PrimaryButton from '../../shared/components/PrimaryButton';
 import AdminPendingPayments from '../components/AdminPendingPayments';
 import  AdminPaymentsOverview  from '../components/AdminPaymentsOverview';
-import CreatePayment from './CreatePayment'
+
 import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';

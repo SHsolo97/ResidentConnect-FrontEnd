@@ -1,11 +1,7 @@
 import React,{useEffect} from 'react'
-import { Paper } from '@material-ui/core';
-import { SectionHeader } from '../../shared/components/SectionHeader';
 import Card from "../../shared/components/cards/Card.js";
 import CardHeader from "../../shared/components/cards/CardHeader.js";
-import CardIcon from "../../shared/components/cards/CardIcon.js";
 import CardBody from "../../shared/components/cards/CardBody.js";
-import CardFooter from "../../shared/components/cards/CardFooter.js";
 import PollTable from "../../shared/components/Table/PollTable.js"
 import styles from "../styles/dashboardStyle.js";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,19 +16,21 @@ export const PollingSection = ({...props}) => {
     const [polls,setPolls]=React.useState([]);
     const {community}=useCommunity();
     useEffect(() => {
-        console.log(props.communityid);
          props.fetchActivePollsByCommunity(community._id);
-         console.log(props.polls);
+         const tempPolls=[];
          if(props.polls!=null)
          {
+             // eslint-disable-next-line array-callback-return
              props.polls.map(poll=>{
-                polls.push(poll);
+              tempPolls.push(poll);
              })
-             console.log(polls);
              
          }
-    }, [])
+         setPolls(tempPolls);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [community._id])
   
+   
     return (
     
         <Card>
