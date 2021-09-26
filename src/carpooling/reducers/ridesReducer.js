@@ -6,11 +6,13 @@ export default (state = [], action) => {
         return action.payload;
         case 'FILTER_RIDES':
           return action.payload;
-        
+          case 'FETCH_RIDE_BY_ID':
+            return action.payload;
         case 'SEARCH_RIDES':
             return action.payload;
       
-     
+        
+            
       default:
         return state;
     }

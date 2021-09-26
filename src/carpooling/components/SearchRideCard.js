@@ -28,10 +28,10 @@ export const  SearchRideCard=({ride,...props})=> {
 
             var apiBaseUrl = `/carpoolings/riderequests/create`
             let data={};
-            data['rideid']=_id;
+            data['ride']=_id;
             data['seats']=props.requestesSeats;
             data['requestedby']=user._id;
-            data['rideowner']=creator;
+            data['owner']=creator;
             data['status']='pending';
             await carPoolingAPI.post(apiBaseUrl, data)
               .then(function (response) {

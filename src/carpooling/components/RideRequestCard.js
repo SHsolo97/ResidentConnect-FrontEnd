@@ -19,27 +19,7 @@ import { RejectReasonModel } from './RejectReasonModel';
 export const  RideRequestCard=({...props})=> {
   const {user}=useProfile();
   const { isOpen, open, close } = useModelState();
-  const [rejectReason,setRejectReaon]=React.useState(null);
-  let startAddress=null;
-  let destAddress= null;
-  let ridedate=null;
-  let ridetime=null;
-  React.useEffect(() => {
-    
-        props.fetchRideById(props.ridereq.rideid);    
-        props.fetchUser(props.ridereq.requestedby);     
-      
-     
-    }, [props.ridereq])
-
-    if(props.ride!=null)
-    {
-      let {_id,source,ridedatetime,destination,seats,amt,car,thumbnail}=props.ride;
-      startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
-      destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
-      ridedate=convertDate(ridedatetime);
-      ridetime=convertTime(ridedatetime);
-    }
+  
     const [approvebuttonName,setApproveButtonName]=React.useState('Approve');
     const [rejectbuttonName,setRejectbuttonName]=React.useState('Reject');
 
@@ -73,7 +53,7 @@ return (
       
       <Grid item alignItems="flex-end">
         <Typography gutterBottom variant="body1" component="div">{props.ridereq.seats} Seats</Typography>
-        <Typography gutterBottom variant="body1" component="div"> &#8377; {props.ride!=null? props.ride.amt:0} per seat</Typography>
+        <Typography gutterBottom variant="body1" component="div"> &#8377; {props.ridereq.ride!=null? props.ridereq.ride.amt:0} per seat</Typography>
       </Grid>
     </Grid>
     
@@ -87,7 +67,7 @@ return (
   }} color="primary" variant="dot">
           
         </Badge>
-        <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body2" gutterBottom>{startAddress}
+        <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body2" gutterBottom>  {props.ridereq.ride.source.addressline}, {props.ridereq.ride.source.area}, {props.ridereq.ride.source.city},{props.ridereq.ride.source.state},{props.ridereq.ride.source.pincode}
           </Typography>
       </div>
 
@@ -99,13 +79,13 @@ return (
     horizontal: 'left',
   }} color="secondary" variant="dot">
 
-          <Typography style={{paddingLeft:'30px'}} variant="body2"  gutterBottom>{destAddress} </Typography>
+          <Typography style={{paddingLeft:'30px'}} variant="body2"  gutterBottom>{props.ridereq.ride.destination.addressline}, {props.ridereq.ride.destination.area}, {props.ridereq.ride.destination.city},{props.ridereq.ride.destination.state},{props.ridereq.ride.destination.pincode}</Typography>
         </Badge>
       </div>
     </Grid>
     <Grid style={{paddingLeft:'30px',paddingTop:'10px'}} container row justifyContent="space-between" alignItems="center">
       <Typography variant="body2" color="text.secondary">
-        {ridedate}, {ridetime}
+        {convertDate(props.ridereq.ride.ridedatetime)}, {convertTime(props.ridereq.ride.ridedatetime)}
       </Typography>
       <div>
      
@@ -131,4 +111,4 @@ const mapStateToProps = (state, ownProps) => {
            requester:state.users.find(user => user._id === ownProps.ridereq.requestedby) };
 };
 
-export default connect(mapStateToProps,{fetchRideById,fetchUser})(RideRequestCard);
+export default connect(mapStateToProps)(RideRequestCard);

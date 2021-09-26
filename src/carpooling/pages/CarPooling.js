@@ -6,17 +6,19 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+
+import  RideRequests  from '../components/RideRequests';
+import MyRideRequests  from '../components/MyRideRequests';
+import  MyRides  from '../components/MyRides';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
-import  RideRequests  from '../components/RideRequests';
-import MyRideRequests  from '../components/MyRideRequests';
-import  MyRides  from '../components/MyRides';
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const carPoolingStore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const carPoolingStore1 = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const carPoolingStore2 = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const carPoolingStore3 = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 function TabPanel(props) {
 const { children, value, index, ...other } = props;
@@ -61,7 +63,6 @@ return (
   <PrimaryButton onClick={goToCreateRidePage}> Create Ride </PrimaryButton>
   <PrimaryButton onClick={goToSearchRidePage}> Search Ride </PrimaryButton>
   <PrimaryButton onClick={goToRideHistoryPage}> Ride History </PrimaryButton>
-  <Provider store={carPoolingStore}>
   <div>
    
       <div position="static" color="default">
@@ -73,22 +74,32 @@ return (
 
         </Tabs>
       </div>
+      <Provider store={carPoolingStore1}>
+
       <TabPanel id="ridereq" value={value} index={0}>
         <RideRequests />
       </TabPanel>
-      <TabPanel id="myridereq" value={value} index={1}>
+      </Provider>
+     
 
+      <TabPanel id="myridereq" value={value} index={1}>
+      <Provider store={carPoolingStore2}>
         <MyRideRequests />
+        </Provider>
 
       </TabPanel>
+ 
        <TabPanel id="myrides" value={value} index={2}>
+       <Provider store={carPoolingStore3}>
 
         <MyRides />
-
+        </Provider>
       </TabPanel>
+     
+
 
   </div>
-  </Provider>
+  
 </div>
 )
 }

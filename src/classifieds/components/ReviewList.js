@@ -108,7 +108,6 @@ export const ReviewList =({...props}) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state.classified) ;
      return { classified: state.classified,
       comments: state.comments };
 };

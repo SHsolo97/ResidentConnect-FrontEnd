@@ -1,7 +1,7 @@
 import React from 'react'
 import { SectionHeader } from '../../shared/components/SectionHeader';
 import { connect } from 'react-redux';
-import {fetchRideRequestsByRideOwner} from '../actions/index';
+import {fetchReceivedRideRequestsDetails} from '../actions/index';
 import SearchRideCard from './SearchRideCard';
 import { useProfile } from '../../context/profile.context';
 import RideRequestCard from './RideRequestCard';
@@ -10,7 +10,7 @@ import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
 export const RideRequests = ({...props}) => {
     const {user} =useProfile();
     React.useEffect(() => {
-        props.fetchRideRequestsByRideOwner(user._id);
+        props.fetchReceivedRideRequestsDetails(user._id);
         
     },[])
     const rejectRide=async(_id,rejectReason)=>{
@@ -37,7 +37,7 @@ export const RideRequests = ({...props}) => {
           .then(function (response) {
             if (response.status === 200) {
               console.log(response.data);
-              props.fetchRideRequestsByRideOwner(user._id);
+              props.fetchReceivedRideRequestsDetails(user._id);
 
             }
           })
@@ -72,5 +72,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    {fetchRideRequestsByRideOwner}  
+    {fetchReceivedRideRequestsDetails}  
   )(RideRequests);

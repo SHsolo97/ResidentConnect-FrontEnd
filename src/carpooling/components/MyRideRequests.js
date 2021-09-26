@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { useProfile } from '../../context/profile.context';
-import {fetchRideRequestsByRequester} from '../actions/index';
+import {fetchMyRideRequestsDetails} from '../actions/index';
 import MyRideRequestCard from './MyRideRequestCard';
 
 export const MyRideRequests = ({...props}) => {
     const {user} =useProfile();
     React.useEffect(() => {
-        props.fetchRideRequestsByRequester(user._id);
+        props.fetchMyRideRequestsDetails(user._id);
+            console.log(props.ridereqs);
+          
+
         
     },[])
 
@@ -15,7 +18,7 @@ export const MyRideRequests = ({...props}) => {
             return props.ridereqs.map(ridereq=>
                 {
               
-                        return  <MyRideRequestCard ridereq={ridereq} />
+                        return  <MyRideRequestCard   ridereq={ridereq} />
                       
                 }
              ) }
@@ -29,13 +32,15 @@ export const MyRideRequests = ({...props}) => {
     )
 }
 const mapStateToProps = (state, ownProps) => {
+    console.log(state.ridereqs);
     return { 
         ridereqs: state.ridereqs
         
+     
     };
 };
 
 export default connect(
     mapStateToProps,
-    {fetchRideRequestsByRequester}  
+    {fetchMyRideRequestsDetails}  
   )(MyRideRequests);
