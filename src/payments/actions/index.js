@@ -9,10 +9,19 @@ export const fetchPaymentOfApartment = (apartmentid) => async dispatch => {
         "apartmentid":apartmentid
     }
   
-    console.log(searchQuery);
   const response = await paymentsAPI.post('/payments/search',searchQuery);
 
   dispatch({ type: 'FETCH_PAYEMENTS_BY_APARTMENT', payload: response.data.payments});
+};
+export const fetchPaymentHistoryOfApartment = (apartmentid) => async dispatch => {
+  let searchQuery={
+      "apartmentid":apartmentid,
+      "status":"paid"
+  }
+
+const response = await paymentsAPI.post('/payments/paymenthistory',searchQuery);
+
+dispatch({ type: 'FETCH_PAYEMENTS_HISTORY_BY_APARTMENT', payload: response.data.payments});
 };
 
 //to show payment details to admin of community
@@ -21,11 +30,22 @@ export const fetchPaymentOfCommunity= (communityid) => async dispatch => {
     let searchQuery={
         "communityid":communityid
     }
-    console.log(searchQuery);
   const response = await paymentsAPI.post('/payments/search',searchQuery);
 
   dispatch({ type: 'FETCH_PAYEMENTS_BY_COMMUNITY', payload: response.data.payments});
 };
+
+export const fetchPaymentHistoryOfCommunity= (communityid) => async dispatch => {
+
+  let searchQuery={
+      "communityid":communityid,
+      "status":"paid"
+  }
+const response = await paymentsAPI.post('/payments/paymenthistory',searchQuery);
+
+dispatch({ type: 'FETCH_PAYEMENTS_HISTORY_BY_COMMUNITY', payload: response.data.payments});
+};
+
 
 //to get one particular payment details by id
 export const fetchPaymentById = (paymentid) => async dispatch => {
@@ -33,7 +53,6 @@ export const fetchPaymentById = (paymentid) => async dispatch => {
     let searchQuery={
         "_id":paymentid
     }
-    console.log(searchQuery);
   const response = await paymentsAPI.post('/payments/search',searchQuery);
   let returnValue;
   if(response.data.payments.length>1)

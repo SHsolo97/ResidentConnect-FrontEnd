@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Grid from '@material-ui/core/Grid';
 
 import  RideRequests  from '../components/RideRequests';
 import MyRideRequests  from '../components/MyRideRequests';
@@ -59,15 +60,22 @@ setValue(newValue);
 };
 return (
 <div>
+<Grid container direction="row" justifyContent="space-between" alignItems="center">
+
   <PageHeader> Car Pooling </PageHeader>
-  <PrimaryButton onClick={goToCreateRidePage}> Create Ride </PrimaryButton>
-  <PrimaryButton onClick={goToSearchRidePage}> Search Ride </PrimaryButton>
-  <PrimaryButton onClick={goToRideHistoryPage}> Ride History </PrimaryButton>
+  <Grid  items alignItems="flex-start">
+
+  <PrimaryButton  style={{marginLeft:'10px'}} onClick={goToCreateRidePage}> Create Ride </PrimaryButton>
+  <PrimaryButton style={{marginLeft:'10px'}}   onClick={goToSearchRidePage}> Search Ride </PrimaryButton>
+  <PrimaryButton style={{marginLeft:'10px'}}   onClick={goToRideHistoryPage}> Ride History </PrimaryButton>
+  </Grid>
+  </Grid>
   <div>
    
       <div position="static" color="default">
 
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs  textColor="primary"
+        indicatorColor="primary" value={value} onChange={handleChange}>
           <Tab label="Ride Requests" id="ridereq" />
           <Tab label="My Ride Request" id="myridereq" />
           <Tab label="My Rides" id="myrides" />

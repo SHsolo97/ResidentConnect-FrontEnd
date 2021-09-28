@@ -1,7 +1,6 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 import { useState } from 'react';
-
 import { PageHeader } from '../../shared/components/PageHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import { useCommunity } from '../../context/community.context';
@@ -9,7 +8,9 @@ import {PrimaryButton} from '../../shared/components/PrimaryButton';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';
-
+import {useModelState} from '../../misc/custom-hooks';
+import MapModel from '../../shared/components/Maps/MapModal';
+import {getGeoOrdinates} from '../../misc/map-helper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,17 +27,24 @@ const useStyles = makeStyles((theme) => ({
 
 export const Community = ({ children, ...props }) => {
   const classes = useStyles();
+  const { isOpen, open, close } = useModelState();
+
+
   const { community,setCommunity } = useCommunity();
   const communityid = community._id;
   const [communityDetails, setCommunityDetails] = useState({
-    name: '',
-    builder: '',
+    name: community.name,
+    builder:community.builder,
     address: {
-      addressline: '',
-      area: '',
-      city: '',
-      state: '',
-      pincode: ''
+      addressline: community.address.addressline,
+      area: community.address.area,
+      city: community.address.city,
+      state: community.address.state,
+      pincode: community.address.pincode
+    },
+    geo:{
+      lat:community.geo.lat,
+      lng:community.geo.lng
     }
   });
   const updateCommunityDetails = async () => {
@@ -122,6 +130,30 @@ export const Community = ({ children, ...props }) => {
     updateCommunityDetails();
     props.handleNext()
   }
+  const geocode =async (address) =>{
+    if(communityDetails.geo.lat===0)
+    {
+      const location=await getGeoOrdinates(address);
+        if(location!=null)
+          setCommunityDetails((prevState) => {
+          return { ...prevState, geo: location}
+        });
+     
+      }
+    
+    
+    if(communityDetails.geo.lat!==0)
+      open();
+  }
+  
+  const openMap=()=>{
+    const addressToSearch=[communityDetails.address.addressline,communityDetails.address.area,communityDetails.address.city,
+      communityDetails.address.state,communityDetails.address.pincode,'India'].join(',')
+      console.log(addressToSearch);
+        geocode({address:addressToSearch});
+     
+   ;
+  }
   return (
 
     <>
@@ -139,12 +171,14 @@ export const Community = ({ children, ...props }) => {
               <TextField id="city" className={classes.textField} label="City" value={communityDetails.address != null ? communityDetails.address.city : ''} onChange={setCity} variant="outlined" />
               <TextField id="state" className={classes.textField} label="State" value={communityDetails.address != null ? communityDetails.address.state : ''} onChange={setState} variant="outlined" />
               <TextField id="pincode" className={classes.textField} label="Pincode" value={communityDetails.address != null ? communityDetails.address.pincode : ''} onChange={setPincode} variant="outlined" />
+              <PrimaryButton onClick={openMap}> Show Map</PrimaryButton>
             </div>
-
-
+           
+            {isOpen &&
+            <MapModel coordinates={communityDetails.geo}  zoom={10} open={open} handleClose={close}  />}
           </Grid>
         </Paper>
-        <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
+        <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
       </form>
 
     </>

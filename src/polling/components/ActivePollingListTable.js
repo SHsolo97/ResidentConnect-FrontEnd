@@ -10,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-
+import {convertDate} from '../../misc/helpers';
 import Paper from '@material-ui/core/Paper';
 import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
@@ -171,7 +171,7 @@ if (b[orderBy]
             <TableRow hover   role="checkbox" tabIndex={-1} key={row._id}>
 
               <TableCell align="left">{row.question}</TableCell>
-              <TableCell align="left">{row.expiredat}</TableCell>
+              <TableCell align="left">{convertDate(row.expiredat)}</TableCell>
               <TableCell align="left">{row.answeredby.length}</TableCell>              
               <TableCell align="left">
                  <Button  onClick={()=>{

@@ -83,14 +83,17 @@ export const RegisterApartmentModel = ({...props}) => {
             
         }
         return (
-            <Dialog style={{ width: "100ch" }} open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+            <Dialog  fullWidth maxWidth='lg' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
               <DialogTitle id="form-dialog-title">
                 <SectionHeader> Add Apartment </SectionHeader>
               </DialogTitle>
               <DialogContent>
-                        <Typography> Provide token id of the apartment </Typography>
-                      <TextField name="token"  value={tokenValue} onChange={(e)=>{setTokenValue(e.target.value)}} variant="outlined" />
-                  
+              <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+
+                        <Typography style={{paddingLeft:300}}> Provide token id of the apartment </Typography>
+                      <TextField name="token"  style={{padding:10}} value={tokenValue} onChange={(e)=>{setTokenValue(e.target.value)}} variant="outlined" />
+                   </Grid>
+                    <br/>
                       <Grid container direction="row" justifyContent="space-around" alignItems="center">
                              <PrimaryButton  onClick={handleSubmit}>Submit</PrimaryButton>
                       <PrimaryButton onClick={props.handleClose}> Cancel </PrimaryButton>

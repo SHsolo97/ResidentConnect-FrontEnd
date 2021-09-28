@@ -7,7 +7,9 @@ export const fetchPollsByCreator = (id) => async dispatch => {
     const searchQuery={
         "createdby":id
     }
+    console.log(searchQuery);
   const response = await pollingAPI.post('/pollings/search',searchQuery);
+  console.log(response.data.polls);
 
   dispatch({ type: 'FETCH_POLLS_BY_CREATOR', payload: response.data.polls});
 };

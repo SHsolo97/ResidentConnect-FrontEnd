@@ -11,10 +11,14 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import PollResultBar from '../../shared/components/PollResultBar';
+import Typography from '@mui/material/Typography';
 
 
 export const ParticipateInPoll = ({...props}) => {
-  const {options,_id,question,totalvotes}=props.poll;
+   const [poll,setPoll]=React.useState(props.poll);
+  const {options,_id,question,totalvotes}=poll
+  const [isAnswerd,setIsAnswered]=React.useState(false);
     const {user}=useProfile();
     const [option,setOption]=React.useState(null);
 
@@ -23,9 +27,11 @@ export const ParticipateInPoll = ({...props}) => {
     
         await pollingAPI.put(apiBaseUrl, data)
           .then(function (response) {
-            if (response.status === 201) {    
+            if (response.status === 200) {    
               console.log(response.data);
-             props.handleClose();
+              setPoll(response.data);
+              setIsAnswered(true);
+             
             }
     
           })
@@ -48,16 +54,13 @@ export const ParticipateInPoll = ({...props}) => {
       editPoll(data);
       }
     }
-
-
-    return (
-        <Dialog  maxWidth='xl' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">
-            <SectionHeader>  Polling </SectionHeader>
-          </DialogTitle>
+    const renderQuestion=()=>{
+      return(
+        <Dialog  maxWidth='md' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+         
           <DialogContent>
-            <div> {question} </div>
-            <FormLabel component="legend">select option</FormLabel>
+            <div style={{fontSize:'28px', fontWeight:'bold'}}> {question} </div>
+            <FormLabel  style={{marginTop:'16px'}} component="legend">select option</FormLabel>
       <RadioGroup
   
         value={option}
@@ -69,19 +72,73 @@ export const ParticipateInPoll = ({...props}) => {
       
      
             {options.map((option,index)=>{
-              return <FormControlLabel value={option._id} control={<Radio />} label={option.description} />
+              return <FormControlLabel  style={{marginTop:'16px'}} value={option._id} control={<Radio />} label={option.description} />
             
             })}
              </RadioGroup>
           </DialogContent>
-          <Grid container direction="row" justifyContent="space-around" alignItems="center">
-                  <PrimaryButton onClick={onSubmit}>Submit</PrimaryButton>
-                  <PrimaryButton onClick={props.handleClose}>
-                    {" "}
-                    Cancel{" "}
-                  </PrimaryButton>
+          <Grid container direction="row"  justifyContent="space-around" alignItems="center">
+                  <PrimaryButton  style={{marginBottom:'50px'}}onClick={onSubmit}>Submit</PrimaryButton>
+                  <PrimaryButton style={{marginBottom:'50px'}} onClick={props.handleClose}>Cancel</PrimaryButton>
                 </Grid>
          
         </Dialog>
+      )
+    }
+
+    const renderResult=()=>{
+      const totalParticipants=poll.answeredby.length;
+
+      return(
+        <Dialog  maxWidth='md' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+         
+          <DialogContent>
+            <div style={{fontSize:'28px', fontWeight:'bold'}}> {question} </div>
+            <FormLabel  style={{marginTop:'16px'}} component="legend">select option</FormLabel>
+      <RadioGroup
+  
+        value={option}
+        onChange={(e)=>{
+          setOption(e.target.value)
+         
+          }}
+      >
+      
+     
+            {options.map((option,index)=>{
+                 let   percentail=0;
+                 if(totalParticipants!==0)
+                         percentail= Math.round(((parseInt(option.votes)/parseInt(totalParticipants))*100),1);
+                 
+              return <div>
+                <FormControlLabel  style={{marginTop:'16px'}} value={option._id} control={<Radio />} label={option.description} />
+                <Grid
+                        container
+                        direction="row"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                      >
+                               <PollResultBar  progress={percentail} height={20} /> 
+<Typography variant="body2" gutterBottom>{percentail}% </Typography>
+                                             </Grid>
+                                             </div>
+            
+            })}
+             </RadioGroup>
+          </DialogContent>
+          <Grid container direction="row"  justifyContent="space-around" alignItems="center">
+                  <PrimaryButton style={{marginBottom:'50px'}} onClick={props.handleClose}>Close</PrimaryButton>
+                </Grid>
+         
+        </Dialog>
+      )
+    }
+
+
+    return (<div>
+      {!isAnswerd &&  renderQuestion()}
+      {isAnswerd &&  renderResult()}
+
+      </div>
       );
     };

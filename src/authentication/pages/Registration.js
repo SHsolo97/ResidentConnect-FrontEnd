@@ -25,12 +25,19 @@ import communityAPI from '../../misc/axios-calls/communityAPI';
 import lock from '../../images/authentication/lock.png';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+  root:{
+    background: 'linear-gradient(149.39deg, #007CC7 50.11%, rgba(0, 124, 199, 0) 144.08%)',
+    height:"60ch",
+    marginTop:'-10ch'
+  },
+  regBox: {
+    marginTop:'30ch',
+
       display: 'flex',
       flexWrap: 'wrap',
 
 width:"80ch",
-height: "60ch",
+height: "80ch",
 padding: '1ch',
 
     },
@@ -221,13 +228,14 @@ const Registration = () => {
       history.push('/signin');
      }
      return (
-
+      <div className={classes.root}>
       <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"50px"}} alignItems="center">
-      <img alt="logo" src={logo}/>
-      <Paper elevation={10} className={classes.root}>
+      <Paper elevation={1} className={classes.regBox}>
 
     
         <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">
+        <img alt="logo" src={logo}/>
+
         <PageHeader>Sign Up</PageHeader>
         <img alt="lock" src={lock}/>
         <RadioGroup row aria-label="position" name="usertype" defaultValue="resident" onChange={onChangeUserType}>        
@@ -237,10 +245,10 @@ const Registration = () => {
 
          
      
-        <TextField id="token" style={{ margin: 8, width: '30ch'}}    margin="normal" label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
+        <TextField id="token" style={{ margin: 8, width: '30ch'}}    label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
 
        
-        <TextField id="email" style={{ margin: 8, width: '30ch'}}    margin="normal" label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
+        <TextField id="email" style={{ margin: 8, width: '30ch'}}   label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
         
         
 
@@ -257,6 +265,7 @@ const Registration = () => {
               </IconButton>
             </InputAdornment>
               }
+              label="Password"
           />
         </FormControl>
        
@@ -268,6 +277,7 @@ const Registration = () => {
       </Grid>
       </Paper>
       </Grid>
+      </div>
     )
 }
 

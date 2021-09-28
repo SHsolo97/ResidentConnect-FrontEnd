@@ -63,15 +63,15 @@ export const CreatePolling = ({...props}) => {
 
     }
     
-const PollingOptions = ({ fields}) => (
+const PollingOptions = ({ fields, meta: { error } }) => (
 <div>
-    <h3> Options  <IconButton onClick={()=> {fields.push({})}}> <AddCircleIcon />       </IconButton> </h3>
+    <h3 style={{marginLeft:'100px'}} > Options  <IconButton onClick={() => fields.push()}>  <AddCircleIcon />       </IconButton> </h3>
     <Stack spacing={1} >
     {fields.map((options, index) => (
      
-        <div key={index}>
+        <div style={{marginLeft:'100px'}} key={index}>
        <Field validate={[required]} name={options} 
-        style={{width:'800px'}}   label={`Option ${index+1}`} component={renderTextField} variant="outlined" />
+        style={{marginLeft:'100px', width:'600px'}}   label={`Option ${index+1}`} component={renderTextField} variant="outlined" />
   
                   <IconButton onClick={() => {fields.remove(index)}} ><RemoveCircleIcon /> </IconButton>
         </div>
@@ -81,22 +81,23 @@ const PollingOptions = ({ fields}) => (
   </div>
     );
     return (
-        <Dialog  maxWidth='xl' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">
+        <Dialog  maxWidth='md' fullWidth='true' open={props.open} onClose={props.handleClose} >
+          <DialogTitle >
             <SectionHeader> Create Poll </SectionHeader>
           </DialogTitle>
           <DialogContent>
           <form onSubmit={props.handleSubmit(onSubmit)}>
-              <Grid container direction="column" justifyContent="space-around" alignItems="center">
-               
+              <Grid container direction="column" justifyContent="space-around" alignItems="flex-start">    
               
-                  <Field style={{width:'800px'}} validate={[required]} name="question" id="question" component={renderTextField} label="Question" multiline rows={5} palceholder="enter Polling Question"
+                  <Field style={{marginLeft:'100px', width:'800px'}} validate={[required]} name="question" id="question" component={renderTextField} label="Question" multiline rows={2} palceholder="enter Polling Question"
                   variant="outlined" />
+                  <div style={{marginLeft:'100px',marginTop:'24px'}} >
              <Field   name="expiredat" 
-          label="Expire At"  minDate={new Date()} component={renderDateField} variant="outlined" />
+          label="Expire At" style={{marginLeft:'100px'}}  minDate={new Date()} component={renderDateField} variant="outlined" />
+          </div>
                 <FieldArray   name="options" component={PollingOptions}/>
                 
-                <Grid container direction="row" justifyContent="space-around" alignItems="center">
+                <Grid style={{marginTop:'50px',marginBottom:'50px'}} container direction="row" justifyContent="space-around" alignItems="center">
                   <PrimaryButton type="submit">Submit</PrimaryButton>
                   <PrimaryButton onClick={props.handleClose}>
                     {" "}

@@ -177,8 +177,8 @@ const renderApartmentList =()=>{
  
   return apartmentList.map((apartment) =>
   <>
-    <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
-      <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+    <Paper  elevation={3} style={{marginTop:"50px",padding:'20px', width:'400px'}}>
+      <Grid  container direction="row" justifyContent="flex-start" alignItems="center">
       <Radio value={apartment.id} color="primary" />
 
     
@@ -193,8 +193,8 @@ const renderApartmentList =()=>{
 const renderAddApartment=()=>{
   return (
   <div>
-  <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
-  <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+  <Paper elevation={3} style={{padding:'20px', marginTop:"50px",width:'400px'}}>
+  <Grid  container direction="row" justifyContent="flex-start" alignItems="center">
   <Radio value="add"color="primary" />
     <div>Add Apartment</div>
     <br />
@@ -204,9 +204,9 @@ const renderAddApartment=()=>{
   }
 
 return (
-<div>
+<Grid style={{marginTop:"200px"}} container direction="column" justifyContent="flex-start" alignItems="center">
   
-  <PageHeader style={{marginTop:"400px"}}> Select Profile </PageHeader>
+  <PageHeader > Select Profile </PageHeader>
 
 
   { (user.type==='admin')
@@ -235,7 +235,7 @@ return (
   }
      
 
-  <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
+  <PrimaryButton style={{marginTop:"50px"}} onClick={handleSubmit}> Next </PrimaryButton>
 
-</div>);
+</Grid>);
 }

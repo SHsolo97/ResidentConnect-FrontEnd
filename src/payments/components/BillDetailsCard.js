@@ -2,13 +2,13 @@ import React from 'react'
 import { SectionHeader } from '../../shared/components/SectionHeader'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-
+import {convertDate} from '../../misc/helpers';
 import Paper from  '@material-ui/core/Paper';
 export const BillDetailsCard = ({...props}) => {
     return (
         <div>
             <Paper style={{width:'1000px'}}>
-            <SectionHeader> Bill Details</SectionHeader>
+            <SectionHeader style={{paddingLeft:'20px',paddingTop:'20px'}}> Bill Details</SectionHeader>
 
      <Grid container alignItems="center" >
         <Grid style={{paddingLeft:"150px" , paddingTop:"50px"}} item xs={6} >
@@ -21,7 +21,7 @@ export const BillDetailsCard = ({...props}) => {
         </Typography>
         <br/>    <br/>    <br/>
         <Typography variant="body2" component="span">
-        <span style={{fontWeight:'bold'}}> Amount: </span>{props.bill.amt}
+        <span style={{fontWeight:'bold'}}> Amount: </span>&#8377; {props.bill.amt.toLocaleString('en-IN')}
         <br/>    <br/>    <br/>
             
             </Typography>
@@ -37,7 +37,7 @@ export const BillDetailsCard = ({...props}) => {
         </Typography>
         <br/>    <br/>    <br/>
         <Typography variant="body2" component="span">
-        <span style={{fontWeight:'bold'}}>  Due Date: </span>{props.bill.dueat}
+        <span style={{fontWeight:'bold'}}>  Due Date: </span>{convertDate(props.bill.dueat)}
         <br/>    <br/>    <br/>
             
             </Typography>

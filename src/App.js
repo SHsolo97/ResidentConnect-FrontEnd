@@ -1,6 +1,9 @@
 import React from 'react';
-import { createTheme,  ThemeProvider } from '@material-ui/core/styles';
-import { blue, grey, orange } from '@material-ui/core/colors';
+import {  
+  ThemeProvider
+ } from '@material-ui/core/styles';
+
+ import theme from "./assests/jss/theme";
 
 import { Switch } from 'react-router-dom';
 import {Community} from './apartments/pages/Community';
@@ -55,16 +58,12 @@ import {hot} from 'react-hot-loader';
 import { CreateRide } from './carpooling/pages/CreateRide';
 import { SearchRide } from './carpooling/pages/SearchRide';
 import { RideHistory } from './carpooling/pages/RideHistory';
-const theme = createTheme({
-  palette: {
-    primary: orange,
-    secondary:blue,
-    disabled:grey
-  },
-});
+import  {ResidentPaymentHistory}  from './payments/pages/ResidentPaymentHistory';
+import {ViewTransaction} from './payments/pages/ViewTransaction';
+
 function App() {
  return(
-  <ThemeProvider theme={theme}>
+  <ThemeProvider  theme={theme}>
  <ProfileProvider>
    <CommunityProvider>
      <ApartmentProvider>
@@ -119,6 +118,9 @@ function App() {
      <PrivateRoute path="/createRide" component={CreateRide} />
      <PrivateRoute path="/searchRide" component={SearchRide} />
      <PrivateRoute path="/rideHistory" component={RideHistory} />
+     <PrivateRoute path="/paymentHistoryR" component={ResidentPaymentHistory} />
+     <PrivateRoute path="/viewTransaction" component={ViewTransaction} />
+
      <PublicRoute path="/">
      <SignIn />
     

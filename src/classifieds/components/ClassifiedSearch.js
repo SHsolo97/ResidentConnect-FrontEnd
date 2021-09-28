@@ -78,11 +78,12 @@ export const ClassifiedSearch = ({...props}) => {
         }
       
       return (
-        <Paper>
+        <Paper elevation={2}>
+          <div style={{ padding: 20}}>  
             <SectionHeader> Search</SectionHeader>
             <form>
       <Grid container direction="column" justifyContent="space-around" alignItems="flex-start">
-        <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+        <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <FormControl style={{ margin: 8, width: '50ch' }} variant="outlined" >
             <InputLabel >Category</InputLabel>
             <Select id="category" value={category} onChange={(e)=>setCategory(e.target.value)} label="Category">
@@ -101,9 +102,13 @@ ca
             </Select>
           </FormControl>
         </Grid>
+        <Grid container direction="row" justifyContent="flex-end" alignItems="center">
         <PrimaryButton onClick={searchClassified}> Search </PrimaryButton>
+        
+        </Grid>
         </Grid>
         </form>
+        </div>
         </Paper>
     )
 }

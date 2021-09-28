@@ -19,7 +19,7 @@ export const AddReview = ({...props}) => {
   }
   return (
     <div>
-      <PrimaryButton onClick={createReview}> Write An Review</PrimaryButton>
+      <PrimaryButton style={{marginTop:'25px',marginBottom:'25px',marginLeft:'1100px'}} onClick={createReview}> Write An Review</PrimaryButton>
         {isOpen &&
        <AddReviewModel classified={props.classified} setNewReview={setNewReview}  handleClose={close} open={open} />}
       </div>

@@ -19,7 +19,7 @@ export const UpdateApartmentServices = ({ children, ...props }) => {
   const community=useCommunity();
   const communityid = community._id;
   const history = useHistory();
-  const [enrolledServices, SetEnrolledService] = React.useState(null);
+  const [enrolledServices, SetEnrolledService] = React.useState(community.paidservices);
 
 
 
@@ -52,10 +52,21 @@ export const UpdateApartmentServices = ({ children, ...props }) => {
     updateServiceDetails(data);
 
   }
+  React.useEffect(() => {
+    if(community != null)
+      SetEnrolledService(community.paidservices);
+    
+   
+  }, [community]);
+
   const handleBack = (e) => {
     props.handleBack();
   }
   const renderServiceInfo = () => {
+    if(community === null)
+
+      return null;
+      
     return (
       <div>
         <h2> Selected Paid Services listed below</h2>
@@ -141,7 +152,7 @@ export const UpdateApartmentServices = ({ children, ...props }) => {
     <>
       <PageHeader>{children}</PageHeader>
       {
-        enrolledServices === null ?
+        community === null ?
           <Progress /> :
           renderServiceInfo()
       }

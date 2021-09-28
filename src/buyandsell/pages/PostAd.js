@@ -194,7 +194,7 @@ export const PostAd = () => {
         <InputLabel id="label-category">Category</InputLabel>
         <Select id="category"  value={advert.category}  onChange={setCategory} label="Category">
         {categories.map((category)=>            
-          <MenuItem key={category.id} name={category.category} value={category.id}>{category.category}</MenuItem>
+          <MenuItem key={category.id} name={category.category} value={category._id}>{category.category}</MenuItem>
         )}
           </Select>
       </FormControl>
@@ -202,7 +202,7 @@ export const PostAd = () => {
         <InputLabel id="label-subcategory">Sub Category</InputLabel>
         <Select id="subcategory" value={advert.subcategory} onChange={setSubCategory} label="Sub Category">
         {subCategories.map((subcategory)=>            
-          <MenuItem key={subcategory.id} name={subcategory.subcategory} value={subcategory.id}>{subcategory.subcategory}</MenuItem>
+          <MenuItem key={subcategory.id} name={subcategory.subcategory} value={subcategory._id}>{subcategory.subcategory}</MenuItem>
         )}
         </Select>
       </FormControl>

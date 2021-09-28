@@ -29,7 +29,7 @@ likeCount:0
 
 const ChatBottom = () => {
 const [input, setInput] = useState('');
-const [ setIsLoading] = useState(false);
+const [ isLoading,setIsLoading] = useState(false);
 const { user } = useProfile();
 const {community}=useCommunity();
 const communityid=community._id;

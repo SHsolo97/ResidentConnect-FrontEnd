@@ -107,7 +107,9 @@ export const AddClassifiedForm = ({...props}) => {
          </Field>
        </Grid>
    <Field id="name"  validate ={[required, minLength(5)]}  style={{ margin: 8, width: '100ch' }} name="name" label="Name"  component={renderTextField} variant="outlined" />
-            <Field id="description" validate ={[required]}  style={{ margin: 8, width: '100ch' }}  name="description" label="Description" component={renderTextField} variant="outlined" />
+            <Field id="description" validate ={[required]}  style={{ margin: 8, width: '100ch' }}  
+           multiline={true}
+          rows={10} name="description" label="Description" component={renderTextField} variant="outlined" />
 
             <Field id="address" validate ={[required]}  style={{ margin: 8, width: '100ch' }} name="address.addressline" label="Address" component={renderTextField} variant="outlined" />
             <Field id="area"  validate ={[required]} style={{ margin: 8, width: '100ch' }} name="address.area" label="Area" component={renderTextField} variant="outlined" />

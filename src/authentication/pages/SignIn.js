@@ -11,6 +11,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
 import { auth } from '../../misc/firebase';
 import Link from '@material-ui/core/Link';
+import TextField from '@mui/material/TextField';
 
 import { PageHeader } from '../../shared/components/PageHeader';
 
@@ -21,12 +22,23 @@ import {Alert} from '../../shared/components/Alert';
 import {useAlertState}  from '../../misc/custom-hooks';
 
 const useStyles=makeStyles((theme)=>({
-  root: {
+  root:{
+
+   
+
+background: 'linear-gradient(149.39deg, #007CC7 50.11%, rgba(0, 124, 199, 0) 144.08%)',
+    height:"60ch",
+ marginTop:'-10ch'
+  },
+  signinBox: {
+    
+  
+    marginTop:'30ch',
     display: 'flex',
     flexWrap: 'wrap',
 
-width:"80ch",
-height: "60ch",
+    width:"80ch",
+    height: "60ch",
 padding: '1ch',
   }
 }));
@@ -111,23 +123,23 @@ history.push(path);
 }
 return (
 
-<>
+<div className={classes.root}>
   <Grid container direction="column" justifyContent="center" style={{marginLeft:"5px"}} alignItems="center">
-  <img alt="logo" src={logo}/>
 
-    <Paper elevation={10} className={classes.root}>
+    <Paper elevation={1} className={classes.signinBox}>
+   
 
       <Grid container direction="column"  justifyContent="space-evenly" alignItems="center">
-        <PageHeader>Sign In</PageHeader>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
-          <OutlinedInput id="email" type="text" onChange={(e)=>setEmail(e.target.value)} value={email} />
-        </FormControl>
+      <img alt="logo" src={logo}/>
+      <PageHeader>Sign In</PageHeader>
+    
+        <TextField id="email" label="Email" onChange={(e)=>setEmail(e.target.value)} variant="outlined" />
 
         <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <InputLabel  variant="outlined" htmlFor="password">Password</InputLabel>
 
-          <OutlinedInput id="outlined-adornment-password" type={password.showPassword ? "text" : "password" } onChange={handlePasswordChange("password")} value={password.password} endAdornment={ <InputAdornment position="end">
+          <OutlinedInput id="password" type={password.showPassword ? "text" : "password" } onChange={handlePasswordChange("password")} 
+          value={password.password} endAdornment={ <InputAdornment position="end">
             <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
               {password.showPassword ?
               <Visibility /> :
@@ -135,10 +147,11 @@ return (
             </IconButton>
             </InputAdornment>
             }
+            label="Password"
             />
         </FormControl>
 
-        <PrimaryButton variant="contained" color="primary" onClick={onSignIn}>Sign In </PrimaryButton>
+        <PrimaryButton onClick={onSignIn}>Sign In </PrimaryButton>
       
         <Link component="button" variant="body2" onClick={onSignUp}> New User? Sign Up </Link>
       </Grid>
@@ -149,7 +162,7 @@ return (
   :
   null}
 
-</>
+</div>
 
 )
 }

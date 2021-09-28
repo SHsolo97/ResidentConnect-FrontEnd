@@ -11,6 +11,7 @@ import { ClassifiedSearch } from '../components/ClassifiedSearch';
 import { connect } from 'react-redux';
 import { fetchClassifieds } from '../actions';
 import { useCommunity } from '../../context/community.context';
+import Grid from '@material-ui/core/Grid';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
@@ -33,8 +34,14 @@ export const Classifieds = () => {
     }
     return (
         <>
-         <PageHeader>Classifieds</PageHeader>
+        <Grid
+  container
+  direction="row"
+  justifyContent="space-between"
+  alignItems="center"
+>  <PageHeader>Classifieds</PageHeader>
          <PrimaryButton onClick={goToClassified}>Add Classified</PrimaryButton>
+         </Grid> 
          <Provider store={store}>
              <ClassifiedSearch setSearchData={setSearchData}/>
              <ClassifiedsList searchData={searchQuery} />

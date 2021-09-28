@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {fetchPaymentOfApartment} from '../actions';
 import { useApartment } from '../../context/apartment.context';
+import { useHistory } from 'react-router-dom';
+import Link from '@mui/material/Link';
+
 const useStyles = makeStyles((theme) => ({
     lastpaymentInner: {
         background:'#FFEAB3',
@@ -70,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     cardLink:{
         color:'grey',
         padding:'5px',
-         marginLeft:'20px',
+         marginLeft:'-15px',
          fontSize:'14px',
          width:'100px'
     }
@@ -78,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const BillCards = ({...props}) => {
+  const history=useHistory();
     const classes = useStyles();
     const {apartment}=useApartment();
     const apartmentid=apartment._id;
@@ -85,8 +89,8 @@ export const BillCards = ({...props}) => {
     const totalOverdue=props.totalOverdue==null?0:props.totalOverdue.toLocaleString('en-IN')
     React.useEffect(() => {
         props.fetchPaymentOfApartment(apartmentid);
-       
-    },[apartmentid])
+        console.log(props.transactions);
+    },[])
        return (
     <div style={{paddingTop:"50px", paddingBottom:"50px"}} >
     <Grid  container
@@ -103,7 +107,12 @@ export const BillCards = ({...props}) => {
 >
     <div className={classes.cardHeading}> Bill Due</div>
     <div className={classes.cardAmount}> &#8377; {totalDue}</div>
-    <a href="#" className={classes.cardLink} >Pay Now</a>
+    {totalDue!==0 && <Link  component="button"
+      variant="body2"  onClick={()=>{
+                       history.push({
+                        pathname: '/payBill',
+                          state: { bill: props.duePayments[0] } });
+                 }} className={classes.cardLink} >Pay Now</Link> }
         </Grid>
       </Box>
       </Box>
@@ -116,7 +125,12 @@ export const BillCards = ({...props}) => {
 >
     <div className={classes.cardHeading}> Over Due</div>
     <div className={classes.cardAmount} > &#8377; {totalOverdue}</div>
-    <a href="#" className={classes.cardLink} >Pay Now</a>
+    {totalOverdue!==0 && <Link  component="button"
+      variant="body2" onClick={()=>{
+                       history.push({
+                        pathname: '/payBill',
+                          state: { bill: props.overDuePayments[0] } });
+                 }}  className={classes.cardLink} >Pay Now</Link>}
         </Grid>
       </Box>
       </Box>
@@ -129,8 +143,17 @@ export const BillCards = ({...props}) => {
   alignItems="center"  style={{width:"50px"}}
 >
     <div className={classes.cardHeading}> Last Payment</div>
-    <div className={classes.cardAmount} >5000</div>
-    <a href="#" className={classes.cardLink} >View</a>
+    {props.transactions.length===0?
+    <div className={classes.cardAmount} >  &#8377; 0</div>
+    :
+    <div className={classes.cardAmount} >  &#8377; {props.transactions[0].amt.toLocaleString('en-IN')}</div>
+    }
+     {props.transactions.length!==0 &&  <Link  component="button"
+      variant="body2" onClick={()=>{
+        history.push({
+         pathname: '/viewTransaction',
+           state: { bill: props.transactions[0] } });
+  }}  className={classes.cardLink} >View</Link>}
         </Grid>
       </Box>
       </Box>
@@ -141,18 +164,28 @@ export const BillCards = ({...props}) => {
     
 }
 const mapStateToProps = state => {
-    return {     totalOverdue :  state.payments.filter(payment=>payment.status==='overdue').reduce(function (accumulator, payment) {
+  function sortByPaidDate(a,b){  
+    var dateA = new Date(a.paidat).getTime();
+    var dateB = new Date(b.paidat).getTime();
+    return dateA > dateB ? 1 : -1;  
+}; 
+    return {    
+      overDuePayments :  state.payments.filter(payment=>payment.status==='overdue'),
+       totalOverdue :  state.payments.filter(payment=>payment.status==='overdue').reduce(function (accumulator, payment) {
         if(payment.status==='overdue')
             return accumulator + payment.amt;
         else
             return 0;
       }, 0),
+      duePayments :  state.payments.filter(payment=>payment.status==='due'),
+
       totalDue :  state.payments.filter(payment=>payment.status==='due').reduce(function (accumulator, payment) {
         if(payment.status==='due')
             return accumulator + payment.amt;
         else
             return 0;
-      }, 0)
+      }, 0),
+      transactions:state.payments.filter(payment=>payment.status==='paid').sort(sortByPaidDate)
       
     };
   };

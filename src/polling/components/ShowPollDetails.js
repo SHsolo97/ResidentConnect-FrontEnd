@@ -38,10 +38,10 @@ export const  ShowPollDetails =({...props})=> {
             if(poll==null)
             return null;
             return(
-                <Paper elevation={1} >
-                    <Typography variant="h5 " gutterBottom component="div"> {poll.question} </Typography>
+                <Paper elevation={1}  >
+                    <Typography variant="h5 " style={{marginLeft:'10px'}} gutterBottom component="div"> {poll.question} </Typography>
                     {poll.options.map(option=>{
-                        return     <Typography variant="body2" gutterBottom> <span style={{fontWeight:'bold'}} > Option: </span> {option.description} </Typography>
+                        return     <Typography variant="body2" gutterBottom> <span style={{marginLeft:'10px', fontWeight:'bold'}} > Option: </span> {option.description} </Typography>
                     })}
                 
                 </Paper>
@@ -50,9 +50,9 @@ export const  ShowPollDetails =({...props})=> {
 
         return (
         <div>
-            <SectionHeader> Poll Details </SectionHeader>
+            {props.poll!=null && <SectionHeader> Poll Details </SectionHeader>}
             {renderPollData(props.poll)}
-            <SectionHeader> Poll Results </SectionHeader>
+            {props.poll!=null && <SectionHeader> Poll Results </SectionHeader> }
             {renderPollResults(props.poll)}
 
         </div>

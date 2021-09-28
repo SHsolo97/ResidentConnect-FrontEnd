@@ -146,7 +146,7 @@ return (
   <Grid container direction="column" justifyContent="space-around" alignItems="center">
     <Grid container direction="row" justifyContent="space-between" alignItems="center">
       <PageHeader>{children}</PageHeader>
-      <Button variant="contained" style={{backgroundColor: orange[500] }} startIcon={<AddCircleOutlineIcon />} onClick={open}>Add Model</Button>
+      <PrimaryButton    onClick={open}>Add Model</PrimaryButton>
     </Grid>
 
     {isOpen &&
@@ -157,9 +157,9 @@ return (
     <h2 style={{color:'gray'}}> Please add module </h2>
     :models.map((model)=>
 
-    <ModelCard editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model} />
+    <ModelCard  key={model._id} editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model} />
     )}
-    <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
+    <Grid container style={{marginTop:'100px'}} direction="row" justifyContent="space-evenly" alignItems="center">
       <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
       <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
     </Grid>

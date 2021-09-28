@@ -6,6 +6,10 @@ export default (state = [], action) => {
         return action.payload;
       case 'FETCH_PAYEMENTS_BY_COMMUNITY':
             return action.payload;
+      case 'FETCH_PAYEMENTS_HISTORY_BY_APARTMENT':
+        return action.payload;
+      case 'FETCH_PAYEMENTS_HISTORY_BY_COMMUNITY':
+        return action.payload;
          
       default:
         return state;

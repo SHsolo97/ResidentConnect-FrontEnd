@@ -24,12 +24,16 @@ const renderRatingCard=()=>
     if(props.classified==null)
     return null
     const ratings=props.classified.ratings;
-  const _5star_percent=Math.round(((ratings._5star/ratings._totrating)*100),1);
-  const _4star_percent=Math.round(((ratings._4star/ratings._totrating)*100),1);
-  const _3star_percent=Math.round(((ratings._3star/ratings._totrating)*100),1);
-  const _2star_percent=Math.round(((ratings._2star/ratings._totrating)*100),1);
-  const _1star_percent=Math.round(((ratings._1star/ratings._totrating)*100),1);
-
+    let _5star_percent=0,_4star_percent=0,_3star_percent=0,_2star_percent=0,_1star_percent=0;
+    if(ratings._totrating!==0)
+    {
+   _5star_percent=Math.round(((ratings._5star/ratings._totrating)*100),1);
+   _4star_percent=Math.round(((ratings._4star/ratings._totrating)*100),1);
+   _3star_percent=Math.round(((ratings._3star/ratings._totrating)*100),1);
+   _2star_percent=Math.round(((ratings._2star/ratings._totrating)*100),1);
+   _1star_percent=Math.round(((ratings._1star/ratings._totrating)*100),1);
+    }
+    
 return(
     <Grid style={{marginTop:'50px'}} container direction="column" justifyContent="space-evenly" alignItems="center">
     <Grid  container direction="row" style={{  marginTop:'50px', marginLeft:'50px'}} justifyContent="flex-start" alignItems="flex-start">
@@ -54,7 +58,7 @@ return(
     <span style={{fontSize:"14px", color:"gray"}}> ({ratings._2star})</span>
     </Grid>
 
-    <Grid  container direction="row" style={{  marginTop:'5px', marginBottom:'50px', marginLeft:'50px'}} justifyContent="flex-start" alignItems="flex-start">
+    <Grid  container direction="row" style={{  marginTop:'5px', marginBottom:'60px', marginLeft:'50px'}} justifyContent="flex-start" alignItems="flex-start">
     <span style={{fontSize:"14px", color:"gray"}}>1 stars</span>
    <ProgressBar bgcolor="orange" progress={_1star_percent} height={8} /> 
     <span style={{fontSize:"14px", color:"gray"}}> ({ratings._1star})</span>

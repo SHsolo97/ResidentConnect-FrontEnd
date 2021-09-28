@@ -24,19 +24,20 @@ export const  MyRideCard=({ride,...props})=> {
       console.log('Edit ride');
     }
 return (
-<Paper elevation={5} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
+<Paper elevation={1} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>
   <Grid container column justifyContent="space-between" alignItems="center">
 
-    <Grid container row justifyContent="space-between" alignItems="center">
+    <Grid container row  alignItems="center">
 
 
       <Avatar style={{height:'100px',width:'100px'}} alt="complex" src={thumbnail} />
-      <Grid item  >
+     
+      
+      <Typography style={{marginLeft:'10px', fontWeight:'bold'}} gutterBottom variant="h5" component="div">{car}</Typography>
+     
 
-      <Typography gutterBottom variant="h5" component="div">{car}</Typography>
-    </Grid>
-      <Grid item alignItems="flex-end">
-        <Typography gutterBottom variant="body1" component="div">{amt}</Typography>
+      <Grid item style={{marginLeft:'470px'}} >
+        <Typography  style={{fontSize:'20px',fontWeight:'bold'}} gutterBottom variant="body1" component="div">&#8377;{amt.toLocaleString('en-IN')}</Typography>
         <Typography gutterBottom variant="body1" component="div">{seats.available} Seats</Typography>
       </Grid>
     </Grid>
@@ -44,18 +45,18 @@ return (
     <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
 
 
-      <div style={{paddingLeft:'30px',paddingTop:'10px'}}>
+      <div style={{paddingLeft:'30px',paddingTop:'15px'}}>
         <Badge anchorOrigin={{
     vertical: 'top',
     horizontal: 'left',
   }} color="primary" variant="dot">
           
         </Badge>
-        <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body2" gutterBottom>{startAddress}
+        <Typography style={{marginTop:'-15px',paddingLeft:'30px',fontSize:'20px'}} variant="body2" gutterBottom>{startAddress}
           </Typography>
       </div>
 
-      <Divider style={{paddingLeft:'20px',  paddingTop:'10px'}} orientation="vertical" />
+      <Divider style={{marginLeft:'30px', height:'30px',width:'2px', background:'black'}} orientation="vertical" />
 
       <div style={{paddingLeft:'30px',paddingTop:'10px'}}>
         <Badge anchorOrigin={{
@@ -63,12 +64,12 @@ return (
     horizontal: 'left',
   }} color="secondary" variant="dot">
 
-          <Typography style={{paddingLeft:'30px'}} variant="body2"  gutterBottom>{destAddress} </Typography>
+          <Typography style={{marginTop:'-15px',fontSize:'20px',paddingLeft:'30px'}} variant="body2"  gutterBottom>{destAddress} </Typography>
         </Badge>
       </div>
     </Grid>
     <Grid style={{paddingLeft:'30px',paddingTop:'10px'}} container row justifyContent="space-between" alignItems="center">
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body2" style={{fontSize:'20px'}} color="orange">
         {ridedate}, {ridetime}
       </Typography>
       <div>
@@ -76,9 +77,9 @@ return (
         <PrimaryButton onClick={editRide}>Edit Ride </PrimaryButton>
         }
          {ride.status!=='cancelled'? 
-          <PrimaryButton onClick={cancelRide}>Cancel Ride </PrimaryButton>
+          <PrimaryButton  style={{marginLeft:'10px'}}  onClick={cancelRide}>Cancel Ride </PrimaryButton>
           :
-          <PrimaryButton disabled>Cancelled </PrimaryButton>
+          <PrimaryButton  style={{marginLeft:'10px'}} disabled>Cancelled </PrimaryButton>
 
        }
       </div>

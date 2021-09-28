@@ -14,23 +14,18 @@ export const ViewAnnouncementModal = ({...props}) => {
     
     
     return (
-        <Dialog  maxWidth='xl' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <Dialog  maxWidth='md' fullWidth open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
-          <SectionHeader> View Announcement </SectionHeader>
+          <SectionHeader>  {title}</SectionHeader>
           
         </DialogTitle>
         <DialogContent>
-        <Typography variant="subtitle1" gutterBottom component="div">
-          {title}
-      </Typography>
+       
       <Typography variant="subtitle1" gutterBottom component="div">
           {description}
       </Typography>
         </DialogContent>
-        <PrimaryButton onClick={props.handleClose}>
-                    {" "}
-                    Close{" "}
-                  </PrimaryButton>
+        <PrimaryButton style={{marginLeft:'450px', marginBottom:'10px', width:'50px'}} onClick={props.handleClose}>Close</PrimaryButton>
         </Dialog>
              
             

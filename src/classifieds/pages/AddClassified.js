@@ -24,7 +24,6 @@ const classifiedstore = createStore(reducers, composeEnhancers(applyMiddleware(t
 export const AddClassified = () => {
 
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
  
   const { user } = useProfile();
   const communityid = user.communities[0];
@@ -40,7 +39,6 @@ export const AddClassified = () => {
         if (response.status === 201) {
 
           console.log(response.data);
-          setIsLoading(false);
         
           history.push('/classifieds');
         }
@@ -48,7 +46,6 @@ export const AddClassified = () => {
       })
       .catch(function (error) {
         console.log(error);
-        setIsLoading(false);
     
 
 
@@ -98,10 +95,7 @@ return (
   <>
     <PageHeader>Add Classified</PageHeader>
    
-    {isLoading ?
-      <Progress /> :
-      null
-    }
+    
        <Provider store={classifiedstore}>
           <AddClassifiedForm setFormData={setFormData} />
         </Provider>

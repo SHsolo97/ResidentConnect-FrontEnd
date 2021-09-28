@@ -6,21 +6,29 @@ import PollCircles from './PollCircles';
  class  PollingOverview  extends React.Component{
  
      componentDidMount() {
+       console.log(this.props.userid);
          this.props.fetchPollsByCreator(this.props.userid);
-         console.log(this.props.polls);
+        
      }
       
   render() {
     return (
     <div>
-        <PollCircles participants={100} activePolls={10} closedPolls={24} />
-        <PollingsList  polls={this.props.polls}/>
+        <PollCircles participants={this.props.participants} activePolls={this.props.activepolls.length} closedPolls={this.props.closedpolls.length} />
+        <PollingsList  activepolls={this.props.activepolls} closedpolls={this.props.closedpolls}/>
         </div>
         )}
 
 }
 const mapStateToProps = state => {
-    return { polls: state.polls };
+  const today=new Date();
+    return { activepolls: state.polls.filter(poll=>new Date(poll.expiredat)>=today),
+      closedpolls: state.polls.filter(poll=>new Date(poll.expiredat)<today),
+      participants : state.polls.reduce(function (total, poll) {
+                
+        return total + poll.answeredby.length;
+  }, 0)
+      };
   };
   
   export default connect(

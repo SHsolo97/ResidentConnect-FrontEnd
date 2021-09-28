@@ -52,33 +52,31 @@ export const ViewClassified = ({...props}) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  React.useEffect(() => {
-    
-   
-  }, [])
+
     return (
         
-        <CurrentClassifiedProvider data={classified}>
-          <ClassifiedOverview />
-          <Divider />
-          <div >
-      <div position="static" color="default">
-        <Tabs  value={value} onChange={handleChange}>
-          <Tab label="Description" id="description" />
-          <Tab label="Reviews"  id="reviews" />
-          
-        </Tabs>
-      </div>
-      <TabPanel  id="description"  value={value} index={0}>
-        <ClassifiedDetails />
-      </TabPanel>
-      <TabPanel id="reviews" value={value} index={1}>
-      <Provider store={store}>
-       <ClassifiedReviews />
-       </Provider>
-      </TabPanel>
-     
-    </div>
-    </CurrentClassifiedProvider>
+      <CurrentClassifiedProvider data={classified}>
+         <ClassifiedOverview />
+      <Divider />
+      <div >
+  <div position="static" color="default">
+    <Tabs textColor="primary"
+        indicatorColor="primary" value={value} onChange={handleChange}>
+      <Tab label="Description" id="description" />
+      <Tab label="Reviews"  id="reviews" />
+      
+    </Tabs>
+  </div>
+  <TabPanel  id="description"  value={value} index={0}>
+    <ClassifiedDetails />
+  </TabPanel>
+  <TabPanel id="reviews" value={value} index={1}>
+  <Provider store={store}>
+   <ClassifiedReviews />
+   </Provider>
+  </TabPanel>
+ 
+</div>
+</CurrentClassifiedProvider>
     )
 }

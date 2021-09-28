@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field,  reduxForm } from "redux-form";
+import { CardElement,useElements,useStripe } from "react-stripe-elements";
 
 import Grid from '@mui/material/Grid';
 import FormLabel from '@mui/material/FormLabel';
@@ -14,49 +15,23 @@ import {
 } from "../../misc/form-fields";
 import { MenuItem } from '@mui/material';
 export const CardPaymentForm = ({ ...props }) => {
+  const elements=useElements();
+  const stripe=useStripe();
   const currentYear = (new Date()).getFullYear();
   const onSubmit = (formValues) => {
     console.log(formValues);
+    if(!stripe || !elements)
+       return;
   }
   const renderForm = () => {
 
     return (
       <form onSubmit={props.handleSubmit(onSubmit)}>
-        <Grid container direction="row">
-          <FormLabel  style={{ marginBottom: "10px", marginLeft: "50px"}}>Card Number </FormLabel>
-          <FormLabel  style={{ marginBottom: "10px",  marginLeft: "250px"}}>CVV </FormLabel>  
-          </Grid>
-           <Grid container direction="row">
-           <Field  inputProps={{ maxLength: 19 }}
- id="card" name="card" normalize={normalizeCardNumber} validate={[exactLength(19),required]} style={{ marginLeft: "10px", width: "24ch" }} component={renderTextField} variant="outlined" />
-
-          
-          <Field inputProps={{ maxLength: 4 }} id="cvv" name="cvv"  validate={[minLength(3),number,required]} style={{ marginLeft: "160px", width: "8ch" }} component={renderTextField} variant="outlined" />
         
-        
-        </Grid>
-        <Grid container direction="row">
-          <FormLabel style={{ marginTop: "30px", marginBottom: "10px", marginLeft: "50px"}}> Exp Date </FormLabel>
-       
-          </Grid>
-           <Grid container direction="row">
-          <Field name="expmonth" validate={[required]} style={{ marginTop: "10px", marginLeft: "10px", width: "8ch" }} component={renderSelectField} variant="outlined">
-            <MenuItem value="" />
-            {[...Array(12)].map((item, i) => <MenuItem value={i + 1}> {i + 1} </MenuItem>)}
-
-          </Field>
-          <Field name="expyear" validate={[required]} style={{ marginTop: "10px", marginLeft: "10px", width: "10ch" }} component={renderSelectField} variant="outlined">
-            <MenuItem value="" />
-            {[...Array(12)].map((item, i) => <MenuItem value={currentYear + i}> {currentYear + i} </MenuItem>)}
-
-          </Field>
-
-  
-        </Grid>
-        <Grid container style={{ marginTop: "10px"}} direction="row">
-      <PrimaryButton> Pay</PrimaryButton>
+          <CardElement id='card-element'/>
+         <PrimaryButton> Pay</PrimaryButton>
         <PrimaryButton> Cancel</PrimaryButton>
-        </Grid>
+        
         </form>
 
     )

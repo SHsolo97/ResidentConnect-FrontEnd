@@ -14,7 +14,6 @@ import { useModelState } from '../../misc/custom-hooks';
 
 const useStyles = makeStyles({
   card: {
-    marginLeft:200,
     marginTop:30,
     width: 700
     
@@ -50,7 +49,7 @@ export default function ModelCard({children,...props}) {
  }
   return (
     
-      <Card  elevation={10} value={props.key} className={classes.card}>
+      <Card  elevation={1} value={props.key} className={classes.card}>
       <CardContent>
       <Grid
   container
