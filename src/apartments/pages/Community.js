@@ -178,7 +178,7 @@ export const Community = ({ children, ...props }) => {
             <MapModel coordinates={communityDetails.geo}  zoom={10} open={open} handleClose={close}  />}
           </Grid>
         </Paper>
-        <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
+        <PrimaryButton style={{marginLeft:'500px'}}  onClick={handleSubmit}> Next </PrimaryButton>
       </form>
 
     </>

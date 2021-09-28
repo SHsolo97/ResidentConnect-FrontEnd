@@ -49,7 +49,7 @@ export const CreateAnnouncementModal = ({...props}) => {
     }
     
     return (
-        <Dialog  maxWidth='lg' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <Dialog  maxWidth='md' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
           <SectionHeader> Create Announcement </SectionHeader>
           <Provider store={announcementStore}>

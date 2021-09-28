@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import { useModelState } from '../../misc/custom-hooks';
 import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import  CreatePolling  from './CreatePolling'
@@ -15,7 +15,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const pollingStore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 const Pollings = () => {
     const { isOpen, open, close } = useModelState();
-
     const {user}=useProfile();
     return (
         <div>

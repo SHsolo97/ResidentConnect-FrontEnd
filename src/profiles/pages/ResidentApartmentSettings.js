@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../shared/components/PageHeader'
 import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import { makeStyles } from  '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import {useApartment} from '../../context/apartment.context';
 import { TextField } from '@material-ui/core';
@@ -26,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
     width:"100ch",
     marginTop:'5ch',
     padding: '1ch',
-    borderRadius:'5ch',
-    border: '2px solid orange'
     
     },
     textField: {
@@ -88,12 +86,12 @@ const editApartment=async()=>{
         <FormControlLabel id="radio_selfoccupied"   value="self-occupied"  control={<Radio color="primary" />} label="Self Occupied" />        
         <FormControlLabel id="radio_notsold"   disabled value="not-sold"  control={<Radio color="primary" />} label="Not Sold" />    
       </RadioGroup>
-      <Box className={classes.root}>
-            <SectionHeader>Basic Details</SectionHeader>
+      <Paper elevation={3} className={classes.root}>
+            <SectionHeader style={{marginLeft:'50px'}}>Basic Details</SectionHeader>
             <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
             <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start">
             <TextField name="tokenid" label="Token Number" value={apartment.token} className={classes.textField} placeholder="Token Number" fullWidth margin="normal"  aria-disabled />
-            <Button  onClick={open} color="secondary">
+            <Button  onClick={open} style={{color:'blue'}}>
         Send Token
       </Button>
             </Grid>
@@ -109,8 +107,8 @@ const editApartment=async()=>{
             <TextField name="pincode" label="Pin Code" value={community.address.pincode} className={classes.textField} placeholder="PinCode" fullWidth margin="normal"  aria-disabled />
 
         </Grid>
-        </Box>
-                <PrimaryButton onClick={handleSubmit}> Update </PrimaryButton>
+        </Paper>
+                <PrimaryButton style={{marginTop:'50px', marginLeft:'600px'}} onClick={handleSubmit}> Update </PrimaryButton>
                 </div>
       )
   }

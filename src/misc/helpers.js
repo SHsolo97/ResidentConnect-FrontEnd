@@ -7,6 +7,11 @@ export function getNameInitials(name) {
     return splitName[0][0];
 
 }
+export function formatPhone(phone)
+{
+    const phone_val = phone.replace(/\D[^\.]/g, "");
+    return phone_val.slice(0,3)+"-"+phone_val.slice(3,6)+"-"+phone_val.slice(6);
+}
 
 export function convertDate(rawdate)
 {
