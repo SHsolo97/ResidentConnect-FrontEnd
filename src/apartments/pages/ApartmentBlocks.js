@@ -7,6 +7,8 @@ import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader';
 import Paper from '@material-ui/core/Paper';
 import communityAPI from '../../misc/axios-calls/communityAPI';
+import { useCommunity } from '../../context/community.context';
+import { Progress } from '../../shared/components/Progress';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -22,9 +24,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const ApartmentBlocks = ({ children, ...props }) => {
 
-  const { user } = useProfile();
+  const {community,setCommunity}=useCommunity();
+  const {isProgress,setIsProgress}=React.useState(true);
 
-  const communityid = user.communities[0];
+  const communityid = community._id;
   const classes = useStyles();
   const [key, setKey] = React.useState(0);
   const IINTIAL_VALUE = {
@@ -43,8 +46,8 @@ export const ApartmentBlocks = ({ children, ...props }) => {
       .then(function (response) {
         if (response.status === 200) {
           console.log(response.data);
-
-
+          setCommunity(response.data);
+          props.handleNext();
 
 
         }
@@ -108,7 +111,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
     })
     console.log(blockdetails);
     editBlocks(blockdetails);
-    props.handleNext();
+   
   }
   const handleBack = (e) => {
     props.handleBack();
@@ -130,34 +133,41 @@ export const ApartmentBlocks = ({ children, ...props }) => {
 
 
   }
-  return (
-
-    <Grid container direction="column" justifyContent="center" alignItems="center">
-      <Grid container direction="row" justifyContent="space-between" alignItems="center"><PageHeader>{children}</PageHeader>
-        <PrimaryButton onClick={addRow}>Add Block</PrimaryButton>
-      </Grid>
-      <Paper elevation={1}>
-        {blocks.length !== 0 ?
-          <Grid container direction="row" justifyContent="space-around" alignItems="center">
-
-            <div className={classes.formControl}> Block </div>
-            <div className={classes.formControl}> Floors</div>
-            <div style={{borderLeft:'-50px'}} className={classes.formControl}>Flats </div>
-          </Grid>
-          :
-          <h2 style={{ color: 'gray' }}> Please add block</h2>
-        }
-
-        {blocks.map((block, index) => {
-          return <BlockRow key={index} isNew="true" saveRow={saveRow} deleteRow={deleteRow} block={block} />
-
-        })}
-      </Paper>
-      <div style={{marginTop:'100px'}}>
-        <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
-        <PrimaryButton style={{marginLeft:'50px'}} onClick={handleSubmit}> Next </PrimaryButton>
-      </div>
-
+  const renderDetails=()=>{
+    return( <Grid container direction="column" justifyContent="center" alignItems="center">
+    <Grid container direction="row" justifyContent="space-between" alignItems="center"><PageHeader>{children}</PageHeader>
+      <PrimaryButton onClick={addRow}>Add Block</PrimaryButton>
     </Grid>
+    <Paper elevation={1}>
+      {blocks.length !== 0 ?
+        <Grid container direction="row" justifyContent="space-around" alignItems="center">
+
+          <div className={classes.formControl}> Block </div>
+          <div className={classes.formControl}> Floors</div>
+          <div style={{borderLeft:'-50px'}} className={classes.formControl}>Flats </div>
+        </Grid>
+        :
+        <h2 style={{ color: 'gray' }}> Please add block</h2>
+      }
+
+      {blocks.map((block, index) => {
+        return <BlockRow key={index} isNew="true" saveRow={saveRow} deleteRow={deleteRow} block={block} />
+
+      })}
+    </Paper>
+    <div style={{marginTop:'100px'}}>
+      <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
+      <PrimaryButton style={{marginLeft:'50px'}} onClick={handleSubmit}> Next </PrimaryButton>
+    </div>
+
+  </Grid>)
+  }
+  return (
+    <div>
+    {
+      community===null? <Progress/>:renderDetails()
+    }
+    </div>
+   
   )
 }

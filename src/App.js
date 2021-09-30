@@ -60,6 +60,7 @@ import { SearchRide } from './carpooling/pages/SearchRide';
 import { RideHistory } from './carpooling/pages/RideHistory';
 import  {ResidentPaymentHistory}  from './payments/pages/ResidentPaymentHistory';
 import {ViewTransaction} from './payments/pages/ViewTransaction';
+import CommunityRegistration from './authentication/pages/CommunityRegistration';
 
 function App() {
  return(
@@ -72,7 +73,12 @@ function App() {
      <SignIn />
     
    </PublicRoute>
+   <PublicRoute path="/registerCommunity">
+    
+   <CommunityRegistration />
+   </PublicRoute>
    <PublicRoute path="/registration">
+    
    <Registration />
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={CommunityProfileSetting} />

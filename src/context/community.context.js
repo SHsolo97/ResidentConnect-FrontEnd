@@ -68,15 +68,12 @@ export const CommunityProvider=({children})=>{
         const authUnsub=auth.onAuthStateChanged(authObj=>{
             if(authObj)
             {
+                console.log(user);
                 if(user!=null && user.communities!=null)
                 setCommunitydetail(user.communities)              
                
             }
-            else
-            {
-                setCommunitydetail([]);               
-
-            }
+         
 
         });
         return ()=>{

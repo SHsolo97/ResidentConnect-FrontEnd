@@ -16,7 +16,7 @@ export const MyAds = () => {
     const creator=user._id;
  
     const getAds=async(creator)=>{
-        const apiBaseUrl = `/adverts`  
+        const apiBaseUrl = `/adverts/search`  
         const searchQuery={creator}
         //console.log(searchQuery);
         await buyAndSellAPI.post(apiBaseUrl,searchQuery )

@@ -24,7 +24,7 @@ const CreateRoomBtnModal = () => {
     
     const { isOpen, open, close } = useModelState();
     const [formValue, setFormValue] = useState(INITIAL_FORM);
-    const [ setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const formRef = useRef();
  
     //const communityid=user.communities[0];

@@ -249,7 +249,7 @@ const renderUserData=()=>{
             <MenuItem key="office" value="office">Office</MenuItem>
             </Select>
             </FormControl>
-          <TextField name="phone[0].number" label="Number" value={formatPhone(formInput.phone[0].number)} className={classes.phoneNumber} placeholder="number" fullWidth margin="normal" onChange={handlePhoneInput} />
+          <TextField name="phone[0].number" label="Number" value={formInput.phone[0].number} className={classes.phoneNumber} placeholder="number" fullWidth margin="normal" onChange={handlePhoneInput} />
         </Grid>
         <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start">
         <FormControl style={{ margin: 8, width: '50ch'}} className={classes.formControl}>
@@ -260,7 +260,7 @@ const renderUserData=()=>{
             <MenuItem key="office" value="office">Office</MenuItem>
             </Select>
             </FormControl>
-          <TextField name="phone[1].number" label="Number" value={formatPhone(formInput.phone[1].number)} className={classes.phoneNumber} placeholder="number" fullWidth margin="normal" onChange={handlePhoneInput} />
+          <TextField name="phone[1].number" label="Number" value={formInput.phone[1].number} className={classes.phoneNumber} placeholder="number" fullWidth margin="normal" onChange={handlePhoneInput} />
         </Grid>
         <FormControl style={{ margin: 8, width: '50ch'}} className={classes.formControl}>
           <InputLabel id="bloodgroup" value={formInput.bloodgroup} className={classes.textField}>Blood group</InputLabel>
@@ -284,12 +284,12 @@ const renderUserData=()=>{
         <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <TextField name="emergencycontacts[0].name" value={formInput.emergencycontacts[0].name} label="Name" className={classes.emergencyField} placeholder="Name" fullWidth margin="normal" onChange={handleECInput} />
           <TextField name="emergencycontacts[0].relationship" value={formInput.emergencycontacts[0].relationship} label="Relationship" className={classes.emergencyField} placeholder="Relationship" fullWidth margin="normal" onChange={handleECInput} />
-          <TextField name="emergencycontacts[0].phone" value={formatPhone(formInput.emergencycontacts[0].phone)} label="Phone" className={classes.emergencyField} placeholder="Phone" fullWidth margin="normal" onChange={handleECInput} />
+          <TextField name="emergencycontacts[0].phone" value={formInput.emergencycontacts[0].phone} label="Phone" className={classes.emergencyField} placeholder="Phone" fullWidth margin="normal" onChange={handleECInput} />
         </Grid>
         <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <TextField name="emergencycontacts[1].name" value={formInput.emergencycontacts[1].name} label="Name" className={classes.emergencyField} placeholder="Name" fullWidth margin="normal" onChange={handleECInput} />
           <TextField name="emergencycontacts[1].relationship" value={formInput.emergencycontacts[1].relationship} label="Relationship" className={classes.emergencyField} placeholder="Relationship" fullWidth margin="normal" onChange={handleECInput} />
-          <TextField name="emergencycontacts[1].phone" value={formatPhone(formInput.emergencycontacts[1].phone)} label="Phone" className={classes.emergencyField} placeholder="Phone" fullWidth margin="normal" onChange={handleECInput} />
+          <TextField name="emergencycontacts[1].phone" value={formInput.emergencycontacts[1].phone} label="Phone" className={classes.emergencyField} placeholder="Phone" fullWidth margin="normal" onChange={handleECInput} />
         </Grid>
       </Grid>
     </Paper>

@@ -93,7 +93,6 @@ const Registration = () => {
                       community=response.data; 
                         console.log(community);
                         
-                        registerUserwithEmailAndPassword();
                     }
                     else if(userInfo.type==='resident') 
                     {
@@ -101,8 +100,9 @@ const Registration = () => {
                       console.log(response.data);
                       apartment=response.data; 
                         console.log(apartment);
-                        registerUserwithEmailAndPassword();
+                
                     }
+                    registerUserwithEmailAndPassword();
                 }
                 else if (response.status === 404) {
                     console.log("Token invalid");
@@ -159,7 +159,7 @@ const Registration = () => {
             type:userInfo.type,
             uid:uid,
             email:userInfo.email,
-            communities:[community.id],
+            communities:[community._id],
             }
         }
         else
@@ -230,7 +230,7 @@ const Registration = () => {
      return (
       <div className={classes.root}>
       <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"50px"}} alignItems="center">
-      <Paper elevation={1} className={classes.regBox}>
+      <Paper elevation={3} className={classes.regBox}>
 
     
         <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">

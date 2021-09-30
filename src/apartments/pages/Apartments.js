@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable array-callback-return */
+
 import React from 'react'
 import { useCommunity } from '../../context/community.context';
 import { PageHeader } from '../../shared/components/PageHeader'
@@ -11,13 +10,12 @@ import { FlatRow } from '../components/FlatRow';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import notificationAPI from '../../misc/axios-calls/notificationAPI';
 import { Progress } from '../../shared/components/Progress';
-import Grid from '@mui/material/Grid';
 
 export const Apartments = ({children,...props}) => {
    
     const {community,setCommunity}=useCommunity();
-    const communityid=community._id;
-    console.log(communityid);
+    console.log(community);
+   
     const [blocks,setBlocks]=React.useState([]);
     const [currentBlock,setCurrentBlock]=React.useState('');
   
@@ -27,13 +25,13 @@ export const Apartments = ({children,...props}) => {
     const [isLoading, setIsLoading] = React.useState(true);
 
     const getApartmentModels=async()=>{
-        var apiBaseUrl = `/community/${communityid}/apartments/models`   
+        var apiBaseUrl = `/community/${community._id}/apartments/models`   
         await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
 
                 {
-                   console.log(response.data.models);
+                   // console.log(response.data.models);
                      setModels(response.data.models);
                      setIsLoading(false);
                   
@@ -45,12 +43,12 @@ export const Apartments = ({children,...props}) => {
              });
     }
     const getCommunityDetails=async ()=>{
-        var apiBaseUrl = `/community/${communityid}`   
+        var apiBaseUrl = `/community/${community._id}`   
         await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
                  {
-                    console.log(response.data);
+                    //console.log(response.data);
                     setCommunity(response.data);
                     let blockdetails=response.data.blockdetails;
                     let data=[];
@@ -60,16 +58,15 @@ export const Apartments = ({children,...props}) => {
                         b['floors']=block.floors;
                         b['flats']=block.flats;
                         b['block']=block.block;
-                        data.push(b);
+                        b['_id']=block._id;
+                        data.push(b)
                         
                     });
                     if(data.length>0)
-                    {
-                    setCurrentBlock(data[0])
+                        setCurrentBlock(data[0])
                    
-                    console.log(data);
+                        console.log(data);
                     setBlocks(data);
-                    }
                 }
              })
              .catch(function (error) {
@@ -100,7 +97,7 @@ export const Apartments = ({children,...props}) => {
     const getApartments=async ()=>{
         var apiBaseUrl = `/community/apartments`   
         let searchquery={};
-        searchquery['communityid']=communityid;
+        searchquery['communityid']=community._id;
         searchquery['block']=currentBlock.block   ;
         searchquery['floor']=currentFloor ;  
         //console.log(searchquery);
@@ -109,7 +106,7 @@ export const Apartments = ({children,...props}) => {
                  if (response.status === 200)
                  {
                    // console.log(response.data);
-                    setCommunity(response.data);
+                    //setCommunity(response.data);
                     let apartments=response.data.apartments;
                     //console.log(apartments);
                     let data=[];
@@ -181,12 +178,12 @@ export const Apartments = ({children,...props}) => {
             data['issold']= flat.status==='not-sold'?false:true;
             data['enrolled']= 0;
             data['status']= flat.status;
-               data['communityid']=communityid;
+               data['communityid']=community._id;
                data['aptnum']=flat.aptnum
                data['block']=flat.block;
                data['floor']=flat.floor;
                 data['model']=flat.model;
-               // console.log(data);
+                console.log(data);
             createApartment(data)
             .then(response=>
             {
@@ -204,6 +201,10 @@ export const Apartments = ({children,...props}) => {
         props.handleBack();
     }
     React.useEffect(() => {
+        if(community===null)
+            return;
+      
+
         getCommunityDetails().then(
             response=>{
                 getApartmentModels();
@@ -244,8 +245,8 @@ export const Apartments = ({children,...props}) => {
     const renderApartmentInfo=()=>{
         console.log(currentBlock);
         console.log(blocks);
-        if(currentBlock===null)
-            if(blocks!==null)
+        if(currentBlock==null)
+            if(blocks!=null)
                 setCurrentBlock(blocks[0]);
             else
                 return null;
@@ -253,7 +254,7 @@ export const Apartments = ({children,...props}) => {
             <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
         <Select id="blocks" value={currentBlock.block} onChange={setCurrentBlockInfo}  >
         {blocks.map((block)=>            
-          <MenuItem key={block.id} name={block.id} value={block.block}>{block.block}</MenuItem>
+          <MenuItem key={block._id} name={block._id} value={block.block}>{block.block}</MenuItem>
         )}
           </Select>
       </FormControl>
@@ -264,17 +265,11 @@ export const Apartments = ({children,...props}) => {
           </Select>
       </FormControl>
       <PrimaryButton  onClick={GetFlats}> Get </PrimaryButton>
-      <Grid
-  container
-  direction="column"
-  justifyContent="space-around"
-  alignItems="flex-start"
->
+
       {flats.map((flat,index)=>{
             return <FlatRow models={models} key={index} isNew="true" saveRow={saveRow}  flat={flat} />
 
         })}
-        </Grid>
         <PrimaryButton  onClick={enrollFlats}> Enroll </PrimaryButton>
         <PrimaryButton  onClick={handleBack}> Back </PrimaryButton>
         <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
@@ -284,8 +279,8 @@ export const Apartments = ({children,...props}) => {
         <>
 
         <PageHeader>{children}</PageHeader>
-
-        {blocks.length===0 && isLoading?
+        {
+            (blocks.length===0 && isLoading)?
             <Progress/>
             :
             renderApartmentInfo()

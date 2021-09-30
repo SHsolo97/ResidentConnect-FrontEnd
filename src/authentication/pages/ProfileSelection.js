@@ -124,7 +124,7 @@ const renderCommunityList =()=>{
   return communityList.map((community)=>
 
       <>
-        <Paper elevation={3} style={{padding:'20px', width:'400px'}}>
+        <Paper key={community._id} elevation={3} style={{padding:'20px', width:'400px'}}>
           <Grid container direction="row" justifyContent="flex-start" alignItems="center">
             <Radio value={community.id} color="primary" />
             <div>

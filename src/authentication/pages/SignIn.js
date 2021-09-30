@@ -121,6 +121,11 @@ let path = `/registration`;
 history.push(path);
 
 }
+const onRegisterCommunity=()=> {
+  let path = `/registerCommunity`;
+  history.push(path);
+  
+  }
 return (
 
 <div className={classes.root}>
@@ -154,6 +159,8 @@ return (
         <PrimaryButton onClick={onSignIn}>Sign In </PrimaryButton>
       
         <Link component="button" variant="body2" onClick={onSignUp}> New User? Sign Up </Link>
+        <Link component="button" variant="body2" onClick={onRegisterCommunity}> New Community? Sign Up </Link>
+
       </Grid>
     </Paper>
   </Grid>

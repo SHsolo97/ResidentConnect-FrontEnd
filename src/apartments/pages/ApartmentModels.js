@@ -43,7 +43,7 @@ if (response.status === 201)
 
 {
 console.log(response.data);
-setModels([...models, response.data.model]);
+setModels([...models, response.data]);
 
 
 

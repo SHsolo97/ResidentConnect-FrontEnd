@@ -1,13 +1,14 @@
 
 import React from "react";
-import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 import { Field,  reduxForm } from "redux-form";
+import Paper from '@mui/material/Paper';
 
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from '@material-ui/core/MenuItem';
 import {
 renderDateField,
 renderTextField,
-renderSelectField,
+renderSelectField,required
 
 } from "../../misc/form-fields";
 import {PrimaryButton}from "../../shared/components/PrimaryButton";
@@ -27,31 +28,34 @@ const onSubmit=(formValues)=>{
     
 return (
 <form onSubmit={props.handleSubmit(onSubmit)}>
-        <Stack spacing={3}>
-
-    <div>
-      <Field name="category" style={{ width: "29ch" }}  component={renderSelectField} label="Category" variant="outlined">
-        <MenuItem value="" />
-        <MenuItem value="maintenance">Maintenance</MenuItem>
-        <MenuItem value="facilitybooking">Facility Booking</MenuItem>
-        <MenuItem value="water">Water Bill</MenuItem>
-      </Field>
-    </div>
-    <div>
-      <Field id="amt" name="amt" style={{ width: "33ch" }} component={renderTextField} label="Amount" variant="outlined" />
-    </div>
-    <div>
-      <Field   name="period" views={['year', 'month']}
+<Paper elevation={3} style={{padding:'50px', width:"800px"}}>
+<Grid container direction="column" justifyContent="space-around" alignItems="center">
+  
+      <Field name="category" label="Category"   validate ={[required]} style={{ marginTop: 8, width: '35ch'}} component={renderSelectField}  variant="outlined">
+     
+        <MenuItem id="maintenance" value="maintenance">Maintenance</MenuItem>
+        <MenuItem id="facilitybooking" value="facilitybooking">Facility Booking</MenuItem>
+        <MenuItem id="water" value="water">Water Bill</MenuItem>
+          </Field>
+  
+      <Field id="amt" name="amt" style={{ marginTop: 34, width: '35ch'}}  component={renderTextField} label="Amount" variant="outlined" />
+      <div style={{ marginTop: 34, width: '35ch'}} >
+      <Field    name="period" views={['year', 'month']}
           label="Payment Period"   maxDate={new Date()} component={renderDateField} variant="outlined" />
     </div>
-    <div>
-      <Field   name="dueat" 
+    <div style={{ marginTop: 34, width: '35ch'}} >
+      <Field   name="dueat"  
           label="Due At"  minDate={new Date()} component={renderDateField} variant="outlined" />
     </div>
     
-  </Stack>
-  <PrimaryButton type="submit">Submit</PrimaryButton>
-    <PrimaryButton> Cancel</PrimaryButton>
+ 
+  </Grid>
+  <Grid container direction="row" justifyContent="center" alignItems="center">
+
+  <PrimaryButton  style={{ marginTop: 34}} type="submit">Submit</PrimaryButton>
+    <PrimaryButton style={{ marginTop: 34,marginLeft:34}} > Cancel</PrimaryButton>
+    </Grid>
+    </Paper>
 </form>
 );
 };
