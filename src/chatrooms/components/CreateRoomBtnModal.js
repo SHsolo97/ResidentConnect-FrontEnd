@@ -1,17 +1,17 @@
-import React, { useCallback, useState, useRef} from 'react';
+import React, { useState, useRef} from 'react';
 import firebase from 'firebase/app';
 import { useModelState } from '../../misc/custom-hooks';
 import { auth, database } from '../../misc/firebase';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { Dialog } from '@material-ui/core';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
-import { useProfile } from '../../context/profile.context';
-import Alert from '@material-ui/lab/Alert';
+
+import { useCommunity } from '../../context/community.context';
 
 const INITIAL_FORM = {
     name: '',
@@ -26,8 +26,10 @@ const CreateRoomBtnModal = () => {
     const [formValue, setFormValue] = useState(INITIAL_FORM);
     const [isLoading, setIsLoading] = useState(false);
     const formRef = useRef();
-    const {user}=useProfile();
-    const communityid=user.communities[0];
+ 
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     const onNameChange =(event)=>{
         
         setFormValue((prevState)=>{

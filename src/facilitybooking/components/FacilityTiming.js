@@ -1,22 +1,9 @@
 import React from 'react'
-import { PageHeader } from '../../shared/components/PageHeader'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import axios from 'axios';
-import {TextField,Button} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { useHistory } from 'react-router';
-import PrimaryButton from '../../shared/components/PrimaryButton';
 import Link from '@material-ui/core/Link';
 import { useModelState } from '../../misc/custom-hooks';
 import TimeSlotModal from '../components/TimeSlotModal';
 import TimeSlotArray from '../components/TimeSlotArray';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+
 export const FacilityTiming = ({...props}) => {
     const { isOpen, open, close } = useModelState();
     const[TimingDetailsPerDay,setTimingDetailsPerDay]=React.useState(props.TimingDetailsPerDay);

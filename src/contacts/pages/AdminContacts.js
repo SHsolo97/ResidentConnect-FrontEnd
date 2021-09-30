@@ -1,20 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import {TextField,Button} from '@material-ui/core';
+import {Button} from '@material-ui/core';
 import { useState,useEffect } from 'react';
 import axios from "axios";
 import ContactCard from '../components/ContactCard';
 import { PageHeader } from '../../shared/components/PageHeader';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { PrimaryButtonWithIcon } from '../../shared/components/PrimaryButtonWithIcon';
+
 import { orange } from '@material-ui/core/colors';
 import { useHistory } from 'react-router-dom';
+import { useCommunity } from '../../context/community.context';
 
 const AdminContacts = () => {
     const [contacts,setContacts]=useState([]);
     const history = useHistory();
    
-    
-    const communityid='610834b3f71aae04c89859d9';
+    const community=useCommunity();
+    const communityid=community._id;
    useEffect( function effectfunction() { async function getcontactdetails(){ 
      
    
@@ -60,7 +62,7 @@ const AdminContacts = () => {
 
                
      
-    },[]);
+    },[communityid]);
     const createContactHandler=()=>{
         history.push('CreateContact');
     }

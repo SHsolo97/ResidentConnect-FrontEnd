@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 
-import { Button } from '@material-ui/core';
+
 import './AdImageUpload.css';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 const AdImageUpload = props => {
@@ -21,15 +21,12 @@ const AdImageUpload = props => {
 
   const pickedHandler = event => {
     let pickedFile;
-    let fileIsValid = isValid;
     if (event.target.files && event.target.files.length === 1) {
       pickedFile = event.target.files[0];
       setFile(pickedFile);
       setIsValid(true);
-      fileIsValid = true;
     } else {
       setIsValid(false);
-      fileIsValid = false;
     }
  //   props.onInput(props.id, pickedFile, fileIsValid);
       props.addFile(pickedFile,props.placeholder);

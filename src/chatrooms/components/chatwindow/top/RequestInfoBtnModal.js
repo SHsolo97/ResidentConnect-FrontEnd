@@ -1,27 +1,27 @@
 import React, { memo,useEffect,useState } from 'react';
 import { useCurrentRoom } from '../../../../context/currentroom.context';
 import { useModelState } from '../../../../misc/custom-hooks';
-import PrimaryButton from '../../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../../shared/components/PrimaryButton';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { Avatar, Dialog, IconButton } from '@material-ui/core';
+import {  Dialog, IconButton } from '@material-ui/core';
 import { SectionHeader } from '../../../../shared/components/SectionHeader';
-import { Link } from '@material-ui/core';
 import { useProfile } from '../../../../context/profile.context';
 import { database } from '../../../../misc/firebase';
 import { transformArrWithId } from '../../../../misc/helpers';
 import RequestsTable from './RequestsTable';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { useCommunity } from '../../../../context/community.context';
 
 const RequestInfoBtnModal = () => {
     const { isOpen, open, close } = useModelState();
-    const description = useCurrentRoom(v => v.description);
+   // const description = useCurrentRoom(v => v.description);
     const name = useCurrentRoom(v => v.name);
     const id= useCurrentRoom(v => v.id);
     const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     const [requests,setRequests]=useState([]);
     useEffect(() => {
         const reqListRef = database.ref(`/requests/${communityid}/${id}`);
@@ -32,7 +32,7 @@ const RequestInfoBtnModal = () => {
         });
 
         
-    },[id]);
+    },[id,communityid]);
 
    
 

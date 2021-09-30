@@ -5,13 +5,11 @@ import { orange } from '@material-ui/core/colors';
 import {Button} from '@material-ui/core';
 import {useModelState} from '../../misc/custom-hooks';
 import AddEditApartmentModel from '../components/AddEditApartmentModel';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { useProfile } from '../../context/profile.context';
 import { useEffect } from 'react';
-import axios from 'axios';
 import ModelCard from '../components/ModelCard';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 
 export const ApartmentModels = ({children,...props}) => {
@@ -45,7 +43,7 @@ if (response.status === 201)
 
 {
 console.log(response.data);
-setModels([...models, response.data.model]);
+setModels([...models, response.data]);
 
 
 
@@ -131,6 +129,7 @@ console.log(error);
 }
 useEffect(() => {
 getApartmentModels();
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
 
@@ -147,20 +146,20 @@ return (
   <Grid container direction="column" justifyContent="space-around" alignItems="center">
     <Grid container direction="row" justifyContent="space-between" alignItems="center">
       <PageHeader>{children}</PageHeader>
-      <Button variant="contained" style={{backgroundColor: orange[500] }} startIcon={<AddCircleOutlineIcon />} onClick={open}>Add Model</Button>
+      <PrimaryButton    onClick={open}>Add Model</PrimaryButton>
     </Grid>
 
     {isOpen &&
     <AddEditApartmentModel actionType="add" model={INTIAIL_VALUE} addApartmentModel={addApartmentModel} handleClose={close} open={open} />}
     
     {
-    models.length==0?
+    models.length===0?
     <h2 style={{color:'gray'}}> Please add module </h2>
     :models.map((model)=>
 
-    <ModelCard editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model} />
+    <ModelCard  key={model._id} editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model} />
     )}
-    <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
+    <Grid container style={{marginTop:'100px'}} direction="row" justifyContent="space-evenly" alignItems="center">
       <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
       <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
     </Grid>

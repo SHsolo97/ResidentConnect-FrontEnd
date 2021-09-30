@@ -15,10 +15,11 @@ import Grid from '@material-ui/core/Grid';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
-import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+import { useCommunity } from '../../context/community.context';
 
 const CustomTextField = withStyles({
     root: {
@@ -67,8 +68,8 @@ export const UpdateAdDetails = ({...props}) => {
     const classes = useStyles();
     const history=useHistory();
     const {user}=useProfile();
-    const communityid = user.communities[0];
-
+    const {community}=useCommunity();
+    const communityid = community._id;
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
     const [advert,setAdvert]=useState(currentAdvert);
@@ -92,6 +93,7 @@ export const UpdateAdDetails = ({...props}) => {
     useEffect(() => {
         
         getSubCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [advert.category])
 
     const updateAdvert=async()=>{

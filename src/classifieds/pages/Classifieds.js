@@ -1,33 +1,27 @@
-import React,{useEffect} from 'react'
-import {TextField,Button} from '@material-ui/core';
-
+import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
-import { useHistory } from 'react-router'
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import {useModelState} from '../../misc/custom-hooks';
-
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router-dom'
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-
 import thunk from 'redux-thunk';
-
 import reducers from '../reducers';
 import ClassifiedsList from './ClassifiedsList';
-import { useProfile } from '../../context/profile.context';
 import { ClassifiedSearch } from '../components/ClassifiedSearch';
 import { connect } from 'react-redux';
 import { fetchClassifieds } from '../actions';
+import { useCommunity } from '../../context/community.context';
+import Grid from '@material-ui/core/Grid';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 export const Classifieds = () => {
-    const { isOpen, open, close } = useModelState();
    
     const history=useHistory();
-    const {user}=useProfile();
-    const communityid=user.communities[0];
+    const {community}=useCommunity();
+    console.log(community);
+    const communityid=community._id;
     const [searchQuery,setSearchQuery]=React.useState({communityid});
     const goToClassified=()=>
     {
@@ -40,8 +34,14 @@ export const Classifieds = () => {
     }
     return (
         <>
-         <PageHeader>Classifieds</PageHeader>
+        <Grid
+  container
+  direction="row"
+  justifyContent="space-between"
+  alignItems="center"
+>  <PageHeader>Classifieds</PageHeader>
          <PrimaryButton onClick={goToClassified}>Add Classified</PrimaryButton>
+         </Grid> 
          <Provider store={store}>
              <ClassifiedSearch setSearchData={setSearchData}/>
              <ClassifiedsList searchData={searchQuery} />

@@ -1,23 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Avatar } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import TimeAgo from 'timeago-react';
-import { useHistory, useLocation } from 'react-router';
-import ProfileAvatar from '../ProfileAvatar';
-import PrimaryButton from '../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../shared/components/PrimaryButton';
 import { useProfile } from '../../../context/profile.context';
 import { database,auth } from '../../../misc/firebase';
 import firebase from 'firebase/app';
 import { transformArrWithId } from '../../../misc/helpers';
 import { useRoomsRequests } from '../../../context/roomsrequest.context';
+import { useCommunity } from '../../../context/community.context';
 
 const useStyles = makeStyles((theme)=>({
 root: {
@@ -31,16 +24,17 @@ height: theme.spacing(7),
 
 export const JoinRoomCard = ({room}) => {
   const {user}=useProfile();
-  const communityid=user.communities;
+  const {community}=useCommunity();
+  const communityid=community._id;
   const reqListRooms=useRoomsRequests();
   const classes = useStyles();
-  const { createdAt, name, lastMessage,id } = room;
-  const location=useLocation();
-  const history=useHistory();
+  const {  name, id } = room;
+ 
   const[reqList,setReqList]=React.useState([]);
   React.useEffect(() => {
       let found=false;
-      reqListRooms.map(reqOfroom=>{
+      // eslint-disable-next-line array-callback-return
+      reqListRooms.map((reqOfroom)=>{
         if(reqOfroom.id===room.id)
         {
           const reqListRef = database.ref(`requests/${communityid}/${room.id}`); //request list of the rooms
@@ -52,21 +46,23 @@ export const JoinRoomCard = ({room}) => {
           
           found=true;
         }
-    })
+      })
     if(!found) 
       setReqList([]);
     return()=>{
       setReqList([]);
     }
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reqListRooms])
 
  const getRequestStatus=()=>
  {
    console.log(reqList);
-  reqList.map(req=>
+    // eslint-disable-next-line array-callback-return
+    reqList.map(req=>
     {
-      console.log(req.raisedby.uid);
-      console.log(auth.currentUser.uid);
+     // console.log(req.raisedby.uid);
+      //console.log(auth.currentUser.uid);
       if(req.raisedby.uid===auth.currentUser.uid)
       {
         return req.status;

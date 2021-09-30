@@ -1,13 +1,12 @@
 import React,{ useEffect,createContext,useContext,useState } from "react";
 import { auth } from "../misc/firebase";
-import axios from "axios";
+
 import { useProfile } from "./profile.context";
-import { useCommunity } from "./community.context";
+import communityAPI from '../misc/axios-calls/communityAPI';
 
 const ApartmentContext=createContext();
 export const ApartmentProvider=({children})=>{
     const {user}=useProfile();
-    const {community,communityList}= useCommunity();
 
     const[apartment,setApartment]=useState(null);
     const[apartmentList,setApartmentList]=useState([]);
@@ -16,13 +15,13 @@ export const ApartmentProvider=({children})=>{
 
    const getApartmentDetails=async (communityId,apartmentid)=>{
        console.log(apartmentid);
-    var apiBaseUrl = `http://localhost:4000/api/community/${communityId}/apartment/${apartmentid}`;
+    var apiBaseUrl = `/community/${communityId}/apartment/${apartmentid}`;
     let apartmentInfo=null;
 
   
  
   
-    const data=await axios.get(apiBaseUrl )
+    const data=await communityAPI.get(apiBaseUrl )
          .then(function (response) {
              if (response.status === 200)
             {           
@@ -83,12 +82,14 @@ export const ApartmentProvider=({children})=>{
         const authUnsub=auth.onAuthStateChanged(authObj=>{
             if(authObj)
             {
-                if(user!=null && user.type=='resident'  && user.apartments!=null)
+                console.log(user);
+                if(user!=null && user.type==='resident'  && user.apartments!=null)
                 setApartmentDetail(user.apartments)              
                
             }
             else
             {
+                console.log(user);
                 setApartmentDetail([]);               
 
             }
@@ -96,8 +97,11 @@ export const ApartmentProvider=({children})=>{
         });
         return ()=>{
             authUnsub();
+            setApartmentList([]); 
         }
-    },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[user])
+
 
     return (
     <ApartmentContext.Provider value={{apartment,setApartment,apartmentList}}> {children} </ApartmentContext.Provider>);

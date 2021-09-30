@@ -55,7 +55,7 @@ if (b[orderBy]
   ];
 
   function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const { classes,  order, orderBy,  onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
   onRequestSort(event, property);
   };
@@ -203,7 +203,6 @@ if (b[orderBy]
             {stableSort(rows, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
-            const labelId = `enhanced-table-checkbox-${index}`;
 
             return (
             <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>

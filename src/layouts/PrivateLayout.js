@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from 'react';
 import './PrivateLayout.css'
 import Grid from '@material-ui/core/Grid';
 
@@ -16,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { useModelState } from '../misc/custom-hooks';
 
 import ApartmentIcon from '@material-ui/icons/Apartment';
 
@@ -23,17 +24,13 @@ import { CustumMenuItem } from './MenuItem';
 import { useHistory } from 'react-router-dom';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Badge from '@material-ui/core/Badge';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { auth } from '../misc/firebase';
 import { useCommunity } from '../context/community.context';
-import { useApartment } from '../context/apartment.context';
 import { useProfile } from '../context/profile.context';
-import Menu from '@material-ui/core/Menu';
 import { useEffect } from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
-import {  InputBase} from '@material-ui/core';
 import logo from '../images/home/logo.png';
+import {CreateAnnouncementModal} from '../announcements/pages/CreateAnnouncementModal';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -104,36 +101,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PrivateLayout = ({ children }) => {
-  const {community,communityList} = useCommunity();
-  const {apartment,apartmentList} = useApartment();
+  const { isOpen, open, close } = useModelState();
+  
+  const {communityList} = useCommunity();
   const {user} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const history = useHistory();
   const communitynames= new Map();
   
 
     const handleDrawerOpen = () => {
-      setOpen(true);
+      setOpenDrawer(true);
     };
     useEffect(() => {
-      communityList.map((community) => {
-        communitynames.set(community.id,community.name);
-      }
+      communityList.map(community => (
+        communitynames.set(community.id,community.name)
       )
+      );
 
-    }, []);
+    }, [communityList]);
 
     const handleDrawerClose = () => {
-      setOpen(false);
+      setOpenDrawer(false);
     };
     const goToAparmentSettings=()=>{
 
       console.log('Goto Aparment Settings');
-      if(user.type=='resident')
+      if(user.type==='resident')
         history.push('/apartmentprofile');
-      if(user.type=='admin')
+      if(user.type==='admin')
         history.push('/updateCommunityProfile');
 
     }
@@ -149,17 +147,14 @@ const PrivateLayout = ({ children }) => {
       const openProfileSettings=()=>{
         history.push('/profile');
       }
-   const getApartmentid = (block,floor,aptnum)=>
-   {
-    return `Block ${block}  Floor  ${floor} Flat ${aptnum}`
-   }
+ 
     return (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: openDrawer,
           })}
         >
         <Toolbar>
@@ -170,12 +165,12 @@ const PrivateLayout = ({ children }) => {
               onClick={handleDrawerOpen}
               edge="start"
               className={clsx(classes.menuButton, {
-                [classes.hide]: open,
+                [classes.hide]: openDrawer,
               })}
             >
               <MenuIcon />
             </IconButton>
-              <img src={logo}/>
+              <img  alt="logo" src={logo}/>
                   <Typography variant="h6" noWrap>
               Residents Connect
             </Typography>
@@ -190,11 +185,11 @@ const PrivateLayout = ({ children }) => {
             <IconButton color="inherit" onClick={openProfileSettings}>
               <AccountCircle />
             </IconButton >
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+           { user.type==='admin' ?
+            <IconButton  onClick={open} color="inherit">
+                <NotificationsIcon />             
+            </IconButton>:
+            null}
             <IconButton color="inherit" edge="end" onClick={signOut}>
               <ExitToAppIcon />
             </IconButton>
@@ -207,13 +202,13 @@ const PrivateLayout = ({ children }) => {
         <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: openDrawer,
+            [classes.drawerClose]: !openDrawer,
           })}
           classes={{
             paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
+              [classes.drawerOpen]: openDrawer,
+              [classes.drawerClose]: !openDrawer,
             }),
           }}
         >
@@ -245,6 +240,9 @@ const PrivateLayout = ({ children }) => {
           <div className={classes.toolbar} />
           <div className="main">{children}</div>
         </main>
+        {isOpen&&
+          <CreateAnnouncementModal open={open} handleClose={close}/>
+        }
       </div>
     );
 }

@@ -2,10 +2,12 @@ import React, { useState,useCallback } from 'react';
 import { Alert } from 'rsuite';
 import firebase from 'firebase/app';
 import { useProfile } from '../../../../context/profile.context';
+import { useCommunity } from '../../../../context/community.context';
+
 import { database } from '../../../../misc/firebase';
 import AttachmentBtnModal from './AttachmentBtnModal';
 import { TextField } from '@material-ui/core';
-import { Icon ,IconButton} from '@material-ui/core';
+import { IconButton} from '@material-ui/core';
 import { useCurrentRoom } from '../../../../context/currentroom.context';
 import SendIcon from '@material-ui/icons/Send';
 import { Grid } from '@material-ui/core';
@@ -27,9 +29,12 @@ likeCount:0
 
 const ChatBottom = () => {
 const [input, setInput] = useState('');
-const [isLoading, setIsLoading] = useState(false);
+const [ isLoading,setIsLoading] = useState(false);
 const { user } = useProfile();
-const communityid=user.communities[0];
+const {community}=useCommunity();
+const communityid=community._id;
+
+
 const chatId = useCurrentRoom(v => v.id);
 
 const onInputChange = (event) => {
@@ -92,6 +97,7 @@ catch (err) {
 setIsLoading(false);
 Alert.error(err.message, 5000);
 }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [chatId, user])
 
 return (

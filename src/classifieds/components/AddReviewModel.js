@@ -5,7 +5,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { SectionHeader } from "../../shared/components/SectionHeader";
-import PrimaryButton from "../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
 import { Field, reduxForm } from "redux-form";
 import { renderRatingField, renderTextField } from "../../misc/form-fields";
@@ -29,6 +29,9 @@ const validate = (formValues) => {
 };
 
 const AddReviewModel = (props) => {
+  const classifiedid=props.classified._id;
+  const ratings=props.classified.ratings;
+
   const { user } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
   const { isAlertOpen, openAlert, closeAlert } = useAlertState();
@@ -37,13 +40,13 @@ const AddReviewModel = (props) => {
   const editRatingDetails = async (rating) => {
     const reviewData = {};
 
-    let _5star = parseInt(props.classified.ratings._5star);
-    let _4star = parseInt(props.classified.ratings._4star);
-    let _3star = parseInt(props.classified.ratings._3star);
-    let _2star = parseInt(props.classified.ratings._2star);
-    let _1star = parseInt(props.classified.ratings._1star);
-    let _totrating = parseInt(props.classified.ratings._totrating);
-    let _avgstar = parseFloat(props.classified.ratings._avgstar);
+    let _5star = parseInt(ratings._5star);
+    let _4star = parseInt(ratings._4star);
+    let _3star = parseInt(ratings._3star);
+    let _2star = parseInt(ratings._2star);
+    let _1star = parseInt(ratings._1star);
+    let _totrating = parseInt(ratings._totrating);
+    let _avgstar = parseFloat(ratings._avgstar);
     _totrating = _totrating + 1;
 
     // eslint-disable-next-line default-case
@@ -83,7 +86,7 @@ const AddReviewModel = (props) => {
     const data = {
       ratings: reviewData,
     };
-    var apiBaseUrl = `/classifieds/${props.classified._id}`;
+    var apiBaseUrl = `/classifieds/${classifiedid}`;
 
     await classifiedAPI
       .put(apiBaseUrl, data)
@@ -94,6 +97,7 @@ const AddReviewModel = (props) => {
           setAlertMessage("comment is added");
           setAlertType("success");
           openAlert();
+          props.setNewReview(true);
         }
       })
       .catch(function (error) {
@@ -127,7 +131,7 @@ const AddReviewModel = (props) => {
     data["comment"] = formValues.comment;
     data["rating"] = parseInt(formValues.rating);
     data["givenby"] = user._id;
-    data["classifiedid"] = props.classified._id;
+    data["classifiedid"] = classifiedid;
     console.log(data);
     setIsLoading(true);
     await addReviewComment(data).then((response) => {
@@ -136,7 +140,7 @@ const AddReviewModel = (props) => {
   };
 
   return (
-    <Dialog style={{ width: "100ch" }} open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+    <Dialog  maxWidth='md' fullWidth='true' open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">
         <SectionHeader> Write your review </SectionHeader>
       </DialogTitle>
@@ -148,7 +152,7 @@ const AddReviewModel = (props) => {
             </div>
 
             <div>
-              <Field name="comment" id="comment" component={renderTextField} label="Comment" multiline rows={10} palceholder="enter comment" variant="outlined" />
+              <Field style={{width:'800px'}} name="comment" id="comment" component={renderTextField} label="Comment" multiline rows={10} palceholder="enter comment" variant="outlined" />
             </div>
             <Grid container direction="row" justifyContent="space-around" alignItems="center">
               <PrimaryButton type="submit">Submit</PrimaryButton>

@@ -2,7 +2,7 @@ import React from "react";
 import MicRecorder from "mic-recorder-to-mp3";
 import { Button } from "@material-ui/core";
 import { SectionHeader } from "../../../../shared/components/SectionHeader";
-import PrimaryButton from "../../../../shared/components/PrimaryButton";
+import {PrimaryButton}from "../../../../shared/components/PrimaryButton";
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
 class RecordAudio extends React.Component {

@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AddSharp } from "@material-ui/icons";
+
 import React, { createContext, useEffect, useState, useContext } from "react";
-import { database } from '../misc/firebase';
-import { transformArrWithId } from '../misc/helpers';
+
 import { useProfile } from "./profile.context";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";

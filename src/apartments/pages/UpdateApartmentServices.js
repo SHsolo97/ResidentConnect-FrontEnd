@@ -1,22 +1,23 @@
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../shared/components/PageHeader'
-import PrimaryButton from '../../shared/components/PrimaryButton'
+import {PrimaryButton} from '../../shared/components/PrimaryButton'
 import {SectionHeader} from '../../shared/components/SectionHeader'
 import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
+
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core'
 import { useProfile } from '../../context/profile.context'
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import { Progress } from '../../shared/components/Progress'
+import { useCommunity } from '../../context/community.context'
 
 export const UpdateApartmentServices = ({children,...props}) => {
 const {user}=useProfile();
-const communityid=user.communities[0];
+const {community,setCommunity}=useCommunity();
+const communityid=community._id;
 const history=useHistory();
 const [enrolledServices,SetEnrolledService]=React.useState(null);
 const [isLoading,setIsLoading]=React.useState(true)
@@ -55,6 +56,7 @@ const updateServiceDetails=async(data)=>{
   if (response.status === 200)
   {
   console.log( response.data);
+  setCommunity(response.data)
   if(user.type==='admin')
   history.push('/dashboardA');
   else

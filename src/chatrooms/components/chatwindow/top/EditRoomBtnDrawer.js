@@ -1,22 +1,17 @@
-import React, {useState, memo,useRef } from 'react';
-import { useParams } from 'react-router';
-import { Alert, Button, Drawer } from 'rsuite';
+import React, {useState, memo } from 'react';
 import { useCurrentRoom } from '../../../../context/currentroom.context';
-import { useMediaQuery, useModelState } from '../../../../misc/custom-hooks';
+import {  useModelState } from '../../../../misc/custom-hooks';
 import { database } from '../../../../misc/firebase';
-import EditableInput from '../../EditableInput';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
-import PrimaryButton from '../../../../shared/components/PrimaryButton';
+import {PrimaryButton} from '../../../../shared/components/PrimaryButton';
 import { TextField } from '@material-ui/core';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Dialog } from '@material-ui/core';
-import { useProfile } from '../../../../context/profile.context';
+import { useCommunity } from '../../../../context/community.context';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,10 +35,10 @@ const EditRoomBtnDrawer = () => {
     const name = useCurrentRoom(v => v.name);
     const description = useCurrentRoom(v => v.description);
     console.log(description);
-    const formRef = useRef();
     const chatId = useCurrentRoom(v => v.id);
-    const {user}=useProfile();
-    const communityid=user.communities[0];
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
     console.log(chatId);
     //const { chatId } = useParams();
     //const isMobile = useMediaQuery(`(max-width:992px)`);
@@ -68,7 +63,7 @@ const EditRoomBtnDrawer = () => {
         setFormValue({
             'name':name,
             'description':description});
-    }, [name])
+    }, [name,description])
 
     const onNameChange =(event)=>{
         

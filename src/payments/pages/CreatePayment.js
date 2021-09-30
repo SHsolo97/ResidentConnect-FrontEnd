@@ -1,19 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useEffect} from 'react'
 import CreatePaymentForm from '../components/CreatePaymentForm';
-
-import { useProfile } from "../../context/profile.context";
 import paymentsAPI from '../../misc/axios-calls/paymentsAPI';
 import { connect } from 'react-redux';
 import {fetchResidentsOfCommunity,fetchCommunityById,fetchApartmentsByCommunityid} from '../actions';
+import { useCommunity } from '../../context/community.context';
+
 export const CreatePayment = ({...props}) => {
-    const {user}=useProfile();
-    const communityid=user.communities[0];
-   
+    //const communityid=user.communities[0];
+    const {community}=useCommunity();
+    const communityid=community._id;
+    const {fetchResidentsOfCommunity,fetchApartmentsByCommunityid,fetchCommunityById}=props;
     useEffect(() => {
-        props.fetchResidentsOfCommunity(communityid);
-        props.fetchApartmentsByCommunityid(communityid);
-        props.fetchCommunityById(communityid)
-    }, [])
+        fetchResidentsOfCommunity(communityid);
+        fetchApartmentsByCommunityid(communityid);
+        fetchCommunityById(communityid)
+    }, [communityid])
 
     const initiatePayments=async(paymentsdata)=>{
         var apiBaseUrl = `/payments/create`;
@@ -37,6 +39,7 @@ export const CreatePayment = ({...props}) => {
         console.log(data);  
         let paymentsdata=[];
 
+        // eslint-disable-next-line array-callback-return
         props.apartments.map(apartment=>{
             let paymentdata={...data};
             paymentdata['communityid']=props.community._id;

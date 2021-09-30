@@ -1,7 +1,6 @@
-import React ,{ Component }from 'react'
-import { Route } from 'react-router-dom';
+import React  from 'react'
+import { Route,Redirect} from 'react-router-dom';
 import PrivateLayout from './PrivateLayout';
-import { Redirect } from 'react-router';
 import { useProfile } from '../context/profile.context';
 import CircularProgress from '@material-ui/core/CircularProgress';
 

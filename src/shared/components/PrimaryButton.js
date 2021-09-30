@@ -1,9 +1,8 @@
-import React from 'react';
-import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import {withStyles,makeStyles  } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { blue, grey, orange, purple } from '@material-ui/core/colors';
 
-export const BootstrapButton = withStyles({
+ const usestyles =theme => ({
+
   root: {
     boxShadow: 'none',
     textTransform: 'none',
@@ -39,34 +38,7 @@ export const BootstrapButton = withStyles({
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
   },
-})(Button);
-
-
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
-
-const theme = createTheme({
-  palette: {
-    primary: orange,
-    secondary:blue,
-    disabled:grey
-  },
 });
 
-export default function PrimaryButton({children,...props}) {
-  const classes = useStyles();
+export const PrimaryButton=withStyles(usestyles)(Button);
 
-  return (
-  
-      <ThemeProvider theme={theme}>
-        <Button  type={props.type} variant="contained" color="primary" onClick={props.onClick} className={classes.margin}>
-          {children}
-        </Button>
-      </ThemeProvider>
-      
-   
-  );
-}

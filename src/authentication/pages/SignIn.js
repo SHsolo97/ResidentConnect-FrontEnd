@@ -1,4 +1,4 @@
-import { Button, OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
+import {  OutlinedInput, Grid,  Paper } from '@material-ui/core'
 import React from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -9,26 +9,36 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
-import firebase from 'firebase/app';
-import { auth,database } from '../../misc/firebase';
+import { auth } from '../../misc/firebase';
 import Link from '@material-ui/core/Link';
-import {Redirect} from 'react-router-dom';
-import { useProfile } from '../../context/profile.context';
+import TextField from '@mui/material/TextField';
+
 import { PageHeader } from '../../shared/components/PageHeader';
-import { Box } from '@material-ui/core';
-import PrimaryButton from '../../shared/components/PrimaryButton';
-import img2 from '../../images/home/img9.jfif'
+
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
+
 import logo from '../../images/home/houselogo.png';
 import {Alert} from '../../shared/components/Alert';
 import {useAlertState}  from '../../misc/custom-hooks';
 
 const useStyles=makeStyles((theme)=>({
-  root: {
+  root:{
+
+   
+
+background: 'linear-gradient(149.39deg, #007CC7 50.11%, rgba(0, 124, 199, 0) 144.08%)',
+    height:"60ch",
+ marginTop:'-10ch'
+  },
+  signinBox: {
+    
+  
+    marginTop:'30ch',
     display: 'flex',
     flexWrap: 'wrap',
 
-width:"80ch",
-height: "60ch",
+    width:"80ch",
+    height: "60ch",
 padding: '1ch',
   }
 }));
@@ -39,10 +49,9 @@ const SignIn = () => {
   const [alertType,setAlertType]=useState(null);
 
 const classes=useStyles();
-const {user}=useProfile();
 const history = useHistory();
 const[email,setEmail]=useState(null);
-const [error,setError]=useState(null);
+const [setError]=useState(null);
 const [password, setPassword] = useState({
 password: "",
 showPassword: false,
@@ -60,35 +69,32 @@ const handlePasswordChange = (prop) => (event) => {
 setPassword({ ...password, [prop]: event.target.value });
 };
 
-const onSignInWithProvider = async provider => {
-/* const results = auth.signOut();
-console.log('Result: ', results); */
-try {
-const { additionalUserInfo, user } = await auth.signInWithPopup(provider);
-/*if (additionalUserInfo.isNewUser) {
-await database.ref(`/profiles/${user.uid}`).set({
-name: user.displayName,
-createdAt:firebase.database.ServerValue.TIMESTAMP
-})
-}*/
-//Alert.success("Success", 10000);
-}
-catch (err) {
-//Alert.info(err.message, 10000);
-}
-}
+// const onSignInWithProvider = async provider => {
+// /* const results = auth.signOut();
+// console.log('Result: ', results); */
+// try {
+//  await auth.signInWithPopup(provider);
+// /*if (additionalUserInfo.isNewUser) {
+// await database.ref(`/profiles/${user.uid}`).set({
+// name: user.displayName,
+// createdAt:firebase.database.ServerValue.TIMESTAMP
+// })
+// }*/
+// //Alert.success("Success", 10000);
+// }
+// catch (err) {
+// //Alert.info(err.message, 10000);
+// }
+// }
 const onSignIn=()=>{
 
-var userType='admin';
 //console.log(email);
 //console.log(password.password);
 
 auth.signInWithEmailAndPassword(email,password.password)
 .then((userCredential) => {
 // Signed in
-const user = userCredential.user;
-console.log(userCredential);
-console.log('goto profile select');
+
 history.push('/selectprofile');
 // ...
 })
@@ -102,38 +108,43 @@ openAlert();
 });
 
 }
-const onFacebookSignIn = () => {
-onSignInWithProvider(new firebase.auth.FacebookAuthProvider());
+// const onFacebookSignIn = () => {
+// onSignInWithProvider(new firebase.auth.FacebookAuthProvider());
 
-}
-const onGoogleSignIn = () => {
-onSignInWithProvider(new firebase.auth.GoogleAuthProvider());
+// }
+// const onGoogleSignIn = () => {
+// onSignInWithProvider(new firebase.auth.GoogleAuthProvider());
 
-}
+// }
 const onSignUp=()=> {
 let path = `/registration`;
 history.push(path);
 
 }
+const onRegisterCommunity=()=> {
+  let path = `/registerCommunity`;
+  history.push(path);
+  
+  }
 return (
 
-<>
+<div className={classes.root}>
   <Grid container direction="column" justifyContent="center" style={{marginLeft:"5px"}} alignItems="center">
-  <img src={logo}/>
 
-    <Paper elevation={10} className={classes.root}>
+    <Paper elevation={1} className={classes.signinBox}>
+   
 
       <Grid container direction="column"  justifyContent="space-evenly" alignItems="center">
-        <PageHeader>Sign In</PageHeader>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
-          <OutlinedInput id="email" type="text" onChange={(e)=>setEmail(e.target.value)} value={email} />
-        </FormControl>
+      <img alt="logo" src={logo}/>
+      <PageHeader>Sign In</PageHeader>
+    
+        <TextField id="email" label="Email" onChange={(e)=>setEmail(e.target.value)} variant="outlined" />
 
         <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <InputLabel  variant="outlined" htmlFor="password">Password</InputLabel>
 
-          <OutlinedInput id="outlined-adornment-password" type={password.showPassword ? "text" : "password" } onChange={handlePasswordChange("password")} value={password.password} endAdornment={ <InputAdornment position="end">
+          <OutlinedInput id="password" type={password.showPassword ? "text" : "password" } onChange={handlePasswordChange("password")} 
+          value={password.password} endAdornment={ <InputAdornment position="end">
             <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
               {password.showPassword ?
               <Visibility /> :
@@ -141,12 +152,15 @@ return (
             </IconButton>
             </InputAdornment>
             }
+            label="Password"
             />
         </FormControl>
 
-        <PrimaryButton variant="contained" color="primary" onClick={onSignIn}>Sign In </PrimaryButton>
+        <PrimaryButton onClick={onSignIn}>Sign In </PrimaryButton>
       
         <Link component="button" variant="body2" onClick={onSignUp}> New User? Sign Up </Link>
+        <Link component="button" variant="body2" onClick={onRegisterCommunity}> New Community? Sign Up </Link>
+
       </Grid>
     </Paper>
   </Grid>
@@ -155,7 +169,7 @@ return (
   :
   null}
 
-</>
+</div>
 
 )
 }

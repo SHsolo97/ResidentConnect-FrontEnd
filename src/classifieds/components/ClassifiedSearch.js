@@ -1,18 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useState,useEffect} from 'react'
 import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
-import { useProfile } from '../../context/profile.context'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { SectionHeader } from '../../shared/components/SectionHeader';
 import { Paper } from '@material-ui/core';
+import { useCommunity } from '../../context/community.context';
 
 export const ClassifiedSearch = ({...props}) => {
-    const {user} = useProfile();
-    const communityid=user.communities[0];
+    const {community} = useCommunity();
+    const communityid=community._id;
     const[category,setCategory]=useState('');
     const[subCategory,setSubCategory]=useState('');
 
@@ -77,11 +78,12 @@ export const ClassifiedSearch = ({...props}) => {
         }
       
       return (
-        <Paper>
+        <Paper elevation={2}>
+          <div style={{ padding: 20}}>  
             <SectionHeader> Search</SectionHeader>
             <form>
       <Grid container direction="column" justifyContent="space-around" alignItems="flex-start">
-        <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+        <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <FormControl style={{ margin: 8, width: '50ch' }} variant="outlined" >
             <InputLabel >Category</InputLabel>
             <Select id="category" value={category} onChange={(e)=>setCategory(e.target.value)} label="Category">
@@ -100,9 +102,13 @@ ca
             </Select>
           </FormControl>
         </Grid>
+        <Grid container direction="row" justifyContent="flex-end" alignItems="center">
         <PrimaryButton onClick={searchClassified}> Search </PrimaryButton>
+        
+        </Grid>
         </Grid>
         </form>
+        </div>
         </Paper>
     )
 }

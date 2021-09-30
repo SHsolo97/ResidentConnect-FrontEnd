@@ -1,10 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 import './ProfileImageUpload.css';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import { makeStyles } from '@material-ui/core/styles';
-import { Fullscreen } from '@material-ui/icons';
+
 
 const ProfileImageUpload = props => {
  const [file, setFile] = useState();
@@ -26,15 +25,12 @@ const ProfileImageUpload = props => {
 
   const pickedHandler = event => {
     let pickedFile;
-    let fileIsValid = isValid;
     if (event.target.files && event.target.files.length === 1) {
       pickedFile = event.target.files[0];
       setFile(pickedFile);
       setIsValid(true);
-      fileIsValid = true;
     } else {
       setIsValid(false);
-      fileIsValid = false;
     }
  //   props.onInput(props.id, pickedFile, fileIsValid);
       props.addFile(pickedFile,props.placeholder);

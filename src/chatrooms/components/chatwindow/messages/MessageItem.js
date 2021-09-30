@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
-import { Button } from 'rsuite';
+
+
 import TimeAgo from 'timeago-react';
-import { useCurrentRoom } from '../../../../context/currentroom.context';
 import { auth } from '../../../../misc/firebase';
-import PresenceDot from '../../PresenceDot';
+
 import ProfileAvatar from '../../ProfileAvatar';
 import ProfileInfoBtnModal from './ProfileInfoBtnModal';
-import { useHover, useMediaQuery } from '../../../../misc/custom-hooks';
-import IconBtnControl from './IconBtnControl';
+import { useHover } from '../../../../misc/custom-hooks';
+
 import ImgBtnModal from './ImgBtnModal';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
@@ -17,7 +17,7 @@ import Badge from '@material-ui/core/Badge';
 import { red } from '@material-ui/core/colors';
 import { grey } from '@material-ui/core/colors';
 import { Grid } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+
 const StyledBadge = withStyles((theme) => ({
 badge: {
 right: -3,
@@ -52,18 +52,12 @@ return <a href={file.url}> Download {file.name} </a>
 
 const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
 
-const { author, createdAt, text,file, likes, likeCount} = message;
-const [selfRef, isHovered] = useHover();
-const isMobile = useMediaQuery(`(max-width:992px)`);
-const isAdmin = useCurrentRoom(v => v.isAdmin);
-const admins = useCurrentRoom(v => v.admins);
-// console.log('isAdmin', isAdmin);
+const { author, createdAt, text,file,  likeCount} = message;
+const [selfRef] = useHover();
 
-const isMessageAuthorAdmin = admins?admins.includes(author.uid):false;
+
 const isAuthor = auth.currentUser.uid === author.uid;
-const canGrantAdmin = isAdmin && !isAuthor;
-const canShowIcons = isMobile || isHovered;
-const isLiked = likes && Object.keys(likes).includes(auth.currentUser.uid);
+
 
 // console.log('isMessageAuthorAdmin', isMessageAuthorAdmin)
 return (
@@ -74,13 +68,9 @@ return (
 
         <ProfileAvatar src={author.avatar} alt={author.name} name={author.name} style={{  width: 50  ,height :50}} />
         
-      <ProfileInfoBtnModal  style={{ padding:10,}} profile={author} appearance="link" >
-        {canGrantAdmin &&
-        <Button block onClick={()=> handleAdmin(author.uid)} color="blue">
-          {isMessageAuthorAdmin ? 'Remove admin permission' : 'give admin permission'}
-        </Button>
-        }
-      </ProfileInfoBtnModal>
+      <ProfileInfoBtnModal  handleAdmin={handleAdmin} style={{ padding:10}} profile={author} / >
+     
+     
       <TimeAgo datetime={createdAt} style={{ padding:10,  color: grey[500] , fontSize: 10 }} />
     </Grid>
 

@@ -4,10 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { Button } from '@material-ui/core';
 import PhoneIcon from '@material-ui/icons/Phone';
-import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router-dom';
+import EmailIcon from '@mui/icons-material/Email';
 const useStyles = makeStyles((theme) => ({
 root: {
 flexGrow: 1,
@@ -53,13 +53,16 @@ return (
             <Typography gutterBottom variant="h5">
             {classified.name}
             </Typography>
+           
             <Typography variant="body1" gutterBottom>
               {classified.address.addressline} , {classified.address.area} , {classified.address.city}, {classified.address.state} , {classified.address.pincode} </Typography>
-            <Typography variant="body1">
-              <PhoneIcon fontSize="small" /> {classified.phone[0].number}
+          
+               <Typography variant="body1">
+              <PhoneIcon style={{height:"14px", width:"14px"}} /> {classified.phone[0].number}
             </Typography>
+         
             <Typography variant="body1">
-              {classified.emails}
+            <EmailIcon style={{height:"14px", width:"14px"}} />  {classified.emails}
             </Typography>
           </Grid>
           <Grid container justifyContent="flex-end" alignItems="center">

@@ -1,34 +1,31 @@
+
 import React from 'react'
 import { useCommunity } from '../../context/community.context';
-import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader'
-import PrimaryButton from '../../shared/components/PrimaryButton'
-import axios from 'axios';
+import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FlatRow } from '../components/FlatRow';
-import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import notificationAPI from '../../misc/axios-calls/notificationAPI';
 import { Progress } from '../../shared/components/Progress';
 
 export const Apartments = ({children,...props}) => {
-    const {user}=useProfile();
-    const communityid=user.communities[0];
-    //const communityid='6132ab3d442964fd1c7ef7f4';
-    const [community,setCommunity]=React.useState(null)
+   
+    const {community,setCommunity}=useCommunity();
+    console.log(community);
+   
     const [blocks,setBlocks]=React.useState([]);
     const [currentBlock,setCurrentBlock]=React.useState('');
-    const [floors,setFloors]=React.useState([]);
+  
     const [currentFloor,setCurrentFloor]=React.useState(0);
     const [flats,setFlats]=React.useState([]);
     const [models,setModels]=React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
     const getApartmentModels=async()=>{
-        var apiBaseUrl = `/community/${communityid}/apartments/models`   
+        var apiBaseUrl = `/community/${community._id}/apartments/models`   
         await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
@@ -46,7 +43,7 @@ export const Apartments = ({children,...props}) => {
              });
     }
     const getCommunityDetails=async ()=>{
-        var apiBaseUrl = `/community/${communityid}`   
+        var apiBaseUrl = `/community/${community._id}`   
         await communityAPI.get(apiBaseUrl )
              .then(function (response) {
                  if (response.status === 200)
@@ -61,12 +58,14 @@ export const Apartments = ({children,...props}) => {
                         b['floors']=block.floors;
                         b['flats']=block.flats;
                         b['block']=block.block;
-                        data.push(b);
+                        b['_id']=block._id;
+                        data.push(b)
                         
-                    })
-                    setCurrentBlock(data[0])
+                    });
+                    if(data.length>0)
+                        setCurrentBlock(data[0])
                    
-                    //console.log(data);
+                        console.log(data);
                     setBlocks(data);
                 }
              })
@@ -98,7 +97,7 @@ export const Apartments = ({children,...props}) => {
     const getApartments=async ()=>{
         var apiBaseUrl = `/community/apartments`   
         let searchquery={};
-        searchquery['communityid']=communityid;
+        searchquery['communityid']=community._id;
         searchquery['block']=currentBlock.block   ;
         searchquery['floor']=currentFloor ;  
         //console.log(searchquery);
@@ -107,7 +106,7 @@ export const Apartments = ({children,...props}) => {
                  if (response.status === 200)
                  {
                    // console.log(response.data);
-                    setCommunity(response.data);
+                    //setCommunity(response.data);
                     let apartments=response.data.apartments;
                     //console.log(apartments);
                     let data=[];
@@ -179,12 +178,12 @@ export const Apartments = ({children,...props}) => {
             data['issold']= flat.status==='not-sold'?false:true;
             data['enrolled']= 0;
             data['status']= flat.status;
-               data['communityid']=communityid;
+               data['communityid']=community._id;
                data['aptnum']=flat.aptnum
                data['block']=flat.block;
                data['floor']=flat.floor;
                 data['model']=flat.model;
-               // console.log(data);
+                console.log(data);
             createApartment(data)
             .then(response=>
             {
@@ -202,6 +201,10 @@ export const Apartments = ({children,...props}) => {
         props.handleBack();
     }
     React.useEffect(() => {
+        if(community===null)
+            return;
+      
+
         getCommunityDetails().then(
             response=>{
                 getApartmentModels();
@@ -251,7 +254,7 @@ export const Apartments = ({children,...props}) => {
             <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
         <Select id="blocks" value={currentBlock.block} onChange={setCurrentBlockInfo}  >
         {blocks.map((block)=>            
-          <MenuItem key={block.id} name={block.id} value={block.block}>{block.block}</MenuItem>
+          <MenuItem key={block._id} name={block._id} value={block.block}>{block.block}</MenuItem>
         )}
           </Select>
       </FormControl>
@@ -276,8 +279,8 @@ export const Apartments = ({children,...props}) => {
         <>
 
         <PageHeader>{children}</PageHeader>
-
-        {blocks.length===0 && isLoading?
+        {
+            (blocks.length===0 && isLoading)?
             <Progress/>
             :
             renderApartmentInfo()

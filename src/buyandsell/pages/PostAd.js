@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import Divider from '@material-ui/core/Divider';
 import { SectionHeader } from '../../shared/components/SectionHeader';
-import {TextField,Button} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import { useProfile } from '../../context/profile.context';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,11 +16,12 @@ import Grid from '@material-ui/core/Grid';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import AdImageUpload from '../../buyandsell/components/AdImageUpload';
-import PrimaryButton from '../../shared/components/PrimaryButton';
-import { useHistory } from 'react-router';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
+import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { CustomTextField } from '../../shared/components/CustomTextField';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
+import { useCommunity } from '../../context/community.context';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +46,8 @@ export const PostAd = () => {
     const classes = useStyles();
     const history=useHistory();
     const {user}=useProfile();
-    const communityid = user.communities[0];
+    const {community}=useCommunity();
+    const communityid = community._id;
     const files =[null,null,null,null,null,null,null,null,null,null,null,null];
     const [ categories,setCategories]=useState([]);
     const [ subCategories,setSubCategories]=useState([]);
@@ -191,7 +194,7 @@ export const PostAd = () => {
         <InputLabel id="label-category">Category</InputLabel>
         <Select id="category"  value={advert.category}  onChange={setCategory} label="Category">
         {categories.map((category)=>            
-          <MenuItem key={category.id} name={category.category} value={category.id}>{category.category}</MenuItem>
+          <MenuItem key={category.id} name={category.category} value={category._id}>{category.category}</MenuItem>
         )}
           </Select>
       </FormControl>
@@ -199,7 +202,7 @@ export const PostAd = () => {
         <InputLabel id="label-subcategory">Sub Category</InputLabel>
         <Select id="subcategory" value={advert.subcategory} onChange={setSubCategory} label="Sub Category">
         {subCategories.map((subcategory)=>            
-          <MenuItem key={subcategory.id} name={subcategory.subcategory} value={subcategory.id}>{subcategory.subcategory}</MenuItem>
+          <MenuItem key={subcategory.id} name={subcategory.subcategory} value={subcategory._id}>{subcategory.subcategory}</MenuItem>
         )}
         </Select>
       </FormControl>

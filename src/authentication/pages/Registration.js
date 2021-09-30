@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
+import {  OutlinedInput, Grid, TextField, Paper } from '@material-ui/core'
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from "axios";
 
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,17 +10,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
-import firebase from 'firebase/app';
-import { auth,database } from '../../misc/firebase';
+import { auth } from '../../misc/firebase';
 import Link from '@material-ui/core/Link';
-import {Redirect} from 'react-router-dom';
+
 import { PageHeader } from '../../shared/components/PageHeader';
-import { CenterFocusStrong, ControlCameraOutlined } from '@material-ui/icons';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-import { Box } from '@material-ui/core';
-import PrimaryButton from '../../shared/components/PrimaryButton';
+import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import logo from '../../images/home/houselogo.png';
 import userAPI from '../../misc/axios-calls/userAPI';
 import communityAPI from '../../misc/axios-calls/communityAPI';
@@ -29,12 +25,19 @@ import communityAPI from '../../misc/axios-calls/communityAPI';
 import lock from '../../images/authentication/lock.png';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+  root:{
+    background: 'linear-gradient(149.39deg, #007CC7 50.11%, rgba(0, 124, 199, 0) 144.08%)',
+    height:"60ch",
+    marginTop:'-10ch'
+  },
+  regBox: {
+    marginTop:'30ch',
+
       display: 'flex',
       flexWrap: 'wrap',
 
 width:"80ch",
-height: "60ch",
+height: "80ch",
 padding: '1ch',
 
     },
@@ -56,7 +59,7 @@ const Registration = () => {
     let uid=null;
     const[userInfo,setUserInfo]=useState(
         {
-            type:'',
+            type:'resident',
          
             email:''
         }
@@ -90,7 +93,6 @@ const Registration = () => {
                       community=response.data; 
                         console.log(community);
                         
-                        return true;
                     }
                     else if(userInfo.type==='resident') 
                     {
@@ -98,8 +100,9 @@ const Registration = () => {
                       console.log(response.data);
                       apartment=response.data; 
                         console.log(apartment);
-                        return true;
+                
                     }
+                    registerUserwithEmailAndPassword();
                 }
                 else if (response.status === 404) {
                     console.log("Token invalid");
@@ -116,16 +119,16 @@ const Registration = () => {
       const handlePasswordChange = (prop) => (event) => {
         setPassword({ ...password, [prop]: event.target.value });
       };
-      const onSignUpWithProvider =  async provider => {
+    //   const onSignUpWithProvider =  async provider => {
         
-         try {
-             const result= await auth.signInWithPopup(provider);
-             console.log(result);           
-         }
-         catch (err) {
-            console.log(err);
-        }
-     }
+    //      try {
+    //          const result= await auth.signInWithPopup(provider);
+    //          console.log(result);           
+    //      }
+    //      catch (err) {
+    //         console.log(err);
+    //     }
+    //  }
      const registerUserwithEmailAndPassword=()=>{
          console.log('Register email in Firebase....');
         auth.createUserWithEmailAndPassword(userInfo.email,password.password)
@@ -156,7 +159,7 @@ const Registration = () => {
             type:userInfo.type,
             uid:uid,
             email:userInfo.email,
-            communities:[community.id],
+            communities:[community._id],
             }
         }
         else
@@ -192,19 +195,10 @@ const Registration = () => {
              
            
        }
-     const onSignup=(event)=>{     
-       const tokencheck=validateToken();
-       console.log(tokencheck);
-       if(tokencheck)
-       {
-
-             registerUserwithEmailAndPassword();
-           
-        
-        }
-
-      event.preventDefault() 
+     const onSignup=()=>{     
+       validateToken();
      }
+      
      const signOut=()=>{
         auth.signOut().then(() => {
           history.push('/signin');
@@ -212,15 +206,16 @@ const Registration = () => {
         console.log(error);
       });
         }
-     const onFacebookSignUp = () => {
-        onSignUpWithProvider(new firebase.auth.FacebookAuthProvider());
+      
+    //  const onFacebookSignUp = () => {
+    //     onSignUpWithProvider(new firebase.auth.FacebookAuthProvider());
 
-     }
-     const onGoogleSignUp = (event) => {
-        onSignUpWithProvider(new firebase.auth.GoogleAuthProvider());
-        event.preventDefault() ;
+    //  }
+    //  const onGoogleSignUp = (event) => {
+    //     onSignUpWithProvider(new firebase.auth.GoogleAuthProvider());
+    //     event.preventDefault() ;
  
-     }
+    //  }
      const onChangeUserType=(event)=>{
         setUserInfo((prevState)=>{
             return{...prevState,type:event.target.value}});
@@ -233,26 +228,27 @@ const Registration = () => {
       history.push('/signin');
      }
      return (
-
+      <div className={classes.root}>
       <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"50px"}} alignItems="center">
-      <img src={logo}/>
-      <Paper elevation={10} className={classes.root}>
+      <Paper elevation={3} className={classes.regBox}>
 
     
         <Grid  container direction="column" justifyContent="space-evenly" alignItems="center">
+        <img alt="logo" src={logo}/>
+
         <PageHeader>Sign Up</PageHeader>
-        <img src={lock}/>
-        <RadioGroup row aria-label="position" name="position" defaultValue="top" onChange={onChangeUserType}>        
+        <img alt="lock" src={lock}/>
+        <RadioGroup row aria-label="position" name="usertype" defaultValue="resident" onChange={onChangeUserType}>        
         <FormControlLabel id="radio_admin"   value="admin"  control={<Radio color="primary" />} label="Admin" />        
         <FormControlLabel id="radio_resident"    value="resident"  control={<Radio color="primary" />} label="Resident" />        
          </RadioGroup>
 
          
      
-        <TextField id="token" style={{ margin: 8, width: '30ch'}}    margin="normal" label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
+        <TextField id="token" style={{ margin: 8, width: '30ch'}}    label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
 
        
-        <TextField id="email" style={{ margin: 8, width: '30ch'}}    margin="normal" label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
+        <TextField id="email" style={{ margin: 8, width: '30ch'}}   label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
         
         
 
@@ -269,6 +265,7 @@ const Registration = () => {
               </IconButton>
             </InputAdornment>
               }
+              label="Password"
           />
         </FormControl>
        
@@ -280,6 +277,7 @@ const Registration = () => {
       </Grid>
       </Paper>
       </Grid>
+      </div>
     )
 }
 

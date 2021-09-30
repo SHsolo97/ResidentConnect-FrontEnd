@@ -1,6 +1,11 @@
 import React from 'react';
-import {  Switch } from 'react-router-dom';
-import Announcements from './announcements/pages/Announcements';
+import {  
+  ThemeProvider
+ } from '@material-ui/core/styles';
+
+ import theme from "./assests/jss/theme";
+
+import { Switch } from 'react-router-dom';
 import {Community} from './apartments/pages/Community';
 import Registration from './authentication/pages/Registration';
 import SignIn from './authentication/pages/SignIn';
@@ -14,6 +19,8 @@ import CreateContact from './contacts/pages/CreateContact';
 import ResidentContacts from './contacts/pages/ResidentContacts';
 import AdminDashboard from './dashboards/pages/AdminDashboard';
 import ResidentDashboard from './dashboards/pages/ResidentDashboard';
+import DummyAdminDashboard from './dashboards/pages/DummyAdminDashboard';
+import DummyResidentDashboard from './dashboards/pages/DummyResidentDashboard';
 import Events from './eventmgmt/pages/Events';
 import AdminFacility from './facilitybooking/pages/AdminFacility';
 import ResidentFacility from './facilitybooking/pages/ResidentFacility';
@@ -34,22 +41,30 @@ import { AddClassified } from './classifieds/pages/AddClassified';
 import { ViewClassified } from './classifieds/pages/ViewClassified';
 import { PostAd } from './buyandsell/pages/PostAd';
 import { AddFacility } from './facilitybooking/pages/AddFacility';
-import SamplePage from './sample/SamplePage';
+
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';
 import { ResidentApartmentDetails } from './apartments/pages/ResidentApartmentDetails';
 import ProfileSetting from './profiles/pages/ProfileSetting';
 import { MyAds } from './buyandsell/pages/MyAds';
-import { AdvertsProvider } from './context/adverts.context';
+
 import { AdDetails } from './buyandsell/pages/AdDetails';
 import { UpdateAdDetails } from './buyandsell/pages/UpdateAdDetails';
 import {ResidentApartmentSettings} from './profiles/pages/ResidentApartmentSettings';
 import UpdateCommunityProfile from './profiles/pages/UpdateCommunityProfile';
 import {InitiatePayment}  from './payments/pages/InitiatePayment';
-
+import { PayBill } from './payments/pages/PayBill';
+import {hot} from 'react-hot-loader';
+import { CreateRide } from './carpooling/pages/CreateRide';
+import { SearchRide } from './carpooling/pages/SearchRide';
+import { RideHistory } from './carpooling/pages/RideHistory';
+import  {ResidentPaymentHistory}  from './payments/pages/ResidentPaymentHistory';
+import {ViewTransaction} from './payments/pages/ViewTransaction';
+import CommunityRegistration from './authentication/pages/CommunityRegistration';
 
 function App() {
  return(
+  <ThemeProvider  theme={theme}>
  <ProfileProvider>
    <CommunityProvider>
      <ApartmentProvider>
@@ -58,7 +73,12 @@ function App() {
      <SignIn />
     
    </PublicRoute>
+   <PublicRoute path="/registerCommunity">
+    
+   <CommunityRegistration />
+   </PublicRoute>
    <PublicRoute path="/registration">
+    
    <Registration />
    </PublicRoute>
    <SettingsRoute path="/settingsA" component={CommunityProfileSetting} />
@@ -66,14 +86,15 @@ function App() {
    <SettingsRoute path="/apartmentDetailsR" component={ResidentApartmentDetails}/>
    
    <SettingsRoute path="/selectprofile" component={ProfileSelection}/>
-   <PrivateRoute path="/dashboardR" component={ResidentDashboard} />
-   <PrivateRoute path="/dashboardA" component={AdminDashboard} />
+   <PrivateRoute path="/dashboardR" component={DummyResidentDashboard} />
+   <PrivateRoute path="/dashboardA" component={DummyAdminDashboard} />
+   <PrivateRoute path="/dashboardOR" component={ResidentDashboard} />
+   <PrivateRoute path="/dashboardOA" component={AdminDashboard} />
    <PrivateRoute path="/buyandsell" component={BuyAndSell} />
    <PrivateRoute path="/events" component={Events} /> 
    <PrivateRoute path="/classifieds" component={Classifieds} />
    <PrivateRoute path="/carpolling" component={CarPooling} />
    <PrivateRoute path="/apartments" component={Community} />
-   <PrivateRoute path="/announcement" component={Announcements} />
    <PrivateRoute path="/chatroomR" component={ResidentChatroom} />
    <PrivateRoute path="/chatroomA" component={AdminChatroom} />
    <PrivateRoute path="/paymentA" component={AdminPayments} />
@@ -92,7 +113,6 @@ function App() {
    <PrivateRoute path="/postAd" component={PostAd} />
    <PrivateRoute path="/addFacility" component={AddFacility}/>
    <PrivateRoute path="/profile" component={ProfileSetting}/>
-   <PrivateRoute path="/samplePage" component={SamplePage}/>
    <PrivateRoute path="/apartmentprofile" component={ResidentApartmentSettings}/>
 
      <PrivateRoute path="/myads" component={MyAds}/>
@@ -100,13 +120,23 @@ function App() {
      <PrivateRoute path="/updateAdDetails"  component={UpdateAdDetails}/>
      <PrivateRoute path="/updateCommunityProfile" component={UpdateCommunityProfile} />
      <PrivateRoute path="/initiatePayment" component={InitiatePayment} />
+     <PrivateRoute path="/payBill" component={PayBill} />
+     <PrivateRoute path="/createRide" component={CreateRide} />
+     <PrivateRoute path="/searchRide" component={SearchRide} />
+     <PrivateRoute path="/rideHistory" component={RideHistory} />
+     <PrivateRoute path="/paymentHistoryR" component={ResidentPaymentHistory} />
+     <PrivateRoute path="/viewTransaction" component={ViewTransaction} />
 
-     
+     <PublicRoute path="/">
+     <SignIn />
+    
+   </PublicRoute>
  </Switch>
  </ApartmentProvider>
  </CommunityProvider>
  </ProfileProvider>
+ </ThemeProvider>
  );
 }
 
-export default App;
+export default hot(module)(App);

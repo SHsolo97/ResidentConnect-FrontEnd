@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
 
 
 
@@ -18,10 +17,9 @@ class Reviewer extends React.Component {
 
     return (
         <div>
-             <Avatar alt={user.firstname} src={user.avatar} style={{  width: 100  ,height :100}}/>
-    <div style={{fontSize:'16px', color:'grey'}}>{user.firstname} {user.lastname} </div>
-    <div>{this.props.createdat}
-    </div>
+             <Avatar alt={user.firstname} src={user.avatar} style={{  width: 75  ,height :75}}/>
+             <div style={{fontSize:'14px', color:'grey'}}>{user.firstname} {user.lastname} </div>
+            <span style={{fontSize:'12px', color:'grey'}}>{this.props.createdat}</span>
     </div>)
     ;
   }
