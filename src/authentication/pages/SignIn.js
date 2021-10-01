@@ -51,7 +51,7 @@ const SignIn = () => {
 const classes=useStyles();
 const history = useHistory();
 const[email,setEmail]=useState(null);
-const [setError]=useState(null);
+const [isError,setError]=useState(null);
 const [password, setPassword] = useState({
 password: "",
 showPassword: false,
