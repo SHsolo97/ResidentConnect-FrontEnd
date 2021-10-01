@@ -7,6 +7,8 @@ import { calculateAverageStars } from "../../misc/helpers";
 import classifiedAPI from "../../misc/axios-calls/classifiedAPI";
 
 export const ReviewList =({...props}) => {
+  const classifiedid=props.classified._id;
+
   const editRatingDetails= async (rating) =>{
     const reviewData = {};
     const ratings=props.classified.ratings;
@@ -81,8 +83,9 @@ export const ReviewList =({...props}) => {
       .delete(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          editRatingDetails(rating)
-          
+         // editRatingDetails(rating)
+         props.fetchClassifiedById(classifiedid);
+         props.fetchCommentsAndUsers(classifiedid);
         }
       })
       .catch(function (error) {

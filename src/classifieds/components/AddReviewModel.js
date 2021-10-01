@@ -30,83 +30,84 @@ const validate = (formValues) => {
 
 const AddReviewModel = (props) => {
   const classifiedid=props.classified._id;
-  const ratings=props.classified.ratings;
+  //const ratings=props.classified.ratings;
 
   const { user } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
   const { isAlertOpen, openAlert, closeAlert } = useAlertState();
   const [alertMessage, setAlertMessage] = useState(null);
   const [alertType, setAlertType] = useState(null);
-  const editRatingDetails = async (rating) => {
-    const reviewData = {};
 
-    let _5star = parseInt(ratings._5star);
-    let _4star = parseInt(ratings._4star);
-    let _3star = parseInt(ratings._3star);
-    let _2star = parseInt(ratings._2star);
-    let _1star = parseInt(ratings._1star);
-    let _totrating = parseInt(ratings._totrating);
-    let _avgstar = parseFloat(ratings._avgstar);
-    _totrating = _totrating + 1;
+  // const editRatingDetails = async (rating) => {
+  //   const reviewData = {};
+  //   const ratings=props.classified.ratings;
+  //   let _5star = parseInt(ratings._5star);
+  //   let _4star = parseInt(ratings._4star);
+  //   let _3star = parseInt(ratings._3star);
+  //   let _2star = parseInt(ratings._2star);
+  //   let _1star = parseInt(ratings._1star);
+  //   let _totrating = parseInt(ratings._totrating);
+  //   let _avgstar = parseFloat(ratings._avgstar);
+  //   _totrating = _totrating + 1;
 
-    // eslint-disable-next-line default-case
-    switch (rating) {
-      case 1:
-        _1star = _1star + 1;
-        break;
-      case 2:
-        _2star = _2star + 1;
-        break;
-      case 3:
-        _3star = _3star + 1;
-        break;
-      case 4:
-        _4star = _4star + 1;
-        break;
-      case 5:
-        _5star = _5star + 1;
-        break;
-    }
-    _avgstar = calculateAverageStars(
-      _1star,
-      _2star,
-      _3star,
-      _4star,
-      _5star,
-      _totrating
-    );
-    console.log(_avgstar);
-    reviewData["_1star"] = _1star;
-    reviewData["_2star"] = _2star;
-    reviewData["_3star"] = _3star;
-    reviewData["_4star"] = _4star;
-    reviewData["_5star"] = _5star;
-    reviewData["_avgstar"] = _avgstar;
-    reviewData["_totrating"] = _totrating;
-    const data = {
-      ratings: reviewData,
-    };
-    var apiBaseUrl = `/classifieds/${classifiedid}`;
+  //   // eslint-disable-next-line default-case
+  //   switch (rating) {
+  //     case 1:
+  //       _1star = _1star + 1;
+  //       break;
+  //     case 2:
+  //       _2star = _2star + 1;
+  //       break;
+  //     case 3:
+  //       _3star = _3star + 1;
+  //       break;
+  //     case 4:
+  //       _4star = _4star + 1;
+  //       break;
+  //     case 5:
+  //       _5star = _5star + 1;
+  //       break;
+  //   }
+  //   _avgstar = calculateAverageStars(
+  //     _1star,
+  //     _2star,
+  //     _3star,
+  //     _4star,
+  //     _5star,
+  //     _totrating
+  //   );
+  //   console.log(_avgstar);
+  //   reviewData["_1star"] = _1star;
+  //   reviewData["_2star"] = _2star;
+  //   reviewData["_3star"] = _3star;
+  //   reviewData["_4star"] = _4star;
+  //   reviewData["_5star"] = _5star;
+  //   reviewData["_avgstar"] = _avgstar;
+  //   reviewData["_totrating"] = _totrating;
+  //   const data = {
+  //     ratings: reviewData,
+  //   };
+  //   var apiBaseUrl = `/classifieds/${classifiedid}`;
 
-    await classifiedAPI
-      .put(apiBaseUrl, data)
-      .then(function (response) {
-        if (response.status === 200) {
-          setIsLoading(false);
-          props.handleClose();
-          setAlertMessage("comment is added");
-          setAlertType("success");
-          openAlert();
-          props.setNewReview(true);
-        }
-      })
-      .catch(function (error) {
-        setIsLoading(false);
-        setAlertMessage(error.message);
-        setAlertType("error");
-        openAlert();
-      });
-  };
+  //   await classifiedAPI
+  //     .put(apiBaseUrl, data)
+  //     .then(function (response) {
+  //       if (response.status === 200) {
+  //         setIsLoading(false);
+  //         props.handleClose();
+  //         setAlertMessage("comment is added");
+  //         setAlertType("success");
+  //         openAlert();
+  //         props.setNewReview(true);
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       setIsLoading(false);
+  //       setAlertMessage(error.message);
+  //       setAlertType("error");
+  //       openAlert();
+  //     });
+  // };
   const addReviewComment = async (commentData) => {
     var apiBaseUrl = `/classifieds/comment/create`;
 
@@ -115,7 +116,12 @@ const AddReviewModel = (props) => {
       .then(function (response) {
         if (response.status === 201) {
           console.log(response.data);
-          return response;
+          setIsLoading(false);
+          props.handleClose();
+          setAlertMessage("comment is added");
+          setAlertType("success");
+          openAlert();
+          props.setNewReview(true);
         }
       })
       .catch(function (error) {
@@ -134,9 +140,11 @@ const AddReviewModel = (props) => {
     data["classifiedid"] = classifiedid;
     console.log(data);
     setIsLoading(true);
-    await addReviewComment(data).then((response) => {
-      editRatingDetails(data.rating);
-    });
+    addReviewComment(data)
+    
+    //       await addReviewComment(data).then((response) => {
+    //   editRatingDetails(data.rating);
+    // });
   };
 
   return (
@@ -148,15 +156,15 @@ const AddReviewModel = (props) => {
         <form onSubmit={props.handleSubmit(onSubmit)}>
           <Grid container direction="column" justifyContent="space-around" alignItems="center">
             <div>
-              <Field name="rating" component={renderRatingField} />
+              <Field name="rating"   sx={{width:'100px',height:'100px'}}   component={renderRatingField} />
             </div>
 
             <div>
-              <Field style={{width:'800px'}} name="comment" id="comment" component={renderTextField} label="Comment" multiline rows={10} palceholder="enter comment" variant="outlined" />
+              <Field style={{marginBottom:'20px',width:'800px'}}  name="comment" id="comment" component={renderTextField} label="Comment" multiline rows={10} palceholder="enter comment" variant="outlined" />
             </div>
             <Grid container direction="row" justifyContent="space-around" alignItems="center">
-              <PrimaryButton type="submit">Submit</PrimaryButton>
-              <PrimaryButton onClick={props.handleClose}>
+              <PrimaryButton style={{marginTop:'20px',marginLeft:'20px'}}  type="submit">Submit</PrimaryButton>
+              <PrimaryButton style={{marginTop:'20px',marginLeft:'20px'}}  onClick={props.handleClose}>
                 {" "}
                 Cancel{" "}
               </PrimaryButton>
