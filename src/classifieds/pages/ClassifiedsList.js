@@ -33,7 +33,7 @@ class ClassifiedsList extends React.Component {
 
     return (
       <div>
-        <span>{this.props.classifieds.length} results found </span>
+        <span style={{fontSize:'32px'}}>{this.props.classifieds.length} results found </span>
         { this.props.classifieds.map((classified) => {
       return (<div style={{marginTop:'10px'}}>
           <ClassifiedCard classified={classified}/>
