@@ -3,7 +3,6 @@ import { PrimaryButton } from '../../shared/components/PrimaryButton'
 import { Grid } from '@material-ui/core';
 import { BlockRow } from '../components/BlockRow';
 import { makeStyles } from '@material-ui/core/styles';
-import { useProfile } from '../../context/profile.context';
 import { PageHeader } from '../../shared/components/PageHeader';
 import Paper from '@material-ui/core/Paper';
 import communityAPI from '../../misc/axios-calls/communityAPI';
