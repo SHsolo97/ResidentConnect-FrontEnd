@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { fetchClassifieds } from '../actions';
 import ClassifiedCard from '../components/ClassifiedCard';
+import Grid from "@material-ui/core/Grid";
 
 class ClassifiedsList extends React.Component {
     constructor(props)
@@ -33,13 +34,22 @@ class ClassifiedsList extends React.Component {
 
     return (
       <div>
+         <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="center"
+      >
         <span style={{fontSize:'32px'}}>{this.props.classifieds.length} results found </span>
+        </Grid>
         { this.props.classifieds.map((classified) => {
+       
       return (<div style={{marginTop:'10px'}}>
           <ClassifiedCard classified={classified}/>
           </div>)
         })
       }
+     
         </div>)
   }
 
