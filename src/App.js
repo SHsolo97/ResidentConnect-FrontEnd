@@ -5,7 +5,7 @@ import {
 
  import theme from "./assests/jss/theme";
 
-import { Switch } from 'react-router-dom';
+import { Switch,BrowserRouter} from 'react-router-dom';
 import {Community} from './apartments/pages/Community';
 import Registration from './authentication/pages/Registration';
 import SignIn from './authentication/pages/SignIn';
@@ -68,6 +68,7 @@ function App() {
  <ProfileProvider>
    <CommunityProvider>
      <ApartmentProvider>
+     <BrowserRouter>
    <Switch>
    <PublicRoute path="/signin">
      <SignIn />
@@ -132,6 +133,7 @@ function App() {
     
    </PublicRoute>
  </Switch>
+ </BrowserRouter>
  </ApartmentProvider>
  </CommunityProvider>
  </ProfileProvider>
