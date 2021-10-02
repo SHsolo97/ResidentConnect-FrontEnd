@@ -9,6 +9,8 @@ import { PrimaryButton } from '../../shared/components/PrimaryButton'
 import { useProfile } from '../../context/profile.context'
 import { useModelState } from '../../misc/custom-hooks'
 import { DeleteAdvertModal } from '../components/DeleteAdvertModal'
+import { ShowSellerProfile } from '../components/ShowSellerProfile'
+
 import { useHistory } from 'react-router-dom'
 import { ImageCarousel } from '../components/ImageCarousel'
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
@@ -19,8 +21,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+import ShareIcon from '@mui/icons-material/Share';
 import { formatPhone,convertDate } from '../../misc/helpers';
+import { IconButton } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,6 +107,8 @@ export const AdDetails = ({ ...props }) => {
   const { advert } = props.location.state
   const { user } = useProfile();
   const [sellerDetails, setSellerDetails] = React.useState({ firstname: '', lastname: '', phone: [{ number: '' }] });
+  const { isOpen, open, close } = useModelState();
+
   const [sellerCommunity, setSellerCommunity] = React.useState( {address:{
     addressline :'',
     area :'',
@@ -119,7 +124,6 @@ geo:
   lng:0
 }});
 
-  const { isOpen, open, close } = useModelState();
   const getSellingAddress = async () => {
     const apiBaseUrl = `/community/${advert.communityid}`
     console.log(apiBaseUrl);
@@ -211,7 +215,9 @@ geo:
               <Paper elevation={1} className={classes.adPrice}>
                 <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
                   <SectionHeader> &#8377; {advert.price.value.toLocaleString('en-IN')}</SectionHeader>
+                  
                   <p>{advert.title}</p>
+                 
                 </Grid>
               </Paper>
               <br /> <br /> <br />
@@ -219,7 +225,7 @@ geo:
                 <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
                   <SectionHeader>Sold By</SectionHeader>
                   <div  style={{fontSize:'16px'}}> <PersonIcon/ >  {'  '} {sellerDetails.firstname} {sellerDetails.lastname}
-                  <Button href="#">View Profile</Button> 
+                    <ShowSellerProfile sellerAddress={sellerCommunity} seller={sellerDetails}/>
                   </div>
                   <div style={{fontSize:'16px'}}> <CalendarTodayIcon/>  {'  '}  Posted On : {convertDate(advert.createdat)}</div>
                   <div style={{fontSize:'16px'}}><PhoneIcon/> {'  '} {formatPhone(sellerDetails.phone[0].number)}</div>
@@ -231,7 +237,7 @@ geo:
                 <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
                   <SectionHeader>Map In</SectionHeader>
                   <div style={{fontSize:'16px', marginBottom:'5px'}}><LocationOnIcon /> {'  ' }{sellerCommunity.address.area}, {sellerCommunity.address.city} </div>
-                  <Map  width='40ch' height='30ch' center={sellerCommunity.geo} zoom={10} />
+                  {/* <Map  width='40ch' height='30ch' center={sellerCommunity.geo} zoom={10} /> */}
                 </Grid>
               </Paper>
             </Grid>
@@ -253,7 +259,7 @@ geo:
           </Grid>
           : null}
       </Grid>
-
+     
     </div>
   )
 }

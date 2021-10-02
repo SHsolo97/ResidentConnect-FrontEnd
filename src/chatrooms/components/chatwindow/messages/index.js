@@ -176,9 +176,10 @@ const Messages = () => {
         return items;
     };
     return (
-        <Paper style={{height: 500, overflow: 'auto'}}>
+        <Paper style={{marginTop:'16px',height: 575, overflow: 'auto'}}>
 
-        <div ref={selfRef} >
+
+        <div style={{padding:'16px'}} ref={selfRef} >
             {messages && messages.length >= PAGE_SIZE && 
                
                 <Button disabled={messages.length <PAGE_SIZE } onClick={onLoadMore} color="green" > Load More </Button>

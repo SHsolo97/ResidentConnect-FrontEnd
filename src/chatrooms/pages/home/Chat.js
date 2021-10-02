@@ -10,6 +10,7 @@ import { transformToArr } from '../../../misc/helpers';
 import { Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
+import Paper from '@mui/material/Paper';
 
 const Chat = ({children}) => {
 //const { chatId } = useParams();
@@ -41,11 +42,12 @@ members
 
 return (
 <CurrentRoomProvider data={currentRoomData}>
-  
+  <Paper  elevation={3}>
+  <div style={{padding:'16px'}}>
   <Grid container direction="column" justifyContent="space-between" alignItems="stretch">
 
   <ChatTop />
-  <Divider/>
+  <Divider style={{ background:'orange'}}/>
   <Messages />
   <Divider/>
 
@@ -54,6 +56,8 @@ return (
     <ChatBottom />
     </Grid>
   </Grid>
+  </div>
+  </Paper>
 </CurrentRoomProvider>
 );
 }

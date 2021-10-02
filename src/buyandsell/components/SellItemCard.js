@@ -12,7 +12,8 @@ import {useCommunity} from '../../context/community.context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 350,
+    height: 400,
   },
   media: {
     height: 0,

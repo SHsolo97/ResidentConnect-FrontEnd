@@ -76,9 +76,9 @@ const CreateRoomBtnModal = () => {
     }
 
     return (
-        <div style={{marginTop:'10px'}}>
+        <div >
             <PrimaryButton block color="green" onClick={open}>
-             <EmojiObjectsIcon /> Create new Chat Room
+            Create new Chat Room
             </PrimaryButton>
 
             <Dialog open={isOpen} onClose={close}>

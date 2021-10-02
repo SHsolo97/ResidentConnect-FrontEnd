@@ -22,13 +22,13 @@ return (
 <RoomsProvider>
   <RoomsRequestsProvider>
   <Grid container direction="row" justifyContent="space-between" alignItems="stretch" spacing={3}>
-    <Grid item xs={4}>
+    <Grid item xs={5}>
       {canRenderSideBar &&
       <SideBar setCurrentRoomId={setCurrentRoom} />
 
       }
     </Grid>
-    <Grid item xs={8}>
+    <Grid item xs={7}>
       {currentRoomId!=null?
       <Chat>{currentRoomId}</Chat>
       :
