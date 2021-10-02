@@ -6,7 +6,7 @@ import { useCurrentClassified } from '../../context/currentclassified.context';
 import  {ClassifiedRatings}  from './ClassifiedRatings';
 import {fetchClassifiedById,fetchCommentsAndUsers} from '../actions';
 import { connect } from 'react-redux';
-
+import {Progress} from '../../shared/components/Progress'
 
  export const ClassifiedReviews = ({...props}) => {
   const classifiedid=useCurrentClassified(v=>v._id);
@@ -21,9 +21,17 @@ import { connect } from 'react-redux';
 
 return (
 <div>
-  <ClassifiedRatings comments={props.comments}  classified={props.classified}   /> 
+  {
+    props.classified===null?
+    <Progress/>
+    :
+    <div>
+      <ClassifiedRatings comments={props.comments}  classified={props.classified}   /> 
   <AddReview classified={props.classified}     />
   <ReviewList  classified={props.classified} comments={props.comments}  />
+  </div>
+  }
+  
 </div>
 )
   }
