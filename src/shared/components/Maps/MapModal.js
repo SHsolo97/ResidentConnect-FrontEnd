@@ -23,7 +23,7 @@ export default function MapModel({...props}) {
         <DialogTitle >Location in Map</DialogTitle>
         <DialogContent>
         <div clasSName={classes.mapContainer}> 
-        <Map center={props.coordinates} zoom={10} />
+        <Map  width='800px' height='800px' center={props.coordinates} zoom={10} />
 
         </div>
         </DialogContent>

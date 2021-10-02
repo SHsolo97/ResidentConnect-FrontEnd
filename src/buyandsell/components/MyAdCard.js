@@ -2,15 +2,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-
 import CardMedia from '@material-ui/core/CardMedia';
 import Chip from '@material-ui/core/Chip';
-
 import CardActionArea from '@material-ui/core/CardActionArea';
-
+import {convertDate} from '../../misc/helpers';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -56,20 +53,25 @@ const openAd=(event)=>{
 
     })
 }
+// eslint-disable-next-line no-extend-native
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 
   return (
     <Card className={classes.root} onClick={openAd}>
    <CardActionArea>
        <Grid alignItems="center" container  zeroMinWidth >
   <Grid item xs={2}    container
-  direction="row" justifyContent="space-around"
-  alignItems="center"  zeroMinWidth >
+  direction="row" justifyContent="flex-start"
+  alignItems="flex-start"  style={{paddingLeft:'20px'}} >
         <div>
         <Typography color="textSecondary" gutterBottom>
-          FROM: {advert.activatedat}
+          FROM: {convertDate(advert.activatedat)}
         </Typography>
         <Typography color="textSecondary" gutterBottom>
-          TO: {advert.expireat}
+          TO: {convertDate(advert.expiredat)}
         </Typography>
         </div>
       </Grid>
@@ -89,8 +91,8 @@ const openAd=(event)=>{
           title="image"
         />
         <Typography color="textSecondary" > {advert.title.slice(0,20)} </Typography>
-        <Typography color="textSecondary" > {advert.price.value} </Typography> 
-        <Chip label="active" color="primary" />
+        <Typography color="textSecondary" >  &#8377; {advert.price.value.toLocaleString('en-IN')} </Typography> 
+        <Chip label={advert.status.capitalize()} style={{backgroundColor:advert.status=='active'?'green':'red'}}  />
        
     </Grid>
    

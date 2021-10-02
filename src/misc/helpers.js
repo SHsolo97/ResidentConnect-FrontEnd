@@ -34,6 +34,11 @@ export function convertTime(rawdate)
     return strTime;
   
 }
+export function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 export function calculateAverageStars(_1star,_2star,_3star,_4star,_5star,_totrating)
 {
     let averageRating=((1*_1star)+ (2*_2star)+(3*_3star)+(4*_4star)+(5*_5star))/_totrating;
