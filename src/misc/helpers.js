@@ -53,6 +53,35 @@ export function transformArrWithId(snapVal) {
     }): [];
 
 }
+export function transformArrWithoutId(snapVal) {
+    snapVal=snapVal[0];
+    const data= snapVal ? Object.keys(snapVal).map(roomId => {
+        console.log(roomId);
+        if(roomId!=='id')
+          return { ...snapVal[roomId]}
+    }): [];
+    console.log(data);
+    return data;
+
+}
+// export function transformArrWithoutId(snapVal) {
+//     const result=[]
+//     console.log(snapVal);
+//     if(snapVal.length==0)
+//         return result;
+//     for(var field in snapVal[0])
+//     {
+//         console.log(field);
+//         console.log(snapVal[field]);
+//         if (field != 'id')
+//         {
+//          result.push(field)
+//         }
+//     }
+//     console.log(result);
+//     return result;
+
+//}
 export async function getUserUpdates(userId, keyToUpdate, value, db) {
     const updates = {};
 

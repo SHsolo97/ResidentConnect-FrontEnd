@@ -11,6 +11,9 @@ import { JoinRoomCard } from './JoinRoomCard';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { useRoomsRequests } from '../../../context/roomsrequest.context';
+
+
 const useStyles = makeStyles((theme) => ({
 
   search: {
@@ -54,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
 const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
   const data=useRooms();
     const[rooms,setRooms] = React.useState(data);
-
+    const reqListRooms=useRoomsRequests();
+  console.log(reqListRooms);
     const classes=useStyles();
     //const c_rooms=rooms.find(room => room.communityid === communityid);
     const location = useLocation();
@@ -123,7 +127,7 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
                     <Nav.Item  style={{listStyleType:'none', marginTop:20}} componentClass={Link}  to={`/chat/${room.id}`}
                     key={room.id} panel="true"
                     eventKey={`/chat/${room.id}` }> 
-                    <JoinRoomCard room={room} />
+                    <JoinRoomCard requests={reqListRooms.filter(req=>req.id===room.id)} room={room} />
                     </Nav.Item>
 
 

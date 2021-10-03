@@ -8,8 +8,7 @@ import {PrimaryButton} from '../../../shared/components/PrimaryButton';
 import { useProfile } from '../../../context/profile.context';
 import { database,auth } from '../../../misc/firebase';
 import firebase from 'firebase/app';
-import { transformArrWithId } from '../../../misc/helpers';
-import { useRoomsRequests } from '../../../context/roomsrequest.context';
+import { transformArrWithId,transformArrWithoutId, transformToArr } from '../../../misc/helpers';
 import { useCommunity } from '../../../context/community.context';
 
 const useStyles = makeStyles((theme)=>({
@@ -22,63 +21,76 @@ height: theme.spacing(7),
 }
 }));
 
-export const JoinRoomCard = ({room}) => {
+export const JoinRoomCard = ({room,requests}) => {
   const {user}=useProfile();
   const {community}=useCommunity();
   const communityid=community._id;
-  const reqListRooms=useRoomsRequests();
+  //const reqListRooms=transformArrWithId(requests.length==0?[]:requests[0]);
+ // console.log(reqListRooms);
   const classes = useStyles();
   const {  name, id } = room;
  
   const[reqList,setReqList]=React.useState([]);
+  
+ 
+// React.useEffect(() => {
+//       console.log(requests);
+//       const data=transformArrWithoutId(requests)
+//       //const data=requests.slice(0, -1);
+//       console.log(data);
+//       setReqList(data);
+    
+// },[]);
   React.useEffect(() => {
       let found=false;
       // eslint-disable-next-line array-callback-return
-      reqListRooms.map((reqOfroom)=>{
+      const reqListRooms = database.ref(`requests/${communityid}`); //request list of the rooms
+      reqListRooms.on('value', (snap1) => {
+        const data = transformArrWithId(snap1.val());
+        //console.log(data);
+        data.map((reqOfroom)=>{
         if(reqOfroom.id===room.id)
         {
           const reqListRef = database.ref(`requests/${communityid}/${room.id}`); //request list of the rooms
-          reqListRef.on('value', (snap) => {
-              const data = transformArrWithId(snap.val());
+          reqListRef.on('value', (snap2) => {
+              const data1 = transformArrWithId(snap2.val());
             
-              setReqList(data);
+              setReqList(data1);
           });
           
           found=true;
         }
       })
+    })
     if(!found) 
       setReqList([]);
     return()=>{
       setReqList([]);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reqListRooms])
+  }, [])
 
  const getRequestStatus=()=>
  {
    console.log(reqList);
     // eslint-disable-next-line array-callback-return
-    reqList.map(req=>
-    {
-     // console.log(req.raisedby.uid);
-      //console.log(auth.currentUser.uid);
-      if(req.raisedby.uid===auth.currentUser.uid)
-      {
-        return req.status;
-      }
-    })
-   return 'Not Raised';
+    let status= 'Not Raised';
+    const data =reqList.filter(req=>req.raisedby.uid===auth.currentUser.uid);
+   if(data.length!==0)
+   {
+     status=data[0].status;
+   }
+   return status;
  }
 const getButton=()=>{
   const status=getRequestStatus();
   console.log(status);
   if(status==='Not Raised')
   return <PrimaryButton  onClick={requestToJoin}>Join</PrimaryButton>
-  else if(status==='Pending')
-  return <PrimaryButton >Pending</PrimaryButton>
+  else if(status==='pending')
+  return <PrimaryButton disabled='true' >Pending</PrimaryButton>
   else if(status==='Declined')
-  return <PrimaryButton>Declined</PrimaryButton>
+  return <PrimaryButton disabled='true'>Declined</PrimaryButton>
 
 }
 const requestToJoin=async ()=>{
