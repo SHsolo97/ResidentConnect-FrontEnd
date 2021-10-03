@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
 const PrivateLayout = ({ children }) => {
   const { isOpen, open, close } = useModelState();
   
-  const {communityList} = useCommunity();
+  const {communityList,community} = useCommunity();
   const {user} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
@@ -219,19 +219,19 @@ const PrivateLayout = ({ children }) => {
           </div>
           <Divider />
           <List>
-          <CustumMenuItem role='admin'>Dashboard</CustumMenuItem>  
+          <CustumMenuItem >Dashboard</CustumMenuItem>  
            
-           <CustumMenuItem role='admin'>Facilties</CustumMenuItem>
-           <CustumMenuItem role='admin'>Events</CustumMenuItem>
-           <CustumMenuItem role='admin'>Chat Rooms</CustumMenuItem>
-           <CustumMenuItem role='admin'>Buy &amp; Sell</CustumMenuItem>
-           <CustumMenuItem role='admin'>Classifieds</CustumMenuItem>
-           <CustumMenuItem role='admin'>Polling</CustumMenuItem>
-           <CustumMenuItem role='admin'>Payments</CustumMenuItem>
-           <CustumMenuItem role='admin'>Car Pooling</CustumMenuItem>         
-           <CustumMenuItem role='admin'>Visitors</CustumMenuItem>
-           <CustumMenuItem role='admin'>Maintenance</CustumMenuItem>
-           <CustumMenuItem role='admin'>Contacts</CustumMenuItem>
+          {community.paidservices.facility && <CustumMenuItem >Facilties</CustumMenuItem>}
+           <CustumMenuItem>Events</CustumMenuItem>
+           <CustumMenuItem >Chat Rooms</CustumMenuItem>
+           <CustumMenuItem >Buy &amp; Sell</CustumMenuItem>
+           <CustumMenuItem>Classifieds</CustumMenuItem>
+           {community.paidservices.polling && <CustumMenuItem >Polling</CustumMenuItem> }
+           <CustumMenuItem >Payments</CustumMenuItem>
+           {community.paidservices.carpooling && <CustumMenuItem>Car Pooling</CustumMenuItem>}     
+           {community.paidservices.visitor && <CustumMenuItem >Visitors</CustumMenuItem>}
+           {community.paidservices.maintenance && <CustumMenuItem >Maintenance</CustumMenuItem>}
+           <CustumMenuItem >Contacts</CustumMenuItem>
            
           </List>
           
