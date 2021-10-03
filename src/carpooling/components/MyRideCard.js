@@ -7,19 +7,35 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
-
+import ShowPassangers from './ShowPassangers';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import IconButton from '@mui/material/IconButton';
+import {useModelState} from '../../misc/custom-hooks';
+import RouteMapModel from '../../shared/components/Maps/RouteMapModal';
+import {getGeoOrdinates} from '../../misc/map-helper';
 export const  MyRideCard=({ride,...props})=> {
-  
-    const {_id,source,ridedatetime,destination,seats,amt,car,thumbnail}=ride;
+  const { isOpen, open, close } = useModelState();
+
+    const {_id,source,stoppoints,ridedatetime,destination,seats,amt,car,thumbnail}=ride;
     const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
     const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
     const ridedate=convertDate(ridedatetime);
     const ridetime=convertTime(ridedatetime);
-
+    const origin=startAddress.concat(', India');
+    const dest=destAddress.concat(', India');
+    const waypoints=stoppoints.length>2?stoppoints.slice(1,stoppoints.length-1):[];
+    const zoom= 6;
+   let center={lat:0,lng:0};
+   const openRouteModel=()=>{
+    console.log(origin);
+    center=getGeoOrdinates({address:origin});
+   open();
+   }
     const cancelRide=()=>{
      props.cancelRide(_id);
       
     }
+ 
     const editRide=()=>{
       console.log('Edit ride');
     }
@@ -72,6 +88,11 @@ return (
       <Typography variant="body2" style={{fontSize:'20px'}} color="orange">
         {ridedate}, {ridetime}
       </Typography>
+      <IconButton color="primary"  onClick={openRouteModel}>
+
+      <LocationOnIcon/>
+      </IconButton>
+      <ShowPassangers rideid={ride._id}/>
       <div>
         {ride.status!=='cancelled' && 
         <PrimaryButton onClick={editRide}>Edit Ride </PrimaryButton>
@@ -84,7 +105,9 @@ return (
        }
       </div>
     </Grid>
-
+       {isOpen &&
+       <RouteMapModel origin={origin} destination={dest} waypoints={waypoints} zoom={zoom} center={center} handleClose={close} open={open} />
+       }
 
   </Grid>
 </Paper>

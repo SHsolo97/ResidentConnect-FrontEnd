@@ -13,15 +13,33 @@ import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 import { useProfile } from '../../context/profile.context';
 import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
-
+import {getGeoOrdinates} from '../../misc/map-helper';
+import {useModelState} from '../../misc/custom-hooks';
+import RouteMapModel from '../../shared/components/Maps/RouteMapModal';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import IconButton from '@mui/material/IconButton';
 export const  SearchRideCard=({ride,...props})=> {
   const {user}=useProfile();
-    const {_id,creator,source,ridedatetime,destination,seats,amt}=ride;
+  const { isOpen, open, close } = useModelState();
+
+    const {_id,creator,stoppoints,source,ridedatetime,destination,seats,amt}=ride;
     const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
     const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
     const ridedate=convertDate(ridedatetime);
     const ridetime=convertTime(ridedatetime);
     const [buttonName,setButtonName]=React.useState('Request Ride');
+
+    const origin=startAddress.concat(', India');
+    const dest=destAddress.concat(', India');
+    const waypoints=stoppoints.length>2?stoppoints.slice(1,stoppoints.length-1):[];
+    const zoom= 6;
+   let center={lat:0,lng:0};
+   const openRouteModel=()=>{
+    console.log(origin);
+    center=getGeoOrdinates({address:origin});
+   open();
+   }
+
     const requestRide=async()=>{
 
 
@@ -100,6 +118,10 @@ return (
       <Typography variant="body2" color="text.secondary">
         {ridedate}, {ridetime}
       </Typography>
+      <IconButton color="primary"  onClick={openRouteModel}>
+
+<LocationOnIcon/>
+</IconButton>
       <div>
      
           <PrimaryButton onClick={requestRide}>{buttonName} </PrimaryButton>
@@ -107,7 +129,9 @@ return (
        
       </div>
     </Grid>
-
+    {isOpen &&
+       <RouteMapModel origin={origin} destination={dest} waypoints={waypoints} zoom={zoom} center={center} handleClose={close} open={open} />
+       }
 
   </Grid>
 </Paper>
