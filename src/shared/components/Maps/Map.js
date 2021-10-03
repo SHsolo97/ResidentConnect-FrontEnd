@@ -20,7 +20,7 @@ const Map = props => {
   return (
     <div
       ref={mapRef}
-      style={{width:'800px',height:'800px'}}
+      style={{width:props.width,height:props.height}}
     ></div>
   );
 };

@@ -34,6 +34,11 @@ export function convertTime(rawdate)
     return strTime;
   
 }
+export function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 export function calculateAverageStars(_1star,_2star,_3star,_4star,_5star,_totrating)
 {
     let averageRating=((1*_1star)+ (2*_2star)+(3*_3star)+(4*_4star)+(5*_5star))/_totrating;
@@ -48,6 +53,35 @@ export function transformArrWithId(snapVal) {
     }): [];
 
 }
+export function transformArrWithoutId(snapVal) {
+    snapVal=snapVal[0];
+    const data= snapVal ? Object.keys(snapVal).map(roomId => {
+        console.log(roomId);
+        if(roomId!=='id')
+          return { ...snapVal[roomId]}
+    }): [];
+    console.log(data);
+    return data;
+
+}
+// export function transformArrWithoutId(snapVal) {
+//     const result=[]
+//     console.log(snapVal);
+//     if(snapVal.length==0)
+//         return result;
+//     for(var field in snapVal[0])
+//     {
+//         console.log(field);
+//         console.log(snapVal[field]);
+//         if (field != 'id')
+//         {
+//          result.push(field)
+//         }
+//     }
+//     console.log(result);
+//     return result;
+
+//}
 export async function getUserUpdates(userId, keyToUpdate, value, db) {
     const updates = {};
 

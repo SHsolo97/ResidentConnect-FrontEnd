@@ -101,13 +101,16 @@ Alert.error(err.message, 5000);
 }, [chatId, user])
 
 return (
+  
 <Grid container justifyContent="center" alignItems="flex-end">
+  
   <AttachmentBtnModal afterUpload={afterUpload} />
-  <TextField multiline style={{width:700}} placeholder="write a new message here..." value={input} onChange={onInputChange} onKeyDown={onKeyDown} />
+  <TextField   multiline style={{width:600}} placeholder="write a new message here..." value={input} onChange={onInputChange} onKeyDown={onKeyDown} />
   <IconButton aria-label="send" onClick={onSendClick}>
     <SendIcon />
   </IconButton>
 </Grid>
+
 );
 }
 

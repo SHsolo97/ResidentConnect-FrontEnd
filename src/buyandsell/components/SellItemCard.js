@@ -8,11 +8,12 @@ import TimeAgo from 'timeago-react';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import { useHistory } from 'react-router-dom';
-
+import {useCommunity} from '../../context/community.context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 350,
+    height: 400,
   },
   media: {
     height: 0,
@@ -36,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SellItemCard({children,...props}) {
   const classes = useStyles();
   const history=useHistory();
-
+  const {community}=useCommunity();
+  const address=`${community.address.area} ,  ${community.address.city}`;
  console.log(props.item);
 
  const openAd=(event)=>{
@@ -61,21 +63,16 @@ export default function SellItemCard({children,...props}) {
         title='image'
       />
       <CardContent>
-        <Typography variant="h5" color="textPrimary" component="p">
-        Rs {props.item.price.value}
-        </Typography>
-        <Typography variant="body" color="textSecondary" component="p">
-        {props.item.title}
-
-        </Typography>
+        <Typography variant="h5" color="textPrimary" component="p"> &#8377; {props.item.price.value.toLocaleString('en-IN')}</Typography>
+        <br/>
+        <Typography  style={{color:'blue',fontSize:'16px'}} component="span">{props.item.title.length>40?props.item.title.slice(0,37).concat('...') :props.item.title }</Typography>
+        <br/>
+        <br/>
+        <Typography style={{fontSize:'14px'}}  component="span">{address}</Typography>
+        <br/>
+        <br/>
         <Typography variant="body2" color="textSecondary" component="p">
-        Tambaram, Chennai 
-
-        </Typography>
-      
-       
-        <Typography variant="body2" color="textSecondary" component="p">
-        <TimeAgo  datetime={new Date(props.item.activatedat)}/>
+          <TimeAgo  datetime={new Date(props.item.activatedat)}/>
         </Typography>
       </CardContent>
       </CardActionArea>

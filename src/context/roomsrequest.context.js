@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState, useContext } from "react";
 import { database } from '../misc/firebase';
 import { transformArrWithId } from '../misc/helpers';
 import { useCommunity } from "./community.context";
+import { useProfile } from "./profile.context";
 
 
 
@@ -9,6 +10,7 @@ const RoomsRequestsContext = createContext();
 
 export const RoomsRequestsProvider = ({ children }) => {
     const [roomsRequests, setRoomsRequests] = useState(null);
+    const {user}=useProfile();
     //const communityid=user.communities[0];
     const {community}=useCommunity();
     const communityid=community._id;
@@ -24,7 +26,7 @@ export const RoomsRequestsProvider = ({ children }) => {
         return () => {
             reqListRef.off();
         }
-       }, [communityid])
+       }, [])
 
     return <RoomsRequestsContext.Provider value={roomsRequests}>{children}</RoomsRequestsContext.Provider>
 }

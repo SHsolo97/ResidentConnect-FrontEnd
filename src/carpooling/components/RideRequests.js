@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { connect } from 'react-redux';
-import {fetchReceivedRideRequestsDetails} from '../actions/index';
+import {fetchReceivedRideRequestsDetails,fetchRideRequestsByRideOwner} from '../actions/index';
 import { useProfile } from '../../context/profile.context';
 import RideRequestCard from './RideRequestCard';
 import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
@@ -71,5 +71,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    {fetchReceivedRideRequestsDetails}  
+    {fetchReceivedRideRequestsDetails,fetchRideRequestsByRideOwner}  
   )(RideRequests);

@@ -5,6 +5,7 @@ import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 
+import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
         backgroundColor: alpha('#FF9800', 0.25),
       },
-      marginLeft:theme.spacing(5),
+     
       width: '50ch'
       
     },
@@ -60,16 +61,34 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   
-export const MyAdFilter = () => {
+export const MyAdFilter = ({...props}) => {
     const classes=useStyles();
-    return (
+
+    const handleChange = (event, newSelection) => {
+      console.log(newSelection);
+      props.setAdFilter(newSelection);
+    };
+    const setSearchFilter=(event)=>
+    {
+      if (event.key === 'Enter') {
+      console.log(event.target.value);
+      props.setAdsearchFilter(event.target.value);
+      }
+    }
+     return (
+      <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="flex-start"
+    >
         <div>
            <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Search…" onKeyDown={setSearchFilter}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -78,12 +97,13 @@ export const MyAdFilter = () => {
             />
           </div>
           
-          <ToggleButtonGroup  color="primary" aria-label="outlined primary button group">
-             <ToggleButton >Active Ads</ToggleButton>
+          <ToggleButtonGroup  exclusive    value={props.filter} onChange={handleChange} style={{marginTop:'50px'}}  color='#00FF00' >
+             <ToggleButton value="active" key="active" >Active Ads</ToggleButton>
                  
-              <ToggleButton >InActive Ads</ToggleButton>
+              <ToggleButton value="expired" key="expired" >InActive Ads</ToggleButton>
        
       </ToggleButtonGroup>
         </div>
+        </Grid>
     )
 }

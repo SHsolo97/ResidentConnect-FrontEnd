@@ -41,9 +41,9 @@ export const fetchUser = id => async dispatch => {
   dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 export const fetchRideRequestsByRideId = rideid => async dispatch => {
-  const searchQuery={rideid};
+  const searchQuery={ride:rideid};
   const response = await carPoolingAPI.post(`/carpoolings/riderequests/search`,searchQuery);
-
+  console.log(response.data.ridereqs);
   dispatch({ type: 'FETCH_RIDE_REQUESTS_BY_RIDE_ID', payload: response.data.ridereqs});
 };
 export const fetchRideRequestsByRideOwner = userid => async dispatch => {
@@ -69,7 +69,18 @@ export const fetchMyRideRequestsDetails = userid => async (dispatch,getState) =>
 
        
 };
+export const fetchMyRideRequestsByRideId = rideId => async (dispatch,getState) => {
+  console.log("fetchMyRideRequestsByRideId");
+  await 
+  dispatch(fetchRideRequestsByRideId(rideId))
+ _.chain(getState().ridereqs)
+   .map('requestedby')
+   .uniq()
+   .forEach(id => dispatch(fetchUser(id)))
+   .value();
 
+   
+};
 export const fetchReceivedRideRequestsDetails = userid => async (dispatch,getState) => {
 
   await 

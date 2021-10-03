@@ -11,7 +11,7 @@ export const MyRides = ({...props}) => {
     const {fetchMyRides}=props;
     useEffect(() => {
         fetchMyRides(user._id);
-        
+       
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const rejectRide=async(_id)=>{

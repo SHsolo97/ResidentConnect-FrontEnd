@@ -14,7 +14,7 @@ export const AdSearchResult = ({ ...props }) => {
   const [adverts, setAdverts] = useState([]);
   const getAds = async () => {
     const apiBaseUrl = `/adverts/search`
-    const searchQuery = { communityid: communityid }
+    const searchQuery = { communityid: communityid ,status:'active'}
 
     if (props.category !== '')
       searchQuery['category'] = props.category;

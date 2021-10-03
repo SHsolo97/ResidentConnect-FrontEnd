@@ -17,11 +17,31 @@ import Popper from '@mui/material/Popper';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import Fade from '@mui/material/Fade';
 import {formatPhone} from '../../misc/helpers';
+import {getGeoOrdinates} from '../../misc/map-helper';
+import {useModelState} from '../../misc/custom-hooks';
+import RouteMapModel from '../../shared/components/Maps/RouteMapModal';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export const  MyRideRequestCard=({...props})=> {
  // eslint-disable-next-line no-extend-native
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+} 
+
+ const { isOpen, open, close } = useModelState();
+ const {_id,creator,stoppoints,source,ridedatetime,destination,seats,amt}=props.ridereq.ride;
+
+ const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
+ const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
+ const origin=startAddress.concat(', India');
+ const dest=destAddress.concat(', India');
+  const waypoints=stoppoints.length>2?stoppoints.slice(1,stoppoints.length-1):[];
+ const zoom= 6;
+let center={lat:0,lng:0};
+const openRouteModel=()=>{
+ console.log(origin);
+ center=getGeoOrdinates({address:origin});
+open();
 }
     const renderData=()=>{
       if( typeof props.ridereq === "undefined")
@@ -101,6 +121,10 @@ export const  MyRideRequestCard=({...props})=> {
         </div>
       )}
     </PopupState>
+    <IconButton color="primary"  onClick={openRouteModel}>
+
+<LocationOnIcon/>
+</IconButton>
       <div>
      
           <PrimaryButton disabled>{props.ridereq.status.capitalize()} </PrimaryButton>
@@ -113,6 +137,9 @@ export const  MyRideRequestCard=({...props})=> {
        
       </div>
     </Grid>
+    {isOpen &&
+       <RouteMapModel origin={origin} destination={dest} waypoints={waypoints} zoom={zoom} center={center} handleClose={close} open={open} />
+       }
 
 
   </Grid>
