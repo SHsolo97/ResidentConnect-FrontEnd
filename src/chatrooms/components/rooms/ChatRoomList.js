@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
+const ChatRoomList = ({ myRoomsOnly,setCurrentRoomId, aboveElHeight }) => {
   const data=useRooms();
     const[rooms,setRooms] = React.useState([]);
     const reqListRooms=useRoomsRequests();
@@ -86,10 +86,13 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
             })
   
         }
-        setRooms(myRooms.concat(otherRooms));
-   
+        if(myRoomsOnly)
+          setRooms(myRooms);
+        else
+          setRooms(myRooms.concat(otherRooms));
+        
     
-    }, [data])
+    }, [data,myRoomsOnly])
   
     const setSearchFilter=(event)=>
     {
