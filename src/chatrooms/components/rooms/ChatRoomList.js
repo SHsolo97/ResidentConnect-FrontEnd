@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
   const data=useRooms();
-    const[rooms,setRooms] = React.useState(data);
+    const[rooms,setRooms] = React.useState([]);
     const reqListRooms=useRoomsRequests();
   console.log(reqListRooms);
     const classes=useStyles();
@@ -67,7 +67,28 @@ const ChatRoomList = ({ setCurrentRoomId, aboveElHeight }) => {
         setCurrentRoomId(roomid);
     } 
     React.useEffect(() => {
-      setRooms(data);
+      if(data==null)
+        return;
+       setRooms(data);
+    
+        let myRooms=[];
+        let otherRooms=[];
+        console.log(data);
+        if(data.length!=0)
+        {
+          data.map(room=>
+            {
+              console.log(room);
+              if(transformToArr(room.members).includes(auth.currentUser.uid))
+              myRooms.push(room);
+              else
+              otherRooms.push(room)
+            })
+  
+        }
+        setRooms(myRooms.concat(otherRooms));
+   
+    
     }, [data])
   
     const setSearchFilter=(event)=>
