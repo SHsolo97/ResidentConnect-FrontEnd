@@ -14,12 +14,14 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
+RUN npm install -g react-scripts
+
 RUN npm install -g npm
 
 
 # add app
 COPY . ./
-EXPOSE 3000
+
 
 # start app
 CMD ["npm", "run", "start"]
