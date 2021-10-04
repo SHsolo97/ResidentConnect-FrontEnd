@@ -11,7 +11,7 @@ before_install:
   - docker build -t agni1984/rc-frontend -f Dockerfile .
 
 script:
-  - docker run -e CI=true agni1984/rc-frontend npm run test --coverage --watchAll
+  - docker run -e CI=true agni1984/rc-frontend npm  test --coverage --watchAll
 # deploy:
 #   provider: elasticbeanstalk
 #   region: 'ap-south-1'
