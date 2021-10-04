@@ -11,4 +11,4 @@ before_install:
   - docker build -t agni1984/rc-frontend -f Dockerfile .
 
 script:
-  - docker run -e CI=true agni1984/rc-frontend npm  test
+  - docker run -e CI=true agni1984/rc-frontend npm run test -- --watchAll=false
