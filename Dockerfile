@@ -1,7 +1,8 @@
 FROM node:14.16.0-alpine
 LABEL version="1.0"
 LABEL maintainer = ["agni1984@gmail.com"]
-RUN apk add g++ make python
+#RUN apk add g++ make python
+
 RUN mkdir /app
 
 # set working directory
@@ -13,7 +14,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm install
+RUN npm install -g npm
 
 
 # add app
