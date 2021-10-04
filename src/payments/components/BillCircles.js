@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         color:'white',
         fontWeight:'bold',
        padding:'5px',
-        marginLeft:'35px',
+        marginLeft:'25px',
         fontSize:'16px',
         width:'110px'
   }
@@ -48,17 +48,17 @@ export default function BillCircles({...props}) {
       
        <div  > Total Due</div>
         <Box className={classes.commonStyles}>
-            <div className={classes.circleAmount}>{totalAmount} </div></Box>
+            <div className={classes.circleAmount}> &#8377; {totalAmount.toLocaleString('en-IN')} </div></Box>
          
       
        <div  style={{   marginTop:'50px'}}> Collected</div>
       <Box className={classes.commonStyles}>
-      <div className={classes.circleAmount}> {totalpaid} </div></Box>
+      <div className={classes.circleAmount}>  &#8377; {totalpaid.toLocaleString('en-IN')} </div></Box>
          
       
        <div  style={{   marginTop:'50px'}}> Due</div>
       <Box className={classes.commonStyles}>
-      <div className={classes.circleAmount}>{totalDue}</div></Box>
+      <div className={classes.circleAmount}>&#8377; {totalDue.toLocaleString('en-IN')}</div></Box>
      
    </Grid>
   

@@ -51,7 +51,8 @@ export const PayBill = ({...props}) => {
             <BillDetailsCard bill={bill}/>
             <div >
       <div position="static" color="default">
-        <Tabs  value={value} onChange={handleChange}>
+        <Tabs  textColor="primary"
+        indicatorColor="primary" value={value} onChange={handleChange}>
           <Tab label="Net Banking" id="netbanking" />
           <Tab label="Credit/Debit"  id="card" />
           
@@ -62,7 +63,7 @@ export const PayBill = ({...props}) => {
        <PayBillByNetBanking />
       </TabPanel>
       <TabPanel  id="card"  value={value} index={1}>
-        <PayBillByCard />
+        <PayBillByCard bill={bill} />
       </TabPanel>
     </div>
         </div>

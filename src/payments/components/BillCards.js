@@ -107,7 +107,7 @@ export const BillCards = ({...props}) => {
 >
     <div className={classes.cardHeading}> Bill Due</div>
     <div className={classes.cardAmount}> &#8377; {totalDue}</div>
-    {totalDue!==0 && <Link  component="button"
+    {totalDue!=='0' && <Link  component="button"
       variant="body2"  onClick={()=>{
                        history.push({
                         pathname: '/payBill',
@@ -125,7 +125,7 @@ export const BillCards = ({...props}) => {
 >
     <div className={classes.cardHeading}> Over Due</div>
     <div className={classes.cardAmount} > &#8377; {totalOverdue}</div>
-    {totalOverdue!==0 && <Link  component="button"
+    {totalOverdue!=='0' && <Link  component="button"
       variant="body2" onClick={()=>{
                        history.push({
                         pathname: '/payBill',
