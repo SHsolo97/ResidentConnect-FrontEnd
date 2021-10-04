@@ -160,6 +160,7 @@ const Registration = () => {
             uid:uid,
             email:userInfo.email,
             communities:[community._id],
+            createdat:new Date()
             }
         }
         else
@@ -172,6 +173,7 @@ const Registration = () => {
                 apartments:[{
                   communityid:apartment.communityid,
                   apartmentid:apartment._id}],
+                  createdat:new Date()
             }
         }
         console.log(userData);

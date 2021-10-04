@@ -31,6 +31,7 @@ import { useProfile } from '../context/profile.context';
 import { useEffect } from 'react';
 import logo from '../images/home/logo.png';
 import {CreateAnnouncementModal} from '../announcements/pages/CreateAnnouncementModal';
+import userAPI from '../misc/axios-calls/userAPI';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -104,7 +105,7 @@ const PrivateLayout = ({ children }) => {
   const { isOpen, open, close } = useModelState();
   
   const {communityList,community} = useCommunity();
-  const {user} = useProfile();
+  const {user,setUser} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
   const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -135,10 +136,31 @@ const PrivateLayout = ({ children }) => {
         history.push('/updateCommunityProfile');
 
     }
+    const editUser=async(profileData)=>{
   
+      var apiBaseUrl = `/users/${user._id}`  
+      await userAPI.put(apiBaseUrl,profileData )
+           .then(function (response) {
+               if (response.status === 200)
+    
+              {
+                  const updatedUserDetails=response.data
+                  console.log(updatedUserDetails);
+                  history.push('/signin');
+                 
+                
+              }
+           })
+           .catch(function (error) {
+               console.log(error);
+                
+           });
+    } 
+    
     const signOut=()=>{
       auth.signOut().then(() => {
-        history.push('/signin');
+        const profileData={lastlogin:new Date()}
+        editUser(profileData);
     }).catch((error) => {
       console.log(error);
     });

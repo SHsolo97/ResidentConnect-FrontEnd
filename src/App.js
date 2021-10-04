@@ -61,6 +61,7 @@ import { RideHistory } from './carpooling/pages/RideHistory';
 import  {ResidentPaymentHistory}  from './payments/pages/ResidentPaymentHistory';
 import {ViewTransaction} from './payments/pages/ViewTransaction';
 import CommunityRegistration from './authentication/pages/CommunityRegistration';
+import { AdminPaymentHistory } from './payments/pages/AdminPaymentHistory';
 
 function App() {
  return(
@@ -127,6 +128,8 @@ function App() {
      <PrivateRoute path="/rideHistory" component={RideHistory} />
      <PrivateRoute path="/paymentHistoryR" component={ResidentPaymentHistory} />
      <PrivateRoute path="/viewTransaction" component={ViewTransaction} />
+     <PrivateRoute path="/paymentHistoryA" component={AdminPaymentHistory} />
+
 
      <PublicRoute path="/">
      <SignIn />

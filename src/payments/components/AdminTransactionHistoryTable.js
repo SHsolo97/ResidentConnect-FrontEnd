@@ -134,7 +134,7 @@ if (b[orderBy]
   },
   }));
 
-  export default function ResidentTransactionHistoryTable({...props}) {
+  export default function AdminTransactionHistoryTable({...props}) {
     const history=useHistory();
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');

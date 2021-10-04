@@ -9,12 +9,23 @@ import GridItem from "../../shared/components/Grid/GridItem.js";
 import GridContainer from "../../shared/components/Grid/GridContainer.js";
 import { UserInfo } from '../components/UserInfo';
 import  AnnouncementSection  from '../components/AnnouncementSection';
-
+import UserSection from '../components/UserSection';
+import { useCommunity } from '../../context/community.context';
+import { useApartment } from '../../context/apartment.context';
+import {ResidentHelpDeskSection} from '../components/ResidentHelpDeskSection';
+import ResidentPaymentSection from '../components/ResidentPaymentSection';
+import MyRideRequestTab from '../components/MyRideRequestTab';
+import CarPoolTabs  from "../../shared/components/Tabs/CarPoolTabs";
+import RideRequestForMyRideTab from '../components/RideRequestForMyRideTab';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const dashboardstore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 const ResidentDashboard = () => {
   const {user}=useProfile();
+  const {community}=useCommunity();
+  const communityid=community._id
+  const {apartment}=useApartment();
+  const apartmentid=apartment._id;
 
    return (
     <>
@@ -24,10 +35,44 @@ const ResidentDashboard = () => {
  
   <GridContainer>
   <GridItem xs={12} sm={12} md={6}>
+        <UserSection apartmentid={apartmentid} communityid={communityid} />
+
+      </GridItem>
+      <GridItem xs={12} sm={12} md={6}>
+        <ResidentHelpDeskSection  />
+
+      </GridItem>
+       <GridItem xs={12} sm={12} md={6}>
             <AnnouncementSection   />
         </GridItem>
   <GridItem xs={12} sm={12} md={6}>
-            <PollingSection  userid={user._id} />
+            <PollingSection   userid={user._id} />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+            <ResidentPaymentSection    />
+        </GridItem>
+  <GridItem xs={12} sm={12} md={6}>
+  <CarPoolTabs
+            title="Car Pooling:"
+            headerColor="primary"
+            tabs={[
+              {
+                tabName: "My Requests",
+              
+                tabContent: (
+                    <MyRideRequestTab />
+                ),
+              },
+              {
+                tabName: "Received Requests",
+               
+                tabContent: (
+                    <RideRequestForMyRideTab />
+                ),
+              }
+              
+            ]}
+          />
         </GridItem>
   </GridContainer>
   </Provider>

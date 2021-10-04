@@ -181,7 +181,7 @@ if (b[orderBy]
               <TableCell align="left"> &#8377; {row.amt.toLocaleString('en-IN')}</TableCell>
               <TableCell align="left">{convertDate(row.dueat)}</TableCell>
               <TableCell align="left">
-                <Chip label={row.status.capitalize()} color={row.status==='due'?'primary':'secondary'} />
+                <Chip label={row.status.capitalize()}  size='small' style={{backgroundColor:row.status=='due'?'green':'red'}}  />
 </TableCell>
               <TableCell align="left">
                  <Button href="#text-buttons" onClick={()=>console.log(row._id)} color="primary">send reminder</Button> 

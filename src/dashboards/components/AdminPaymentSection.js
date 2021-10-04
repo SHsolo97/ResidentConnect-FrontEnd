@@ -4,7 +4,11 @@ import Card from "../../shared/components/cards/Card.js";
 import CardHeader from "../../shared/components/cards/CardHeader.js";
 import CardBody from "../../shared/components/cards/CardBody.js";
 import {fetchPaymentOfCommunity} from '../actions';
-import { makeStyles } from '@material-ui/core';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { useHistory } from 'react-router-dom';
+
+import { Button, makeStyles } from '@material-ui/core';
 import {
     Chart,
     PieSeries,
@@ -24,20 +28,23 @@ const useStyles = makeStyles({
 
 const AdminPaymentSection =({...props})=>{
     const classes=useStyles();
-
+    const[totalPaid,setTotalPaid]=React.useState(0);
+    const[totalDue,setTotalDue]=React.useState(0);
+    const[total,setTotal]=React.useState(0);
+    const history=useHistory();
     React.useEffect(() => {
         //console.log(props.communityid);
         props.fetchPaymentOfCommunity(props.communityid);
-
-        //console.log(props.totalPaid);
-        //console.log(props.totalDue);
-        
+        setTotalPaid(props.totalPaid!=null?parseInt(props.totalPaid):0);
+        setTotalDue(props.totalDue!=null?parseInt(props.totalDue):0);
+        setTotal((props.totalDue!=null?parseInt(props.totalDue):0) + (props.totalPaid!=null?parseInt(props.totalPaid):0));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.communityid])
-    
+    }, [])
+    const goToPayments=()=>{
+      history.push('/paymentA');
+    }
     const renderPaymentData=()=>{
-        const totalPaid=props.totalPaid!=null?parseInt(props.totalPaid):1300;
-        const totalDue=props.totalDue!=null?parseInt(props.totalDue):1300;
+       
         const chartData=[];
         chartData.push({status: 'TotalPaid', amount: totalPaid },
         { status: 'TotalDue', amount: totalDue })
@@ -54,7 +61,20 @@ const AdminPaymentSection =({...props})=>{
           <h2 className={classes.cardTitleWhite}>Payments</h2>
         </CardHeader>
         <CardBody>
-         {renderPaymentData()}
+        <Grid container >
+        <Grid item xs={7}>
+        {renderPaymentData()}
+        </Grid>
+        <Grid container   direction="column"
+  justifyContent="center"
+  alignItems="flex-start" xs={5}>
+          
+          <Typography variant='body1'>Total Due:   &#8377;{total.toLocaleString('en-IN')}</Typography>
+          <Typography variant='body1'>Paid:  &#8377; {totalPaid.toLocaleString('en-IN')}</Typography>
+          <Typography  variant='body1'>Due:   &#8377; {totalDue.toLocaleString('en-IN')}</Typography>
+          <Button style={{color:'blue'}} onClick={goToPayments}> More Details...</Button>
+        </Grid>
+       </Grid>
         </CardBody>
       </Card>
     )
@@ -62,21 +82,19 @@ const AdminPaymentSection =({...props})=>{
 }
 const mapStateToProps = state => {
 
-
+    console.log(state.payments);
     return { 
 
-             totalPaid : state.payments.reduce(function (accumulator, payment) {
-                if(payment.status==='paid')
-                    return accumulator + payment.amt;
-                  else
-                  return 0;
+             totalPaid : state.payments.filter(payment=>payment.status==='paid').reduce(function (accumulator1, payment) {
+               
+                    return accumulator1 + payment.amt;
+                 
               }, 0),
             
-              totalDue : state.payments.reduce(function (accumulator, payment) {
-                if(payment.status!=='paid')
-                    return accumulator + payment.amt;
-                else
-                    return 0;
+              totalDue : state.payments.filter(payment=>payment.status!=='paid').reduce(function (accumulator2, payment) {
+        
+                    return accumulator2 + payment.amt;
+              
               }, 0)
       
     };

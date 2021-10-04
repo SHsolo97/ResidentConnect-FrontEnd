@@ -68,7 +68,7 @@ return (
   }} color="primary" variant="dot">
           
         </Badge>
-        <Typography style={{marginTop:'-15px',paddingLeft:'30px',fontSize:'20px'}} variant="body2" gutterBottom>{startAddress}
+        <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body2" gutterBottom>{startAddress}
           </Typography>
       </div>
 
@@ -80,12 +80,12 @@ return (
     horizontal: 'left',
   }} color="secondary" variant="dot">
 
-          <Typography style={{marginTop:'-15px',fontSize:'20px',paddingLeft:'30px'}} variant="body2"  gutterBottom>{destAddress} </Typography>
+          <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body2"  gutterBottom>{destAddress} </Typography>
         </Badge>
       </div>
     </Grid>
     <Grid style={{paddingLeft:'30px',paddingTop:'10px'}} container row justifyContent="space-between" alignItems="center">
-      <Typography variant="body2" style={{fontSize:'20px'}} color="orange">
+      <Typography variant="body2"  color="orange">
         {ridedate}, {ridetime}
       </Typography>
       <IconButton color="primary"  onClick={openRouteModel}>
