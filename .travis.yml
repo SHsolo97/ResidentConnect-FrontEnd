@@ -2,7 +2,7 @@ sudo: required
 language: generic
 branches:
   only:
-  - master
+  - main
 
 services:
   - docker
