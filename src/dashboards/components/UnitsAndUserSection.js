@@ -28,11 +28,13 @@ const renderUserData=() =>{
 if (props.userSummary.length !== 0) {
 return (
 <div>
+<br/> 
   <GroupsIcon style={{width:'50px',height:'50px'}} />
-
+  <br/> <br/>
   <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.userSummary.total} </span> Users</div>
-  <div> {props.userSummary.admin} Admins</div>
-  <div> {props.userSummary.resident} Residents</div>
+  <br/> 
+  <div> {props.userSummary.admin} Admins</div>  <br/>
+  <div> {props.userSummary.resident} Residents</div> <br/>
 </div>
 )
 }
@@ -45,11 +47,15 @@ const renderApartmentData=()=> {
 if (props.apartmentsSummary!=null) {
 return (
 <div>
+<br/> 
   <ApartmentIcon style={{width:'50px',height:'50px'}} />
+  <br/> 
+  <br/> 
   <div> <span style={{fontWeight:'bold', fontSize:'20px'}}> {props.apartmentsSummary.total} </span> Units</div>
+  <br/> 
   { props.apartmentsSummary.status.map(data=>
   {
-  return <div> {data.count} {data.type.capitalize()}</div>
+  return <div> <div> {data.count} {data.type.capitalize()}</div> <br/> </div>
   })
   }
 </div>

@@ -2,9 +2,11 @@ import userAPI from '../../misc/axios-calls/userAPI';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import paymentsAPI from '../../misc/axios-calls/paymentsAPI';
 import announcementAPI from '../../misc/axios-calls/announcementAPI';
-
+import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
+import _ from 'lodash';
 
+//*********************************************************************************** */
 
 export const fetchPollsByCreator = (id) => async dispatch => {
 
@@ -28,6 +30,8 @@ export const fetchActivePollsByCommunity = (communityid) => async dispatch => {
 
   dispatch({ type: 'FETCH_ACTIVE_POLLS_BY_COMMUNITY', payload: response.data.polls});
 };
+//*********************************************************************************** */
+
 export const fetchAnnouncementsByCommunity = (communityid) => async dispatch => {
 
      const searchQuery={
@@ -38,6 +42,8 @@ export const fetchAnnouncementsByCommunity = (communityid) => async dispatch => 
  
    dispatch({ type: 'FETCH_ANNOUNCEMENTS_BY_COMMUNITY', payload: response.data.announcements});
  };
+ //*********************************************************************************** */
+
 export const fetchPaymentOfApartment = (apartmentid) => async dispatch => {
     let searchQuery={
         "apartmentid":apartmentid
@@ -49,6 +55,8 @@ export const fetchPaymentOfApartment = (apartmentid) => async dispatch => {
   dispatch({ type: 'FETCH_PAYEMENTS_BY_APARTMENT', payload: response.data.payments});
 };
 
+
+
 //to show payment details to admin of community
 export const fetchPaymentOfCommunity= (communityid) => async dispatch => {
 
@@ -59,6 +67,17 @@ export const fetchPaymentOfCommunity= (communityid) => async dispatch => {
   const response = await paymentsAPI.post('/payments/search',searchQuery);
 
   dispatch({ type: 'FETCH_PAYEMENTS_BY_COMMUNITY', payload: response.data.payments});
+};
+//*********************************************************************************** */
+export const fetchUsersByApartmentId = (apartmentid) => async dispatch => {
+  let searchQuery={
+      "apartments.apartmentid":apartmentid
+  }
+
+  console.log(searchQuery);
+const response = await userAPI.post('/users/search',searchQuery);
+
+dispatch({ type: 'FETCH_USERS_BY_APARTMENT', payload: response.data.users});
 };
 export const fetchUsersOverview = (communityid) => async dispatch => {
 
@@ -94,6 +113,8 @@ export const fetchUsersOverview = (communityid) => async dispatch => {
     console.log(result);
   dispatch({ type: 'FETCH_USERS_DATA', payload:result});
 };
+//*********************************************************************************** */
+
 export const fetchApartmentsOverview = (communityid) => async dispatch => {
 
     const searchQuery=
@@ -123,4 +144,52 @@ export const fetchApartmentsOverview = (communityid) => async dispatch => {
     }
     console.log(result);
   dispatch({ type: 'FETCH_APARTMENTS_DATA', payload:result});
+};
+//*********************************************************************************** */
+
+export const fetchReceivedRideRequestsDetails = userid => async (dispatch,getState) => {
+
+  await 
+  dispatch(fetchRideRequestsByRideOwner(userid))
+ _.chain(getState().ridereqs)
+   .map('requestedby')
+   .uniq()
+   .forEach(id => dispatch(fetchUser(id)))
+   .value();
+
+
+};
+export const fetchUser = id => async dispatch => {
+  const response = await userAPI.get(`/users/${id}`);
+  console.log(response.data);
+  dispatch({ type: 'FETCH_USER', payload: response.data });
+};
+export const fetchRideRequestsByRideId = rideid => async dispatch => {
+  const searchQuery={ride:rideid};
+  const response = await carPoolingAPI.post(`/carpoolings/riderequests/search`,searchQuery);
+  console.log(response.data.ridereqs);
+  dispatch({ type: 'FETCH_RIDE_REQUESTS_BY_RIDE_ID', payload: response.data.ridereqs});
+};
+export const fetchRideRequestsByRideOwner = userid => async dispatch => {
+  const searchQuery={owner:userid};
+  const response = await carPoolingAPI.post(`/carpoolings/riderequests/search`,searchQuery);
+
+  dispatch({ type: 'FETCH_RIDE_REQUESTS_BY_OWNER_ID', payload: response.data.ridereqs});
+};
+export const fetchRideRequestsByRequester = userid => async dispatch => {
+  const searchQuery={requestedby:userid};
+  const response = await carPoolingAPI.post(`/carpoolings/riderequests/search`,searchQuery);
+
+  dispatch({ type: 'FETCH_RIDE_REQUESTS_BY_REQUESTER', payload: response.data.ridereqs});
+};
+export const fetchMyRideRequestsDetails = userid => async (dispatch,getState) => {
+  await 
+  dispatch(fetchRideRequestsByRequester(userid))
+ _.chain(getState().ridereqs)
+   .map('owner')
+   .uniq()
+   .forEach(id => dispatch(fetchUser(id)))
+   .value();
+
+   
 };

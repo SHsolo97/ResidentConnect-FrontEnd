@@ -2,7 +2,7 @@ import React from 'react'
 import { useCommunity } from '../../context/community.context';
 import { useProfile } from '../../context/profile.context'
 import UnitsAndUserSection from '../components/UnitsAndUserSection';
-import {HelpDeskSection} from '../components/HelpDeskSection';
+import {AdminHelpDeskSection} from '../components/AdminHelpDeskSection';
 import {FacilityActivitySection} from '../components/FacilityActivitySection';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -18,7 +18,6 @@ import  AnnouncementSection from '../components/AnnouncementSection';
 
 
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const dashboardstore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
@@ -29,7 +28,7 @@ const AdminDashboard = () => {
 const {user}=useProfile();
 const {community}=useCommunity();
 const communityid=community._id;
-
+const {carpooling,facility,maintenance,polling,visitor}=community.paidservices;
 return (
 
 <>
@@ -42,24 +41,24 @@ return (
         <UnitsAndUserSection communityid={communityid} />
 
       </GridItem>
-      <GridItem xs={12} sm={12} md={6}>
-        <HelpDeskSection communityid={communityid} />
+      {maintenance && <GridItem xs={12} sm={12} md={6}>
+        <AdminHelpDeskSection communityid={communityid} />
 
-      </GridItem>
+      </GridItem>}
       <GridItem xs={12} sm={12} md={6}>
         <AnnouncementSection communityid={communityid} />
       </GridItem>
-      <GridItem xs={12} sm={12} md={6}>
+      {polling && <GridItem xs={12} sm={12} md={6}>
         <PollingSection userid={user._id}  />
-      </GridItem>
-      <GridItem xs={12} sm={12} md={6}>
+      </GridItem> }
+      {facility && <GridItem xs={12} sm={12} md={6}>
         <FacilityActivitySection communityid={communityid} />
 
-      </GridItem>
-      <GridItem xs={12} sm={12} md={6}>
+      </GridItem>}
+     <GridItem xs={12} sm={12} md={6}>
         <AdminPaymentSection communityid={communityid} />
 
-      </GridItem>
+      </GridItem> 
 
       
     </GridContainer>

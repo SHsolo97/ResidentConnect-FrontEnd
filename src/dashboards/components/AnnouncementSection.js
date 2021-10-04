@@ -59,7 +59,8 @@ export const AnnouncementSection = ({...props}) => {
 }
 
 const mapStateToProps = (state) => {
-    return { announcements: state.announcements };
+  const today=new Date();
+    return { announcements:  state.announcements==null?[]:state.announcements.filter(announcement =>new Date(announcement.expiredat)>=today)};
   };
   
   export default connect(
