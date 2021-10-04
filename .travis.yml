@@ -1,5 +1,8 @@
 sudo: required
 language: generic
+branches:
+  only:
+  - master
 
 services:
   - docker
@@ -8,4 +11,4 @@ before_install:
   - docker build -t agni1984/rc-frontend -f Dockerfile .
 
 script:
-  - docker run -e CI=true agni1984/rc-frontend
+  - docker run -e CI=true agni1984/rc-frontend npm run test
