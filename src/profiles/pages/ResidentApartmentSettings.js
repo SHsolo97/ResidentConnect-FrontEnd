@@ -63,7 +63,7 @@ const editApartment=async()=>{
             {
                 console.log(response.data);
                 setApartment(response.data);
-                history.push('/dashboardR');
+                history.push('/dashboardOR');
                
               
             }

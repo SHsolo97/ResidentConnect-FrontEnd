@@ -172,9 +172,9 @@ const editUser=async(profileData)=>{
               console.log(updatedUserDetails);
               setUser(updatedUserDetails)
               if(user.type==='admin')
-              history.push('/dashboardA')
+              history.push('/dashboardOA')
             else
-              history.push('/dashboardR')
+              history.push('/dashboardOR')
              
             
           }
@@ -211,9 +211,9 @@ editUser(profileData);
 }
 const goToDashboard=(event)=>{
   if(user.type==='admin')
-    history.push('/dashboardA')
+    history.push('/dashboardOA')
   else
-    history.push('/dashboardR')
+    history.push('/dashboardOR')
 }
 const addFile=(filetoUpload)=>{
  setAvatarImage(filetoUpload);

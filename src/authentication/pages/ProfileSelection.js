@@ -30,12 +30,12 @@ const handleSubmit=()=>{
 if(user.type==='admin')
 
 if(user.profilecompletion)
-history.push('/dashboardA');
+history.push('/dashboardOA');
 else
 history.push('/settingsA');
 else
 if(user.profilecompletion)
-history.push('/dashboardR');
+history.push('/dashboardOR');
 else
 history.push('/settingsR');
 
