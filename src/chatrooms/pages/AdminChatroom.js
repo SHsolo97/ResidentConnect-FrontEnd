@@ -10,7 +10,7 @@ const AdminChatroom = () => {
         <Grid
   container
   direction="row"
-  justifyContent="center"
+  justifyContent="space-between"
   alignItems="center"
 >
         <PageHeader> Chat Rooms</PageHeader>
