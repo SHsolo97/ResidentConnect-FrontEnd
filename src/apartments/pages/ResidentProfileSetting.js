@@ -202,7 +202,7 @@ const editUser=async(profileData)=>{
               if (user.type==='resident')              
                 history.push('/apartmentDetailsR');
               else
-              history.push('/dashboardA');
+              history.push('/dashboardOA');
              
             
           }

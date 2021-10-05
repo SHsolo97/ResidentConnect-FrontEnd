@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 export const MenuItem = ({children,...props}) => {
     const menuName=children;
     return (
-        <Link to='/dashboardA'>
+        <Link to='/dashboardOA'>
         <ListItem button key={menuName}>
             {menuName==='Dashboard' &&  <ListItemIcon> <DashboardIcon /> </ListItemIcon>}  
             {menuName==='Apartments' &&  <ListItemIcon> <ApartmentIcon /> </ListItemIcon>}  

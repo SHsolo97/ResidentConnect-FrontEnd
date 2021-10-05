@@ -1,9 +1,4 @@
 FROM node:14.16.0-alpine
-LABEL version="1.0"
-LABEL maintainer = ["agni1984@gmail.com"]
-RUN apk add g++ make python
-
-RUN mkdir /app
 
 # set working directory
 WORKDIR /app
@@ -14,14 +9,11 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm install -g react-scripts
-
-RUN npm install -g npm
-
+RUN npm install --silent
+RUN npm install react-scripts@4.0.3 -g --silent
 
 # add app
 COPY . ./
 
-
 # start app
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]

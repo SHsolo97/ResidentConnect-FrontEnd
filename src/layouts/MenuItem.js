@@ -30,7 +30,7 @@ export const CustumMenuItem = ({children}) => {
         {
         switch(menuName) {
             case 'Dashboard':
-                history.push('/dashboardR');  
+                history.push('/dashboardOR');  
               break;
             case 'Payments':
               history.push('/paymentR'); 
@@ -76,7 +76,7 @@ export const CustumMenuItem = ({children}) => {
         {
           switch(menuName) {
             case 'Dashboard':
-                history.push('/dashboardA');  
+                history.push('/dashboardOA');  
               break;
             case 'Payments':
               history.push('/paymentA'); 

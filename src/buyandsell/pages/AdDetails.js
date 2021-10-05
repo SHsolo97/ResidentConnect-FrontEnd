@@ -237,7 +237,7 @@ geo:
                 <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
                   <SectionHeader>Map In</SectionHeader>
                   <div style={{fontSize:'16px', marginBottom:'5px'}}><LocationOnIcon /> {'  ' }{sellerCommunity.address.area}, {sellerCommunity.address.city} </div>
-                  {/* <Map  width='40ch' height='30ch' center={sellerCommunity.geo} zoom={10} /> */}
+                 <Map  width='40ch' height='30ch' center={sellerCommunity.geo} zoom={10} /> 
                 </Grid>
               </Paper>
             </Grid>

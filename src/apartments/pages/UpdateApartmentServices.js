@@ -58,9 +58,9 @@ const updateServiceDetails=async(data)=>{
   console.log( response.data);
   setCommunity(response.data)
   if(user.type==='admin')
-  history.push('/dashboardA');
+  history.push('/dashboardOA');
   else
-  history.push('/dashboardR');
+  history.push('/dashboardOR');
   
   }
   })
