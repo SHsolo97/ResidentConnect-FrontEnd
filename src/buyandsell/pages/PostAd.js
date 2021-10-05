@@ -22,6 +22,7 @@ import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { CustomTextField } from '../../shared/components/CustomTextField';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 import { useCommunity } from '../../context/community.context';
+import {addDays} from '../../misc/helpers';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,7 @@ export const PostAd = () => {
         
             communityid :communityid,
             creator:user._id,
+            expiredat:addDays(new Date(),15),
             title: '',
             description:'',
             category: 'Autos',
