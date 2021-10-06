@@ -50,7 +50,7 @@ const AdImageUpload = props => {
       <div className={`image-upload`}>
         <div className="image-upload__preview"   onClick={pickImageHandler}>
           {previewUrl && <img src={previewUrl} alt="Preview"  />}
-          {!previewUrl && <p><AddAPhotoIcon fontSize="large"/> </p>}
+          {!previewUrl && <AddAPhotoIcon fontSize="large"/> }
         </div>
        
       </div>

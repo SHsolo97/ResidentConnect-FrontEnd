@@ -65,7 +65,7 @@ export const CreatePolling = ({...props}) => {
     
 const PollingOptions = ({ fields}) => (
 <div>
-    <h3> Options  <IconButton onClick={()=> fields.push()}> <AddCircleIcon />       </IconButton> </h3>
+    <h3> Options  <IconButton onClick={()=>{ fields.push()}}> <AddCircleIcon />       </IconButton> </h3>
     <Stack spacing={1} >
     {fields.map((options, index) => (
      
