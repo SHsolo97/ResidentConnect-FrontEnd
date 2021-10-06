@@ -1,0 +1,24 @@
+sudo: required
+language: generic
+branches:
+  only:
+  - main
+
+services:
+  - docker
+
+before_install:
+  - docker build -t agni1984/rc-frontend -f Dockerfile .
+
+script:
+  - docker run -e CI=true agni1984/rc-frontend npm run test
+#   provider: elasticbeanstalk
+#   region: 'ap-south-1'
+#   app: 'docker'
+#   env: 'docker-env'
+#   bucket_name: 'elasticbeanstalk-us-south-1-860905879962'
+#   bucket_path: 'docker'
+#   on:
+#     branch: main
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY

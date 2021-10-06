@@ -1,0 +1,39 @@
+#kubectl apply -f rc-frontend-depl.yml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rc-frontend-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rc-frontend
+  template:
+    metadata:
+      labels:
+        app: rc-frontend
+    spec:
+      containers:
+        - name: rc-frontend
+          image: agni1984/rc-client
+          ports: 
+            - containerPort: 3000 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rc-frontend-srv
+spec:
+  selector:
+    app: rc-frontend
+  type: NodePort
+  ports:
+    - name: rc-frontend
+      port: 3000
+      targetPort: 3000
+
+
+
+
+        
