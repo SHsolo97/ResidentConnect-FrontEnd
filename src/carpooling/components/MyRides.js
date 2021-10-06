@@ -58,12 +58,21 @@ export const MyRides = ({...props}) => {
            
           });
     }
+    const renderRides=()=>{
+      if(props.rides.length===0)
+      {
+        return <div style={{color:'red',fontSize:'32px', marginTop:'150px',marginLeft:'400px'}}> No Rides</div>
+      }
+      return(
+        props.rides.map(ride=>{
+          return  <MyRideCard key={ride._id} ride={ride} cancelRide={cancelRide}/>
+     })
+
+      )
+    }
     return (
         <div>
-         { props.rides !=null && 
-         props.rides.map(ride=>{
-                     return  <MyRideCard key={ride._id} ride={ride} cancelRide={cancelRide}/>
-                })}
+         { props.rides !=null && renderRides() }
         </div>
     )
 }

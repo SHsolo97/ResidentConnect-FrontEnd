@@ -58,14 +58,16 @@ export const CreatePolling = ({...props}) => {
         data['createdby']=user._id;
         data['answeredby']=[];
        
-        //console.log(data);
+        console.log(data);
         createPoll(data);
 
     }
     
 const PollingOptions = ({ fields}) => (
 <div>
-    <h3> Options  <IconButton onClick={()=>{ fields.push()}}> <AddCircleIcon />       </IconButton> </h3>
+    <h3> Options  <IconButton onClick={(e)=> {fields.push();
+    e.preventDefault();
+    e.stopPropagation();}}> <AddCircleIcon />       </IconButton> </h3>
     <Stack spacing={1} >
     {fields.map((options, index) => (
      

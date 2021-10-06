@@ -11,12 +11,22 @@ export const MyRideHistory = ({...props}) => {
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user._id])
+    const renderRides=()=>{
+      if(props.rides.length===0)
+      {
+        return <div style={{color:'red',fontSize:'32px', marginTop:'150px',marginLeft:'400px'}}> No Rides</div>
+      }
+        return(
+          props.rides.map(ride=>{
+                    return  <MyRideHistoryCard ride={ride}/>
+               })
+        )
+    }
     return (
         <div>
         { props.rides !=null && 
-        props.rides.map(ride=>{
-                    return  <MyRideHistoryCard ride={ride}/>
-               })}
+        renderRides()
+        }
        </div>
     )
 }
