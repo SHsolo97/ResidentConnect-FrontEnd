@@ -17,6 +17,10 @@ import ResidentPaymentSection from '../components/ResidentPaymentSection';
 import MyRideRequestTab from '../components/MyRideRequestTab';
 import CarPoolTabs  from "../../shared/components/Tabs/CarPoolTabs";
 import RideRequestForMyRideTab from '../components/RideRequestForMyRideTab';
+import { Button,Grid } from '@material-ui/core';
+import DummyResidentDashboard from './DummyResidentDashboard';
+import {useModelState} from '../../misc/custom-hooks';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const dashboardstore = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
@@ -24,6 +28,7 @@ const ResidentDashboard = () => {
   const {user}=useProfile();
   const {community}=useCommunity();
   const {apartment}=useApartment();
+  const { isOpen, open, close } = useModelState();
 
   const renderData=()=>{
     if(community===null && user === null && apartment===null )
@@ -31,6 +36,17 @@ const ResidentDashboard = () => {
     
     return(
       <Provider store={dashboardstore}>
+       <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="center"
+      >
+       <Button onClick={open}> For Developers </Button>
+       
+      {isOpen && 
+      <DummyResidentDashboard handleClose={close} open={open}/>}
+      </Grid>
       <UserInfo/>
 
  

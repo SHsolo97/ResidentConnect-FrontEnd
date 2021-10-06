@@ -1,23 +1,26 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom';
 import { useCommunity } from '../../context/community.context';
 import { useProfile } from '../../context/profile.context'
-import { PageHeader } from '../../shared/components/PageHeader';
 import {PrimaryButton}from '../../shared/components/PrimaryButton';
 
-const DummyAdminDashboard = () => {
-    const history=useHistory();
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+const DummyAdminDashboard = ({...props}) => {
     const {user}=useProfile();
 
     const {communityList}=useCommunity();
-    //console.log(user);
-    const gotoDashboard=()=>{
-        history.push('/DashboardOA');
-    }
+  
     return (
-        <>
-         <PageHeader>Admin Dashboard</PageHeader>
-         <div>id={user._id}</div>
+        <Dialog  maxWidth='sm' fullWidth open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">
+          Admin Details
+          
+        </DialogTitle>
+        <DialogContent>
+        <h2> User  Details</h2>
+
+   <div>id={user._id}</div>
         
         <br/>
         <div>Email={user.email}</div>
@@ -42,9 +45,14 @@ const DummyAdminDashboard = () => {
                     <br/>
                     </>)        
 }
-<PrimaryButton onClick={gotoDashboard}>Go To Dashboard</PrimaryButton>
-</>
-    )
+        </DialogContent>
+        <PrimaryButton style={{marginLeft:'450px', marginBottom:'10px', width:'50px'}} onClick={props.handleClose}>Close</PrimaryButton>
+        </Dialog>
+        
+         
+    );
+
+    
 }
 
 export default DummyAdminDashboard

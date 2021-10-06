@@ -1,24 +1,25 @@
 import React from 'react'
-import { PageHeader } from '../../shared/components/PageHeader';
 import { useProfile } from '../../context/profile.context'
 import { useApartment } from '../../context/apartment.context';
 import { Divider } from '@mui/material';
 import { useCommunity } from '../../context/community.context';
-import { useHistory } from 'react-router-dom';
 import {PrimaryButton}from '../../shared/components/PrimaryButton';
-
-const DummyResidentDashboard = () => {
-    const history=useHistory();
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+const DummyResidentDashboard = ({...props}) => {
     const {user}=useProfile();
     const {community} = useCommunity();
-    const gotoDashboard=()=>{
-        history.push('/DashboardOR');
-    }
-  const {apartment} = useApartment();
+    const {apartment} = useApartment();
+
     return (
-        <>
-         <PageHeader>Resident Dashboard</PageHeader>
-         <div>user id={user._id}</div>
+        <Dialog  maxWidth='sm' fullWidth open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">
+          Resident Details
+          
+        </DialogTitle>
+        <DialogContent>
+        <div>user id={user._id}</div>
         
         <br/>
         <div>Email={user.email}</div>
@@ -40,10 +41,15 @@ const DummyResidentDashboard = () => {
          <div>Current community id: {community._id}</div>
           <div>Current apartment id: {apartment._id}</div>
            <br/>
-           <PrimaryButton onClick={gotoDashboard}>Go To Dashboard</PrimaryButton>
+        </DialogContent>
+        <PrimaryButton style={{marginLeft:'450px', marginBottom:'10px', width:'50px'}} onClick={props.handleClose}>Close</PrimaryButton>
+        </Dialog>
+        
+         
+    );
 
-        </>
-    )
+    
 }
 
 export default DummyResidentDashboard
+

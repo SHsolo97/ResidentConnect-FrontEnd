@@ -99,10 +99,7 @@ return (
   <TextField disabled={disabled} style={{ width: "50px" }} className={classes.formControl} variant="outlined" name="flatnum" onChange={setFlatNumValue} value={flat.aptnum} />
   <FormControl variant="outlined" className={classes.formControl}>
     <Select style={{ width: "175px" }} disabled={disabled} value={flat==null ? null : flat.model._id} onChange={setFlatModelValue}>
-      {props.models.map((model) => {
-      return
-      <MenuItem value={model._id}>{model.name}</MenuItem>
-      })}
+      {props.models.map((model) => <MenuItem value={model.id}>{model.name}</MenuItem>)}
 
     </Select>
   </FormControl>
