@@ -28,7 +28,7 @@ const RequestInfoBtnModal = () => {
         reqListRef.on('value', (snap) => {
             const data = transformArrWithId(snap.val());
             setRequests(data)
-            console.log(data);
+            //console.log(data);
         });
 
         
@@ -37,7 +37,7 @@ const RequestInfoBtnModal = () => {
    
 
     const approveRequest=async (reqid)=>{
-        console.log('approve request');
+        //console.log('approve request');
         database.ref(`/requests/${communityid}/${id}/${reqid}`).child('status').set('Approved').then(() => {
             console.log('Successfully Updated');
         }).catch(err => {
@@ -73,7 +73,7 @@ const RequestInfoBtnModal = () => {
       
       }
       const declineRequest=async(reqid)=>{
-        console.log('decline request');
+       // console.log('decline request');
         database.ref(`/requests/${communityid}/${id}/${reqid}`).child('status').set('Declined').then(() => {
             console.log('Successfully Updated');
         }).catch(err => {

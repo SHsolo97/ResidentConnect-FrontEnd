@@ -53,7 +53,7 @@ export const ResidentApartmentSettings = () => {
     const { isOpen, open, close } = useModelState();
 
 const editApartment=async()=>{
-    console.log(status);
+    //console.log(status);
     const data={status : status};
     var apiBaseUrl = `/community/apartment/${apartmentid}`  
     await communityAPI.put(apiBaseUrl,data )
@@ -61,7 +61,7 @@ const editApartment=async()=>{
              if (response.status === 200)
   
             {
-                console.log(response.data);
+                //console.log(response.data);
                 setApartment(response.data);
                 history.push('/dashboardOR');
                

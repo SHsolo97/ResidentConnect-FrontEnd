@@ -35,7 +35,7 @@ export const  SearchRideCard=({ride,...props})=> {
     const zoom= 6;
    let center={lat:0,lng:0};
    const openRouteModel=()=>{
-    console.log(origin);
+    //console.log(origin);
     center=getGeoOrdinates({address:origin});
    open();
    }
@@ -54,7 +54,7 @@ export const  SearchRideCard=({ride,...props})=> {
               .then(function (response) {
                 if (response.status === 201) {
         
-                  console.log(response.data);
+                 // console.log(response.data);
                   setButtonName('Pending');
                   
                 }
@@ -139,7 +139,7 @@ return (
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps.ride.creator);
+  //console.log(ownProps.ride.creator);
   return { creator: state.users.find(user => user._id === ownProps.ride.creator) };
 };
 

@@ -80,9 +80,9 @@ export const AddClassifiedForm = ({...props}) => {
       const onSubmit=(formValues)=>
         {
           
-            console.log("submission");
-          console.log(formValues);
-          console.log(file);
+          //  console.log("submission");
+          //console.log(formValues);
+          //console.log(file);
           props.setFormData(formValues,file);
          }
      

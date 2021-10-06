@@ -11,7 +11,7 @@ export const fetchApartment= (apartmentid) => async dispatch => {
     let searchQuery={
         "_id":apartmentid
     }
-    console.log(searchQuery);
+    //console.log(searchQuery);
   const response = await communityAPI.post('/community/apartments',searchQuery);
 
   dispatch({ type: 'FETCH_APARTMENT', payload: response.data.apartments[0]});

@@ -23,7 +23,7 @@ const AdminContacts = () => {
       // eslint-disable-next-line no-use-before-define
      
     
-      console.log(`communityid : ${communityid}`);
+      //console.log(`communityid : ${communityid}`);
      
       var apiBaseUrl = "http://localhost:4001/api/contacts/";
        
@@ -39,10 +39,10 @@ const AdminContacts = () => {
                     //console.log(response.data.contacts);
                     
                     contactslist=response.data.contacts;
-                    console.log(contactslist);
+                 //  console.log(contactslist);
                     
                     setContacts(contactslist);
-                    console.log(`contacts: ${contacts}`);
+                   // console.log(`contacts: ${contacts}`);
 
                 }
                

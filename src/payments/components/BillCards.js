@@ -89,7 +89,7 @@ export const BillCards = ({...props}) => {
     const totalOverdue=props.totalOverdue==null?0:props.totalOverdue.toLocaleString('en-IN')
     React.useEffect(() => {
         props.fetchPaymentOfApartment(apartmentid);
-        console.log(props.transactions);
+        //console.log(props.transactions);
     },[])
        return (
     <div style={{paddingTop:"50px", paddingBottom:"50px"}} >

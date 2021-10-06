@@ -27,7 +27,7 @@ const [announcement,setAnnouncement]=React.useState(null);
 const classes = useStyles();
 const { tableHead, tableData, tableHeaderColor } = props;
 const deleteAnnouncement=async()=>{
-  console.log('delete');
+  //console.log('delete');
   var apiBaseUrl = `/announcements/${announcement._id}`
   // eslint-disable-next-line no-extend-native
   String.prototype.capitalize = function() {
@@ -37,7 +37,7 @@ const deleteAnnouncement=async()=>{
     .then(function (response) {
       if (response.status === 200) {
 
-        console.log(response.data);
+        //console.log(response.data);
       
       }
 

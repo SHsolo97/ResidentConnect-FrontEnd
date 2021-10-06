@@ -12,7 +12,7 @@ import {Progress} from '../../shared/components/Progress'
   const classifiedid=useCurrentClassified(v=>v._id);
 
   useEffect(() => {
-    console.log(classifiedid);
+    //console.log(classifiedid);
      props.fetchClassifiedById(classifiedid);
      props.fetchCommentsAndUsers(classifiedid);
 
@@ -37,7 +37,7 @@ return (
   }
 
   const mapStateToProps = state => {
-    console.log(state.classified) ;
+   // console.log(state.classified) ;
        return { classified: state.classified,
         comments: state.comments };
   };

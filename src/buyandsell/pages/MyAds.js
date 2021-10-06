@@ -27,7 +27,7 @@ export const MyAds = () => {
                  if (response.status === 200)
     
                 {
-                    console.log(response.data.ads);
+                   // console.log(response.data.ads);
                     setAdverts(response.data.ads);
                    
                   
@@ -55,7 +55,7 @@ export const MyAds = () => {
                     status:filter};
                 }
             
-            console.log(searchQuery);
+           // console.log(searchQuery);
 
             getAds(searchQuery);
           

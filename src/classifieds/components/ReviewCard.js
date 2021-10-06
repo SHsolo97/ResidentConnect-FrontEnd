@@ -20,7 +20,7 @@ export const ReviewCard = ({ classified,comment,deleteReviewComment }) => {
   const {user}=useProfile();
   const commentdate = convertDate(comment.createdat);
   const editComment = () => {
-    console.log('clicked edit');
+   // console.log('clicked edit');
     open();
   }
   

@@ -2,7 +2,6 @@ import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import SearchRideForm from '../components/SearchRideForm';
 import  RideResult  from '../components/RideResult';
-import Grid from '@mui/material/Grid';
 
 import thunk from 'redux-thunk';
 import reducers from '../reducers';

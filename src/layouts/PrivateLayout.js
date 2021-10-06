@@ -105,7 +105,7 @@ const PrivateLayout = ({ children }) => {
   const { isOpen, open, close } = useModelState();
   
   const {communityList,community} = useCommunity();
-  const {user,setUser} = useProfile();
+  const {user} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
   const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -129,7 +129,7 @@ const PrivateLayout = ({ children }) => {
     };
     const goToAparmentSettings=()=>{
 
-      console.log('Goto Aparment Settings');
+      //console.log('Goto Aparment Settings');
       if(user.type==='resident')
         history.push('/apartmentprofile');
       if(user.type==='admin')
@@ -144,8 +144,8 @@ const PrivateLayout = ({ children }) => {
                if (response.status === 200)
     
               {
-                  const updatedUserDetails=response.data
-                  console.log(updatedUserDetails);
+                  //const updatedUserDetails=response.data
+                  //console.log(updatedUserDetails);
                   history.push('/signin');
                  
                 
@@ -243,16 +243,16 @@ const PrivateLayout = ({ children }) => {
           <List>
           <CustumMenuItem >Dashboard</CustumMenuItem>  
            
-          {community.paidservices.facility && <CustumMenuItem >Facilties</CustumMenuItem>}
+          {community!==null && community.paidservices.facility && <CustumMenuItem >Facilties</CustumMenuItem>}
            <CustumMenuItem>Events</CustumMenuItem>
            <CustumMenuItem >Chat Rooms</CustumMenuItem>
            <CustumMenuItem >Buy &amp; Sell</CustumMenuItem>
            <CustumMenuItem>Classifieds</CustumMenuItem>
-           {community.paidservices.polling && <CustumMenuItem >Polling</CustumMenuItem> }
+           {community!==null &&  community.paidservices.polling && <CustumMenuItem >Polling</CustumMenuItem> }
            <CustumMenuItem >Payments</CustumMenuItem>
-           {community.paidservices.carpooling && <CustumMenuItem>Car Pooling</CustumMenuItem>}     
-           {community.paidservices.visitor && <CustumMenuItem >Visitors</CustumMenuItem>}
-           {community.paidservices.maintenance && <CustumMenuItem >Maintenance</CustumMenuItem>}
+           { community!==null &&  community.paidservices.carpooling && <CustumMenuItem>Car Pooling</CustumMenuItem>}     
+           {community!==null &&  community.paidservices.visitor && <CustumMenuItem >Visitors</CustumMenuItem>}
+           {community!==null &&  community.paidservices.maintenance && <CustumMenuItem >Maintenance</CustumMenuItem>}
            <CustumMenuItem >Contacts</CustumMenuItem>
            
           </List>

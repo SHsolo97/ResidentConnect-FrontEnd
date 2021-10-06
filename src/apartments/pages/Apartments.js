@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 
 import React from 'react'
 import { useCommunity } from '../../context/community.context';
@@ -10,17 +11,19 @@ import { FlatRow } from '../components/FlatRow';
 import communityAPI from '../../misc/axios-calls/communityAPI';
 import notificationAPI from '../../misc/axios-calls/notificationAPI';
 import { Progress } from '../../shared/components/Progress';
+import Grid from '@mui/material/Grid';
+import Paper from '@material-ui/core/Paper';
 
 export const Apartments = ({children,...props}) => {
    
     const {community,setCommunity}=useCommunity();
-    console.log(community);
+    //console.log(community);
    
     const [blocks,setBlocks]=React.useState([]);
     const [currentBlock,setCurrentBlock]=React.useState('');
   
     const [currentFloor,setCurrentFloor]=React.useState(0);
-    const [flats,setFlats]=React.useState([]);
+    const [flats,setFlats]=React.useState(null);
     const [models,setModels]=React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
@@ -65,7 +68,7 @@ export const Apartments = ({children,...props}) => {
                     if(data.length>0)
                         setCurrentBlock(data[0])
                    
-                        console.log(data);
+                        ///console.log(data);
                     setBlocks(data);
                 }
              })
@@ -183,7 +186,7 @@ export const Apartments = ({children,...props}) => {
                data['block']=flat.block;
                data['floor']=flat.floor;
                 data['model']=flat.model;
-                console.log(data);
+                //console.log(data);
             createApartment(data)
             .then(response=>
             {
@@ -243,36 +246,72 @@ export const Apartments = ({children,...props}) => {
     }
    
     const renderApartmentInfo=()=>{
-        console.log(currentBlock);
-        console.log(blocks);
+        //console.log(currentBlock);
+        //console.log(blocks);
         if(currentBlock==null)
             if(blocks!=null)
                 setCurrentBlock(blocks[0]);
             else
                 return null;
         return(<div>
-            <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
+         
+         <Grid row  justifyContent="center"
+  alignItems="center" container spacing={3}>
+         <Grid justifyContent="center"  item xs={4}><FormControl style={{ margin: 8, width: '20ch'}}   variant="outlined" >
         <Select id="blocks" value={currentBlock.block} onChange={setCurrentBlockInfo}  >
         {blocks.map((block)=>            
-          <MenuItem key={block._id} name={block._id} value={block.block}>{block.block}</MenuItem>
+          <MenuItem key={block._id} name={block._id} value={block.block}>Block - {block.block}</MenuItem>
         )}
           </Select>
       </FormControl>
-      <FormControl style={{ margin: 8, width: '50ch'}}   variant="outlined" >
+      <FormControl style={{ margin: 8, width: '20ch'}}   variant="outlined" >
 
       <Select id="floors" value={currentFloor} onChange={setCurrentFloorInfo}  >
-      {[...Array(currentBlock.floors)].map((item, i) => <MenuItem value={i}> {i} </MenuItem>)}
+      {[...Array(currentBlock.floors)].map((item, i) => <MenuItem value={i}> Floor - {i} </MenuItem>)}
           </Select>
       </FormControl>
-      <PrimaryButton  onClick={GetFlats}> Get </PrimaryButton>
+            </Grid>
+            <Grid item xs >
 
-      {flats.map((flat,index)=>{
-            return <FlatRow models={models} key={index} isNew="true" saveRow={saveRow}  flat={flat} />
+      <PrimaryButton  onClick={GetFlats}> Get </PrimaryButton>
+      <PrimaryButton style={{marginLeft:'50px'}} onClick={enrollFlats}> Enroll </PrimaryButton>
+      </Grid>
+      </Grid>
+      {flats ===null &&
+            <div style={{marginLeft:'450px', marginTop:'50px',color:'red'}}> Please select Block and Floor details </div>}
+      <Paper elevation={1}>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        {flats !==null &&
+         <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+             <div style={{padding:'10px', marginLeft:'360px',fontWeight:'bold'}}> Apt Num</div>
+             <div style={{padding:'10px', marginLeft:'80px',fontWeight:'bold'}}> Apt Model</div>
+             <div style={{padding:'10px', marginLeft:'90px',fontWeight:'bold'}}> Apt Status</div>
+             <div style={{padding:'10px', marginLeft:'90px',fontWeight:'bold'}}> Resident's Email</div>
+
+
+    </Grid>    }
+      {flats !==null && flats.map((flat,index)=>{
+            return <FlatRow models={models} key={index}  saveRow={saveRow}  flat={flat} />
 
         })}
-        <PrimaryButton  onClick={enrollFlats}> Enroll </PrimaryButton>
-        <PrimaryButton  onClick={handleBack}> Back </PrimaryButton>
-        <PrimaryButton  onClick={handleSubmit}> Next </PrimaryButton>
+        </Grid>
+          </Paper>
+        <Grid
+  container 
+  direction="row"
+  justifyContent="space-evenly"
+  alignItems="center"
+>
+        <PrimaryButton style={{marginTop:'50px'}}  onClick={handleBack}> Back </PrimaryButton>
+        <PrimaryButton  style={{marginTop:'50px'}}  onClick={handleSubmit}> Next </PrimaryButton>
+        </Grid>
+
+      
         </div>)
     }
      return (

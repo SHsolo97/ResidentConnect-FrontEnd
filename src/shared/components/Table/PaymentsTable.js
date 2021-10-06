@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from '@mui/material/Avatar';
 import {convertDate} from '../../../misc/helpers';
 
 // @material-ui/core components
@@ -12,7 +11,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "./styles/tableStyle.js";
-import { Link } from "@material-ui/core";
 import Chip from '@mui/material/Chip';
 
 import { Button } from '@material-ui/core';

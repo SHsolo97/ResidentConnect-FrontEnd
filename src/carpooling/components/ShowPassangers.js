@@ -1,14 +1,13 @@
-import React,{useEffect} from 'react'
-import {PrimaryButton}from '../../shared/components/PrimaryButton';
+import React from 'react'
+
 import {useModelState} from '../../misc/custom-hooks';
-import { RejectReasonModel } from './RejectReasonModel';
+
 import GroupIcon from '@mui/icons-material/Group';
 import IconButton from '@mui/material/IconButton';
 import  {ShowPassangersModel} from './ShowPassangersModel';
 import {fetchMyRideRequestsByRideId} from '../actions/index';
 import { connect } from 'react-redux';
-import Grid from '@mui/material/Grid';
-import { Avatar, Typography } from '@material-ui/core';
+
 
 export const ShowPassangers = ({...props}) => {
 const { isOpen, open, close } = useModelState();
@@ -16,11 +15,11 @@ const [rideid,setRideid]=React.useState(props.rideid);
 
 
 const showPassangers=()=>{
-    console.log(rideid);
+   // console.log(rideid);
 
     props.fetchMyRideRequestsByRideId(rideid);
-  console.log(props.ridereqs);
-  console.log(props.users);
+  //console.log(props.ridereqs);
+  //console.log(props.users);
   open();
 
 }

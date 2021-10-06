@@ -23,14 +23,14 @@ export default function AddEditApartmentModel({...props}) {
     const [modelDetails,setModelDetails]=useState(props.model);
     const addBlock=()=>
     {
-        console.log(modelDetails);
+        //console.log(modelDetails);
         props.addApartmentModel(modelDetails);
         props.handleClose();
     }
 
     const editBlock=()=>
     {
-      console.log(modelDetails);
+     // console.log(modelDetails);
       props.editApartmentModel(modelDetails);
       props.handleClose();
       

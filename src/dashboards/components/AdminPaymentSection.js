@@ -82,7 +82,7 @@ const AdminPaymentSection =({...props})=>{
 }
 const mapStateToProps = state => {
 
-    console.log(state.payments);
+    //console.log(state.payments);
     return { 
 
              totalPaid : state.payments.filter(payment=>payment.status==='paid').reduce(function (accumulator1, payment) {

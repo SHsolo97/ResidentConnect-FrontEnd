@@ -22,7 +22,7 @@ export const CreateRide = () => {
               .then(function (response) {
                 if (response.status === 201) {
         
-                  console.log(response.data);
+                 // console.log(response.data);
                   
                 }
         
@@ -36,7 +36,7 @@ export const CreateRide = () => {
           }
           
         const onSubmit=async (formValues,file)=>{
-        console.log(formValues);
+      // console.log(formValues);
         const fileList = [file];
         const path = `${community._id}/carpooling/${user._id}`;
         //const imagefiles=await uploadImageToFireStorage();
@@ -58,7 +58,7 @@ export const CreateRide = () => {
         data['contact']=user.phone[0].number;
         data['thumbnail'] = imagefiles[0].url
 
-        console.log(data);
+        //console.log(data);
         createRide(data);
 
 

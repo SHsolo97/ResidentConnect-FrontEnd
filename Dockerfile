@@ -1,4 +1,9 @@
-FROM node:14.16.0-alpine
+FROM node:14.16.0-alpine as builder
+LABEL version="1.0"
+LABEL maintainer = ["agni1984@gmail.com"]
+
+RUN mkdir /app
+
 
 # set working directory
 WORKDIR /app
@@ -17,3 +22,8 @@ COPY . ./
 
 # start app
 CMD ["npm", "start"]
+
+
+#  FROM nginx
+#  COPY --from=builder /app/build /usr/share/nginx/html
+

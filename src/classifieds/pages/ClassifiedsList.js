@@ -8,18 +8,18 @@ class ClassifiedsList extends React.Component {
     constructor(props)
     {
       super(props);
-      console.log(this.props.searchData);
+      //console.log(this.props.searchData);
       this.state = {
             
         searchQuery:this.props.searchData
     }
     }
     componentDidMount() {
-     console.log(this.props.searchData);
+    // console.log(this.props.searchData);
       this.props.fetchClassifieds(this.props.searchData);
     }
     componentDidUpdate(prevProps, prevState) {
-      console.log(this.props.searchData);
+     // console.log(this.props.searchData);
       if (prevProps.searchData !== this.props.searchData) {
         this.props.fetchClassifieds(this.props.searchData);
 

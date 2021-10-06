@@ -9,7 +9,6 @@ import Avatar from '@mui/material/Avatar';
 import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 import {useModelState} from '../../misc/custom-hooks';
-import { RejectReasonModel } from './RejectReasonModel';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import IconButton from '@mui/material/IconButton';
 import Popper from '@mui/material/Popper';
@@ -25,7 +24,7 @@ export const  RideRequestCard=({...props})=> {
   const { isOpen, open, close } = useModelState();
   const [approvebuttonName]=React.useState('Approve');
   const [rejectbuttonName]=React.useState('Reject');
-  const {_id,creator,stoppoints,source,ridedatetime,destination,seats,amt}=props.ridereq.ride;
+  const {stoppoints,source,destination}=props.ridereq.ride;
 
   const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
   const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
@@ -35,7 +34,7 @@ export const  RideRequestCard=({...props})=> {
   const zoom= 6;
  let center={lat:0,lng:0};
  const openRouteModel=()=>{
-  console.log(origin);
+  //console.log(origin);
   center=getGeoOrdinates({address:origin});
  open();
  }
@@ -80,7 +79,7 @@ return (
   }} color="primary" variant="dot">
           
         </Badge>
-        <Typography style={{marginTop:'-15px',paddingLeft:'30px',fontSize:'20px'}} variant="body2" gutterBottom>  {props.ridereq.ride.source.addressline}, {props.ridereq.ride.source.area}, {props.ridereq.ride.source.city},{props.ridereq.ride.source.state},{props.ridereq.ride.source.pincode}
+        <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body1" gutterBottom>  {props.ridereq.ride.source.addressline}, {props.ridereq.ride.source.area}, {props.ridereq.ride.source.city},{props.ridereq.ride.source.state},{props.ridereq.ride.source.pincode}
           </Typography>
       </div>
 
@@ -92,13 +91,13 @@ return (
     horizontal: 'left',
   }} color="secondary" variant="dot">
 
-          <Typography style={{marginTop:'-15px',fontSize:'20px',paddingLeft:'30px'}} variant="body2"  gutterBottom>{props.ridereq.ride.destination.addressline}, {props.ridereq.ride.destination.area}, {props.ridereq.ride.destination.city},{props.ridereq.ride.destination.state},{props.ridereq.ride.destination.pincode}</Typography>
+          <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body1"  gutterBottom>{props.ridereq.ride.destination.addressline}, {props.ridereq.ride.destination.area}, {props.ridereq.ride.destination.city},{props.ridereq.ride.destination.state},{props.ridereq.ride.destination.pincode}</Typography>
         </Badge>
       </div>
     </Grid>
   
     <Grid style={{paddingLeft:'30px',paddingTop:'10px'}} container row justifyContent="space-between" alignItems="center">
-      <Typography  variant="body2" style={{fontSize:'20px'}} color="orange">
+      <Typography  variant="body2" color="orange">
         {convertDate(props.ridereq.ride.ridedatetime)}, {convertTime(props.ridereq.ride.ridedatetime)}
       </Typography>
       <PopupState  style={{paddingLeft:'30px'}} variant="popper" >
@@ -143,7 +142,7 @@ return (
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.user);
+  //console.log(state.user);
   return { ride: state.ride ,
            requester:state.users.find(user => user._id === ownProps.ridereq.requestedby) };
 };

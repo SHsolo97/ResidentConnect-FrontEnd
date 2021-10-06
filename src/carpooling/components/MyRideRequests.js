@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { useProfile } from '../../context/profile.context';
 import {fetchMyRideRequestsDetails} from '../actions/index';
 import MyRideRequestCard from './MyRideRequestCard';
+import {Progress} from '../../shared/components/Progress';
 
 export const MyRideRequests = ({...props}) => {
     const {user} =useProfile();
     React.useEffect(() => {
         props.fetchMyRideRequestsDetails(user._id);
-            console.log(props.ridereqs);
+            //console.log(props.ridereqs);
           
 
         
@@ -25,15 +26,12 @@ export const MyRideRequests = ({...props}) => {
              ) }
     return (
         <div>
-      {props.ridereqs!=null &&
-
-        renderRideRequestCard()
-      }
+      {props.ridereqs===null ?  <Progress/>:renderRideRequestCard()}
       </div>
     )
 }
 const mapStateToProps = (state, ownProps) => {
-    console.log(state.ridereqs);
+    //console.log(state.ridereqs);
     return { 
         ridereqs: state.ridereqs
         

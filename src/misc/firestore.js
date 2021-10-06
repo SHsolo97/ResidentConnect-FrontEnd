@@ -3,7 +3,7 @@ import {storage} from './firebase';
 export  const uploadImagesToFireStorage = async (path,fileList) => {
     try {
         const uploadPromises = fileList.map(f => {
-          console.log(f.name);
+          //console.log(f.name);
             return storage
                 .ref(path)
                 .child(Date.now() + f.name)
@@ -37,7 +37,7 @@ export  const uploadImagesToFireStorage = async (path,fileList) => {
 export  const uploadFilesToFireStorage = async (path,fileList) => {
     try {
         const uploadPromises = fileList.map(f => {
-          console.log(f.name);
+          //console.log(f.name);
             return storage
                 .ref(path)
                 .child(Date.now() + f.name)

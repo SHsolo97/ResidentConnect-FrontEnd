@@ -21,7 +21,7 @@ export const MyRides = ({...props}) => {
         await carPoolingAPI.put(apiBaseUrl, {status:'rejected',rejectionreason:'Ride Cancelled'})
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
+             // console.log(response.data);
             }
           })
           .catch(function (error) {
@@ -31,14 +31,14 @@ export const MyRides = ({...props}) => {
     }
 
     const cancelRide=async(_id)=>{
-        console.log('cancel ride');
+       // console.log('cancel ride');
    
         var apiBaseUrl = `/carpoolings/rides/${_id}`;
     
         await carPoolingAPI.put(apiBaseUrl, {status:'cancelled'})
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
+             // console.log(response.data);
               props.fetchRideRequestsByRideId(_id);
               if(props.ridereqs!=null)
               {

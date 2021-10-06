@@ -8,14 +8,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import {fetchActivePollsByCommunity} from '../actions/index';
 import { connect } from 'react-redux';
 import { useCommunity } from '../../context/community.context';
+import {Progress} from '../../shared/components/Progress';
 
 const useStyles = makeStyles(styles);
 
 export const PollingSection = ({...props}) => {
     const classes = useStyles();
-    const [polls,setPolls]=React.useState([]);
+    const [polls,setPolls]=React.useState(null);
     const {community}=useCommunity();
     useEffect(() => {
+      if(community===null) 
+      return;
          props.fetchActivePollsByCommunity(community._id);
          const tempPolls=[];
          if(props.polls!=null)
@@ -28,25 +31,29 @@ export const PollingSection = ({...props}) => {
          }
          setPolls(tempPolls);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [community._id])
+    }, [])
   
-   
+   const renderData=()=>{
+     return( <Card>
+      <CardHeader color="warning">
+        <h2 className={classes.cardTitleWhite}>Active Polls</h2>
+       
+      </CardHeader>
+      {polls!=null && 
+      <CardBody>
+        <PollTable
+          tableHeaderColor="warning"
+          tableHead={["Participate in Poll"]}
+          tableData={polls}
+        />
+      </CardBody>}
+    </Card>)
+   }
     return (
     
-        <Card>
-        <CardHeader color="warning">
-          <h2 className={classes.cardTitleWhite}>Active Polls</h2>
-         
-        </CardHeader>
-        {polls!=null && 
-        <CardBody>
-          <PollTable
-            tableHeaderColor="warning"
-            tableHead={["Participate in Poll"]}
-            tableData={polls}
-          />
-        </CardBody>}
-      </Card>
+       <div>
+         {polls===null? <Progress/> : renderData()}
+       </div>
 
 
     )

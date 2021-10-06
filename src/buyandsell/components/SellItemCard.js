@@ -12,8 +12,8 @@ import {useCommunity} from '../../context/community.context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 350,
-    height: 400,
+    width: 250,
+    height: 300,
   },
   media: {
     height: 0,
@@ -39,11 +39,11 @@ export default function SellItemCard({children,...props}) {
   const history=useHistory();
   const {community}=useCommunity();
   const address=`${community.address.area} ,  ${community.address.city}`;
- console.log(props.item);
+ //console.log(props.item);
 
  const openAd=(event)=>{
-  console.log('open ad');
-  console.log(props.helperTextitem);
+ // console.log('open ad');
+  //console.log(props.helperTextitem);
   event.stopPropagation();
   event.preventDefault();
   history.push({
@@ -63,15 +63,15 @@ export default function SellItemCard({children,...props}) {
         title='image'
       />
       <CardContent>
-        <Typography variant="h5" color="textPrimary" component="p"> &#8377; {props.item.price.value.toLocaleString('en-IN')}</Typography>
+        <Typography variant="h6" color="textPrimary" component="div"> &#8377; {props.item.price.value.toLocaleString('en-IN')}</Typography>
         <br/>
-        <Typography  style={{color:'blue',fontSize:'16px'}} component="span">{props.item.title.length>40?props.item.title.slice(0,37).concat('...') :props.item.title }</Typography>
+        <Typography  style={{color:'blue',fontSize:'14px'}} component="span">{props.item.title.length>40?props.item.title.slice(0,37).concat('...') :props.item.title }</Typography>
         <br/>
+       
+        <Typography style={{fontSize:'12px'}}  component="span">{address}</Typography>
         <br/>
-        <Typography style={{fontSize:'14px'}}  component="span">{address}</Typography>
-        <br/>
-        <br/>
-        <Typography variant="body2" color="textSecondary" component="p">
+        
+        <Typography style={{fontSize:'10px'}} color="textSecondary" component="span">
           <TimeAgo  datetime={new Date(props.item.activatedat)}/>
         </Typography>
       </CardContent>

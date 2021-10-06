@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const Alert = ({children,...props}) => {
-  console.log({children});
+  //console.log({children});
   const classes = useStyles();
   
   const handleClose = (event, reason) => {

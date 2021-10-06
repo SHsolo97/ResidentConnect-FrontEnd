@@ -49,7 +49,7 @@ export const fetchPaymentOfApartment = (apartmentid) => async dispatch => {
         "apartmentid":apartmentid
     }
   
-    console.log(searchQuery);
+    ////console.log(searchQuery);
   const response = await paymentsAPI.post('/payments/search',searchQuery);
 
   dispatch({ type: 'FETCH_PAYEMENTS_BY_APARTMENT', payload: response.data.payments});
@@ -63,7 +63,7 @@ export const fetchPaymentOfCommunity= (communityid) => async dispatch => {
     let searchQuery={
         "communityid":communityid
     }
-    console.log(searchQuery);
+    ////console.log(searchQuery);
   const response = await paymentsAPI.post('/payments/search',searchQuery);
 
   dispatch({ type: 'FETCH_PAYEMENTS_BY_COMMUNITY', payload: response.data.payments});
@@ -74,7 +74,7 @@ export const fetchUsersByApartmentId = (apartmentid) => async dispatch => {
       "apartments.apartmentid":apartmentid
   }
 
-  console.log(searchQuery);
+  ////console.log(searchQuery);
 const response = await userAPI.post('/users/search',searchQuery);
 
 dispatch({ type: 'FETCH_USERS_BY_APARTMENT', payload: response.data.users});
@@ -86,7 +86,7 @@ export const fetchUsersOverview = (communityid) => async dispatch => {
         "communities": communityid
 
     }
-    console.log(searchQuery);
+    ////console.log(searchQuery);
   const response = await userAPI.post('/users/summary',searchQuery);
   let result={
       total:0,
@@ -110,7 +110,7 @@ export const fetchUsersOverview = (communityid) => async dispatch => {
                  }
     })
     }
-    console.log(result);
+    ////console.log(result);
   dispatch({ type: 'FETCH_USERS_DATA', payload:result});
 };
 //*********************************************************************************** */
@@ -122,7 +122,7 @@ export const fetchApartmentsOverview = (communityid) => async dispatch => {
         "communityid": communityid
 
     }
-    console.log(searchQuery);
+    ////console.log(searchQuery);
   const response = await communityAPI.post('/community/apartments/summary',searchQuery);
   let result={
       total:0,
@@ -132,7 +132,7 @@ export const fetchApartmentsOverview = (communityid) => async dispatch => {
    {  
        // eslint-disable-next-line array-callback-return
        response.data.map(apttype=>{
-           console.log(apttype);
+           ////console.log(apttype);
            const type= apttype._id.status;
            const count=apttype.total;
            const val={type,count}
@@ -142,7 +142,7 @@ export const fetchApartmentsOverview = (communityid) => async dispatch => {
       
     })
     }
-    console.log(result);
+    //console.log(result);
   dispatch({ type: 'FETCH_APARTMENTS_DATA', payload:result});
 };
 //*********************************************************************************** */
@@ -161,13 +161,13 @@ export const fetchReceivedRideRequestsDetails = userid => async (dispatch,getSta
 };
 export const fetchUser = id => async dispatch => {
   const response = await userAPI.get(`/users/${id}`);
-  console.log(response.data);
+  //console.log(response.data);
   dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 export const fetchRideRequestsByRideId = rideid => async dispatch => {
   const searchQuery={ride:rideid};
   const response = await carPoolingAPI.post(`/carpoolings/riderequests/search`,searchQuery);
-  console.log(response.data.ridereqs);
+  //console.log(response.data.ridereqs);
   dispatch({ type: 'FETCH_RIDE_REQUESTS_BY_RIDE_ID', payload: response.data.ridereqs});
 };
 export const fetchRideRequestsByRideOwner = userid => async dispatch => {

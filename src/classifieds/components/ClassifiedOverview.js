@@ -43,9 +43,9 @@ export default function ClassifiedOverview() {
   const emails = useCurrentClassified(v => v.emails);
   const showMap=async ()=>{
     const completeAddress=`${address.addressline},${address.area},${address.city},${address.state},${address.pincode}, India`
-    console.log(completeAddress);
+   // console.log(completeAddress);
       const response= await getGeoOrdinates({address:completeAddress});
-      console.log(response);
+   //   console.log(response);
           setCoordinates(response);
           open();
 

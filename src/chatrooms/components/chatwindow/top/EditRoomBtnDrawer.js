@@ -34,17 +34,17 @@ const EditRoomBtnDrawer = () => {
     const { isOpen, open, close } = useModelState();
     const name = useCurrentRoom(v => v.name);
     const description = useCurrentRoom(v => v.description);
-    console.log(description);
+   // console.log(description);
     const chatId = useCurrentRoom(v => v.id);
     //const communityid=user.communities[0];
     const {community}=useCommunity();
     const communityid=community._id;
-    console.log(chatId);
+    //console.log(chatId);
     //const { chatId } = useParams();
     //const isMobile = useMediaQuery(`(max-width:992px)`);
     const onSubmit = (event) => {
         database.ref(`rooms/${communityid}/${chatId}`).child('name').set(formValue.name).then(() => {
-            console.log('Successfully Updated');
+           console.log('Successfully Updated');
         }).catch(err => {
             console.log(err.message);
         })
@@ -69,13 +69,13 @@ const EditRoomBtnDrawer = () => {
         
         setFormValue((prevState)=>{
             return{...prevState,name:event.target.value}});
-        console.log(formValue);
+        //console.log(formValue);
     }
     const onDescriptionChange =(event)=> {
         
         setFormValue((prevState)=>{
             return{...prevState,description:event.target.value}});
-        console.log(formValue);
+      //  console.log(formValue);
     };
     return (
         <div>

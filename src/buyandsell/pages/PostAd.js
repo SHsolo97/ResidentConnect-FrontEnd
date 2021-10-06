@@ -121,7 +121,7 @@ export const PostAd = () => {
                  if (response.status === 200)
                 {           
                   
-                    console.log(response.data);
+                   // console.log(response.data);
                     return response.data;
                  
                 }
@@ -158,12 +158,12 @@ export const PostAd = () => {
             return{...prevState,price:tempPrice}});   
       }
       const addFile=(file,placeholder)=>{
-        console.log('inside addFile')
-        console.log(file);
+       // console.log('inside addFile')
+        //console.log(file);
         files[placeholder]=file;
 
          
-            console.log(files);
+        //    console.log(files);
         
       }
       const handleCancel=(event)=>
