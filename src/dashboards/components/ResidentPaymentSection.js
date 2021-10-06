@@ -19,7 +19,7 @@ const ResidentPaymentSection =({...props}) =>{
 
 React.useEffect(() => {
 props.fetchPaymentOfApartment(apartment._id);
-console.log(props.payments);
+//console.log(props.payments);
 }, [apartment])
 
 // eslint-disable-next-line no-extend-native

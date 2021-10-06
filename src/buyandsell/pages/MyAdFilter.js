@@ -65,13 +65,13 @@ export const MyAdFilter = ({...props}) => {
     const classes=useStyles();
 
     const handleChange = (event, newSelection) => {
-      console.log(newSelection);
+      //console.log(newSelection);
       props.setAdFilter(newSelection);
     };
     const setSearchFilter=(event)=>
     {
       if (event.key === 'Enter') {
-      console.log(event.target.value);
+      //console.log(event.target.value);
       props.setAdsearchFilter(event.target.value);
       }
     }

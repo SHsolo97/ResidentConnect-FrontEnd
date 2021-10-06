@@ -15,7 +15,7 @@ const SideBar = ({...props}) => {
     const [myRoomsOnly, setMyRoomsOnly] = React.useState(true);
 
     const setCurrentRoom=(roomid)=>{
-        console.log(roomid);
+        //console.log(roomid);
         props.setCurrentRoomId(roomid);
     }
     useEffect(() => {

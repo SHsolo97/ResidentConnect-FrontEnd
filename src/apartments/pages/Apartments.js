@@ -15,7 +15,7 @@ import { Progress } from '../../shared/components/Progress';
 export const Apartments = ({children,...props}) => {
    
     const {community,setCommunity}=useCommunity();
-    console.log(community);
+    //console.log(community);
    
     const [blocks,setBlocks]=React.useState([]);
     const [currentBlock,setCurrentBlock]=React.useState('');
@@ -66,7 +66,7 @@ export const Apartments = ({children,...props}) => {
                     if(data.length>0)
                         setCurrentBlock(data[0])
                    
-                        console.log(data);
+                        ///console.log(data);
                     setBlocks(data);
                 }
              })
@@ -184,7 +184,7 @@ export const Apartments = ({children,...props}) => {
                data['block']=flat.block;
                data['floor']=flat.floor;
                 data['model']=flat.model;
-                console.log(data);
+                //console.log(data);
             createApartment(data)
             .then(response=>
             {
@@ -244,8 +244,8 @@ export const Apartments = ({children,...props}) => {
     }
    
     const renderApartmentInfo=()=>{
-        console.log(currentBlock);
-        console.log(blocks);
+        //console.log(currentBlock);
+        //console.log(blocks);
         if(currentBlock==null)
             if(blocks!=null)
                 setCurrentBlock(blocks[0]);

@@ -122,7 +122,7 @@ export const EditReviewModel = (props) => {
       .put(apiBaseUrl, commentData)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+        //  console.log(response.data);
           return response;
         }
       })
@@ -140,7 +140,7 @@ export const EditReviewModel = (props) => {
     data["comment"] = newComment;
     data["rating"] = newRating
    
-    console.log(data);
+   // console.log(data);
     setIsLoading(true);
     await editReviewComment(data).then((response) => {
       //editRatingDetails(rating,data.rating);
@@ -190,7 +190,7 @@ export const EditReviewModel = (props) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state.classified) ;
+ // console.log(state.classified) ;
      return { classified: state.classified,
       comments: state.comments };
 };

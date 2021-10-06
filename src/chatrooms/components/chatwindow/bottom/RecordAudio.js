@@ -68,7 +68,7 @@ class RecordAudio extends React.Component {
     reader.readAsDataURL(audio);
     reader.onloadend = () => {
       const base64data = reader.result;
-      console.log("base64data", base64data);
+      //console.log("base64data", base64data);
     };
   };
 

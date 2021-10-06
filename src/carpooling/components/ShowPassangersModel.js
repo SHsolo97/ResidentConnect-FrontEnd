@@ -8,7 +8,7 @@ import { SectionHeader } from '../../shared/components/SectionHeader';
 import  Requester from './Requester';
 
 export const ShowPassangersModel = ({...props}) => {
-   console.log(props.ridereqs);
+   //console.log(props.ridereqs);
     return (
              <Dialog open={props.open} maxWidth='md' fullWidth onClose={props.handleclose}>
                 <SectionHeader> Passangers Details </SectionHeader>

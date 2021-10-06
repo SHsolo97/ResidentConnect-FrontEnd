@@ -19,7 +19,7 @@ export const CardPaymentForm1 = ({ ...props }) => {
   const stripe=useStripe();
   const currentYear = (new Date()).getFullYear();
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    //console.log(formValues);
     if(!stripe || !elements)
        return;
   }

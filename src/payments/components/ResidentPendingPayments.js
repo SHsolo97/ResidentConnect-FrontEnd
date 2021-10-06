@@ -37,7 +37,7 @@ export const ResidentPendingPayments = ({...props}) => {
     )
 }
 const mapStateToProps = state => {
-    console.log(state.payments);
+    //console.log(state.payments);
     return { payments: state.payments.filter(payment=>payment.status!=='paid')  
     };
   };

@@ -10,14 +10,14 @@ export const fetchFacilityTypes= () => async dispatch => {
     dispatch({ type: 'FETCH_FACILITIY_TYPES', payload: response.data.facilityTypes});
   };
 export const fetchFacilities = (searchQuery) => async dispatch => {
-  console.log(searchQuery);
+  //console.log(searchQuery);
   const response = await facilityAPI.post('/facilities/search',searchQuery);
 
   dispatch({ type: 'FETCH_FACILITIES', payload: response.data.facilities});
 };
 export const fetchFacilityBookings = (searchQuery) => async dispatch => {
 
-    console.log(searchQuery);
+    //console.log(searchQuery);
   const response = await facilityAPI.post('/facilities/booking/search',searchQuery);
 
   dispatch({ type: 'FETCH_FACILITY_BOOKING', payload: response.data.bookings});

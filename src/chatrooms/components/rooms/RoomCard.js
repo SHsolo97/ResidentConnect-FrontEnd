@@ -30,7 +30,7 @@ const { createdAt, name, lastMessage } = room;
 }
 
 const setCurrentRoom=()=>{
-    console.log(room.id);
+    //console.log(room.id);
     setCurrentRoomId(room.id);
 }
 return (

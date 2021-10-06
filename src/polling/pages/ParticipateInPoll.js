@@ -27,7 +27,7 @@ export const ParticipateInPoll = ({...props}) => {
         await pollingAPI.put(apiBaseUrl, data)
           .then(function (response) {
             if (response.status === 200) {    
-              console.log(response.data);
+              ////console.log(response.data);
               setPoll(response.data);
               setIsAnswered(true);
              
@@ -43,13 +43,13 @@ export const ParticipateInPoll = ({...props}) => {
       if(option!=null)
       {
       const selectedOption = options.filter(o=>o._id===option)[0];
-      console.log(selectedOption);
+      //console.log(selectedOption);
       const data={};
       data['answeredby']=user._id;
       data['totalvotes']=totalvotes+1;
       data['optionid']=option;
       data['selectedoptionvotes']=selectedOption.votes+1;
-      console.log(data);
+      //console.log(data);
       editPoll(data);
       }
     }

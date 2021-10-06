@@ -7,7 +7,7 @@ export const RideResult = ({...props}) => {
     React.useEffect(() => {
         if(typeof props.filter !== "undefined")
             props.filterRideWithUser(props.filter);      
-           console.log(props.rides);
+           //console.log(props.rides);
  
         
     // eslint-disable-next-line react-hooks/exhaustive-deps

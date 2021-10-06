@@ -18,13 +18,13 @@ export const AdvertsProvider = ({ children }) => {
     const getAds=async()=>{
         const apiBaseUrl = `http://localhost:4004/api/adverts`  
         const searchQuery={creator:creator}
-        console.log(searchQuery);
+        //console.log(searchQuery);
         await axios.post(apiBaseUrl,searchQuery )
              .then(function (response) {
                  if (response.status === 200)
     
                 {
-                    console.log(response.data.ads);
+                   // console.log(response.data.ads);
                     setAdverts(response.data.ads);
                    
                   

@@ -37,7 +37,7 @@ export const AddClassified = () => {
       .then(function (response) {
         if (response.status === 201) {
 
-          console.log(response.data);
+         // console.log(response.data);
         
           history.push('/classifieds');
         }
@@ -81,7 +81,7 @@ export const AddClassified = () => {
       data.address=classified.address;
       data['emails']=classified.emails
       data['thumbnail'] = imagefiles[0].url
-      console.log(data);
+      //console.log(data);
        await addClassifieds(data);
 
   }

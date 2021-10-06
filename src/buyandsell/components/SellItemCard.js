@@ -39,11 +39,11 @@ export default function SellItemCard({children,...props}) {
   const history=useHistory();
   const {community}=useCommunity();
   const address=`${community.address.area} ,  ${community.address.city}`;
- console.log(props.item);
+ //console.log(props.item);
 
  const openAd=(event)=>{
-  console.log('open ad');
-  console.log(props.helperTextitem);
+ // console.log('open ad');
+  //console.log(props.helperTextitem);
   event.stopPropagation();
   event.preventDefault();
   history.push({

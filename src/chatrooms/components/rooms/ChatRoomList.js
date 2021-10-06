@@ -58,12 +58,12 @@ const ChatRoomList = ({ myRoomsOnly,setCurrentRoomId, aboveElHeight }) => {
   const data=useRooms();
     const[rooms,setRooms] = React.useState([]);
     const reqListRooms=useRoomsRequests();
-  console.log(reqListRooms);
+  //console.log(reqListRooms);
     const classes=useStyles();
     //const c_rooms=rooms.find(room => room.communityid === communityid);
     const location = useLocation();
     const setCurrentRoom=(roomid)=>{
-        console.log(roomid);
+       //console.log(roomid);
         setCurrentRoomId(roomid);
     } 
     React.useEffect(() => {
@@ -73,13 +73,13 @@ const ChatRoomList = ({ myRoomsOnly,setCurrentRoomId, aboveElHeight }) => {
     
         let myRooms=[];
         let otherRooms=[];
-        console.log(data);
+        //console.log(data);
         if(data.length!==0)
         {
           // eslint-disable-next-line array-callback-return
           data.map(room=>
             {
-              console.log(room);
+              //console.log(room);
               if(transformToArr(room.members).includes(auth.currentUser.uid))
               myRooms.push(room);
               else
@@ -98,7 +98,7 @@ const ChatRoomList = ({ myRoomsOnly,setCurrentRoomId, aboveElHeight }) => {
     const setSearchFilter=(event)=>
     {
       if (event.key === 'Enter') {
-      console.log(event.target.value);
+     // console.log(event.target.value);
       const searchString=event.target.value;
       const result= data.filter(room=>room.name.includes(searchString));
       setRooms(result);

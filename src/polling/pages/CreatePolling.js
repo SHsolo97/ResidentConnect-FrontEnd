@@ -29,7 +29,7 @@ export const CreatePolling = ({...props}) => {
         await pollingAPI.post(apiBaseUrl, data)
           .then(function (response) {
             if (response.status === 201) {    
-              console.log(response.data);
+              //console.log(response.data);
              props.handleClose();
             }
     
@@ -40,7 +40,7 @@ export const CreatePolling = ({...props}) => {
       }
 
     const onSubmit=(formValues)=>{
-        console.log(formValues);
+        //console.log(formValues);
         let data={...formValues};
         data['question']=formValues.question;
         data['expiredat']=formValues.expiredat;
@@ -58,7 +58,7 @@ export const CreatePolling = ({...props}) => {
         data['createdby']=user._id;
         data['answeredby']=[];
        
-        console.log(data);
+        //console.log(data);
         createPoll(data);
 
     }

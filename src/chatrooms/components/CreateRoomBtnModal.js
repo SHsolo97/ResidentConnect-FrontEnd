@@ -33,18 +33,18 @@ const CreateRoomBtnModal = () => {
         
         setFormValue((prevState)=>{
             return{...prevState,name:event.target.value}});
-        console.log(formValue);
+       // console.log(formValue);
     }
     const onDescriptionChange =(event)=> {
         
         setFormValue((prevState)=>{
             return{...prevState,description:event.target.value}});
-        console.log(formValue);
+      //  console.log(formValue);
     };
    
     const onSubmit = async () => {
         
-        console.log(formValue);
+       // console.log(formValue);
         setIsLoading(true);
         const newRoomdata = {
             ...formValue,

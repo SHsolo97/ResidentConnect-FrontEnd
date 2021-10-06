@@ -9,7 +9,7 @@ export const MyRideRequests = ({...props}) => {
     const {user} =useProfile();
     React.useEffect(() => {
         props.fetchMyRideRequestsDetails(user._id);
-            console.log(props.ridereqs);
+            //console.log(props.ridereqs);
           
 
         
@@ -33,7 +33,7 @@ export const MyRideRequests = ({...props}) => {
     )
 }
 const mapStateToProps = (state, ownProps) => {
-    console.log(state.ridereqs);
+    //console.log(state.ridereqs);
     return { 
         ridereqs: state.ridereqs
         

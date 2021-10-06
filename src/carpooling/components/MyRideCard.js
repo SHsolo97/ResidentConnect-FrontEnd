@@ -27,7 +27,7 @@ export const  MyRideCard=({ride,...props})=> {
     const zoom= 6;
    let center={lat:0,lng:0};
    const openRouteModel=()=>{
-    console.log(origin);
+    //console.log(origin);
     center=getGeoOrdinates({address:origin});
    open();
    }
@@ -37,7 +37,7 @@ export const  MyRideCard=({ride,...props})=> {
     }
  
     const editRide=()=>{
-      console.log('Edit ride');
+    //  console.log('Edit ride');
     }
 return (
 <Paper elevation={1} style={{  marginLeft: '100px', padding:'10px', marginTop:'50px', width: '800px'}}>

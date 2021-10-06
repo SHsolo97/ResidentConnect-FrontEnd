@@ -114,7 +114,7 @@ const AddReviewModel = (props) => {
       .post(apiBaseUrl, commentData)
       .then(function (response) {
         if (response.status === 201) {
-          console.log(response.data);
+         // console.log(response.data);
           setIsLoading(false);
           props.handleClose();
           setAlertMessage("comment is added");
@@ -137,7 +137,7 @@ const AddReviewModel = (props) => {
     data["rating"] = parseInt(formValues.rating);
     data["givenby"] = user._id;
     data["classifiedid"] = classifiedid;
-    console.log(data);
+   // console.log(data);
     setIsLoading(true);
     addReviewComment(data)
     

@@ -15,11 +15,11 @@ const [rideid,setRideid]=React.useState(props.rideid);
 
 
 const showPassangers=()=>{
-    console.log(rideid);
+   // console.log(rideid);
 
     props.fetchMyRideRequestsByRideId(rideid);
-  console.log(props.ridereqs);
-  console.log(props.users);
+  //console.log(props.ridereqs);
+  //console.log(props.users);
   open();
 
 }

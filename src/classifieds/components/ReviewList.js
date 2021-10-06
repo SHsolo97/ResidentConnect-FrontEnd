@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {ReviewCard} from './ReviewCard';
 import { fetchCommentsAndUsers,fetchClassifiedById } from '../actions';
 import Divider from '@material-ui/core/Divider';
-import { calculateAverageStars } from "../../misc/helpers";
 import classifiedAPI from "../../misc/axios-calls/classifiedAPI";
 
 export const ReviewList =({...props}) => {
@@ -76,7 +75,7 @@ export const ReviewList =({...props}) => {
   //     });
   // };
   const  deleteReviewComment=async(commentid,rating) =>{
-    console.log(rating);
+   // console.log(rating);
     var apiBaseUrl = `/classifieds/comments/${commentid}`;
 
     await classifiedAPI

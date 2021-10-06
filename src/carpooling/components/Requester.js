@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import { formatPhone } from '../../misc/helpers';
 
 export const Requester = ({...props}) => {
-    console.log(props.ridereq);
+    //console.log(props.ridereq);
     return (
         <Paper elevation={3} style={{marginBottom:'20px', padding:'20px'}}>
               {props.requester!=null &&  <Grid
@@ -25,7 +25,7 @@ export const Requester = ({...props}) => {
     )
 }
 const mapStateToProps = (state,ownProps) => {
-    console.log(ownProps.ridereq.requestedby);
+   // console.log(ownProps.ridereq.requestedby);
     return {
      requester: state.users.find(user => user._id === ownProps.ridereq.requestedby) 
 

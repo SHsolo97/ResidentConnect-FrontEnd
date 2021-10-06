@@ -43,8 +43,8 @@ export default function MyAdCard({...props}) {
   const classes = useStyles();
   const advert=props.advert;
 const openAd=(event)=>{
-    console.log('open ad');
-    console.log(advert);
+   // console.log('open ad');
+   // console.log(advert);
     event.stopPropagation();
     event.preventDefault();
     history.push({

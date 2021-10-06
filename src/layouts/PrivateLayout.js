@@ -129,7 +129,7 @@ const PrivateLayout = ({ children }) => {
     };
     const goToAparmentSettings=()=>{
 
-      console.log('Goto Aparment Settings');
+      //console.log('Goto Aparment Settings');
       if(user.type==='resident')
         history.push('/apartmentprofile');
       if(user.type==='admin')
@@ -144,8 +144,8 @@ const PrivateLayout = ({ children }) => {
                if (response.status === 200)
     
               {
-                  const updatedUserDetails=response.data
-                  console.log(updatedUserDetails);
+                  //const updatedUserDetails=response.data
+                  //console.log(updatedUserDetails);
                   history.push('/signin');
                  
                 

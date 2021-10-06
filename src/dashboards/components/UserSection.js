@@ -19,7 +19,7 @@ const UserSection =({...props}) =>{
 
 React.useEffect(() => {
 props.fetchUsersByApartmentId(apartment._id);
-console.log(props.users);
+//console.log(props.users);
 }, [apartment])
 
 // eslint-disable-next-line no-extend-native

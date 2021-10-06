@@ -29,7 +29,7 @@ export const AnnouncementSection = ({...props}) => {
              props.announcements.map(announcement=>{
                 tempAnnouncements.push(announcement);
          })
-             console.log(tempAnnouncements);
+             //console.log(tempAnnouncements);
              setAnnouncements(tempAnnouncements);
              
          }

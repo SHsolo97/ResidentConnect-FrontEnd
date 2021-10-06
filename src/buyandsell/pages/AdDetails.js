@@ -126,11 +126,11 @@ geo:
 
   const getSellingAddress = async () => {
     const apiBaseUrl = `/community/${advert.communityid}`
-    console.log(apiBaseUrl);
+   // console.log(apiBaseUrl);
     await communityAPI.get(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+        // console.log(response.data);
           setSellerCommunity(response.data);
         
         }
@@ -142,13 +142,13 @@ geo:
   }
   const getSellerDetails = async () => {
     const apiBaseUrl = `/users/${advert.creator}`
-    console.log(apiBaseUrl);
+    //console.log(apiBaseUrl);
     await userAPI.get(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+       //   console.log(response.data);
           setSellerDetails(response.data);
-          console.log(sellerDetails);
+         // console.log(sellerDetails);
         }
       })
       .catch(function (error) {
@@ -171,12 +171,12 @@ geo:
   }
 
   const deleteAd = async () => {
-    console.log(`delete ${advert._id}`);
+    //(`delete ${advert._id}`);
     var apiBaseUrl = `/adverts/${advert._id}`
     await buyAndSellAPI.delete(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+     //     console.log(response.data);
           close();
           history.push('/myads');
         }

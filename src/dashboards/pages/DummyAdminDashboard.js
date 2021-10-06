@@ -10,7 +10,7 @@ const DummyAdminDashboard = () => {
     const {user}=useProfile();
 
     const {communityList}=useCommunity();
-    console.log(user);
+    //console.log(user);
     const gotoDashboard=()=>{
         history.push('/DashboardOA');
     }

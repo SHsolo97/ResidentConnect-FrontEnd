@@ -31,7 +31,7 @@ export const AdSearch = ({...props}) => {
                  if (response.status === 200)
                 {           
                   
-                    console.log(response.data.subcategories);
+                    //console.log(response.data.subcategories);
                     setSubCategories(response.data.subcategories);
                 }
            

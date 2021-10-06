@@ -11,21 +11,21 @@ export const FacilityTiming = ({...props}) => {
    const[slotKey,setSlotKey]=React.useState(0);
    const handleAddTimeSlot=(slotToAdd)=>()=>{
     //setChipData((chips) => chips.push(chipToAdd));
-    console.log("handleAdd");
-    console.log(slotToAdd);
+    //console.log("handleAdd");
+    //console.log(slotToAdd);
     addTimeSlot(slotToAdd);
   }
 
   const handleTimeSlotAdd=(value)=>{
     close();
     const chipToAdd={key:slotKey, label:value};
-    console.log(chipToAdd);
+    //console.log(chipToAdd);
     addTimeSlot(chipToAdd);
   }
   
   const addTimeSlot=(slotToAdd)=>{
     setTimeSlotChip(SlotChip => [...SlotChip, slotToAdd]);
-    console.log(slotToAdd);
+    //console.log(slotToAdd);
     setSlotKey(slotKey+1);
   }
  

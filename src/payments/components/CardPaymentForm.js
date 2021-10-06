@@ -30,7 +30,7 @@ export const CardPaymentForm = ({ ...props }) => {
       .put(apiBaseUrl, paymentsdata)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+          //console.log(response.data);
           if(user.type==='admin')
             history.push('/paymentA')
            else
@@ -44,7 +44,7 @@ export const CardPaymentForm = ({ ...props }) => {
 
 }
 const onSubmit = (formValues) => {
-  console.log(formValues);
+  //console.log(formValues);
   const paymentsdata={}
   paymentsdata['status']='paid';
   paymentsdata['paidon']=new Date();
@@ -52,7 +52,7 @@ const onSubmit = (formValues) => {
   paymentdetails['cardnumber']='XXXX-XXXX-XXXX-'.concat(formValues.card.slice(15));
   paymentdetails['type']='card'
   paymentsdata['paymentdetails']=paymentdetails;
-  console.log(paymentsdata);
+  //console.log(paymentsdata);
   editPayment(paymentsdata);
 }
 

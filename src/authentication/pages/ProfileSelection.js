@@ -41,7 +41,7 @@ history.push('/settingsR');
 
 }
 const getCommunityDetails=async (communityId)=>{
-  console.log(communityId);
+ // console.log(communityId);
 var apiBaseUrl = `/community/${communityId}`;
 let communityinfo=null;
 
@@ -60,7 +60,7 @@ const data=await communityAPI.get(apiBaseUrl )
 
             const communitydata=communityinfo;
             
-            console.log(communitydata);
+           //console.log(communitydata);
             setCommunity(communitydata); 
            }     
           
@@ -78,7 +78,7 @@ const data=await communityAPI.get(apiBaseUrl )
     return data;
    }
 const getApartmentDetails=async (apartmentid)=>{
-  console.log(apartmentid);
+ // console.log(apartmentid);
 var apiBaseUrl = `/community/apartments`;
 let apartmentInfo=null;
 
@@ -86,7 +86,7 @@ const searchQuery={
   "_id":apartmentid
 }
 
-console.log(searchQuery);
+//console.log(searchQuery);
 const data=await communityAPI.post(apiBaseUrl,searchQuery )
     .then(function (response) {
         if (response.status === 200)
@@ -97,7 +97,7 @@ const data=await communityAPI.post(apiBaseUrl,searchQuery )
            {
         
             const apartmentdata=apartmentInfo[0];
-            console.log(apartmentdata);
+           // console.log(apartmentdata);
             setApartment(apartmentdata);   
                getCommunityDetails(apartmentdata.communityid)
  
@@ -142,7 +142,7 @@ const renderCommunityList =()=>{
 
 const selectApartment=(event)=>{
   const val=event.target.value;
-  console.log(val);
+  //console.log(val);
   if(val==='add')
   {
     open();
@@ -158,7 +158,7 @@ const selectApartment=(event)=>{
 }
 const selectCommunity=(event)=>{
   const val=event.target.value;
-  console.log(val);
+  //console.log(val);
   if(val==='add')
   {
     open();
@@ -173,7 +173,7 @@ const selectCommunity=(event)=>{
 }
 const renderApartmentList =()=>{
 
- console.log(apartmentList);
+ //console.log(apartmentList);
  
   return apartmentList.map((apartment) =>
   <>

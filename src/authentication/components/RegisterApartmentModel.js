@@ -27,7 +27,7 @@ export const RegisterApartmentModel = ({...props}) => {
               
                 
                    const userdata= response.data;
-                   console.log(userdata);
+                   //console.log(userdata);
                    setUser(userdata);
                     props.handleClose();
                    
@@ -74,7 +74,7 @@ export const RegisterApartmentModel = ({...props}) => {
   }
    const handleSubmit=()=>
         {
-            console.log(tokenValue);
+            //console.log(tokenValue);
             validateToken(tokenValue)
            
                 

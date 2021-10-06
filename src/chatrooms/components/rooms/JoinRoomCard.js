@@ -72,7 +72,7 @@ export const JoinRoomCard = ({room,requests}) => {
 
  const getRequestStatus=()=>
  {
-   console.log(reqList);
+   //console.log(reqList);
     // eslint-disable-next-line array-callback-return
     let status= 'Not Raised';
     const data =reqList.filter(req=>req.raisedby.uid===auth.currentUser.uid);
@@ -84,7 +84,7 @@ export const JoinRoomCard = ({room,requests}) => {
  }
 const getButton=()=>{
   const status=getRequestStatus();
-  console.log(status);
+  //console.log(status);
   if(status==='Not Raised')
   return <PrimaryButton  onClick={requestToJoin}>Join</PrimaryButton>
   else if(status==='pending')
@@ -94,7 +94,7 @@ const getButton=()=>{
 
 }
 const requestToJoin=async ()=>{
-  console.log( `request to join room ${id}`);
+  //console.log( `request to join room ${id}`);
   const newRequestdata = {
     
     createdAt: firebase.database.ServerValue.TIMESTAMP,
@@ -106,7 +106,7 @@ const requestToJoin=async ()=>{
       type:'member',
     status:'pending'
   }
-  console.log(newRequestdata);
+  //console.log(newRequestdata);
   try {
      await database.ref(`/requests/${communityid}/${id}`).push(newRequestdata);
   }

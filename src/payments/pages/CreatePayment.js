@@ -24,7 +24,7 @@ export const CreatePayment = ({...props}) => {
           .post(apiBaseUrl, paymentsdata)
           .then(function (response) {
             if (response.status === 201) {
-              console.log(response.data);
+              //console.log(response.data);
               return response;
             }
           })
@@ -36,7 +36,7 @@ export const CreatePayment = ({...props}) => {
     }
 
     const setFormData=(data)=>{
-        console.log(data);  
+        //console.log(data);  
         let paymentsdata=[];
 
         // eslint-disable-next-line array-callback-return
@@ -49,7 +49,7 @@ export const CreatePayment = ({...props}) => {
             
             paymentsdata.push(paymentdata);
         })
-        console.log(paymentsdata);
+        //console.log(paymentsdata);
         initiatePayments(paymentsdata);
     }
     return (

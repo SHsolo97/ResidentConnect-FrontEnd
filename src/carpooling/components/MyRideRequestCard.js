@@ -39,7 +39,7 @@ export const  MyRideRequestCard=({...props})=> {
  const zoom= 6;
 let center={lat:0,lng:0};
 const openRouteModel=()=>{
- console.log(origin);
+ //console.log(origin);
  center=getGeoOrdinates({address:origin});
 open();
 }
@@ -155,8 +155,8 @@ return (
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps.ridereq.owner);
-  console.log(state.users);
+ // console.log(ownProps.ridereq.owner);
+  //console.log(state.users);
   return { 
    
     

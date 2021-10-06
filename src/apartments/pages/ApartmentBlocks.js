@@ -44,7 +44,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
     await communityAPI.put(apiBaseUrl, blocksToAdd)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+          //console.log(response.data);
           setCommunity(response.data);
           props.handleNext();
 
@@ -63,7 +63,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
     await communityAPI.get(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data.blocks);
+          //console.log(response.data.blocks);
           const blockList = response.data.blocks;
 
           // eslint-disable-next-line array-callback-return
@@ -71,7 +71,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
             blockList[index] = { ...block, key: index };
             setKey(index + 1);
           });
-          console.log(blockList);
+          //console.log(blockList);
           setBlocks(blockList)
 
 
@@ -94,10 +94,10 @@ export const ApartmentBlocks = ({ children, ...props }) => {
     setBlocks([...blocks, block]);
     setKey(key => key + 1);
     setIsNew([...isNew, true]);
-    console.log(blocks);
+    //console.log(blocks);
   }
   const handleSubmit = (e) => {
-    console.log(blocks);
+    //console.log(blocks);
     let blockdetails = [];
     // eslint-disable-next-line array-callback-return
     blocks.map((block) => {
@@ -108,7 +108,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
       b['floordetails'] = block['floordetails']
       blockdetails.push(b);
     })
-    console.log(blockdetails);
+    //console.log(blockdetails);
     editBlocks(blockdetails);
    
   }

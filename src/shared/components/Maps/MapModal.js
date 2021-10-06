@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 export default function MapModel({...props}) {
     const classes = useStyles();
-    console.log(props.coordinates);
+    //console.log(props.coordinates);
   return (
  
       <Dialog open={props.open} onClose={props.handleClose}  maxWidth='md'  fullWidth  >

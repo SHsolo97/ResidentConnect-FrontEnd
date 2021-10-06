@@ -38,9 +38,9 @@ function TabPanel(props) {
 
   
 export const PayBill = ({...props}) => {
-    console.log(props.location.state);
+    //console.log(props.location.state);
     const {bill}=props.location.state
-    console.log(bill);
+    //console.log(bill);
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);

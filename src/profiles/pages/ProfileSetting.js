@@ -169,7 +169,7 @@ const editUser=async(profileData)=>{
 
           {
               const updatedUserDetails=response.data
-              console.log(updatedUserDetails);
+              //console.log(updatedUserDetails);
               setUser(updatedUserDetails)
               if(user.type==='admin')
               history.push('/dashboardOA')
@@ -220,7 +220,7 @@ const addFile=(filetoUpload)=>{
 
 }
 const renderUserData=()=>{
-  console.log('inside render user data');
+  //console.log('inside render user data');
   return(
     <form onSubmit={handleSubmit}>
 

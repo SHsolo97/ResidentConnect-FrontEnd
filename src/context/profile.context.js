@@ -32,7 +32,7 @@ export const ProfileProvider=({children})=>{
       
         let data=null
      
-        console.log(searchquery);
+        //console.log(searchquery);
         await userAPI.post(apiBaseUrl,searchquery )
              .then(function (response) {
                  if (response.status === 200)
@@ -41,9 +41,9 @@ export const ProfileProvider=({children})=>{
                     userinfo=response.data.users[0];
                     if(userinfo!=null)
                     {
-                    console.log(userinfo);
-                    console.log(userinfo.communities);
-                    console.log(userinfo.apartments);
+                   // console.log(userinfo);
+                   // console.log(userinfo.communities);
+                   // console.log(userinfo.apartments);
                 
                     data=userinfo;
                     setUser(data);

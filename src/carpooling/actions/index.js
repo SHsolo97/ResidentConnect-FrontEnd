@@ -7,16 +7,16 @@ export const fetchMyRides = (userid) => async dispatch => {
     const searchQuery={
         creator:userid
     }
-    console.log(searchQuery);
+    //console.log(searchQuery);
   const response = await carPoolingAPI.post('/carpoolings/rides/search',searchQuery);
-  console.log(response);
+  //console.log(response);
   dispatch({ type: 'FETCH_MYRIDES', payload: response.data.rides});
 };
 export const fetchRideById = (id) => async dispatch => {
 
  
 const response = await carPoolingAPI.get(`/carpoolings/rides/${id}`);
-console.log(response);
+//console.log(response);
 dispatch({ type: 'FETCH_RIDE_BY_ID', payload: response.data});
 };
 export const filterRide= (searchQuery) => async dispatch => {
@@ -29,21 +29,21 @@ export const filterRide= (searchQuery) => async dispatch => {
 export const searchRides= (searchQuery) => async dispatch => {
 
    
-    console.log(searchQuery);
+    //console.log(searchQuery);
   const response = await carPoolingAPI.post('/carpoolings/rides/search',searchQuery);
-  console.log(response);
+  //console.log(response);
   dispatch({ type: 'SEARCH_RIDES', payload: response.data.rides});
 };
 
 export const fetchUser = id => async dispatch => {
   const response = await userAPI.get(`/users/${id}`);
-  console.log(response.data);
+  //console.log(response.data);
   dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 export const fetchRideRequestsByRideId = rideid => async dispatch => {
   const searchQuery={ride:rideid};
   const response = await carPoolingAPI.post(`/carpoolings/riderequests/search`,searchQuery);
-  console.log(response.data.ridereqs);
+  //console.log(response.data.ridereqs);
   dispatch({ type: 'FETCH_RIDE_REQUESTS_BY_RIDE_ID', payload: response.data.ridereqs});
 };
 export const fetchRideRequestsByRideOwner = userid => async dispatch => {
@@ -70,7 +70,7 @@ export const fetchMyRideRequestsDetails = userid => async (dispatch,getState) =>
        
 };
 export const fetchMyRideRequestsByRideId = rideId => async (dispatch,getState) => {
-  console.log("fetchMyRideRequestsByRideId");
+  //console.log("fetchMyRideRequestsByRideId");
   await 
   dispatch(fetchRideRequestsByRideId(rideId))
  _.chain(getState().ridereqs)

@@ -13,7 +13,7 @@ const RouteMap = props => {
 
   const calculateAndDisplayRoute=(directionsService, directionsRenderer) =>{
     const waypts = [];
-    console.log("calculateAndDisplayRoute");
+    //console.log("calculateAndDisplayRoute");
     for (let i = 0; i < waypoints.length; i++) {
      
         waypts.push({
@@ -51,7 +51,7 @@ const RouteMap = props => {
       //   summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
       // }
     })
-    //.catch((e) => console.log("Directions request failed due to ")));
+    //.catch((e) => //console.log("Directions request failed due to ")));
     
    }
    useEffect(() => {

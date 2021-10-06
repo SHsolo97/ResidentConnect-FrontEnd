@@ -34,7 +34,7 @@ export const  RideRequestCard=({...props})=> {
   const zoom= 6;
  let center={lat:0,lng:0};
  const openRouteModel=()=>{
-  console.log(origin);
+  //console.log(origin);
   center=getGeoOrdinates({address:origin});
  open();
  }
@@ -142,7 +142,7 @@ return (
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.user);
+  //console.log(state.user);
   return { ride: state.ride ,
            requester:state.users.find(user => user._id === ownProps.ridereq.requestedby) };
 };

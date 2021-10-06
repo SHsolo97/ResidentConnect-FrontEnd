@@ -12,8 +12,7 @@ export const MyRideRequestTab = ({...props}) => {
   React.useEffect(() => {
 
        props.fetchMyRideRequestsDetails(user._id);
-       if(props.ridereqs!=null)
-        console.log(props.ridereqs);
+       
     
 
 

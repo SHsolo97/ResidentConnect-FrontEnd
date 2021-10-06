@@ -21,11 +21,11 @@ export const AdSearchResult = ({ ...props }) => {
     if (props.subcategory !== '')
       searchQuery['subcategory'] = props.subcategory;
 
-    console.log(searchQuery);
+   // console.log(searchQuery);
     await buyAndSellAPI.post(apiBaseUrl, searchQuery)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data.ads);
+        //  console.log(response.data.ads);
           setAdverts(response.data.ads);
 
 
