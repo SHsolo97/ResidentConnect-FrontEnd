@@ -14,7 +14,6 @@ import { Alert } from "../../shared/components/Alert";
 import { useAlertState } from "../../misc/custom-hooks";
 import { Progress } from "../../shared/components/Progress";
 import { useProfile } from "../../context/profile.context";
-import { calculateAverageStars } from "../../misc/helpers";
 
 const validate = (formValues) => {
   const errors = {};

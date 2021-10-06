@@ -28,7 +28,7 @@ const AdminDashboard = () => {
 const {user}=useProfile();
 const {community}=useCommunity();
 const communityid=community._id;
-const {carpooling,facility,maintenance,polling,visitor}=community.paidservices;
+const {facility,maintenance,polling}=community.paidservices;
 return (
 
 <>

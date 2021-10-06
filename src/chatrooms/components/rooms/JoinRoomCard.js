@@ -8,12 +8,12 @@ import {PrimaryButton} from '../../../shared/components/PrimaryButton';
 import { useProfile } from '../../../context/profile.context';
 import { database,auth } from '../../../misc/firebase';
 import firebase from 'firebase/app';
-import { transformArrWithId,transformArrWithoutId, transformToArr } from '../../../misc/helpers';
+import { transformArrWithId } from '../../../misc/helpers';
 import { useCommunity } from '../../../context/community.context';
 
 const useStyles = makeStyles((theme)=>({
 root: {
-maxWidth: 500,
+maxWidth: 450,
 },
 avatar: {
 width: theme.spacing(7),

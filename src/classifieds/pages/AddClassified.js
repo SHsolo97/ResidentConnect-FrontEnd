@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useState } from 'react'
+import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { useProfile } from '../../context/profile.context';
 
@@ -7,7 +7,6 @@ import { useProfile } from '../../context/profile.context';
 import { useHistory } from 'react-router-dom';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 
-import { Progress } from '../../shared/components/Progress';
 import classifiedAPI from '../../misc/axios-calls/classifiedAPI';
 import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';

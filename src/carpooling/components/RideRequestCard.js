@@ -9,7 +9,6 @@ import Avatar from '@mui/material/Avatar';
 import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import {convertDate,convertTime} from '../../misc/helpers';
 import {useModelState} from '../../misc/custom-hooks';
-import { RejectReasonModel } from './RejectReasonModel';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import IconButton from '@mui/material/IconButton';
 import Popper from '@mui/material/Popper';
@@ -25,7 +24,7 @@ export const  RideRequestCard=({...props})=> {
   const { isOpen, open, close } = useModelState();
   const [approvebuttonName]=React.useState('Approve');
   const [rejectbuttonName]=React.useState('Reject');
-  const {_id,creator,stoppoints,source,ridedatetime,destination,seats,amt}=props.ridereq.ride;
+  const {stoppoints,source,destination}=props.ridereq.ride;
 
   const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
   const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`

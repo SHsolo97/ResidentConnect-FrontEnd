@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 
 import React from 'react'
 import { useCommunity } from '../../context/community.context';

@@ -4,7 +4,6 @@ import { useModelState } from '../../misc/custom-hooks';
 import { auth, database } from '../../misc/firebase';
 import {PrimaryButton}from '../../shared/components/PrimaryButton';
 import { Dialog } from '@material-ui/core';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 

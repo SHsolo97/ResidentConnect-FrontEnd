@@ -1,6 +1,6 @@
 import { Divider, Paper } from '@material-ui/core';
 import React, { useRef, useState, useEffect }  from 'react';
-import { SectionHeader } from '../../shared/components/SectionHeader';
+
 import {useProfile} from '../../context/profile.context';
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';

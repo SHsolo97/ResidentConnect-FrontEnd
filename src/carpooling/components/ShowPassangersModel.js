@@ -1,12 +1,10 @@
-import React,{useEffect} from 'react'
-import {PrimaryButton}from '../../shared/components/PrimaryButton';
+import React from 'react'
 import DialogActions from '@material-ui/core/DialogActions';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import { SectionHeader } from '../../shared/components/SectionHeader';
-import TextField from '@mui/material/TextField';
-import { connect } from 'react-redux';
+
 import  Requester from './Requester';
 
 export const ShowPassangersModel = ({...props}) => {

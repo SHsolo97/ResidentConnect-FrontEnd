@@ -33,7 +33,7 @@ const RouteMap = props => {
 
       
     },function(response, status){
-      if (status == 'OK') {
+      if (status === 'OK') {
         directionsRenderer.setDirections(response);
       }
       //const summaryPanel = document.getElementById("directions-panel");
@@ -66,7 +66,8 @@ const RouteMap = props => {
 
     
 
-  }, [center, zoom]);  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [center,zoom,directionsService,directionsRenderer]);  
 
  
   

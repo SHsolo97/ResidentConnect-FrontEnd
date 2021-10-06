@@ -12,12 +12,12 @@ import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
-import { Box,Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { uploadImagesToFireStorage } from '../../misc/firestore';
 import userAPI from '../../misc/axios-calls/userAPI';
 import { Progress } from '../../shared/components/Progress';
 import ProfileImageUpload from '../../apartments/components/ProfileImageUpload';
-import {formatPhone} from '../../misc/helpers';
+
 
 const useStyles = makeStyles((theme) => ({
 root: {

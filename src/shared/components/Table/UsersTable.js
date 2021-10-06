@@ -12,9 +12,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "./styles/tableStyle.js";
-import { Link } from "@material-ui/core";
-import { useModelState } from "../../../misc/custom-hooks.js";
-import { ParticipateInPoll } from "../../../polling/pages/ParticipateInPoll.js";
+
 
 const useStyles = makeStyles(styles);
 

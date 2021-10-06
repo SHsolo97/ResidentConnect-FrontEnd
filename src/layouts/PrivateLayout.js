@@ -105,7 +105,7 @@ const PrivateLayout = ({ children }) => {
   const { isOpen, open, close } = useModelState();
   
   const {communityList,community} = useCommunity();
-  const {user,setUser} = useProfile();
+  const {user} = useProfile();
   const classes = useStyles();
   const theme = useTheme();
   const [openDrawer, setOpenDrawer] = React.useState(false);

@@ -92,7 +92,7 @@ String.prototype.capitalize = function() {
         />
         <Typography color="textSecondary" > {advert.title.slice(0,20)} </Typography>
         <Typography color="textSecondary" >  &#8377; {advert.price.value.toLocaleString('en-IN')} </Typography> 
-        <Chip label={advert.status.capitalize()} style={{backgroundColor:advert.status=='active'?'green':'red'}}  />
+        <Chip label={advert.status.capitalize()} style={{backgroundColor:advert.status==='active'?'green':'red'}}  />
        
     </Grid>
    

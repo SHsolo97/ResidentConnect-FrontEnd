@@ -12,7 +12,8 @@ export const ResidentTransactionHistory = ({...props}) => {
      useEffect(() => {
          props.fetchPaymentHistoryOfApartment(apartmentid);
          
-     }, [])
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [apartmentid])
      return (
         
         <div>

@@ -3,8 +3,7 @@ import {PrimaryButton}from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { SectionHeader } from "../../shared/components/SectionHeader";
+
 import { useProfile } from "../../context/profile.context";
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
 import Radio from '@mui/material/Radio';

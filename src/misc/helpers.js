@@ -53,17 +53,17 @@ export function transformArrWithId(snapVal) {
     }): [];
 
 }
-export function transformArrWithoutId(snapVal) {
-    snapVal=snapVal[0];
-    const data= snapVal ? Object.keys(snapVal).map(roomId => {
-        console.log(roomId);
-        if(roomId!=='id')
-          return { ...snapVal[roomId]}
-    }): [];
-    console.log(data);
-    return data;
+// export function transformArrWithoutId(snapVal) {
+//     snapVal=snapVal[0];
+//     const data= snapVal ? Object.keys(snapVal).map(roomId => {
+//         console.log(roomId);
+//         if(roomId!=='id')
+//           return { ...snapVal[roomId]}
+//     }): [];
+//     console.log(data);
+//     return data;
 
-}
+// }
 // export function transformArrWithoutId(snapVal) {
 //     const result=[]
 //     console.log(snapVal);

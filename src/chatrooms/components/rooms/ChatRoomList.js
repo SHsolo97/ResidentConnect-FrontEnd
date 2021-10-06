@@ -3,8 +3,8 @@ import {  Nav } from 'rsuite';
 import { Link, useLocation } from 'react-router-dom';
 import { useRooms } from '../../../context/rooms.context';
 import {RoomCard} from './RoomCard';
-import { CircularProgress, Grid, Paper, TextField } from '@material-ui/core';
-import Search from '@material-ui/icons/Search';
+import { CircularProgress,  Paper } from '@material-ui/core';
+
 import { auth } from '../../../misc/firebase';
 import { transformToArr } from '../../../misc/helpers';
 import { JoinRoomCard } from './JoinRoomCard';
@@ -74,8 +74,9 @@ const ChatRoomList = ({ myRoomsOnly,setCurrentRoomId, aboveElHeight }) => {
         let myRooms=[];
         let otherRooms=[];
         console.log(data);
-        if(data.length!=0)
+        if(data.length!==0)
         {
+          // eslint-disable-next-line array-callback-return
           data.map(room=>
             {
               console.log(room);
