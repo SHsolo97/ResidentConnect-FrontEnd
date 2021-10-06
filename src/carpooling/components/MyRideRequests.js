@@ -17,6 +17,10 @@ export const MyRideRequests = ({...props}) => {
     },[user._id])
 
     const renderRideRequestCard=()=>{
+        if(props.ridereqs.length===0)
+        {
+            return <div style={{color:'red',fontSize:'32px', marginTop:'150px',marginLeft:'400px'}}> No Ride Request</div>
+        }
             return props.ridereqs.map(ridereq=>
                 {
               

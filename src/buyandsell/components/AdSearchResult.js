@@ -104,7 +104,7 @@ export const AdSearchResult = ({ ...props }) => {
   justifyContent="flex-end"
   alignItems="center"
 >
-        <div>({adverts.length}) result(s) found </div>
+        <div style={{color:'red'}}>({adverts.length}) result(s) found </div>
         </Grid>
         <AdSearchResultPage adverts={adverts.slice(startIndex,endIndex)}/>
         {adverts.length!==0 && <Grid
