@@ -26,27 +26,11 @@ export const ApartmentProvider=({children})=>{
              if (response.status === 200)
             {           
               
-                apartmentInfo=response.data;
-                if(apartmentInfo!=null)
-                {
-             
+                apartmentInfo=response.data;             
 
-                 const apartmentdata={
-                    id:apartmentInfo._id,
-                    communityid:apartmentInfo.communityid,
-                    aptnum:apartmentInfo.aptnum,
-                    block:apartmentInfo.block,
-                    floor:apartmentInfo.floor,
-                    issold:apartmentInfo.issold,
-                    status:apartmentInfo.status,
-                    enrolled:apartmentInfo.enrolled
-                }
-                return apartmentdata;  
-                }     
-               
                 
-                return null;
-             
+                return apartmentInfo;  
+                
              }
        
          })

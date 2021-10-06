@@ -26,8 +26,9 @@ const ResidentDashboard = () => {
   const {apartment}=useApartment();
 
   const renderData=()=>{
-    if(community===null || user === null || apartment===null )
+    if(community===null && user === null && apartment===null )
       return(null);
+    
     return(
       <Provider store={dashboardstore}>
       <UserInfo/>
@@ -35,7 +36,7 @@ const ResidentDashboard = () => {
  
   <GridContainer>
   <GridItem xs={12} sm={12} md={6}>
-        <UserSection apartmentid={apartment._id} communityid={community._id} />
+        <UserSection/>
 
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>

@@ -5,6 +5,7 @@ import {fetchReceivedRideRequestsDetails,fetchRideRequestsByRideOwner} from '../
 import { useProfile } from '../../context/profile.context';
 import RideRequestCard from './RideRequestCard';
 import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
+import {Progress} from '../../shared/components/Progress';
 
 export const RideRequests = ({...props}) => {
     const {user} =useProfile();
@@ -55,9 +56,7 @@ export const RideRequests = ({...props}) => {
              ) }
     return (
         <div>
-      {props.ridereqs!=null &&
-
-        renderRideRequestCard()
+      {props.ridereqs===null ?<Progress/>:renderRideRequestCard()
       }
       </div>
     )

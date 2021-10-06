@@ -79,7 +79,7 @@ return (
   }} color="primary" variant="dot">
           
         </Badge>
-        <Typography style={{marginTop:'-15px',paddingLeft:'30px',fontSize:'20px'}} variant="body2" gutterBottom>  {props.ridereq.ride.source.addressline}, {props.ridereq.ride.source.area}, {props.ridereq.ride.source.city},{props.ridereq.ride.source.state},{props.ridereq.ride.source.pincode}
+        <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body1" gutterBottom>  {props.ridereq.ride.source.addressline}, {props.ridereq.ride.source.area}, {props.ridereq.ride.source.city},{props.ridereq.ride.source.state},{props.ridereq.ride.source.pincode}
           </Typography>
       </div>
 
@@ -91,13 +91,13 @@ return (
     horizontal: 'left',
   }} color="secondary" variant="dot">
 
-          <Typography style={{marginTop:'-15px',fontSize:'20px',paddingLeft:'30px'}} variant="body2"  gutterBottom>{props.ridereq.ride.destination.addressline}, {props.ridereq.ride.destination.area}, {props.ridereq.ride.destination.city},{props.ridereq.ride.destination.state},{props.ridereq.ride.destination.pincode}</Typography>
+          <Typography style={{marginTop:'-15px',paddingLeft:'30px'}} variant="body1"  gutterBottom>{props.ridereq.ride.destination.addressline}, {props.ridereq.ride.destination.area}, {props.ridereq.ride.destination.city},{props.ridereq.ride.destination.state},{props.ridereq.ride.destination.pincode}</Typography>
         </Badge>
       </div>
     </Grid>
   
     <Grid style={{paddingLeft:'30px',paddingTop:'10px'}} container row justifyContent="space-between" alignItems="center">
-      <Typography  variant="body2" style={{fontSize:'20px'}} color="orange">
+      <Typography  variant="body2" color="orange">
         {convertDate(props.ridereq.ride.ridedatetime)}, {convertTime(props.ridereq.ride.ridedatetime)}
       </Typography>
       <PopupState  style={{paddingLeft:'30px'}} variant="popper" >

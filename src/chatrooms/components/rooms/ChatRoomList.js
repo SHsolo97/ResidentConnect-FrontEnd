@@ -13,6 +13,7 @@ import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { useRoomsRequests } from '../../../context/roomsrequest.context';
 
+import {Progress} from '../../../shared/components/Progress';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -135,7 +136,7 @@ const ChatRoomList = ({ myRoomsOnly,setCurrentRoomId, aboveElHeight }) => {
         style={{ height: `calc(100% -${aboveElHeight}px)` }}
         activeKey={location.pathname} 
     >
-            {!rooms && (<CircularProgress/>)}
+            {!rooms && <CircularProgress/>}
             
             {rooms &&
                 rooms.length > 0 &&

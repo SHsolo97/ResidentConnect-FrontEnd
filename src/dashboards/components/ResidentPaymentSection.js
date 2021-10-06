@@ -18,6 +18,9 @@ const ResidentPaymentSection =({...props}) =>{
   const classes=useStyles();
 
 React.useEffect(() => {
+  if(apartment===null) 
+       return;
+      console.log(apartment);
 props.fetchPaymentOfApartment(apartment._id);
 //console.log(props.payments);
 }, [apartment])

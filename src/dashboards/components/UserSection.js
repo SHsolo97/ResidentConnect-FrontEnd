@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { fetchUsersByApartmentId } from '../actions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Card from "../../shared/components/cards/Card.js";
 import CardHeader from "../../shared/components/cards/CardHeader.js";
@@ -18,6 +19,8 @@ const UserSection =({...props}) =>{
   const classes=useStyles();
 
 React.useEffect(() => {
+  if(apartment==null) 
+  return;
 props.fetchUsersByApartmentId(apartment._id);
 //console.log(props.users);
 }, [apartment])
@@ -28,26 +31,30 @@ String.prototype.capitalize = function() {
 }
 
 const renderUserData=()=>{
-  if(props.users==null)
-  return;
+  if(props.users===null  || apartment===null)
+  return null;
   const users=props.users;
-  return <UsersTable
+  return  (<Card> <CardHeader color="info">
+  <h2 className={classes.cardTitleWhite}>Unit  - {apartment.aptnum} </h2>
+</CardHeader>
+<CardBody>
+  <UsersTable
             tableHeaderColor="info"
             tableHead={["Avatar","Name","Phone"]}
             tableData={users}
           />
+            </CardBody>
+            </Card>)
+
   
 }
 
 return (
-<Card>
-  <CardHeader color="info">
-    <h2 className={classes.cardTitleWhite}>Unit  - {apartment.aptnum} </h2>
-  </CardHeader>
-  <CardBody>
-  {renderUserData()}
-  </CardBody>
-</Card>
+
+ <div>
+  {(props.users===null  || apartment===null )? <CircularProgress/> : renderUserData()}
+  </div>
+
 )
 }
 const mapStateToProps = state => {

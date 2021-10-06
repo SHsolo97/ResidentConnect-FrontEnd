@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useCommunity } from '../../context/community.context.js';
 import AnnouncementTable from "../../shared/components/Table/AnnouncementTable.js"
 import { useProfile } from '../../context/profile.context.js';
+import {Progress} from '../../shared/components/Progress';
 
 
 const useStyles = makeStyles(styles);
@@ -17,9 +18,11 @@ export const AnnouncementSection = ({...props}) => {
     const classes=useStyles();
     const {user}=useProfile();
     const {community}=useCommunity();
-    const [announcements,setAnnouncements]=React.useState([]);
+    const [announcements,setAnnouncements]=React.useState(null);
 
     useEffect(() => {
+      if(community===null) 
+       return;
          props.fetchAnnouncementsByCommunity(community._id);
         // console.log(props.announcements);
          const tempAnnouncements=[]
@@ -34,9 +37,9 @@ export const AnnouncementSection = ({...props}) => {
              
          }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [community._id])
-    return (
-        <Card>
+    }, [])
+    const renderData=()=>{
+      return(<Card>
         <CardHeader color="success">
           <h2 className={classes.cardTitleWhite}>Announcements</h2>
          
@@ -54,7 +57,12 @@ export const AnnouncementSection = ({...props}) => {
             tableData={announcements}/>
             }
         </CardBody>
-      </Card>
+      </Card>)
+    }
+    return (
+      <div>
+        {announcements===null ? <Progress/> : renderData() }
+        </div>
     )
 }
 
