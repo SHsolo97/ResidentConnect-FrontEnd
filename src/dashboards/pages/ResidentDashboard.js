@@ -23,19 +23,19 @@ const dashboardstore = createStore(reducers, composeEnhancers(applyMiddleware(th
 const ResidentDashboard = () => {
   const {user}=useProfile();
   const {community}=useCommunity();
-  const communityid=community._id
   const {apartment}=useApartment();
-  const apartmentid=apartment._id;
 
-   return (
-    <>
-     <Provider store={dashboardstore}>
+  const renderData=()=>{
+    if(community===null || user === null || apartment===null )
+      return(null);
+    return(
+      <Provider store={dashboardstore}>
       <UserInfo/>
 
  
   <GridContainer>
   <GridItem xs={12} sm={12} md={6}>
-        <UserSection apartmentid={apartmentid} communityid={communityid} />
+        <UserSection apartmentid={apartment._id} communityid={community._id} />
 
       </GridItem>
       <GridItem xs={12} sm={12} md={6}>
@@ -76,6 +76,11 @@ const ResidentDashboard = () => {
         </GridItem>
   </GridContainer>
   </Provider>
+    )
+  }
+   return (
+    <>
+     {renderData()}
      </>
 )
 }

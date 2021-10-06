@@ -243,16 +243,16 @@ const PrivateLayout = ({ children }) => {
           <List>
           <CustumMenuItem >Dashboard</CustumMenuItem>  
            
-          {community.paidservices.facility && <CustumMenuItem >Facilties</CustumMenuItem>}
+          {community!==null && community.paidservices.facility && <CustumMenuItem >Facilties</CustumMenuItem>}
            <CustumMenuItem>Events</CustumMenuItem>
            <CustumMenuItem >Chat Rooms</CustumMenuItem>
            <CustumMenuItem >Buy &amp; Sell</CustumMenuItem>
            <CustumMenuItem>Classifieds</CustumMenuItem>
-           {community.paidservices.polling && <CustumMenuItem >Polling</CustumMenuItem> }
+           {community!==null &&  community.paidservices.polling && <CustumMenuItem >Polling</CustumMenuItem> }
            <CustumMenuItem >Payments</CustumMenuItem>
-           {community.paidservices.carpooling && <CustumMenuItem>Car Pooling</CustumMenuItem>}     
-           {community.paidservices.visitor && <CustumMenuItem >Visitors</CustumMenuItem>}
-           {community.paidservices.maintenance && <CustumMenuItem >Maintenance</CustumMenuItem>}
+           { community!==null &&  community.paidservices.carpooling && <CustumMenuItem>Car Pooling</CustumMenuItem>}     
+           {community!==null &&  community.paidservices.visitor && <CustumMenuItem >Visitors</CustumMenuItem>}
+           {community!==null &&  community.paidservices.maintenance && <CustumMenuItem >Maintenance</CustumMenuItem>}
            <CustumMenuItem >Contacts</CustumMenuItem>
            
           </List>

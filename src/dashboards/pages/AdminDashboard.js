@@ -27,11 +27,17 @@ const AdminDashboard = () => {
 
 const {user}=useProfile();
 const {community}=useCommunity();
-const communityid=community._id;
-const {facility,maintenance,polling}=community.paidservices;
-return (
+const renderData=()=>{
 
-<>
+  if(user===null || community==null )
+  {
+    return (null);
+  }
+  const communityid=community._id;
+
+  const {facility,maintenance,polling}=community.paidservices;
+
+  return(
   <Provider store={dashboardstore}>
     
 
@@ -62,7 +68,12 @@ return (
 
       
     </GridContainer>
-  </Provider>
+  </Provider>)
+}
+return (
+
+<>
+  {renderData()}
 </>
 )
 }

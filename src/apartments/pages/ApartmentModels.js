@@ -9,12 +9,13 @@ import { useEffect } from 'react';
 import ModelCard from '../components/ModelCard';
 import Grid from '@material-ui/core/Grid';
 import communityAPI from '../../misc/axios-calls/communityAPI';
+import {Progress} from '../../shared/components/Progress';
 
 export const ApartmentModels = ({ children, ...props }) => {
   const { isOpen, open, close } = useModelState();
   const { user } = useProfile();
   const communityid = user.communities[0];
-  const [models, setModels] = React.useState([]);
+  const [models, setModels] = React.useState(null);
   const INTIAIL_VALUE = {
     communityid: communityid,
     name: '',
@@ -125,31 +126,39 @@ export const ApartmentModels = ({ children, ...props }) => {
   const handleBack = (e) => {
     props.handleBack();
   }
+  const renderData=()=>{
+    return(
+      <Grid container direction="column" justifyContent="space-around" alignItems="center">
+      <Grid container direction="row" justifyContent="space-between" alignItems="center">
+        <PageHeader>{children}</PageHeader>
+        <PrimaryButton onClick={open}>Add Model</PrimaryButton>
+      </Grid>
+
+      {isOpen &&
+        <AddEditApartmentModel actionType="add" model={INTIAIL_VALUE} addApartmentModel={addApartmentModel} handleClose={close} open={open} />}
+
+      {
+        models.length === 0 ?
+          <h2 style={{ color: 'gray' }}> Please add module </h2>
+          : models.map((model) =>
+
+            <ModelCard key={model._id} editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model} />
+          )}
+      <Grid container style={{ marginTop: '100px' }} direction="row" justifyContent="space-evenly" alignItems="center">
+        <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
+        <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
+      </Grid>
+    </Grid>
+    )
+  }
   return (
 
     <>
-
-      <Grid container direction="column" justifyContent="space-around" alignItems="center">
-        <Grid container direction="row" justifyContent="space-between" alignItems="center">
-          <PageHeader>{children}</PageHeader>
-          <PrimaryButton onClick={open}>Add Model</PrimaryButton>
-        </Grid>
-
-        {isOpen &&
-          <AddEditApartmentModel actionType="add" model={INTIAIL_VALUE} addApartmentModel={addApartmentModel} handleClose={close} open={open} />}
-
-        {
-          models.length === 0 ?
-            <h2 style={{ color: 'gray' }}> Please add module </h2>
-            : models.map((model) =>
-
-              <ModelCard key={model._id} editApartmentModel={editApartmentModel} deleteModel={deleteModel} model={model} />
-            )}
-        <Grid container style={{ marginTop: '100px' }} direction="row" justifyContent="space-evenly" alignItems="center">
-          <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
-          <PrimaryButton onClick={handleSubmit}> Next </PrimaryButton>
-        </Grid>
-      </Grid>
+    {models===null?
+    <Progress/>
+    :
+    renderData()}
+     
     </>
   )
 }

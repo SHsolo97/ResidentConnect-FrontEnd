@@ -154,9 +154,15 @@ export const UpdateApartmentServices = ({ children, ...props }) => {
         </Paper>
         </div>
 
-
-        <PrimaryButton onClick={handleBack}> Back </PrimaryButton>
-        <PrimaryButton onClick={handleSubmit}> Finish </PrimaryButton>
+        <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <PrimaryButton style={{marginTop:'50px'}} onClick={handleBack}> Back </PrimaryButton>
+        <PrimaryButton  style={{marginTop:'50px'}} onClick={handleSubmit}> Finish </PrimaryButton>
+        </Grid>
       </div>
     )
   }
