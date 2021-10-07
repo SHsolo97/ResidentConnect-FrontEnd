@@ -11,7 +11,12 @@ import Select from '@material-ui/core/Select';
 import { useProfile } from '../../context/profile.context';
 import { useHistory } from 'react-router'
 import {TextField,Button} from '@material-ui/core';
-import '../components/addEventStyle.css'
+// input[type="text"] {
+//   width: 500px;
+//   height: 35px;
+//   margin: 20px;
+// }
+
 export const AddEvent = () => {
     const history=useHistory();
     var file=null;

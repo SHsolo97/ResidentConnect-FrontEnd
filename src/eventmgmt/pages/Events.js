@@ -1,5 +1,4 @@
 import React from 'react'
-import '../components/styles.css'
 import EventFilter from '../components/eventFilter'
 import EventsList from "../components/localEvents"
 import Button from '@material-ui/core/Button';
