@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import {convertDate} from '../../misc/helpers';
 import Paper from  '@material-ui/core/Paper';
 export const BillDetailsCard = ({...props}) => {
+      // eslint-disable-next-line no-extend-native
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
     return (
         <div>
             <Paper style={{width:'1000px'}}>
@@ -13,11 +17,11 @@ export const BillDetailsCard = ({...props}) => {
      <Grid container alignItems="center" >
         <Grid style={{paddingLeft:"150px" , paddingTop:"50px"}} item xs={6} >
         <Typography  variant="body2" component="span">
-         <span style={{fontWeight:'bold'}}> Community: </span> {props.bill.communityname}         
+         <span style={{fontWeight:'bold'}}> Community: </span> {props.bill.communityname.capitalize()}         
         </Typography>
         <br/>    <br/>    <br/>
         <Typography  variant="body2" component="span">
-        <span style={{fontWeight:'bold'}}> Type:  </span> {props.bill.category} 
+        <span style={{fontWeight:'bold'}}> Type:  </span> {props.bill.category.capitalize()} 
         </Typography>
         <br/>    <br/>    <br/>
         <Typography variant="body2" component="span">

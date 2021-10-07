@@ -1,15 +1,18 @@
 import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
-import {BillDetailsCard} from '../components/BillDetailsCard';
 import ReceiptDetailsCard from '../components/ReceiptDetailsCard';
+import Paper from  '@material-ui/core/Paper';
+
 export const ViewTransaction = ({...props}) => {
     const {bill}=props.location.state
 
     return (
         <div>
             <PageHeader> View Transaction</PageHeader>
-            <BillDetailsCard bill={bill}/>
+           
+            <Paper style={{width:'1000px'}}>
             <ReceiptDetailsCard bill={bill}/>
+            </Paper>
         </div>
     )
 }
