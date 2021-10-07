@@ -138,9 +138,9 @@ return (
       <img alt="logo" src={logo}/>
       <PageHeader>Sign In</PageHeader>
     
-        <TextField id="email" label="Email" onChange={(e)=>setEmail(e.target.value)} variant="outlined" />
+        <TextField style={{width:'300px'}} id="email" label="Email" onChange={(e)=>setEmail(e.target.value)} variant="outlined" />
 
-        <FormControl variant="outlined">
+        <FormControl  style={{width:'300px'}}  variant="outlined">
           <InputLabel  variant="outlined" htmlFor="password">Password</InputLabel>
 
           <OutlinedInput id="password" type={password.showPassword ? "text" : "password" } onChange={handlePasswordChange("password")} 

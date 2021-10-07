@@ -229,6 +229,9 @@ const Registration = () => {
      const goToSignIn=(event)=>{
       history.push('/signin');
      }
+     const callSignUp=(event)=>{
+       
+     }
      return (
       <div className={classes.root}>
       <Grid  container direction="column" justifyContent="space-evenly"  style={{marginLeft:"5px", marginTop:"50px"}} alignItems="center">
@@ -247,14 +250,14 @@ const Registration = () => {
 
          
      
-        <TextField id="token" style={{ margin: 8, width: '30ch'}}    label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
+        <TextField id="token" style={{ margin: 8, width: '40ch'}}    label="Token" value={token} onChange={(e)=>setToken(e.target.value)}  variant="outlined"/>
 
        
-        <TextField id="email" style={{ margin: 8, width: '30ch'}}   label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
+        <TextField id="email" style={{ margin: 8, width: '40ch'}}   label="Email" value={userInfo.email} onChange={onChangeEmail}  variant="outlined"/>
         
         
 
-        <FormControl variant="outlined">
+        <FormControl onKeyDown={callSignUp}  style={{ margin: 8, width: '40ch'}} variant="outlined">
         <InputLabel htmlFor="password">Password</InputLabel>
   
           <OutlinedInput   id="password" type={password.showPassword ? "text" : "password"} onChange={handlePasswordChange("password")}
