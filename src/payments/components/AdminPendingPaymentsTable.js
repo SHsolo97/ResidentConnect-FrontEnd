@@ -57,7 +57,7 @@ if (b[orderBy]
   { id: 'period', numeric: false, disablePadding: false, label: 'Period' },
   { id: 'category', numeric: false, disablePadding: false, label: 'Type' },
   { id: 'aptnum', numeric: false, disablePadding: false, label: 'Apartment' },
-  { id: 'amt', numeric: false, disablePadding: false, label: 'Amount' },
+  { id: 'totamt', numeric: false, disablePadding: false, label: 'Amount' },
   { id: 'dueat', numeric: false, disablePadding: false, label: 'Due At' },
   { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
   { id: 'action', numeric: false, disablePadding: false, label: 'Action' },
@@ -178,7 +178,7 @@ if (b[orderBy]
               <TableCell align="left">{row.period}</TableCell>
               <TableCell align="left">{row.category.capitalize()}</TableCell>
               <TableCell align="left">{row.aptnum}</TableCell>              
-              <TableCell align="left"> &#8377; {row.amt.toLocaleString('en-IN')}</TableCell>
+              <TableCell align="left"> &#8377; {row.totamt.toLocaleString('en-IN')}</TableCell>
               <TableCell align="left">{convertDate(row.dueat)}</TableCell>
               <TableCell align="left">
                 <Chip label={row.status.capitalize()}  size='small' style={{backgroundColor:row.status==='due'?'green':'red'}}  />

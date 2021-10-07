@@ -42,15 +42,15 @@ const mapStateToProps = state => {
              transactions_overdue: state.payments.filter(payment=>payment.status==='overdue'),
              totalPaid : state.payments.filter(payment=>payment.status==='paid').reduce(function (a1, payment) {
                 
-                    return a1 + payment.amt;
+                    return a1 + payment.totamt;
               }, 0),
               totalOverdue : state.payments.filter(payment=>payment.status==='overdue').reduce(function (a2, payment) {
                 
-                    return a2 + payment.amt;
+                    return a2 + payment.totamt;
               }, 0),
               totalDue : state.payments.filter(payment=>payment.status==='due').reduce(function (a3, payment) {
                
-                    return a3 + payment.amt;
+                    return a3 + payment.totamt;
               }, 0)
       
     };

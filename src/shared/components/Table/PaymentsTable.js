@@ -53,7 +53,7 @@ export default function CustomTable(props) {
                    <TableCell className={classes.tableCell} key={key}>{prop.period}</TableCell>
                    <TableCell> {prop.category.capitalize()}</TableCell>
                     
-                    <TableCell className={classes.tableCell} key={key}>&#8377; {prop.amt.toLocaleString('en-IN')} </TableCell>
+                    <TableCell className={classes.tableCell} key={key}>&#8377; {prop.totamt.toLocaleString('en-IN')} </TableCell>
                     <TableCell className={classes.tableCell} key={key}>{convertDate(prop.dueat)}</TableCell>
 
                     <TableCell align="left">

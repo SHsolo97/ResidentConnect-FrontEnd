@@ -46,7 +46,7 @@ export const CreatePayment = ({...props}) => {
             paymentdata['communityname']=props.community.name;
             paymentdata['apartmentid']=apartment._id;
             paymentdata['aptnum']=apartment.aptnum;
-            
+            paymentdata['totamt']=data.amt;
             paymentsdata.push(paymentdata);
         })
         //console.log(paymentsdata);

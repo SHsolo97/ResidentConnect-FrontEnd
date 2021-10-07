@@ -41,11 +41,11 @@ return (
       <Field id="amt" name="amt" style={{ marginTop: 34, width: '35ch'}}  component={renderTextField} label="Amount" variant="outlined" />
       <div style={{ marginTop: 34, width: '35ch'}} >
       <Field    name="period" views={['year', 'month']}
-          label="Payment Period"   maxDate={new Date()} component={renderDateField} variant="outlined" />
+          label="Payment Period"   component={renderDateField} variant="outlined" />
     </div>
     <div style={{ marginTop: 34, width: '35ch'}} >
       <Field   name="dueat"  
-          label="Due At"  minDate={new Date()} component={renderDateField} variant="outlined" />
+          label="Due At"   component={renderDateField} variant="outlined" />
     </div>
     
  
