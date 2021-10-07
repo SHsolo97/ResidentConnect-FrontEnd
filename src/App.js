@@ -42,7 +42,6 @@ import { ViewClassified } from './classifieds/pages/ViewClassified';
 import { PostAd } from './buyandsell/pages/PostAd';
 import { AddFacility } from './facilitybooking/pages/AddFacility';
 import {AddEvent} from "./eventmgmt/pages/addEvent";
-import {VIewEvent} from "./eventmgmt/pages/viewEvent";
 
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';

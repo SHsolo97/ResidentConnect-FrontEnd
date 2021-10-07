@@ -1,8 +1,8 @@
 import React from 'react'
 import EventFilter from '../components/eventFilter'
-import EventsList from "../components/localEvents"
+import EventsList from "../components/EventsList"
 import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { useCommunity } from '../../context/community.context';
 import { useProfile } from '../../context/profile.context';

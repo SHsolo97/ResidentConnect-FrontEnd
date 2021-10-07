@@ -1,25 +1,24 @@
 import React, {useEffect, useState} from "react";
 import { useHistory } from 'react-router-dom';
 import EventCard from "./EventCard.js"
-import axios from "axios";
-
+import eventAPI from '../../misc/axios-calls/eventAPI';
 const FilteredEventsList= (props) =>{
   const [events,setEvents]=useState([]);
   const history = useHistory();
-  useEffect( function effectfunction() { async function getEventDetails(){ 
+  const getEventDetails=async(City,Type,Category)=>{ 
    
  
     // eslint-disable-next-line no-use-before-define
-    var apiBaseUrl = "http://localhost:4003/api/events/allevents/search";
+    var apiBaseUrl = "/events/allevents/search";
       
       let eventslist=[];
-      await axios.get(apiBaseUrl)
+      await eventAPI.get(apiBaseUrl)
           .then(function (response) {
               if (response.status === 200) {
                   eventslist=response.data.events;
                   console.log(eventslist);
                   const filteredEvents=eventslist.filter(eventslist =>{
-                    return ((eventslist.city===(props.City) || eventslist.mode===(props.Type)) || eventslist.category===(props.Category) );
+                    return ((eventslist.city===(City) || eventslist.mode===(Type)) || eventslist.category===(Category) );
                   })
                   setEvents(filteredEvents);
 
@@ -37,9 +36,12 @@ const FilteredEventsList= (props) =>{
             console.log(error);
         });
       }
-      getEventDetails();          
- 
-},[events]);
+
+      useEffect(() => {
+        getEventDetails(props.City,props.Type,props.Category);   
+        
+      }, [props.City,props.Type,props.Category])
+  
 return( 
 
         <section className="localEvents">

@@ -3,32 +3,26 @@ import { orange } from '@material-ui/core/colors';
 import { useHistory } from 'react-router-dom';
 import EventCard from "./EventCard.js"
 import axios from "axios";
+import eventAPI from '../../misc/axios-calls/eventAPI';
 
-const EventsList= (props) =>{
+const EventsList= ({...props}) =>{
   const [events,setEvents]=useState([]);
   const history = useHistory();
  
   
   const communityid=props.cid;
- useEffect( function effectfunction() { async function getEventDetails(){ 
-   
+  const getEventDetails= async()=>{
+    var apiBaseUrl =null;
+    if(props.link==="community")  
+        apiBaseUrl = `/events/${props.link}/${communityid}`; 
+    else if(props.link==="city")
+        apiBaseUrl = `/events/${props.link}/${props.cname}`;
+    else 
+        apiBaseUrl = `/events/${props.link}/${props.hostid}`;
  
-    // eslint-disable-next-line no-use-before-define
-   
-    if(props.link==="community"){
-    console.log(`communityid : ${communityid}`);
-   
-    var apiBaseUrl = "http://localhost:4003/api/events/"+props.link+"/"+communityid;
- }
- else if(props.link==="city"){
-  var apiBaseUrl = "http://localhost:4003/api/events/"+props.link+"/"+props.cname;
- }
- else {
-  var apiBaseUrl = "http://localhost:4003/api/events/"+props.link+"/"+props.hostid;
- }
       
       let eventslist=[];
-      await axios.get(apiBaseUrl)
+      await eventAPI.get(apiBaseUrl)
           .then(function (response) {
               if (response.status === 200) {
                   eventslist=response.data.events;          
@@ -47,8 +41,13 @@ const EventsList= (props) =>{
             console.log(error);
         });
       }
-      getEventDetails();          
+  
+  useEffect(() => {
+   
  
+      getEventDetails();          
+     // eslint-disable-next-line no-use-before-define   
+
 },[]);
 return(
         <section className="localEvents">
