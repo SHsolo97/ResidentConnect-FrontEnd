@@ -2,7 +2,6 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
 import { useState,useEffect } from 'react';
-import axios from "axios";
 import ContactCard from '../components/ContactCard';
 import { PageHeader } from '../../shared/components/PageHeader';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -10,6 +9,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { orange } from '@material-ui/core/colors';
 import { useHistory } from 'react-router-dom';
 import { useCommunity } from '../../context/community.context';
+import contactsAPI from '../../misc/axios-calls/contactsAPI';
 
 const AdminContacts = () => {
     const [contacts,setContacts]=useState([]);
@@ -25,14 +25,14 @@ const AdminContacts = () => {
     
       //console.log(`communityid : ${communityid}`);
      
-      var apiBaseUrl = "http://localhost:4001/api/contacts/";
+      var apiBaseUrl = "/contacts/";
        
         
         var data = {
             "communityid": communityid          
         }
         let contactslist=[];
-        await axios.post(apiBaseUrl, data )
+        await contactsAPI.post(apiBaseUrl, data )
             .then(function (response) {
                 if (response.status === 200) {
                     //alert("Registration successfull.Login Again");
