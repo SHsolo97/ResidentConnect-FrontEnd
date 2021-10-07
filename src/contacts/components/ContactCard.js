@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import {useProfile} from '../../context/profile.context';
 
 const useStyles = makeStyles({
   card: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles({
 
 export default function ContactCard({children,...props}) {
   const classes = useStyles();
+  const {user}=useProfile();
  const contactdetails=props.contactdetails;
  //console.log(contactdetails);
   return (
@@ -39,8 +41,8 @@ export default function ContactCard({children,...props}) {
   direction="row"
   justifyContent="flex-end"
   alignItems="baseline"
->     <EditIcon/>
-      <DeleteIcon />
+>     {user.type==='admin' && <EditIcon/>}
+      {user.type==='admin' && <DeleteIcon />}
       </Grid>
   
         <Typography variant="h5" component="h2">
