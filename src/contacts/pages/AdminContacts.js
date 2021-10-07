@@ -15,16 +15,17 @@ const AdminContacts = () => {
     const [contacts,setContacts]=useState([]);
     const history = useHistory();
    
-    const community=useCommunity();
+    const {community}=useCommunity();
     const communityid=community._id;
-   useEffect( function effectfunction() { async function getcontactdetails(){ 
+   
+    const getContactdetails=async ()=>{ 
      
    
       // eslint-disable-next-line no-use-before-define
      
     
       //console.log(`communityid : ${communityid}`);
-     
+
       var apiBaseUrl = "/contacts/";
        
         
@@ -35,14 +36,11 @@ const AdminContacts = () => {
         await contactsAPI.post(apiBaseUrl, data )
             .then(function (response) {
                 if (response.status === 200) {
-                    //alert("Registration successfull.Login Again");
-                    //console.log(response.data.contacts);
-                    
+                   
                     contactslist=response.data.contacts;
-                 //  console.log(contactslist);
+             
                     
                     setContacts(contactslist);
-                   // console.log(`contacts: ${contacts}`);
 
                 }
                
@@ -58,11 +56,11 @@ const AdminContacts = () => {
                 console.log(error);
             });
           }
-          getcontactdetails();
-
-               
-     
-    },[communityid]);
+          
+          useEffect(() => {
+            getContactdetails();
+         
+        }, [])
     const createContactHandler=()=>{
         history.push('CreateContact');
     }
