@@ -146,7 +146,7 @@ export const BillCards = ({...props}) => {
     {props.transactions.length===0?
     <div className={classes.cardAmount} >  &#8377; 0</div>
     :
-    <div className={classes.cardAmount} >  &#8377; {props.transactions[0].amt.toLocaleString('en-IN')}</div>
+    <div className={classes.cardAmount} >  &#8377; {props.transactions[0].totamt.toLocaleString('en-IN')}</div>
     }
      {props.transactions.length!==0 &&  <Link  component="button"
       variant="body2" onClick={()=>{
@@ -165,15 +165,15 @@ export const BillCards = ({...props}) => {
 }
 const mapStateToProps = state => {
   function sortByPaidDate(a,b){  
-    var dateA = new Date(a.paidat).getTime();
-    var dateB = new Date(b.paidat).getTime();
+    var dateA = new Date(a.paidon).getTime();
+    var dateB = new Date(b.paidon).getTime();
     return dateA > dateB ? 1 : -1;  
 }; 
     return {    
       overDuePayments :  state.payments.filter(payment=>payment.status==='overdue'),
        totalOverdue :  state.payments.filter(payment=>payment.status==='overdue').reduce(function (accumulator, payment) {
         if(payment.status==='overdue')
-            return accumulator + payment.amt;
+            return accumulator + payment.totamt;
         else
             return 0;
       }, 0),
@@ -181,7 +181,7 @@ const mapStateToProps = state => {
 
       totalDue :  state.payments.filter(payment=>payment.status==='due').reduce(function (accumulator, payment) {
         if(payment.status==='due')
-            return accumulator + payment.amt;
+            return accumulator + payment.totamt;
         else
             return 0;
       }, 0),

@@ -21,7 +21,7 @@ export const BillDetailsCard = ({...props}) => {
         </Typography>
         <br/>    <br/>    <br/>
         <Typography variant="body2" component="span">
-        <span style={{fontWeight:'bold'}}> Amount: </span>&#8377; {props.bill.amt.toLocaleString('en-IN')}
+        <span style={{fontWeight:'bold'}}> Amount: </span>&#8377; {props.bill.totamt.toLocaleString('en-IN')}
         <br/>    <br/>    <br/>
             
             </Typography>
