@@ -5,6 +5,7 @@ import React, { createContext, useEffect, useState, useContext } from "react";
 import { useProfile } from "./profile.context";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
+import buyAndSellAPI from '../misc/axios-calls/buyAndSellAPI';
 
 const AdvertsContext = createContext();
 
@@ -16,10 +17,10 @@ export const AdvertsProvider = ({ children }) => {
     const creator=user._id;
  
     const getAds=async()=>{
-        const apiBaseUrl = `http://localhost:4004/api/adverts`  
+        const apiBaseUrl = `/adverts`  
         const searchQuery={creator:creator}
         //console.log(searchQuery);
-        await axios.post(apiBaseUrl,searchQuery )
+        await buyAndSellAPI.post(apiBaseUrl,searchQuery )
              .then(function (response) {
                  if (response.status === 200)
     
