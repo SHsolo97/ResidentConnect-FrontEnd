@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import { useHistory } from 'react-router-dom';
 import EventCard from "./EventCard.js"
 import eventAPI from '../../misc/axios-calls/eventAPI';
+import Carousal from 'react-material-ui-carousel'
+import {Button} from '@material-ui/core';
 const FilteredEventsList= (props) =>{
   const [events,setEvents]=useState([]);
   const history = useHistory();
@@ -41,17 +43,38 @@ const FilteredEventsList= (props) =>{
         getEventDetails(props.City,props.Type,props.Category);   
         
       }, [props.City,props.Type,props.Category])
-  
+      var n=3;
+      if(events.length<3){
+        n=events.length;
+      }
+      const items=[];
+      for (let i = 0; i < events.length; i += n) {
+        if (i % n === 0) {
+          items.push(
+            events.slice(i,i+n).map((da,index)=>{
+              return (<div className="eventList" style={{ display: "inline-block"  }}><EventCard key={index.toString()} eventDetails={da} /></div>);
+            })
+          )
+        }
+      }
 return( 
 
         <section className="localEvents">
           <h2 style={{ color:"#3f51b5" }} >{props.heading} </h2>
           <div className="eventList" style={{ display: "flex", flexDirection: "row",   }}>
-          { events.map(event=>(
-                   <div>
-                         <EventCard eventDetails={event} Category={props.Category} Type={props.Type} City={props.City} />
-                   </div>
-            ))}
+          <Carousal NavButton={({onClick, className, style, next, prev}) => {
+        // Other logic
+
+        return (
+            <Button onClick={onClick} className={className} style={style}>
+                {next && "Next"}
+                {prev && "Previous"}
+            </Button>
+        )
+    }} 
+> 
+          {items}
+            </Carousal>
           </div>
         </section>
     );

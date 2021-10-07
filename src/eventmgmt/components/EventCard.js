@@ -20,7 +20,7 @@ import events from "../allevents.js"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 400,
   },
   media: {
     height: 0,
