@@ -17,7 +17,7 @@ deploy:
   region: 'ap-south-1'
   app: 'ResidentsConnect'
   env: 'ResidentsConnect-env'
-  bucket_name: 'elasticbeanstalk-us-south-1-860905879962'
+  bucket_name: 'elasticbeanstalk-us-south-1-860905879962-efg'
   bucket_path: 'ResidentsConnect'
   on:
     branch: main
