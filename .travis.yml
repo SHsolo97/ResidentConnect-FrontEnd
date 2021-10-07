@@ -12,13 +12,14 @@ before_install:
 
 script:
   - docker run -e CI=true agni1984/rc-frontend npm run test
-#   provider: elasticbeanstalk
-#   region: 'ap-south-1'
-#   app: 'docker'
-#   env: 'docker-env'
-#   bucket_name: 'elasticbeanstalk-us-south-1-860905879962'
-#   bucket_path: 'docker'
-#   on:
-#     branch: main
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-south-1'
+  app: 'ResidentsConnect'
+  env: 'ResidentsConnect-env'
+  bucket_name: 'elasticbeanstalk-us-south-1-860905879962'
+  bucket_path: 'ResidentsConnect'
+  on:
+    branch: main
+  access_key_id: 'AKIA4Q4P5HGNKI65EYFG'
+  secret_access_key: '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'
