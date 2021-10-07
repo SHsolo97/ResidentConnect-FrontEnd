@@ -109,7 +109,7 @@ const setAddressLine = (event) => {
     });
   }
 const addEvents = async (eventData) => {
-    var apiBaseUrl = `/create`
+    var apiBaseUrl = `/events/create`
 
     await eventAPI.post(apiBaseUrl, eventData)
       .then(function (response) {
