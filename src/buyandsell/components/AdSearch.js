@@ -31,7 +31,7 @@ export const AdSearch = ({...props}) => {
                  if (response.status === 200)
                 {           
                   
-                    console.log(response.data.subcategories);
+                    //console.log(response.data.subcategories);
                     setSubCategories(response.data.subcategories);
                 }
            
@@ -67,7 +67,7 @@ export const AdSearch = ({...props}) => {
         <InputLabel id="label-category">Category</InputLabel>
         <Select id="category"  value={props.category}  onChange={(e)=>{props.setCategory(e.target.value)}} label="Category">
         {categories.map((category)=>            
-          <MenuItem key={category.id} name={category.category} value={category._id}>{category.category}</MenuItem>
+          <MenuItem key={category._id} name={category.category} value={category._id}>{category.category}</MenuItem>
         )}
           </Select>
       </FormControl>
@@ -75,7 +75,7 @@ export const AdSearch = ({...props}) => {
         <InputLabel id="label-subcategory">Sub Category</InputLabel>
         <Select id="subcategory" value={props.subcategory} onChange={(e)=>{props.setSubCategory(e.target.value)}} label="Sub Category">
         {subCategories.map((subcategory)=>            
-          <MenuItem key={subcategory.id} name={subcategory.subcategory} value={subcategory._id}>{subcategory.subcategory}</MenuItem>
+          <MenuItem key={subcategory._id} name={subcategory.subcategory} value={subcategory._id}>{subcategory.subcategory}</MenuItem>
         )}
         </Select>
       </FormControl>

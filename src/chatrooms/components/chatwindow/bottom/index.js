@@ -39,7 +39,7 @@ const chatId = useCurrentRoom(v => v.id);
 
 const onInputChange = (event) => {
 setInput(event.target.value);
-console.log(input);
+//console.log(input);
 };
 const onSendClick = async () => {
 if (input.trim() === '') {

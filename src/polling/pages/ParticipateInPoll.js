@@ -3,8 +3,7 @@ import {PrimaryButton}from "../../shared/components/PrimaryButton";
 import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { SectionHeader } from "../../shared/components/SectionHeader";
+
 import { useProfile } from "../../context/profile.context";
 import pollingAPI from '../../misc/axios-calls/pollingAPI';
 import Radio from '@mui/material/Radio';
@@ -28,7 +27,7 @@ export const ParticipateInPoll = ({...props}) => {
         await pollingAPI.put(apiBaseUrl, data)
           .then(function (response) {
             if (response.status === 200) {    
-              console.log(response.data);
+              ////console.log(response.data);
               setPoll(response.data);
               setIsAnswered(true);
              
@@ -44,13 +43,13 @@ export const ParticipateInPoll = ({...props}) => {
       if(option!=null)
       {
       const selectedOption = options.filter(o=>o._id===option)[0];
-      console.log(selectedOption);
+      //console.log(selectedOption);
       const data={};
       data['answeredby']=user._id;
       data['totalvotes']=totalvotes+1;
       data['optionid']=option;
       data['selectedoptionvotes']=selectedOption.votes+1;
-      console.log(data);
+      //console.log(data);
       editPoll(data);
       }
     }

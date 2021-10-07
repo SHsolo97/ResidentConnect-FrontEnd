@@ -9,6 +9,7 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
+import {Progress} from '../../shared/components/Progress';
 
 
 const useStyles = makeStyles(styles);

@@ -41,6 +41,8 @@ import { AddClassified } from './classifieds/pages/AddClassified';
 import { ViewClassified } from './classifieds/pages/ViewClassified';
 import { PostAd } from './buyandsell/pages/PostAd';
 import { AddFacility } from './facilitybooking/pages/AddFacility';
+import {AddEvent} from "./eventmgmt/pages/addEvent";
+import {VIewEvent} from "./eventmgmt/pages/viewEvent";
 
 import { CommunityProvider } from './context/community.context';
 import { ApartmentProvider } from './context/apartment.context';
@@ -93,7 +95,8 @@ function App() {
    <PrivateRoute path="/dashboardOR" component={ResidentDashboard} />
    <PrivateRoute path="/dashboardOA" component={AdminDashboard} />
    <PrivateRoute path="/buyandsell" component={BuyAndSell} />
-   <PrivateRoute path="/events" component={Events} /> 
+   <PrivateRoute path="/events" component={Events} />
+   <PrivateRoute path="/addEvent" component={AddEvent} />   
    <PrivateRoute path="/classifieds" component={Classifieds} />
    <PrivateRoute path="/carpolling" component={CarPooling} />
    <PrivateRoute path="/apartments" component={Community} />

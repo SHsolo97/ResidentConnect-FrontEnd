@@ -20,7 +20,7 @@ export const Classifieds = () => {
    
     const history=useHistory();
     const {community}=useCommunity();
-    console.log(community);
+   // console.log(community);
     const communityid=community._id;
     const [searchQuery,setSearchQuery]=React.useState({communityid});
     const goToClassified=()=>
@@ -29,7 +29,7 @@ export const Classifieds = () => {
         //history.push('/samplePage');
     }
     const setSearchData=(data)=>{
-        console.log(data);
+        //console.log(data);
         setSearchQuery(data);
     }
     return (

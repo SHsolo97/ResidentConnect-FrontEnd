@@ -14,6 +14,7 @@ export const ViewAnnouncementModal = ({...props}) => {
     
     
     return (
+      
         <Dialog  maxWidth='md' fullWidth open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
           <SectionHeader>  {title}</SectionHeader>

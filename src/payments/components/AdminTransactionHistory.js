@@ -13,7 +13,8 @@ export const AdminTransactionHistory = ({...props}) => {
      useEffect(() => {
          props.fetchPaymentHistoryOfCommunity(communityid);
          
-     }, [])
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [communityid])
      return (
         
         <div>

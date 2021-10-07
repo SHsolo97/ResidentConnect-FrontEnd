@@ -73,7 +73,7 @@ const CommunityRegistration = () => {
                if (response.status === 201)
               {           
                 
-                  console.log(response.data);
+                  //console.log(response.data);
                   const community=response.data;
                   sendTokentoEmail(email,community.token);
                
@@ -90,7 +90,7 @@ const CommunityRegistration = () => {
      
      const onSignup=()=>{  
        const data={name,builder}
-       console.log(data);
+       //console.log(data);
        createCommunity(data);
 
      }

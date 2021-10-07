@@ -27,7 +27,7 @@ export const CreateAnnouncementModal = ({...props}) => {
           .then(function (response) {
             if (response.status === 201) {
     
-              console.log(response.data);
+              //console.log(response.data);
               props.handleClose();
             }
     
@@ -44,7 +44,7 @@ export const CreateAnnouncementModal = ({...props}) => {
         const data={...formValues};
         data['createdby']=user._id;
         data['communityid']=community._id;
-        console.log(data);
+       // console.log(data);
         createAnnouncement(data);
     }
     

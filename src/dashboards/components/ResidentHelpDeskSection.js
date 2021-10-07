@@ -4,8 +4,6 @@ import CardHeader from "../../shared/components/cards/CardHeader.js";
 import CardBody from "../../shared/components/cards/CardBody.js";
 import styles from "../styles/dashboardStyle.js";
 import { makeStyles } from "@material-ui/core/styles";
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';

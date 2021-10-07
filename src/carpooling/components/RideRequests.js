@@ -5,6 +5,7 @@ import {fetchReceivedRideRequestsDetails,fetchRideRequestsByRideOwner} from '../
 import { useProfile } from '../../context/profile.context';
 import RideRequestCard from './RideRequestCard';
 import carPoolingAPI from '../../misc/axios-calls/carPoolingAPI';
+import {Progress} from '../../shared/components/Progress';
 
 export const RideRequests = ({...props}) => {
     const {user} =useProfile();
@@ -19,7 +20,7 @@ export const RideRequests = ({...props}) => {
         await carPoolingAPI.put(apiBaseUrl, {status:'rejected',rejectionreason:rejectReason})
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
+             // console.log(response.data);
               props.fetchRideRequestsByRideOwner(user._id);
 
             }
@@ -35,7 +36,7 @@ export const RideRequests = ({...props}) => {
         await carPoolingAPI.put(apiBaseUrl, {status:'approved'})
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
+              //console.log(response.data);
               props.fetchReceivedRideRequestsDetails(user._id);
 
             }
@@ -46,7 +47,11 @@ export const RideRequests = ({...props}) => {
           });
     }
     const renderRideRequestCard=()=>{
-            return props.ridereqs.map(ridereq=>
+      if(props.ridereqs.length===0)
+      {
+          return <div style={{color:'red',fontSize:'32px', marginTop:'150px',marginLeft:'400px'}}> No Ride Request</div>
+      }
+       return props.ridereqs.map(ridereq=>
                 {
               
                         return  <RideRequestCard rejectRide={rejectRide}  approveRide={approveRide} ridereq={ridereq} />
@@ -55,9 +60,7 @@ export const RideRequests = ({...props}) => {
              ) }
     return (
         <div>
-      {props.ridereqs!=null &&
-
-        renderRideRequestCard()
+      {props.ridereqs===null ?<Progress/>:renderRideRequestCard()
       }
       </div>
     )

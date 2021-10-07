@@ -22,6 +22,7 @@ import { uploadImagesToFireStorage } from '../../misc/firestore';
 import { CustomTextField } from '../../shared/components/CustomTextField';
 import buyAndSellAPI from '../../misc/axios-calls/buyAndSellAPI';
 import { useCommunity } from '../../context/community.context';
+import {addDays} from '../../misc/helpers';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,7 @@ export const PostAd = () => {
         
             communityid :communityid,
             creator:user._id,
+            expiredat:addDays(new Date(),15),
             title: '',
             description:'',
             category: 'Autos',
@@ -119,7 +121,7 @@ export const PostAd = () => {
                  if (response.status === 200)
                 {           
                   
-                    console.log(response.data);
+                   // console.log(response.data);
                     return response.data;
                  
                 }
@@ -156,12 +158,12 @@ export const PostAd = () => {
             return{...prevState,price:tempPrice}});   
       }
       const addFile=(file,placeholder)=>{
-        console.log('inside addFile')
-        console.log(file);
+       // console.log('inside addFile')
+        //console.log(file);
         files[placeholder]=file;
 
          
-            console.log(files);
+        //    console.log(files);
         
       }
       const handleCancel=(event)=>

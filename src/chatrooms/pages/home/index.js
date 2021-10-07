@@ -15,7 +15,7 @@ const canRenderSideBar = isDesktop || isExact;
 //const location = useLocation();
 const [currentRoomId,setCurrentRoomId]=React.useState(null);;
 const setCurrentRoom=(roomid)=>{
-console.log(roomid);
+//console.log(roomid);
 setCurrentRoomId(roomid);
 }
 return (

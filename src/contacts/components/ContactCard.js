@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 export default function ContactCard({children,...props}) {
   const classes = useStyles();
  const contactdetails=props.contactdetails;
- console.log(contactdetails);
+ //console.log(contactdetails);
   return (
     <Card className={classes.card}>
       <CardContent>

@@ -1,4 +1,4 @@
-import React,{useRef} from 'react'
+import React from 'react'
 import { useModelState } from '../../misc/custom-hooks';
 import {PrimaryButton}from '../../shared/components/PrimaryButton'
 import  CreatePolling  from './CreatePolling'

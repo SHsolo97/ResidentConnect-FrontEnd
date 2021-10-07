@@ -21,7 +21,7 @@ export const MyRides = ({...props}) => {
         await carPoolingAPI.put(apiBaseUrl, {status:'rejected',rejectionreason:'Ride Cancelled'})
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
+             // console.log(response.data);
             }
           })
           .catch(function (error) {
@@ -31,14 +31,14 @@ export const MyRides = ({...props}) => {
     }
 
     const cancelRide=async(_id)=>{
-        console.log('cancel ride');
+       // console.log('cancel ride');
    
         var apiBaseUrl = `/carpoolings/rides/${_id}`;
     
         await carPoolingAPI.put(apiBaseUrl, {status:'cancelled'})
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
+             // console.log(response.data);
               props.fetchRideRequestsByRideId(_id);
               if(props.ridereqs!=null)
               {
@@ -58,12 +58,21 @@ export const MyRides = ({...props}) => {
            
           });
     }
+    const renderRides=()=>{
+      if(props.rides.length===0)
+      {
+        return <div style={{color:'red',fontSize:'32px', marginTop:'150px',marginLeft:'400px'}}> No Rides</div>
+      }
+      return(
+        props.rides.map(ride=>{
+          return  <MyRideCard key={ride._id} ride={ride} cancelRide={cancelRide}/>
+     })
+
+      )
+    }
     return (
         <div>
-         { props.rides !=null && 
-         props.rides.map(ride=>{
-                     return  <MyRideCard key={ride._id} ride={ride} cancelRide={cancelRide}/>
-                })}
+         { props.rides !=null && renderRides() }
         </div>
     )
 }

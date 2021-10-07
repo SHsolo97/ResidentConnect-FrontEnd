@@ -45,12 +45,12 @@ export const ResidentApartmentDetails = () => {
     const history=useHistory();
     const {apartment}=useApartment();
     const {community}=useCommunity();
-    console.log(community);
+    //console.log(community);
     const [status,setStatus]= React.useState(apartment.status);
 
       
 const editApartment=async()=>{
-    console.log(status);
+    //console.log(status);
     const data={status : status};
     var apiBaseUrl = `/community/apartment/${apartment.id}`  
     await communityAPI.put(apiBaseUrl,data )
@@ -58,7 +58,7 @@ const editApartment=async()=>{
              if (response.status === 200)
   
             {
-                console.log(response.data);
+                //console.log(response.data);
                
                 history.push('/dashboardOR');
                

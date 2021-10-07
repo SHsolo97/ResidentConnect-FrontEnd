@@ -29,7 +29,7 @@ export const  MyRideRequestCard=({...props})=> {
 } 
 
  const { isOpen, open, close } = useModelState();
- const {_id,creator,stoppoints,source,ridedatetime,destination,seats,amt}=props.ridereq.ride;
+ const {stoppoints,source,destination}=props.ridereq.ride;
 
  const startAddress=`${source.addressline}, ${source.area}, ${source.city},${source.state},${source.pincode}`;
  const destAddress=`${destination.addressline}, ${destination.area}, ${destination.city},${destination.state},${destination.pincode}`
@@ -39,7 +39,7 @@ export const  MyRideRequestCard=({...props})=> {
  const zoom= 6;
 let center={lat:0,lng:0};
 const openRouteModel=()=>{
- console.log(origin);
+ //console.log(origin);
  center=getGeoOrdinates({address:origin});
 open();
 }
@@ -155,8 +155,8 @@ return (
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps.ridereq.owner);
-  console.log(state.users);
+ // console.log(ownProps.ridereq.owner);
+  //console.log(state.users);
   return { 
    
     

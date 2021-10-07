@@ -14,8 +14,9 @@ import PollingSection from '../components/PollingSection';
 import GridItem from "../../shared/components/Grid/GridItem.js";
 import GridContainer from "../../shared/components/Grid/GridContainer.js";
 import  AnnouncementSection from '../components/AnnouncementSection';
-
-
+import { Button,Grid } from '@material-ui/core';
+import DummyAdminDashboard from './DummyAdminDashboard';
+import {useModelState} from '../../misc/custom-hooks';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,15 +28,34 @@ const AdminDashboard = () => {
 
 const {user}=useProfile();
 const {community}=useCommunity();
-const communityid=community._id;
-const {carpooling,facility,maintenance,polling,visitor}=community.paidservices;
-return (
+const { isOpen, open, close } = useModelState();
 
-<>
+const renderData=()=>{
+
+  if(user===null || community==null )
+  {
+    return (null);
+  }
+  const communityid=community._id;
+
+  const {facility,maintenance,polling}=community.paidservices;
+
+  return(
   <Provider store={dashboardstore}>
     
-
+    <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="center"
+      >
+       <Button onClick={open}> For Developers </Button>
+       
+      {isOpen && 
+      <DummyAdminDashboard handleClose={close} open={open}/>}
+      </Grid>
     <UserInfo/>
+   
     <GridContainer>
       <GridItem xs={12} sm={12} md={6}>
         <UnitsAndUserSection communityid={communityid} />
@@ -62,7 +82,12 @@ return (
 
       
     </GridContainer>
-  </Provider>
+  </Provider>)
+}
+return (
+
+<>
+  {renderData()}
 </>
 )
 }

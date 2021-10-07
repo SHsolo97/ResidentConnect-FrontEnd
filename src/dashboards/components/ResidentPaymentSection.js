@@ -2,10 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { fetchPaymentOfApartment } from '../actions';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import GroupsIcon from '@mui/icons-material/Groups';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+
 import Card from "../../shared/components/cards/Card.js";
 import CardHeader from "../../shared/components/cards/CardHeader.js";
 import CardBody from "../../shared/components/cards/CardBody.js";
@@ -21,8 +18,11 @@ const ResidentPaymentSection =({...props}) =>{
   const classes=useStyles();
 
 React.useEffect(() => {
+  if(apartment===null) 
+       return;
+      console.log(apartment);
 props.fetchPaymentOfApartment(apartment._id);
-console.log(props.payments);
+//console.log(props.payments);
 }, [apartment])
 
 // eslint-disable-next-line no-extend-native
@@ -59,7 +59,7 @@ return (
 }
 const mapStateToProps = state => {
 return {
-payments: state.payments.filter(payment=>payment.status!='paid')
+payments: state.payments.filter(payment=>payment.status!=='paid')
 
 };
 };

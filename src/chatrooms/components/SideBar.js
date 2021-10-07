@@ -1,6 +1,6 @@
 import { Divider, Paper } from '@material-ui/core';
 import React, { useRef, useState, useEffect }  from 'react';
-import { SectionHeader } from '../../shared/components/SectionHeader';
+
 import {useProfile} from '../../context/profile.context';
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
@@ -15,7 +15,7 @@ const SideBar = ({...props}) => {
     const [myRoomsOnly, setMyRoomsOnly] = React.useState(true);
 
     const setCurrentRoom=(roomid)=>{
-        console.log(roomid);
+        //console.log(roomid);
         props.setCurrentRoomId(roomid);
     }
     useEffect(() => {

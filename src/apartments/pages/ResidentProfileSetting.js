@@ -190,14 +190,14 @@ break;
 }
 
 const editUser=async(profileData)=>{
-  console.log(user);
+  //console.log(user);
   var apiBaseUrl = `/users/${user._id}`  
   await userAPI.put(apiBaseUrl,profileData )
        .then(function (response) {
            if (response.status === 200)
 
           {
-              console.log(response.data);
+              //console.log(response.data);
               setUser(response.data);
               if (user.type==='resident')              
                 history.push('/apartmentDetailsR');
@@ -215,8 +215,8 @@ const editUser=async(profileData)=>{
 
 const handleSubmit=async (event)=>{
 event.preventDefault();
-console.log(formInput);
-console.log(avatarImage);
+//console.log(formInput);
+//console.log(avatarImage);
 //history.push('/apartmentDetailsR');
 const fileList=[avatarImage];
 const path=`${communityid}/avatars/${user._id}`;

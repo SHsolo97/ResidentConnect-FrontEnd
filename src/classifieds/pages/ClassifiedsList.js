@@ -8,18 +8,18 @@ class ClassifiedsList extends React.Component {
     constructor(props)
     {
       super(props);
-      console.log(this.props.searchData);
+      //console.log(this.props.searchData);
       this.state = {
             
         searchQuery:this.props.searchData
     }
     }
     componentDidMount() {
-     console.log(this.props.searchData);
+    // console.log(this.props.searchData);
       this.props.fetchClassifieds(this.props.searchData);
     }
     componentDidUpdate(prevProps, prevState) {
-      console.log(this.props.searchData);
+     // console.log(this.props.searchData);
       if (prevProps.searchData !== this.props.searchData) {
         this.props.fetchClassifieds(this.props.searchData);
 
@@ -40,7 +40,7 @@ class ClassifiedsList extends React.Component {
         justifyContent="flex-end"
         alignItems="center"
       >
-        <span style={{fontSize:'32px'}}>{this.props.classifieds.length} results found </span>
+        <span style={{paddingTop:'20px',fontSize:'18px', color:'red'}}>{this.props.classifieds.length} result(s) found </span>
         </Grid>
         { this.props.classifieds.map((classified) => {
        

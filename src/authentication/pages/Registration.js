@@ -88,18 +88,18 @@ const Registration = () => {
                 if (response.status === 200) {           
                     if(userInfo.type==='admin')                    
                     { 
-                      console.log("save community details");
-                      console.log(response.data);
+                      //console.log("save community details");
+                      //console.log(response.data);
                       community=response.data; 
-                        console.log(community);
+                       // console.log(community);
                         
                     }
                     else if(userInfo.type==='resident') 
                     {
-                        console.log("save apartment details");
-                      console.log(response.data);
+                        //console.log("save apartment details");
+                      //console.log(response.data);
                       apartment=response.data; 
-                        console.log(apartment);
+                      //  console.log(apartment);
                 
                     }
                     registerUserwithEmailAndPassword();
@@ -130,13 +130,13 @@ const Registration = () => {
     //     }
     //  }
      const registerUserwithEmailAndPassword=()=>{
-         console.log('Register email in Firebase....');
+         //console.log('Register email in Firebase....');
         auth.createUserWithEmailAndPassword(userInfo.email,password.password)
         .then((userCredential) => {
          
         const user = userCredential.user;
-        console.log(user);
-        console.log(uid);
+       // console.log(user);
+        //console.log(uid);
 
         uid=user.uid;
             createUser();  
@@ -149,8 +149,8 @@ const Registration = () => {
         });
      }
      const createUser=async ()=>{
-        console.log('create userInfo Record...');
-        console.log(community);
+       // console.log('create userInfo Record...');
+       // console.log(community);
         var apiBaseUrl = `/users/create`;
         let userData=null;
         if(userInfo.type==='admin')
@@ -176,13 +176,13 @@ const Registration = () => {
                   createdat:new Date()
             }
         }
-        console.log(userData);
+       // console.log(userData);
         await userAPI.post(apiBaseUrl,userData )
              .then(function (response) {
                  if (response.status === 201) {           
                   
-                  console.log('user is created');
-                  console.log(response.data);
+                //  console.log('user is created');
+                 // console.log(response.data);
                   
                   signOut();
                   history.push('/signin');

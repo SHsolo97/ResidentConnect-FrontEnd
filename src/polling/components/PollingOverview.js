@@ -6,7 +6,7 @@ import PollCircles from './PollCircles';
  class  PollingOverview  extends React.Component{
  
      componentDidMount() {
-       console.log(this.props.userid);
+       //console.log(this.props.userid);
          this.props.fetchPollsByCreator(this.props.userid);
         
      }

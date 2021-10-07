@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BillCircles({...props}) {
     const classes = useStyles();
-    console.log(props.totalPaid);
-    console.log(props.totalDue);
-    console.log(props.totalOverdue);
+    //console.log(props.totalPaid);
+    //console.log(props.totalDue);
+    //console.log(props.totalOverdue);
     const totalpaid=props.totalPaid==null?0:parseInt(props.totalPaid) ;
     const totalDue= (props.totalDue==null?0:parseInt(props.totalDue)) +
     (props.totalOverdue==null?0:parseInt(props.totalOverdue));

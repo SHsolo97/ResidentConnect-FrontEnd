@@ -188,7 +188,7 @@ if (b[orderBy]
               <TableCell align="left">{convertDate(row.dueat)}</TableCell>
               <TableCell align="left">
                 <Chip label={row.status.capitalize()} 
-                size='small' style={{backgroundColor:row.status=='due'?'green':'red'}} />
+                size='small' style={{backgroundColor:row.status==='due'?'green':'red'}} />
 </TableCell>
               <TableCell align="left">
                  <Button  onClick={()=>{

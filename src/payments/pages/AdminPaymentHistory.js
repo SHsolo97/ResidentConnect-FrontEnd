@@ -1,7 +1,6 @@
 import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 
-import { useApartment } from '../../context/apartment.context';
 import AdminTransactionHistory from '../components/AdminTransactionHistory';
 
 import reducers from '../reducers';

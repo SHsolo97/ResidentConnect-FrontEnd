@@ -24,7 +24,7 @@ export const PollResult = ({...props}) => {
         await pollingAPI.put(apiBaseUrl, data)
           .then(function (response) {
             if (response.status === 201) {    
-              console.log(response.data);
+              //console.log(response.data);
              props.handleClose();
             }
     

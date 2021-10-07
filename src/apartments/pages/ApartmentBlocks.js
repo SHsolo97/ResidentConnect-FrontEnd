@@ -24,9 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export const ApartmentBlocks = ({ children, ...props }) => {
 
   const {community,setCommunity}=useCommunity();
-  const {isProgress,setIsProgress}=React.useState(true);
 
-  const communityid = community._id;
   const classes = useStyles();
   const [key, setKey] = React.useState(0);
   const IINTIAL_VALUE = {
@@ -40,11 +38,11 @@ export const ApartmentBlocks = ({ children, ...props }) => {
   }
   const editBlocks = async (blocksToAdd) => {
 
-    var apiBaseUrl = `/community/${communityid}/blocks/edit`
+    var apiBaseUrl = `/community/${community._id}/blocks/edit`
     await communityAPI.put(apiBaseUrl, blocksToAdd)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+          //console.log(response.data);
           setCommunity(response.data);
           props.handleNext();
 
@@ -56,14 +54,14 @@ export const ApartmentBlocks = ({ children, ...props }) => {
 
       });
   }
-  const [isNew, setIsNew] = React.useState([])
-  const [blocks, setBlocks] = React.useState([])
+  const [isNew, setIsNew] = React.useState([]);
+  const [blocks, setBlocks] = React.useState(null);
   const getApartmentBlocks = async () => {
-    var apiBaseUrl = `/community/${communityid}/blocks`
+    var apiBaseUrl = `/community/${community._id}/blocks`
     await communityAPI.get(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data.blocks);
+          //console.log(response.data.blocks);
           const blockList = response.data.blocks;
 
           // eslint-disable-next-line array-callback-return
@@ -71,7 +69,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
             blockList[index] = { ...block, key: index };
             setKey(index + 1);
           });
-          console.log(blockList);
+          //console.log(blockList);
           setBlocks(blockList)
 
 
@@ -94,10 +92,10 @@ export const ApartmentBlocks = ({ children, ...props }) => {
     setBlocks([...blocks, block]);
     setKey(key => key + 1);
     setIsNew([...isNew, true]);
-    console.log(blocks);
+    //console.log(blocks);
   }
   const handleSubmit = (e) => {
-    console.log(blocks);
+    //console.log(blocks);
     let blockdetails = [];
     // eslint-disable-next-line array-callback-return
     blocks.map((block) => {
@@ -108,7 +106,7 @@ export const ApartmentBlocks = ({ children, ...props }) => {
       b['floordetails'] = block['floordetails']
       blockdetails.push(b);
     })
-    console.log(blockdetails);
+    //console.log(blockdetails);
     editBlocks(blockdetails);
    
   }
@@ -133,6 +131,8 @@ export const ApartmentBlocks = ({ children, ...props }) => {
 
   }
   const renderDetails=()=>{
+    if(blocks===null)
+    return(null);
     return( <Grid container direction="column" justifyContent="center" alignItems="center">
     <Grid container direction="row" justifyContent="space-between" alignItems="center"><PageHeader>{children}</PageHeader>
       <PrimaryButton onClick={addRow}>Add Block</PrimaryButton>
@@ -164,7 +164,10 @@ export const ApartmentBlocks = ({ children, ...props }) => {
   return (
     <div>
     {
-      community===null? <Progress/>:renderDetails()
+      (community===null  && blocks===null) ? 
+       <Progress/>
+       :
+       renderDetails()
     }
     </div>
    

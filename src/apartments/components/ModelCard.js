@@ -38,7 +38,7 @@ export default function ModelCard({children,...props}) {
  const {model} = props;
  
  const deleteModel=(event)=>{
-  console.log(`delete ${model._id}`);
+  //console.log(`delete ${model._id}`);
   props.deleteModel(model);
 
   event.preventDefault();

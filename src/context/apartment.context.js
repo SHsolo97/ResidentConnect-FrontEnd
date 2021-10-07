@@ -14,7 +14,7 @@ export const ApartmentProvider=({children})=>{
     
 
    const getApartmentDetails=async (communityId,apartmentid)=>{
-       console.log(apartmentid);
+     //  console.log(apartmentid);
     var apiBaseUrl = `/community/${communityId}/apartment/${apartmentid}`;
     let apartmentInfo=null;
 
@@ -26,27 +26,11 @@ export const ApartmentProvider=({children})=>{
              if (response.status === 200)
             {           
               
-                apartmentInfo=response.data;
-                if(apartmentInfo!=null)
-                {
-             
+                apartmentInfo=response.data;             
 
-                 const apartmentdata={
-                    id:apartmentInfo._id,
-                    communityid:apartmentInfo.communityid,
-                    aptnum:apartmentInfo.aptnum,
-                    block:apartmentInfo.block,
-                    floor:apartmentInfo.floor,
-                    issold:apartmentInfo.issold,
-                    status:apartmentInfo.status,
-                    enrolled:apartmentInfo.enrolled
-                }
-                return apartmentdata;  
-                }     
-               
                 
-                return null;
-             
+                return apartmentInfo;  
+                
              }
        
          })
@@ -58,20 +42,20 @@ export const ApartmentProvider=({children})=>{
          return data;
         }
     const setApartmentDetail= (apartments)=>{
-       console.log(apartments);
+      // console.log(apartments);
        if(apartments==null)
         return;
         apartments.map( async(apartment)=>{
-        console.log(apartment.apartmentid)
-        console.log(apartment.communityid)
+      //  console.log(apartment.apartmentid)
+  //      console.log(apartment.communityid)
 
         const apartmentdata=await getApartmentDetails(apartment.communityid,apartment.apartmentid);
-        console.log(apartmentdata);
+        //console.log(apartmentdata);
         if(apartmentdata!=null)
         setApartmentList(apartmentList => [...apartmentList, apartmentdata]);
 
         });
-        console.log(apartmentList);
+      //  console.log(apartmentList);
         if(apartmentList!=null)
                setApartment(apartmentList[0]);
     }
@@ -82,14 +66,14 @@ export const ApartmentProvider=({children})=>{
         const authUnsub=auth.onAuthStateChanged(authObj=>{
             if(authObj)
             {
-                console.log(user);
+                //console.log(user);
                 if(user!=null && user.type==='resident'  && user.apartments!=null)
                 setApartmentDetail(user.apartments)              
                
             }
             else
             {
-                console.log(user);
+               // console.log(user);
                 setApartmentDetail([]);               
 
             }

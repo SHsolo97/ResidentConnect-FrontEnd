@@ -50,11 +50,11 @@ export const Community = ({ children, ...props }) => {
   const updateCommunityDetails = async () => {
 
     var apiBaseUrl = `/community/${communityid}`
-    console.log(communityDetails);
+    //console.log(communityDetails);
     await communityAPI.put(apiBaseUrl, communityDetails)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+          //console.log(response.data);
           setCommunity(response.data);
 
 
@@ -149,7 +149,7 @@ export const Community = ({ children, ...props }) => {
   const openMap=()=>{
     const addressToSearch=[communityDetails.address.addressline,communityDetails.address.area,communityDetails.address.city,
       communityDetails.address.state,communityDetails.address.pincode,'India'].join(',')
-      console.log(addressToSearch);
+      //console.log(addressToSearch);
         geocode({address:addressToSearch});
      
    ;

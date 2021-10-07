@@ -12,7 +12,7 @@ export const CommunityProvider=({children})=>{
     
 
    const getCommunityDetails=async (communityId)=>{
-       console.log(communityId);
+       //console.log(communityId);
     var apiBaseUrl = `/community/${communityId}`;
     let communityinfo=null;
 
@@ -68,7 +68,7 @@ export const CommunityProvider=({children})=>{
         const authUnsub=auth.onAuthStateChanged(authObj=>{
             if(authObj)
             {
-                console.log(user);
+                //console.log(user);
                 if(user!=null && user.communities!=null)
                 setCommunitydetail(user.communities)              
                

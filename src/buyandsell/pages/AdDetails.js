@@ -2,7 +2,7 @@
 import React from 'react'
 import { PageHeader } from '../../shared/components/PageHeader'
 import { SectionHeader } from '../../shared/components/SectionHeader'
-import { Box, Paper,Button } from '@material-ui/core'
+import {  Paper,Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core'
 import { PrimaryButton } from '../../shared/components/PrimaryButton'
@@ -21,9 +21,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import ShareIcon from '@mui/icons-material/Share';
+
 import { formatPhone,convertDate } from '../../misc/helpers';
-import { IconButton } from '@mui/material';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,11 +126,11 @@ geo:
 
   const getSellingAddress = async () => {
     const apiBaseUrl = `/community/${advert.communityid}`
-    console.log(apiBaseUrl);
+   // console.log(apiBaseUrl);
     await communityAPI.get(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+        // console.log(response.data);
           setSellerCommunity(response.data);
         
         }
@@ -142,13 +142,13 @@ geo:
   }
   const getSellerDetails = async () => {
     const apiBaseUrl = `/users/${advert.creator}`
-    console.log(apiBaseUrl);
+    //console.log(apiBaseUrl);
     await userAPI.get(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+       //   console.log(response.data);
           setSellerDetails(response.data);
-          console.log(sellerDetails);
+         // console.log(sellerDetails);
         }
       })
       .catch(function (error) {
@@ -171,12 +171,12 @@ geo:
   }
 
   const deleteAd = async () => {
-    console.log(`delete ${advert._id}`);
+    //(`delete ${advert._id}`);
     var apiBaseUrl = `/adverts/${advert._id}`
     await buyAndSellAPI.delete(apiBaseUrl)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data);
+     //     console.log(response.data);
           close();
           history.push('/myads');
         }
@@ -237,7 +237,7 @@ geo:
                 <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
                   <SectionHeader>Map In</SectionHeader>
                   <div style={{fontSize:'16px', marginBottom:'5px'}}><LocationOnIcon /> {'  ' }{sellerCommunity.address.area}, {sellerCommunity.address.city} </div>
-                  {/* <Map  width='40ch' height='30ch' center={sellerCommunity.geo} zoom={10} /> */}
+                 <Map  width='40ch' height='30ch' center={sellerCommunity.geo} zoom={10} /> 
                 </Grid>
               </Paper>
             </Grid>

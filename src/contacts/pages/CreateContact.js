@@ -42,8 +42,8 @@ import { useState } from 'react';
       const handleSubmit=(e)=>{
        
      
-        console.log(communityid);   
-        console.log(contact);   
+        //console.log(communityid);   
+        //console.log(contact);   
        
        
         e.preventDefault();
