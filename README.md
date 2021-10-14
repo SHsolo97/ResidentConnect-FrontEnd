@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Backend Microservices
+Run all microserivces in below project with 'npm start' command for each.
+
+https://github.com/Capstone-BitsPilani/ResidentConnect-API.git
+
+In the project directory, you can run:
 
 ## Available Scripts
 
